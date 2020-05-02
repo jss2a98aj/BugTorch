@@ -1,0 +1,135 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'forge'
+
+version = "1.0.0"
+group = "jss.bugtorch"
+archivesBaseName = "BugTorch"
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+minecraft {
+    version = "1.7.10-10.13.4.1614-1.7.10"
+}
+
+configurations {
+    // configuration that holds jars to include in the jar
+    shade
+    provided
+    embedded
+    compile.extendsFrom provided, embedded
+}
+
+dependencies {
+    compile files('libs/GanysSurface-1.12.8-deobf.jar')
+}
+
+processResources {
+    // this will ensure that this task is redone when the versions change.
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    // replace stuff in mcmod.info, nothing else
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+
+        // replace version and mcversion
+        expand(
+                'version': project.version,
+                'mcversion': project.minecraft.version
+        )
+    }
+
+    // copy everything else, that's not the mcmod.info
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
+
+//##########################################################################################################
+//########################################    Mixin  Part   ################################################
+//##########################################################################################################
+def yourMixinConfig = 'mixins.bugtorch.json'
+def refMapForYourConfig = 'mixins.bugtorch.refmap.json'
+def relativePathToMixinAP = 'tools/mixin-0.8-SNAPSHOT.jar'
+
+repositories {
+    maven {
+        name = "sponge"
+        url = "http://repo.spongepowered.org/maven/"
+    }
+}
+
+dependencies {
+    compile('org.spongepowered:mixin:0.7.11-SNAPSHOT') {
+        // Mixin includes a lot of dependencies that are too up-to-date
+        exclude module: 'launchwrapper'
+        exclude module: 'guava'
+        exclude module: 'gson'
+        exclude module: 'commons-io'
+        exclude module: 'log4j-core'
+    }
+}
+
+def refMap = "${tasks.compileJava.temporaryDir}" + File.separator + refMapForYourConfig
+
+def mixinSrg = "${tasks.reobf.temporaryDir}" + File.separator + "mixins.srg"
+
+jar {
+    from refMap
+    manifest {
+        attributes.put("TweakClass", "org.spongepowered.asm.launch.MixinTweaker")
+        attributes.put("FMLCorePluginContainsFMLMod", true)
+        attributes.put("ForceLoadAsMod", true)
+        attributes.put("MixinConfigs", yourMixinConfig)
+    }
+}
+
+reobf {
+    addExtraSrgFile mixinSrg
+}
+
+afterEvaluate {
+    def fixedRelPathToAP = relativePathToMixinAP
+    if(fixedRelPathToAP.startsWith('./') || fixedRelPathToAP.startsWith('.\\')){
+        fixedRelPathToAP = fixedRelPathToAP.substring(2)
+    } else if(fixedRelPathToAP.startsWith('/') || fixedRelPathToAP.startsWith('\\')){
+        fixedRelPathToAP = fixedRelPathToAP.substring(1)
+    }
+
+    tasks.compileJava {
+        println "Path: " + projectDir.absolutePath
+        options.compilerArgs += [
+                // There's a bug in the AnnotationProcessor for 0.7.11 that will generate the annotations pointing to the parent class instead of subclass
+                // resulting in the mixin not being applied.  This is fixed in 0.8, however 0.8 needs guava > 21.0, and minecraft ships with 17.0.
+                // So as a hacky workaround... ship with 0.7.11, but use the AP from 0.8 for compiling
+                "-processorpath", projectDir.absolutePath + '/' + fixedRelPathToAP,
+                "-processor", "org.spongepowered.tools.obfuscation.MixinObfuscationProcessorInjection,org.spongepowered.tools.obfuscation.MixinObfuscationProcessorTargets",
+                "-Xlint:-sunapi", "-XDenableSunApiLintControl", "-XDignore.symbol.file",
+                "-AreobfSrgFile=${tasks.reobf.srg}", "-AoutSrgFile=${mixinSrg}", "-AoutRefMapFile=${refMap}"
+        ]
+    }
+}
+
+sourceSets {
+    main {
+        output.resourcesDir = output.classesDir
+        ext.refMap = refMapForYourConfig
+    }
+}
