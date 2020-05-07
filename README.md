@@ -71,11 +71,6 @@ https://github.com/GTNewHorizons/SpongeMixins
       <td valign="top">MC-1947</td>
     </tr>
     <tr>
-      <td valign="top">Pumpkins and Jack o'Lanterns can be placed without a solid block below them</td>
-      <td valign="top">1.13</td>
-      <td valign="top">MC-1947</td>
-    </tr>
-    <tr>
       <td valign="top">Shearing a block will not give drops in addition to itself</td>
       <td valign="top">N/A</td>
       <td valign="top">N/A</td>
