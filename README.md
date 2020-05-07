@@ -12,28 +12,39 @@ https://github.com/GTNewHorizons/SpongeMixins
 <table width="100%">
   <thead>
     <tr>
-      <th width="65%">Option</th>
-      <th width="10%">From MC Version</th>
-      <th width="25%">Fixes</th>
+      <th width="60%">Backported features</th>
+      <th width="20%">From MC</th>
+      <th width="20%">Fixes</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-        <td valign="top">Trapdoors no longer require attachment blocks</td>
-        <td valign="top">1.9</td>
-        <td valign="top">N/A</td>
+      <td valign="top">Trapdoors no longer require attachment blocks</td>
+      <td valign="top">1.9</td>
+      <td valign="top">N/A</td>
     </tr>
     <tr>
-        <td valign="top">Cobwebs can be collected with Shears without Silk Touch</td>
-        <td valign="top">1.9</td>
-        <td valign="top">MC-93001</td>
+      <td valign="top">Cobwebs can be collected with Shears without Silk Touch</td>
+      <td valign="top">1.9</td>
+      <td valign="top">MC-93001</td>
+    </tr>
+    <tr>
+      <td valign="top">Dead Bushes drop 0-2 Sticks</td>
+      <td valign="top">1.9</td>
+      <td valign="top">N/A</td>
+    </tr>
+    <tr>
+      <td valign="top">Minecarts with TNT explode when hit by fire arrows</td>
+      <td valign="top">1.8</td>
+      <td valign="top">MC-8987</td>
+    </tr>
+    <tr>
+      <td valign="top">Ender Pearls can be thrown in creative mode</td>
+      <td valign="top">1.9</td>
+      <td valign="top">MC-438</td>
     </tr>
   </tbody>
 </table>
-
-Dead Bushes drop 0-2 Sticks. From MC 1.9
-Minecarts with TNT explode when hit by fire arrows. From MC 1.8, fixes MC-8987
-Ender Pearls can be thrown in creative mode. From MC 1.9, fixes MC-438
 
 ## Bugfixes
 Fire Charges have the correct use sound. From MC 1.8, fixes MC-1831
