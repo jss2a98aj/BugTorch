@@ -34,32 +34,37 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public List<String> getMixins() {
-        BugTorchConfig.initMixinConfig(new File(Launch.minecraftHome, "config" + File.separator + BugTorchCore.MODID + File.separator + "mixins.cfg"));
+        BugTorchConfig.loadBaseMixinConfig(new File(Launch.minecraftHome, "config" + File.separator + BugTorchCore.MODID + File.separator + "mixins.cfg"));
+        BugTorchConfig.loadModdedMixinConfig(new File(Launch.minecraftHome, "config" + File.separator + BugTorchCore.MODID + File.separator + "mixinsModSupport.cfg"));
         List<String> mixins = new ArrayList<>();
         
         //Backports
-        if(BugTorchConfig.cobwebsCanBeSheared)  mixins.add("blocks.MixinBlockWeb");
-        if(BugTorchConfig.deadBushesDropSticks) mixins.add("blocks.MixinBlockDeadBush");
-        if(BugTorchConfig.fireArrowsDetonateTNTCarts) mixins.add("entity.MixinEntityMinecraftTNT");
-        if(BugTorchConfig.throwEnderPearlsInCrativeMode) mixins.add("items.MixinItemEnderPearl");
+        if(BugTorchConfig.cobwebsCanBeSheared)  mixins.add("minecraft.blocks.MixinBlockWeb");
+        if(BugTorchConfig.deadBushesDropSticks) mixins.add("minecraft.blocks.MixinBlockDeadBush");
+        if(BugTorchConfig.fireArrowsDetonateTNTCarts) mixins.add("minecraft.entity.item.MixinEntityMinecartTNT");
+        if(BugTorchConfig.throwEnderPearlsInCrativeMode) mixins.add("minecraft.items.MixinItemEnderPearl");
 
         //Bugfixes
-        if(BugTorchConfig.fixFireChargeUseSound) mixins.add("items.MixinItemFireball");
-        if(BugTorchConfig.fixLavaHissOnAirReplace) mixins.add("blocks.MixinBlockLiquid");
-        if(BugTorchConfig.fixPumpkinPlacementCheck) mixins.add("blocks.MixinBlockPumpkin");
-        if(BugTorchConfig.fixStoneMonsterEggDoubleSpawns) mixins.add("blocks.MixinBlockSilverfish");
-        if(BugTorchConfig.fixShearedBlocksDropExtraItems) mixins.add("blocks.MixinBlock");
-        if(BugTorchConfig.fixSignPacketChatMessages) mixins.add("client.network.MixinNetHandlerPlayClient");//Confirm
-        if(BugTorchConfig.fixVillageSieges) mixins.add("village.MixinVillageSiege");//Confirm
+        if(BugTorchConfig.fixFireChargeUseSound) mixins.add("minecraft.items.MixinItemFireball");
+        if(BugTorchConfig.fixLavaHissOnAirReplace) mixins.add("minecraft.blocks.MixinBlockLiquid");
+        if(BugTorchConfig.fixPumpkinPlacementCheck) mixins.add("minecraft.blocks.MixinBlockPumpkin");
+        if(BugTorchConfig.fixStoneMonsterEggDoubleSpawns) mixins.add("minecraft.blocks.MixinBlockSilverfish");
+        if(BugTorchConfig.fixShearedBlocksDropExtraItems) mixins.add("minecraft.blocks.MixinBlock");
+        if(BugTorchConfig.fixShearsNotTakingDamageFromNormalBlocks) mixins.add("minecraft.items.MixinItemShears");
+        if(BugTorchConfig.fixSignPacketChatMessages) mixins.add("minecraft.client.network.MixinNetHandlerPlayClient");//Confirm
+        if(BugTorchConfig.fixVillagePathsHavePlantsOnTop) mixins.add("minecraft.world.gen.structure.MixinStructureVillagePieces_Path");
+        if(BugTorchConfig.fixVillageSieges) mixins.add("minecraft.village.MixinVillageSiege");//Confirm
+        if(BugTorchConfig.fixVillageWellDesertMaterial) mixins.add("minecraft.world.gen.structure.MixinStructureVillagePieces_Well");
 
         //Performance
-        if(BugTorchConfig.skipInitialWorldChunkLoad) mixins.add("server.MixinMinecraftServer");
+        if(BugTorchConfig.skipInitialWorldChunkLoad) mixins.add("minecraft.server.MixinMinecraftServer");
+        if(BugTorchConfig.fasterDroppedItemStackingChecks) mixins.add("minecraft.entity.item.MixinEntityItem");
         
         //Tweaks
-        //if(BugTorchConfig.adjustGanysSurfaceTrapdoorSpineTextures) mixins.add("mods.ganyssurface.blocks.MixinBlockWoodTrapdoor");
-        
-        //mixins.add("entity.passive.MixinEntityAnimal");
-        //mixins.add("blocks.MixinBlockHugeMushroom");
+        if(BugTorchConfig.lanPortOverride) mixins.add("minecraft.server.integrated.MixinIntegratedServer");
+
+        //Mod bugfixes
+        if(BugTorchConfig.fixGanysSurfaceOpenTrapdoorBackTexture) mixins.add("ganyssurface.blocks.MixinBlockWoodTrapdoor");
 
         return mixins;
     }

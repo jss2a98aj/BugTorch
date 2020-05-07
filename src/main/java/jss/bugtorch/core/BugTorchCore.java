@@ -11,7 +11,7 @@ import net.minecraft.block.BlockTrapDoor;
 @Mod(
         modid = BugTorchCore.MODID,
         name = "Bug Spray with a Lighter",
-        version = "1.0.0",
+        version = "1.0.1",
         dependencies = "after:spongemixins@[1.1.0,);"
     )
 
@@ -21,7 +21,7 @@ public class BugTorchCore {
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        BugTorchConfig.initConfig(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + MODID + File.separator + "base.cfg"));
+        BugTorchConfig.loadBaseConfig(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + MODID + File.separator + "base.cfg"));
         
         if(BugTorchConfig.enableFloatingTrapDoors) {
             BlockTrapDoor.disableValidation = true;
