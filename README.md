@@ -1,6 +1,6 @@
 # BugTorch
 
-BugTorch is a mod for Minecraft 1.7.10. It is called BugTorch because reasons.
+BugTorch is a mod for Minecraft 1.7.10. It is called BugTorch because reasons. It mostly fixes bugs.
 
 ## Requirements
 
