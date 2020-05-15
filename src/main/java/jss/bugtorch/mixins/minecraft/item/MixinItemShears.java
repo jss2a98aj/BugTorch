@@ -1,11 +1,11 @@
-package jss.bugtorch.mixins.minecraft.items;
+package jss.bugtorch.mixins.minecraft.item;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
+import jss.bugtorch.util.XSTR;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -34,10 +34,8 @@ public class MixinItemShears extends Item {
         if (block instanceof IShearable) {
             IShearable target = (IShearable)block;
             if (target.isShearable(itemstack, player.worldObj, x, y, z)) {
-                ArrayList<ItemStack> drops = target.onSheared(itemstack, player.worldObj, x, y, z,
-                        EnchantmentHelper.getEnchantmentLevel(Enchantment.fortune.effectId, itemstack));
-                Random rand = new Random();
-
+                ArrayList<ItemStack> drops = target.onSheared(itemstack, player.worldObj, x, y, z, EnchantmentHelper.getEnchantmentLevel(Enchantment.fortune.effectId, itemstack));
+                XSTR rand = new XSTR();//Swap to XSTR because why not
                 for(ItemStack stack : drops) {
                     float f = 0.7F;
                     double d  = (double)(rand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
@@ -53,4 +51,5 @@ public class MixinItemShears extends Item {
         itemstack.damageItem(1, player);
         return false;
     }
+
 }

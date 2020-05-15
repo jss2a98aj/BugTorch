@@ -1,4 +1,4 @@
-package jss.bugtorch.mixins.minecraft.items;
+package jss.bugtorch.mixins.minecraft.item;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;

@@ -26,6 +26,10 @@ public class MixinEntityMinecartTNT extends EntityMinecart {
     protected void explodeCart(double p_94103_1_){ 
     }
 
+    /**
+     * @author jss2a98aj
+     * @reason "Fire arrow make cart go boom"
+     */
     public boolean attackEntityFrom(DamageSource source, float amount) {
         Entity entity = source.getSourceOfDamage();
 

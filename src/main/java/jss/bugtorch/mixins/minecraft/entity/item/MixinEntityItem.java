@@ -17,7 +17,10 @@ public abstract class MixinEntityItem extends Entity {
         super(worldIn);
     }
 
-    //If this stack is full don't attempt to stack with nearby stacks
+    /**
+     * @author jss2a98aj
+     * @reason If an item stack is full don't attempt to stack with nearby stacks
+     */
     @Inject(method = "searchForOtherItemsNearby", at = @At("HEAD"), cancellable = true)
     private void onSearchForOtherItemsNearby (CallbackInfo ci) {
         final ItemStack stack = this.getDataWatcher().getWatchableObjectItemStack(10);

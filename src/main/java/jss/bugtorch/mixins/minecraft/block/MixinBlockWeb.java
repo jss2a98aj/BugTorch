@@ -1,4 +1,4 @@
-package jss.bugtorch.mixins.minecraft.blocks;
+package jss.bugtorch.mixins.minecraft.block;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,6 +14,10 @@ import net.minecraftforge.common.IShearable;
 @Mixin(BlockWeb.class)
 public class MixinBlockWeb implements IShearable {
 
+    /**
+     * @author jss2a98aj
+     * @reason Allows spiderwebs to be sheared without the need for silk touch
+     */
     @Override
     public boolean isShearable(ItemStack item, IBlockAccess world, int x, int y, int z) {
         return true;

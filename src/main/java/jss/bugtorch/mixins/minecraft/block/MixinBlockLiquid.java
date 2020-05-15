@@ -1,4 +1,4 @@
-package jss.bugtorch.mixins.minecraft.blocks;
+package jss.bugtorch.mixins.minecraft.block;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -55,7 +55,7 @@ public class MixinBlockLiquid extends Block {
                     if (l == 0) {
                         worldIn.setBlock(x, y, z, Blocks.obsidian);
                         this.func_149799_m(worldIn, x, y, z);
-                    } else if (l <= 4) {
+                    } else if (l <= 4) { //Paper Spigot does else if (l > 0)
                         worldIn.setBlock(x, y, z, Blocks.cobblestone);
                         this.func_149799_m(worldIn, x, y, z);
                     }

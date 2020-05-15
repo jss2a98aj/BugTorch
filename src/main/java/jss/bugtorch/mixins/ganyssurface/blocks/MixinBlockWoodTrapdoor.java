@@ -27,7 +27,7 @@ public class MixinBlockWoodTrapdoor extends BlockTrapDoor {
 
     /**
      * @author jss2a98aj
-     * @reason Makes trapdoors have the correct back texture when open
+     * @reason Makes trapdoors from Gany's Surface have the correct back texture when open
      */
     @Overwrite(remap = false)
     @Override

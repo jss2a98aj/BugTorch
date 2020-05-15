@@ -39,27 +39,41 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
         List<String> mixins = new ArrayList<>();
         
         //Backports
-        if(BugTorchConfig.cobwebsCanBeSheared)  mixins.add("minecraft.blocks.MixinBlockWeb");
-        if(BugTorchConfig.deadBushesDropSticks) mixins.add("minecraft.blocks.MixinBlockDeadBush");
+        if(BugTorchConfig.cobwebsCanBeSheared)  mixins.add("minecraft.block.MixinBlockWeb");
+        if(BugTorchConfig.deadBushesDropSticks) mixins.add("minecraft.block.MixinBlockDeadBush");
         if(BugTorchConfig.fireArrowsDetonateTNTCarts) mixins.add("minecraft.entity.item.MixinEntityMinecartTNT");
-        if(BugTorchConfig.throwEnderPearlsInCrativeMode) mixins.add("minecraft.items.MixinItemEnderPearl");
+        if(BugTorchConfig.throwEnderPearlsInCrativeMode) mixins.add("minecraft.item.MixinItemEnderPearl");
 
         //Bugfixes
-        if(BugTorchConfig.fixFireChargeUseSound) mixins.add("minecraft.items.MixinItemFireball");
-        if(BugTorchConfig.fixLavaHissOnAirReplace) mixins.add("minecraft.blocks.MixinBlockLiquid");
-        if(BugTorchConfig.fixPumpkinPlacementCheck) mixins.add("minecraft.blocks.MixinBlockPumpkin");
-        if(BugTorchConfig.fixStoneMonsterEggDoubleSpawns) mixins.add("minecraft.blocks.MixinBlockSilverfish");
-        if(BugTorchConfig.fixShearedBlocksDropExtraItems) mixins.add("minecraft.blocks.MixinBlock");
-        if(BugTorchConfig.fixShearsNotTakingDamageFromNormalBlocks) mixins.add("minecraft.items.MixinItemShears");
-        if(BugTorchConfig.fixSignPacketChatMessages) mixins.add("minecraft.client.network.MixinNetHandlerPlayClient");//Confirm
+        if(BugTorchConfig.fixFireChargeUseSound) mixins.add("minecraft.item.MixinItemFireball");
+        if(BugTorchConfig.fixLavaHissOnAirReplace) mixins.add("minecraft.block.MixinBlockLiquid");
+        if(BugTorchConfig.fixPumpkinPlacementCheck) mixins.add("minecraft.block.MixinBlockPumpkin");
+        if(BugTorchConfig.fixStoneMonsterEggDoubleSpawns) mixins.add("minecraft.block.MixinBlockSilverfish");
+        if(BugTorchConfig.fixShearedBlocksDropExtraItems) mixins.add("minecraft.block.MixinBlock_ShearsDupeFix");
+        if(BugTorchConfig.fixShearsNotTakingDamageFromNormalBlocks) mixins.add("minecraft.item.MixinItemShears");
+        if(BugTorchConfig.fixSignPacketChatMessages) mixins.add("minecraft.client.network.MixinNetHandlerPlayClient");//Never had this myself, but some non-vanilla servers cause it frequently.
         if(BugTorchConfig.fixVillagePathsHavePlantsOnTop) mixins.add("minecraft.world.gen.structure.MixinStructureVillagePieces_Path");
-        if(BugTorchConfig.fixVillageSieges) mixins.add("minecraft.village.MixinVillageSiege");//Confirm
+        if(BugTorchConfig.fixVillageSieges) mixins.add("minecraft.village.MixinVillageSiege");//Appears to work without issue, but tests using odd village layouts would be good.
         if(BugTorchConfig.fixVillageWellDesertMaterial) mixins.add("minecraft.world.gen.structure.MixinStructureVillagePieces_Well");
 
         //Performance
-        if(BugTorchConfig.skipInitialWorldChunkLoad) mixins.add("minecraft.server.MixinMinecraftServer");
+        if(BugTorchConfig.brokenChestsDontSplitStacks) mixins.add("minecraft.block.MixinBlockChest");
         if(BugTorchConfig.fasterDroppedItemStackingChecks) mixins.add("minecraft.entity.item.MixinEntityItem");
-        
+        if(BugTorchConfig.fasterEntityLivingBaseIsPotionActiveAndSetAir) mixins.add("minecraft.entity.MixinEntityLivingBase");
+        if(BugTorchConfig.fasterGetBlockByIdForAirBlocks) mixins.add("minecraft.block.MixinBlock");
+        if(BugTorchConfig.fasterSnowBlockTicks) mixins.add("minecraft.block.MixinBlockSnowBlock");
+        if(BugTorchConfig.replaceRandomWithXSTRInBlockChest) mixins.add("xstr.block.MixinBlockChest");
+        if(BugTorchConfig.replaceRandomWithXSTRInEffectRenderer) mixins.add("xstr.client.particle.MixinEffectRenderer");
+        if(BugTorchConfig.replaceRandomWithXSTRInEntity) mixins.add("xstr.entity.MixinEntity");
+        if(BugTorchConfig.replaceRandomWithXSTRInMinecraftServer) mixins.add("xstr.server.MixinMinecraftServer");
+        if(BugTorchConfig.replaceRandomWithXSTRInRenderItem) mixins.add("xstr.client.renderer.entity.MixinRenderItem");
+        if(BugTorchConfig.replaceRandomWithXSTRInWorld) {
+            BugTorchCore.logger.info("World.class will use XSTR in place of Random, this changes world generation slightly");
+            mixins.add("xstr.world.MixinWorld");
+        }
+        if(BugTorchConfig.replaceRandomWithXSTRInWorldClient) mixins.add("xstr.client.multiplayer.MixinWorldClient");
+        if(BugTorchConfig.skipInitialWorldChunkLoad) mixins.add("minecraft.server.MixinMinecraftServer");
+
         //Tweaks
         if(BugTorchConfig.lanPortOverride) mixins.add("minecraft.server.integrated.MixinIntegratedServer");
 

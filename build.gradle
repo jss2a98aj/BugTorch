@@ -18,7 +18,7 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'forge'
 
-version = "1.0.1"
+version = "1.0.2"
 group = "jss.bugtorch"
 archivesBaseName = "BugTorch"
 sourceCompatibility = 1.8
@@ -38,6 +38,7 @@ configurations {
 
 dependencies {
     compile files('libs/GanysSurface-1.12.8-deobf.jar')
+    compile files('libs/Thaumcraft-1.7.10-4.2.3.5-deobf.jar')
 }
 
 processResources {
