@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
-import jss.bugtorch.util.XSTR;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -17,38 +16,38 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraftforge.common.IShearable;
 
-@Mixin(ItemShears.class)
+@Mixin(value = ItemShears.class)
 public class MixinItemShears extends Item {
 
     /**
      * @author jss2a98aj
-     * @reason Makes Shears take damage when breaking blocks
+     * @reason Makes Shears take damage when breaking blocks and stops shearable logic from running in creative mode
      */
     @Overwrite(remap = false)
     @Override
-    public boolean onBlockStartBreak(ItemStack itemstack, int x, int y, int z, EntityPlayer player) {
-        if (player.worldObj.isRemote) {
+    public boolean onBlockStartBreak(ItemStack itemStack, int x, int y, int z, EntityPlayer player) {
+        if (player.worldObj.isRemote || player.capabilities.isCreativeMode) {
             return false;
         }
         Block block = player.worldObj.getBlock(x, y, z);
         if (block instanceof IShearable) {
             IShearable target = (IShearable)block;
-            if (target.isShearable(itemstack, player.worldObj, x, y, z)) {
-                ArrayList<ItemStack> drops = target.onSheared(itemstack, player.worldObj, x, y, z, EnchantmentHelper.getEnchantmentLevel(Enchantment.fortune.effectId, itemstack));
-                XSTR rand = new XSTR();//Swap to XSTR because why not
+            if (target.isShearable(itemStack, player.worldObj, x, y, z)) {
+                ArrayList<ItemStack> drops = target.onSheared(itemStack, player.worldObj, x, y, z, EnchantmentHelper.getEnchantmentLevel(Enchantment.fortune.effectId, itemStack));
                 for(ItemStack stack : drops) {
                     float f = 0.7F;
-                    double d  = (double)(rand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
-                    double d1 = (double)(rand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
-                    double d2 = (double)(rand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
-                    EntityItem entityitem = new EntityItem(player.worldObj, (double)x + d, (double)y + d1, (double)z + d2, stack);
+                    //Swap to itemRand rather than making a new random instance every time shears break an IShearable block
+                    double dx  = (double)(itemRand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
+                    double dy = (double)(itemRand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
+                    double dz = (double)(itemRand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
+                    EntityItem entityitem = new EntityItem(player.worldObj, (double)x + dx, (double)y + dy, (double)z + dz, stack);
                     entityitem.delayBeforeCanPickup = 10;
                     player.worldObj.spawnEntityInWorld(entityitem);
                 }
                 player.addStat(StatList.mineBlockStatArray[Block.getIdFromBlock(block)], 1);
             }
         }
-        itemstack.damageItem(1, player);
+        itemStack.damageItem(1, player);
         return false;
     }
 

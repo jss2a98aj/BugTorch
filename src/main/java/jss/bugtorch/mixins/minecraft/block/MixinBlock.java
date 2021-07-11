@@ -9,7 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.RegistryNamespaced;
 
-@Mixin(Block.class)
+@Mixin(value = Block.class)
 public class MixinBlock {
 
     @Shadow
@@ -20,9 +20,9 @@ public class MixinBlock {
      * @author jss2a98aj
      * @reason Most calls have 0 (air), this makes those calls faster
      */
-    @Overwrite
+    @Overwrite()
     public static Block getBlockById(int blockId) {
-       if(blockId == 0) return Blocks.air;
+        if(blockId == 0) return Blocks.air;
         Block ret = (Block)blockRegistry.getObjectById(blockId);
         return ret == null ? Blocks.air : ret;
     }

@@ -10,11 +10,11 @@ import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
-@Mixin(EntityMinecartTNT.class)
+@Mixin(value = EntityMinecartTNT.class)
 public class MixinEntityMinecartTNT extends EntityMinecart {
 
-    public MixinEntityMinecartTNT(World worldIn) {
-        super(worldIn);
+    public MixinEntityMinecartTNT(World world) {
+        super(world);
     }
 
     @Shadow

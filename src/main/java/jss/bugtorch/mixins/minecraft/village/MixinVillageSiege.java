@@ -17,7 +17,7 @@ import net.minecraft.village.VillageSiege;
 import net.minecraft.world.SpawnerAnimals;
 import net.minecraft.world.World;
 
-@Mixin(VillageSiege.class)
+@Mixin(value = VillageSiege.class)
 public class MixinVillageSiege {
 
     @Shadow
@@ -39,7 +39,7 @@ public class MixinVillageSiege {
      * @author jss2a98aj
      * @reason Allows Zombie sieges to start
      */
-    @Overwrite
+    @Overwrite()
     private boolean func_75529_b() {
         List<EntityPlayer> list = this.worldObj.playerEntities;
         Iterator iterator = list.iterator();
@@ -101,12 +101,12 @@ public class MixinVillageSiege {
      * @author jss2a98aj
      * @reason Fixes Zombie spawn location selection
      */
-    @Overwrite
-    private Vec3 func_75527_a(int p_75527_1_, int p_75527_2_, int p_75527_3_) {
+    @Overwrite()
+    private Vec3 func_75527_a(int x, int y, int z) {
         for (int i = 0; i < 10; ++i) {
-            int i1 = p_75527_1_ + this.worldObj.rand.nextInt(16) - 8;
-            int j1 = p_75527_2_ + this.worldObj.rand.nextInt(6) - 3;
-            int k1 = p_75527_3_ + this.worldObj.rand.nextInt(16) - 8;
+            int i1 = x + this.worldObj.rand.nextInt(16) - 8;
+            int j1 = y + this.worldObj.rand.nextInt(6) - 3;
+            int k1 = z + this.worldObj.rand.nextInt(16) - 8;
 
             if (this.theVillage.isInRange(i1, j1, k1) && SpawnerAnimals.canCreatureTypeSpawnAtLocation(EnumCreatureType.monster, this.worldObj, i1, j1, k1)) {
                 return Vec3.createVectorHelper((double)i1, (double)j1, (double)k1);

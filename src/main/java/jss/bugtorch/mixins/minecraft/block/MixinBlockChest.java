@@ -7,6 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
+import jss.util.RandomXoshiro256StarStar;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.BlockContainer;
@@ -17,45 +18,44 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.world.World;
 
-@Mixin(BlockChest.class)
+@Mixin(value = BlockChest.class)
 public abstract class MixinBlockChest extends BlockContainer {
 
     protected MixinBlockChest(Material material) {
         super(material);
     }
 
-    @Shadow
     @Final
-    private Random field_149955_b;
+    private Random field_149955_b = new RandomXoshiro256StarStar();
 
     /**
      * @author jss2a98aj
-     * @reason Splitting dropped item stacks just for them to stack right after is almost pointless. It looks nice(?) but is slow.
+     * @reason Splitting dropped item stacks just for them to stack right after is basically pointless.
      */
-    @Overwrite
-    public void breakBlock(World worldIn, int x, int y, int z, Block blockIn, int p_149749_6_) {
-        TileEntityChest tileentitychest = (TileEntityChest)worldIn.getTileEntity(x, y, z);
-        if (tileentitychest != null) {
-            for (int i1 = 0; i1 < tileentitychest.getSizeInventory(); ++i1) {
-                ItemStack itemstack = tileentitychest.getStackInSlot(i1);
-                if (itemstack != null) {
-                    float f = this.field_149955_b.nextFloat() * 0.8F + 0.1F;
-                    float f1 = this.field_149955_b.nextFloat() * 0.8F + 0.1F;
-                    float f2 = this.field_149955_b.nextFloat() * 0.8F + 0.1F;
-                    EntityItem entityitem = new EntityItem(worldIn, (double)((float)x + f), (double)((float)y + f1), (double)((float)z + f2), itemstack);
-                    float f3 = 0.05F;
-                    entityitem.motionX = (double)((float)this.field_149955_b.nextGaussian() * f3);
-                    entityitem.motionY = (double)((float)this.field_149955_b.nextGaussian() * f3 + 0.2F);
-                    entityitem.motionZ = (double)((float)this.field_149955_b.nextGaussian() * f3);
-                    if (itemstack.hasTagCompound()) {
-                        entityitem.getEntityItem().setTagCompound((NBTTagCompound)itemstack.getTagCompound().copy());
+    @Overwrite()
+    public void breakBlock(World world, int x, int y, int z, Block block, int p_149749_6_) {
+        TileEntityChest tileEntityChest = (TileEntityChest)world.getTileEntity(x, y, z);
+        if (tileEntityChest != null) {
+            for (int slot = 0; slot < tileEntityChest.getSizeInventory(); ++slot) {
+                ItemStack itemStack = tileEntityChest.getStackInSlot(slot);
+                if (itemStack != null) {
+                    float randX = this.field_149955_b.nextFloat() * 0.8F + 0.1F;
+                    float randY = this.field_149955_b.nextFloat() * 0.8F + 0.1F;
+                    float randZ = this.field_149955_b.nextFloat() * 0.8F + 0.1F;
+                    EntityItem entityitem = new EntityItem(world, (double)((float)x + randX), (double)((float)y + randY), (double)((float)z + randZ), itemStack);
+                    float motionMult = 0.05F;
+                    entityitem.motionX = (double)((float)this.field_149955_b.nextGaussian() * motionMult);
+                    entityitem.motionY = (double)((float)this.field_149955_b.nextGaussian() * motionMult + 0.2F);
+                    entityitem.motionZ = (double)((float)this.field_149955_b.nextGaussian() * motionMult);
+                    if (itemStack.hasTagCompound()) {
+                        entityitem.getEntityItem().setTagCompound((NBTTagCompound)itemStack.getTagCompound().copy());
                     }
-                    worldIn.spawnEntityInWorld(entityitem);
+                    world.spawnEntityInWorld(entityitem);
                 }
             }
-            worldIn.func_147453_f(x, y, z, blockIn);
+            world.func_147453_f(x, y, z, block);
         }
-        super.breakBlock(worldIn, x, y, z, blockIn, p_149749_6_);
+        super.breakBlock(world, x, y, z, block, p_149749_6_);
     }
 
 }

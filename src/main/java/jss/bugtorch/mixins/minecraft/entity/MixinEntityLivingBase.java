@@ -12,11 +12,11 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;
 import net.minecraft.world.World;
 
-@Mixin(EntityLivingBase.class)
+@Mixin(value = EntityLivingBase.class)
 public abstract class MixinEntityLivingBase extends Entity {
 
-    public MixinEntityLivingBase(World worldIn) {
-        super(worldIn);
+    public MixinEntityLivingBase(World world) {
+        super(world);
     }
 
     @Shadow
@@ -27,7 +27,7 @@ public abstract class MixinEntityLivingBase extends Entity {
      * @author jss2a98aj
      * @reason If the potion array is empty don't waste time checking it
      */
-    @Overwrite
+    @Overwrite()
     public boolean isPotionActive(int potionID) {
         return this.activePotionsMap.size() != 0 && this.activePotionsMap.containsKey(Integer.valueOf(potionID));
     }
@@ -36,7 +36,7 @@ public abstract class MixinEntityLivingBase extends Entity {
      * @author jss2a98aj
      * @reason If the potion array is empty don't waste time checking it
      */
-    @Overwrite
+    @Overwrite()
     public boolean isPotionActive(Potion potion) {
         return this.activePotionsMap.size() != 0 && this.activePotionsMap.containsKey(Integer.valueOf(potion.id));
     }

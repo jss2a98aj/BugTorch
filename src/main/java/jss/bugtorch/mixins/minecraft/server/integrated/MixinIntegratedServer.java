@@ -18,7 +18,7 @@ import net.minecraft.server.integrated.IntegratedServer;
 import net.minecraft.util.HttpUtil;
 import net.minecraft.world.WorldSettings;
 
-@Mixin(IntegratedServer.class)
+@Mixin(value = IntegratedServer.class)
 public abstract class MixinIntegratedServer extends MinecraftServer {
 
     @Shadow
@@ -34,10 +34,10 @@ public abstract class MixinIntegratedServer extends MinecraftServer {
      * @author jss2a98aj
      * @reason Allows a specific port to be selected instead of a random one
      */
-    @Overwrite
+    @Overwrite()
     public String shareToLAN(WorldSettings.GameType gameType, boolean allowCommands) {
         try {
-            int i = BugTorchConfig.lanPortToUSeForOverride;
+            int i = BugTorchConfig.lanPortToUseForOverride;
             this.func_147137_ag().addLanEndpoint((InetAddress)null, i);
             this.isPublic = true;
             this.lanServerPing = new ThreadLanServerPing(this.getMOTD(), i + "");

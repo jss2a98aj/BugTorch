@@ -36,34 +36,44 @@ public class BugTorchConfig {
     public static boolean fixSignPacketChatMessages;
     public static boolean fixStoneMonsterEggDoubleSpawns;
     public static boolean fixVillagePathsHavePlantsOnTop;
+    public static boolean fixVillagerTradeMetadataDetection;
     public static boolean fixVillageSieges;
     public static boolean fixVillageWellDesertMaterial;
 
     //Mixin performance improvements
     public static boolean brokenChestsDontSplitStacks;
+    public static boolean brokenHoppersDontSplitStacks;
     public static boolean fasterDroppedItemStackingChecks;
     public static boolean fasterEntityLivingBaseIsPotionActiveAndSetAir;
     public static boolean fasterGetBlockByIdForAirBlocks;
     public static boolean fasterSnowBlockTicks;
-    public static boolean replaceRandomWithXSTRInBlockChest;
-    public static boolean replaceRandomWithXSTRInEffectRenderer;
-    public static boolean replaceRandomWithXSTRInEntity;
-    public static boolean replaceRandomWithXSTRInMinecraftServer;
-    public static boolean replaceRandomWithXSTRInRenderItem;
-    public static boolean replaceRandomWithXSTRInWorld;
-    public static boolean replaceRandomWithXSTRInWorldClient;
+    public static boolean replaceRandomInEffectRenderer;
+    public static boolean replaceRandomInEntity;
+    public static boolean replaceRandomInItem;
+    public static boolean replaceRandomInMinecraftServer;
+    public static boolean replaceRandomInRenderItem;
+    public static boolean replaceRandomInWorld;
+    public static boolean replaceRandomInWorldClient;
     public static boolean skipInitialWorldChunkLoad;
 
     //Mixin tweaks
+    public static boolean farmlandImprovements;
     public static boolean lanPortOverride;
-    public static int lanPortToUSeForOverride;
+    public static int lanPortToUseForOverride;
+    public static boolean removeEntityDuplicateExtendedPropertiesIdentifierSpam;
 
+    //Mixin mod names
+    public static String gannysSurfaceJarName;
+    public static String witcheryJarName;
+    
     //Mixin mod bugfixes
     public static boolean fixGanysSurfaceOpenTrapdoorBackTexture;
+    public static boolean fixWitcheryGarlicGarlandBlockBounds;
 
     //Category names
     static final String categoryBackport = "backported features";
     static final String categoryBugfixes = "bug fixes";
+    static final String categoryModNames = "mod file names";
     static final String categoryOreDictionary = "ore dictionary";
     static final String categoryPerformance = "performance improvements";
     static final String categoryTweaks = "tweaks";
@@ -72,10 +82,10 @@ public class BugTorchConfig {
         Configuration config = new Configuration(configFile);
 
         //Backports
-        enableFloatingTrapDoors = config.getBoolean("freeFloatingTrapDoors", categoryBackport, true, "Trapdoors no longer require attachment blocks. From MC 1.9");
+        enableFloatingTrapDoors = config.getBoolean("freeFloatingTrapDoors", categoryBackport, true, "Trapdoors no longer require attachment blocks.\nFrom MC 1.9");
 
         //Bugfixes
-        fixSnowBlocksRandomlyTicking = config.getBoolean("fixSnowBlocksRandomlyTicking", categoryBugfixes, true, "Non-layered snow blocks will no longer randomly tick. From MC 1.14, fixes MC-88097");
+        fixSnowBlocksRandomlyTicking = config.getBoolean("fixSnowBlocksRandomlyTicking", categoryBugfixes, true, "Non-layered snow blocks will no longer randomly tick.\nFrom MC 1.14, fixes MC-88097");
 
         if(config.hasChanged()) {
             config.save();
@@ -86,14 +96,14 @@ public class BugTorchConfig {
         Configuration config = new Configuration(configFile);
 
         //Ore Dictionary
-        registerThaumcraftLeavesToTheOreDictionary = config.getBoolean("registerThaumcraftLeavesToTheOreDictionary", categoryOreDictionary, true, "Register Thaumcraft Greatwood and Silverwood leaves as treeLeaves");
-        registerThaumcraftThaumiumBlockToTheOreDictionary = config.getBoolean("registerThaumcraftThaumiumBlockToTheOreDictionary", categoryOreDictionary, true, "Register Thaumcraft Thaumium Blocks as blockThaumium");
-        registerThaumcraftWoodStairsToTheOreDictionary = config.getBoolean("registerThaumcraftWoodStairsToTheOreDictionary", categoryOreDictionary, true, "Register Thaumcraft Greatwood and Silverwood stairs as stairWood");
+        registerThaumcraftLeavesToTheOreDictionary = config.getBoolean("registerThaumcraftLeavesToTheOreDictionary", categoryOreDictionary, true, "Register Thaumcraft Greatwood and Silverwood leaves as treeLeaves.");
+        registerThaumcraftThaumiumBlockToTheOreDictionary = config.getBoolean("registerThaumcraftThaumiumBlockToTheOreDictionary", categoryOreDictionary, true, "Register Thaumcraft Thaumium Blocks as blockThaumium.");
+        registerThaumcraftWoodStairsToTheOreDictionary = config.getBoolean("registerThaumcraftWoodStairsToTheOreDictionary", categoryOreDictionary, true, "Register Thaumcraft Greatwood and Silverwood stairs as stairWood.");
 
         //Tweaks
-        craftThaumcraftAncientStoneSlabsAndStairs = config.getBoolean("craftThaumcraftAncientStoneSlabs", categoryTweaks, true, "Craft Thaumcraft Ancient Stone slabs and stairs");
-        reverseCraftThaumcraftSlabs = config.getBoolean("reverseCraftThaumcraftSlabs", categoryTweaks, true, "Craft Thaumcraft slabs back into blocks");
-        
+        craftThaumcraftAncientStoneSlabsAndStairs = config.getBoolean("craftThaumcraftAncientStoneSlabs", categoryTweaks, true, "Craft Thaumcraft Ancient Stone slabs and stairs.");
+        reverseCraftThaumcraftSlabs = config.getBoolean("reverseCraftThaumcraftSlabs", categoryTweaks, true, "Craft Thaumcraft slabs back into blocks.");
+
         if(config.hasChanged()) {
             config.save();
         }
@@ -101,43 +111,47 @@ public class BugTorchConfig {
 
     public static void loadBaseMixinConfig(File configFile) {
         Configuration config = new Configuration(configFile);
-        
+
         //Backports
-        cobwebsCanBeSheared = config.getBoolean("cobwebsCanBeSheared", categoryBackport, true, "Cobwebs can be collected with Shears without Silk Touch. From MC 1.9, fixes MC-93001");
-        deadBushesDropSticks = config.getBoolean("deadBushesDropSticks", categoryBackport, true, "Dead Bushes drop 0-2 Sticks. From MC 1.9");
-        fireArrowsDetonateTNTCarts = config.getBoolean("fireArrowsDetonateTNTCarts", categoryBackport, true, "Minecarts with TNT explode when hit by fire arrows. From MC 1.8, fixes MC-8987");
-        throwEnderPearlsInCrativeMode = config.getBoolean("throwEnderPearlsInCrativeMode", categoryBackport, true, "Ender Pearls can be thrown in creative mode. From MC 1.9, fixes MC-438");
+        cobwebsCanBeSheared = config.getBoolean("cobwebsCanBeSheared", categoryBackport, true, "Cobwebs can be collected with Shears without Silk Touch.\nFrom MC 1.9, fixes MC-93001");
+        deadBushesDropSticks = config.getBoolean("deadBushesDropSticks", categoryBackport, true, "Dead Bushes drop 0-2 Sticks.\nFrom MC 1.9");
+        fireArrowsDetonateTNTCarts = config.getBoolean("fireArrowsDetonateTNTCarts", categoryBackport, true, "Minecarts with TNT explode when hit by fire arrows.\nFrom MC 1.8, fixes MC-8987");
+        throwEnderPearlsInCrativeMode = config.getBoolean("throwEnderPearlsInCrativeMode", categoryBackport, true, "Ender Pearls can be thrown in creative mode.\nFrom MC 1.9, fixes MC-438");
 
         //Bugfixes
-        fixFireChargeUseSound = config.getBoolean("fixFireChargeUseSound", categoryBugfixes, true, "Fire Charges have the correct use sound. From MC 1.8, fixes MC-1831");
-        fixLavaHissOnAirReplace = config.getBoolean("fixLavaHissOnAirReplace", categoryBugfixes, true, "Lava will only hiss when mixing with water. From MC 1.8, fixes MC-32301");
-        fixPumpkinPlacementCheck = config.getBoolean("fixPumpkinPlacementCheck", categoryBackport, true, "Pumpkins and Jack o'Lanterns can be placed without a solid block below them. From MC 1.13, fixes MC-1947");
-        fixShearedBlocksDropExtraItems = config.getBoolean("fixShearedBlocksDropExtraItems", categoryBugfixes, true, "Shearing a block will not give drops in addition to itself");
-        fixShearsNotTakingDamageFromNormalBlocks = config.getBoolean("fixShearsNotTakingDamageFromNormalBlocks", categoryBugfixes, true, "Shears will take damage when used to mine any block. From MC 1.9, fixes MC-8180");
-        fixSignPacketChatMessages = config.getBoolean("fixSignPacketChatMessages", categoryBugfixes, true, "Sign update packets for signs in unloaded chunks will not send chat messages. From MC 1.9, fixes MC-3564");
-        fixStoneMonsterEggDoubleSpawns = config.getBoolean("fixStoneMonsterEggDoubleSpawns", categoryBugfixes, true, "Stone Monster Eggs only spawn one Silverfish when broken. From MC 1.8, fixes MC-31081");
-        fixVillagePathsHavePlantsOnTop = config.getBoolean("fixVillagePathsHavePlantsOnTop", categoryBugfixes, true, "Village paths will not have flowers or grass on top of them. From MC 1.10, fixes MC-3437");
-        fixVillageSieges = config.getBoolean("fixVillageSieges", categoryBugfixes, true, "Zombies will seige villages that are large enough at night. From MC 1.8, fixes MC-7432 and MC-7488");
-        fixVillageWellDesertMaterial = config.getBoolean("fixVillageWellDesertMaterial", categoryBugfixes, true, "Wells in desert villages will use the correct material. From MC 1.8, fixes MC-32514");
+        fixFireChargeUseSound = config.getBoolean("fixFireChargeUseSound", categoryBugfixes, true, "Fire Charges have the correct use sound.\nFrom MC 1.8, fixes MC-1831");
+        fixLavaHissOnAirReplace = config.getBoolean("fixLavaHissOnAirReplace", categoryBugfixes, true, "Lava will only hiss when mixing with water.\nFrom MC 1.8, fixes MC-32301");
+        fixPumpkinPlacementCheck = config.getBoolean("fixPumpkinPlacementCheck", categoryBackport, true, "Pumpkins and Jack o'Lanterns can be placed without a solid block below them.\nFrom MC 1.13, fixes MC-1947");
+        fixShearedBlocksDropExtraItems = config.getBoolean("fixShearedBlocksDropExtraItems", categoryBugfixes, true, "Shearing a block will not give drops in addition to itself.");
+        fixShearsNotTakingDamageFromNormalBlocks = config.getBoolean("fixShearsNotTakingDamageFromNormalBlocks", categoryBugfixes, true, "Shears will take damage when used to mine any block.\nAlso stops Forge shearing logic from dropping things in creative mode.\nFrom MC 1.9, fixes MC-8180");
+        fixSignPacketChatMessages = config.getBoolean("fixSignPacketChatMessages", categoryBugfixes, true, "Sign update packets for signs in unloaded chunks will not send chat messages.\nFrom MC 1.9, fixes MC-3564");
+        fixStoneMonsterEggDoubleSpawns = config.getBoolean("fixStoneMonsterEggDoubleSpawns", categoryBugfixes, true, "Stone Monster Eggs only spawn one Silverfish when broken.\nFrom MC 1.8, fixes MC-31081");
+        fixVillagePathsHavePlantsOnTop = config.getBoolean("fixVillagePathsHavePlantsOnTop", categoryBugfixes, true, "Village paths will not have flowers or grass on top of them.\nFrom MC 1.10, fixes MC-3437");
+        fixVillagerTradeMetadataDetection = config.getBoolean("fixVillagerTradeMetadataDetection", categoryBugfixes, true, "Villager trades will respect metadata.\nFrom MC 1.8");
+        fixVillageSieges = config.getBoolean("fixVillageSieges", categoryBugfixes, true, "Zombies will seige villages that are large enough at night.\nFrom MC 1.8, fixes MC-7432 and MC-7488");
+        fixVillageWellDesertMaterial = config.getBoolean("fixVillageWellDesertMaterial", categoryBugfixes, true, "Wells in desert villages will use the correct material.\nFrom MC 1.8, fixes MC-32514");
 
         //Performance
-        brokenChestsDontSplitStacks = config.getBoolean("brokenChestsDontSplitStacks", categoryPerformance, true, "Broken chests don't split apart dropped item stacks");
-        fasterDroppedItemStackingChecks = config.getBoolean("fasterDroppedItemStackingChecks", categoryPerformance, true, "Dropped item nearby stack checks are faster for full stacks");
-        fasterEntityLivingBaseIsPotionActiveAndSetAir = config.getBoolean("fasterEntityLivingBaseIsPotionActiveAndSetAir", categoryPerformance, true, "isPotionActive returns faster with 0 active potions and setAir only updates it's datawatcher when needed");
-        fasterGetBlockByIdForAirBlocks = config.getBoolean("fasterGetBlockByIdForAirBlocks", categoryPerformance, true, "When something gets air from using its ID it will return faster");
-        fasterSnowBlockTicks = config.getBoolean("fasterSnowBlockTicks", categoryPerformance, true, "Non-layered snow block ticks are faster");
-        replaceRandomWithXSTRInBlockChest = config.getBoolean("replaceRandomWithXSTRInBlockChest", categoryPerformance, true, "Makes BlockChest.class use a faster implementation of random");
-        replaceRandomWithXSTRInEffectRenderer = config.getBoolean("replaceRandomWithXSTRInEffectRenderer", categoryPerformance, true, "Makes EffectRenderer.class use a faster implementation of random");
-        replaceRandomWithXSTRInEntity = config.getBoolean("replaceRandomWithXSTRInEntity", categoryPerformance, true, "Makes Entity.class use a faster implementation of random");
-        replaceRandomWithXSTRInMinecraftServer = config.getBoolean("replaceRandomWithXSTRInMinecraftServer", categoryPerformance, true, "Makes MinecraftServer.class use a faster implementation of random");
-        replaceRandomWithXSTRInRenderItem = config.getBoolean("replaceRandomWithXSTRInRenderItem", categoryPerformance, true, "Makes RenderItem.class use a faster implementation of random");
-        replaceRandomWithXSTRInWorld = config.getBoolean("replaceRandomWithXSTRInWorld", categoryPerformance, false, "!This changes world generation! Makes World.class use a faster implementation of random");
-        replaceRandomWithXSTRInWorldClient = config.getBoolean("replaceRandomWithXSTRInWorldClient", categoryPerformance, true, "Makes WorldClient.class use a faster implementation of random");
-        skipInitialWorldChunkLoad = config.getBoolean("skipInitialWorldChunkLoad", categoryPerformance, true, "Speeds up initial world loading by not waiting for as many chunks to preload");
+        brokenChestsDontSplitStacks = config.getBoolean("brokenChestsDontSplitStacks", categoryPerformance, false, "Broken chests don't split apart dropped item stacks.");
+        brokenHoppersDontSplitStacks = config.getBoolean("brokenHoppersDontSplitStacks", categoryPerformance, false, "Broken hoppers don't split apart dropped item stacks.");
+        fasterDroppedItemStackingChecks = config.getBoolean("fasterDroppedItemStackingChecks", categoryPerformance, true, "Dropped item nearby stack checks are faster for full stacks.");
+        fasterEntityLivingBaseIsPotionActiveAndSetAir = config.getBoolean("fasterEntityLivingBaseIsPotionActiveAndSetAir", categoryPerformance, true, "isPotionActive returns immediately if there are no active potions.\nsetAir only updates it's datawatcher when needed.");
+        fasterGetBlockByIdForAirBlocks = config.getBoolean("fasterGetBlockByIdForAirBlocks", categoryPerformance, true, "When something gets air blocks from ID it will return faster.");
+        fasterSnowBlockTicks = config.getBoolean("fasterSnowBlockTicks", categoryPerformance, true, "Non-layered snow block ticking is faster.");
+        replaceRandomInEffectRenderer = config.getBoolean("replaceRandomInEffectRenderer", categoryPerformance, true, "Makes EffectRenderer.class use a faster implementation of random.");
+        replaceRandomInEntity = config.getBoolean("replaceRandomInEntity", categoryPerformance, true, "Makes Entity.class use a faster implementation of random.");
+        replaceRandomInItem = config.getBoolean("replaceRandomInItem", categoryPerformance, true, "Makes Item.class use a faster implementation of random.");
+        replaceRandomInMinecraftServer = config.getBoolean("replaceRandomInMinecraftServer", categoryPerformance, true, "Makes MinecraftServer.class use a faster implementation of random.");
+        replaceRandomInRenderItem = config.getBoolean("replaceRandomInRenderItem", categoryPerformance, true, "Makes RenderItem.class use a faster implementation of random.");
+        replaceRandomInWorld = config.getBoolean("replaceRandomInWorld", categoryPerformance, false, "Makes World.class use a faster implementation of random.\n!This impacts world generation slightly!");
+        replaceRandomInWorldClient = config.getBoolean("replaceRandomInWorldClient", categoryPerformance, true, "Makes WorldClient.class use a faster implementation of random.");
+        skipInitialWorldChunkLoad = config.getBoolean("skipInitialWorldChunkLoad", categoryPerformance, true, "Speeds up initial world loading by not waiting for chunks to preload.");
 
         //Tweaks
-        lanPortOverride = config.getBoolean("lanPortOverride", categoryTweaks, false, "Override the port used when opening singleplayer to LAN");
-        lanPortToUSeForOverride = config.getInt("lanPortToUSeForOverride", categoryTweaks, 25565, 1024 , 49151, "Port to use for lanPortOverride");
+        farmlandImprovements = config.getBoolean("farmlandImprovements", categoryTweaks, false, "Farmland will no longer get trampled and hydroponic farms will be possible.\nWill be moved to a seperate mod at some point.");
+        lanPortOverride = config.getBoolean("lanPortOverride", categoryTweaks, false, "Override the port used when opening singleplayer to LAN.");
+        lanPortToUseForOverride = config.getInt("lanPortToUSeForOverride", categoryTweaks, 25565, 1024 , 49151, "Port to use for lanPortOverride.");
+        removeEntityDuplicateExtendedPropertiesIdentifierSpam = config.getBoolean("removeEntityDuplicateExtendedPropertiesIdentifierSpam", categoryTweaks, true, "Removes \"An attempt was made to register exended properties using an existing key\" log spam caused by some mods.");
 
         if(config.hasChanged()) {
             config.save();
@@ -146,8 +160,14 @@ public class BugTorchConfig {
 
     public static void loadModdedMixinConfig(File configFile) {
         Configuration config = new Configuration(configFile);
+        
+        //Mod file names
+        gannysSurfaceJarName = config.getString("gannysSurfaceJarName", categoryModNames, "Ganys+Surface-1.12.8", "The file name without extention that Ganny's Surface is expected to use.\n!This can break things if the wrong name is used!\nSet to 'd' to disable all mixins for Ganny's Surface.");
+        witcheryJarName = config.getString("witcheryJarName", categoryModNames, "witchery-1.7.10-0.24.1", "The file name without extention that Witchery is expected to use.\n!This can break things if the wrong name is used!\nSet to 'd' to disable all mixins for Witchery.");
 
-        fixGanysSurfaceOpenTrapdoorBackTexture = config.getBoolean("fixGanysSurfaceOpenTrapdoorBackTexture", categoryBugfixes, true, "The back of Gany's Surface trapdoors use the correct texture");
+        //Bugfixes
+        fixGanysSurfaceOpenTrapdoorBackTexture = config.getBoolean("fixGanysSurfaceOpenTrapdoorBackTexture", categoryBugfixes, true, "Makes Gany's Surface trapdoors use the correct back texture when open.");
+        fixWitcheryGarlicGarlandBlockBounds = config.getBoolean("fixWitcheryGarlicGarlandBlockBounds", categoryBugfixes, true, "Makes Witchery Garlic Garlands use valid block bounds when facing .");
 
         if(config.hasChanged()) {
             config.save();

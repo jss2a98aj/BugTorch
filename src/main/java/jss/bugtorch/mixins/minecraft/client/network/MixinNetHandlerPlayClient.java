@@ -11,7 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.util.ChatComponentText;
 
-@Mixin(NetHandlerPlayClient.class)
+@Mixin(value = NetHandlerPlayClient.class)
 public class MixinNetHandlerPlayClient {
 
     @Shadow
@@ -21,17 +21,17 @@ public class MixinNetHandlerPlayClient {
      * @author jss2a98aj
      * @reason Stops a chat message from being sent to players when they receive an invalid sign packet
      */
-    @Overwrite
-    public void handleUpdateSign(S33PacketUpdateSign p_147248_1_) {
-        if (this.gameController.theWorld.blockExists(p_147248_1_.func_149346_c(), p_147248_1_.func_149345_d(), p_147248_1_.func_149344_e())) {
-            TileEntity tileentity = this.gameController.theWorld.getTileEntity(p_147248_1_.func_149346_c(), p_147248_1_.func_149345_d(), p_147248_1_.func_149344_e());
+    @Overwrite()
+    public void handleUpdateSign(S33PacketUpdateSign updatePacket) {
+        if (this.gameController.theWorld.blockExists(updatePacket.func_149346_c(), updatePacket.func_149345_d(), updatePacket.func_149344_e())) {
+            TileEntity tileentity = this.gameController.theWorld.getTileEntity(updatePacket.func_149346_c(), updatePacket.func_149345_d(), updatePacket.func_149344_e());
 
             if (tileentity instanceof TileEntitySign) {
                 TileEntitySign tileentitysign = (TileEntitySign)tileentity;
 
                 if (tileentitysign.func_145914_a()) {
                     for (int i = 0; i < 4; ++i) {
-                        tileentitysign.signText[i] = p_147248_1_.func_149347_f()[i];
+                        tileentitysign.signText[i] = updatePacket.func_149347_f()[i];
                     }
                     tileentitysign.markDirty();
                 }

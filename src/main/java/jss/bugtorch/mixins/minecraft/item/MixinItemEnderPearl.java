@@ -10,24 +10,24 @@ import net.minecraft.item.ItemEnderPearl;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-@Mixin(ItemEnderPearl.class)
+@Mixin(value = ItemEnderPearl.class)
 public class MixinItemEnderPearl extends Item {
 
     /**
      * @author jss2a98aj
      * @reason Allows Ender Pearls to be thrown in creative mode
      */
-    @Overwrite
-    public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
-        if (!playerIn.capabilities.isCreativeMode) {
-            --itemStackIn.stackSize;
+    @Overwrite()
+    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
+        if (!player.capabilities.isCreativeMode) {
+            --itemStack.stackSize;
         }  
-        worldIn.playSoundAtEntity(playerIn, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+        world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 
-        if (!worldIn.isRemote) {
-            worldIn.spawnEntityInWorld(new EntityEnderPearl(worldIn, playerIn));
+        if (!world.isRemote) {
+            world.spawnEntityInWorld(new EntityEnderPearl(world, player));
         }
-        return itemStackIn;
+        return itemStack;
     }
 
 }

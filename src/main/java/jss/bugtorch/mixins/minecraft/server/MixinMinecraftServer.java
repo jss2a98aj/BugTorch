@@ -5,14 +5,14 @@ import org.spongepowered.asm.mixin.Overwrite;
 
 import net.minecraft.server.MinecraftServer;
 
-@Mixin(MinecraftServer.class)
+@Mixin(value = MinecraftServer.class)
 public class MixinMinecraftServer {
 
     /**
      * @author jss2a98aj
      * @reason Makes initial world loading faster
      */
-    @Overwrite
+    @Overwrite()
     public void initialWorldChunkLoad() {
     }
 

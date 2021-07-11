@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntitySenses;
 
-@Mixin(EntitySenses.class)
+@Mixin(value = EntitySenses.class)
 public class MixinEntitySenses {
     //TODO: see if this works and implement if so
     //Replace List with HashSet

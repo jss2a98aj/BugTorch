@@ -10,11 +10,11 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-@Mixin(EntityItem.class)
+@Mixin(value = EntityItem.class)
 public abstract class MixinEntityItem extends Entity {
 
-    public MixinEntityItem(World worldIn) {
-        super(worldIn);
+    public MixinEntityItem(World world) {
+        super(world);
     }
 
     /**
@@ -22,7 +22,7 @@ public abstract class MixinEntityItem extends Entity {
      * @reason If an item stack is full don't attempt to stack with nearby stacks
      */
     @Inject(method = "searchForOtherItemsNearby", at = @At("HEAD"), cancellable = true)
-    private void onSearchForOtherItemsNearby (CallbackInfo ci) {
+    private void searchForOtherItemsNearbyHead (CallbackInfo ci) {
         final ItemStack stack = this.getDataWatcher().getWatchableObjectItemStack(10);
         if (stack.stackSize >= stack.getMaxStackSize()) {
             //System.out.println("Cancelled searchForOtherItemsNearby due to max stack size");

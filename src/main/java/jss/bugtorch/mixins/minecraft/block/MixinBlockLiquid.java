@@ -8,14 +8,14 @@ import net.minecraft.block.BlockLiquid;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 
-@Mixin(BlockLiquid.class)
+@Mixin(value = BlockLiquid.class)
 public class MixinBlockLiquid {
 
     /**
      * @author jss2a98aj
      * @reason Lava should only hiss when mixing with water
      */
-    @Overwrite
+    @Overwrite()
     protected void func_149799_m(World worldIn, int x, int y, int z) {
         Block block = worldIn.getBlock(x, y, z);
         if (block == Blocks.cobblestone | block == Blocks.obsidian | block == Blocks.stone) {
@@ -30,7 +30,7 @@ public class MixinBlockLiquid {
 
 //I would like to do this instead, but the mixin fails to apply?
 /*
-@Mixin(BlockLiquid.class)
+@Mixin(value = BlockLiquid.class)
 public class MixinBlockLiquid extends Block {
 
     protected MixinBlockLiquid(Material worldIn) {
@@ -41,7 +41,7 @@ public class MixinBlockLiquid extends Block {
     protected void func_149799_m(World worldIn, int x, int y, int z) {
     }
     
-    @Overwrite
+    @Overwrite()
     private void func_149805_n(World worldIn, int x, int y, int z) {
         if (worldIn.getBlock(x, y, z) == this) {
             if (this.blockMaterial == Material.lava) {
