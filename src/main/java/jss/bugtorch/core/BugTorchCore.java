@@ -15,7 +15,7 @@ import jss.bugtorch.util.LoadedMods;
 @Mod(
         modid = BugTorchCore.MODID,
         name = BugTorchCore.NAME,
-        version = "1.1.0",
+        version = "1.1.1",
         dependencies = "required-after:spongemixins@[1.2.0,);after:Thaumcraft;"
         //dependencies = "required-after:spongemixins@[1.3.0,);after:Thaumcraft;after:witchery;after:ganyssurface;"
     )
@@ -29,8 +29,9 @@ public class BugTorchCore {
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        BugTorchConfig.loadBaseConfig(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + MODID + File.separator + "base.cfg"));
-        BugTorchConfig.loadModdedConfig(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + MODID + File.separator + "modSupport.cfg"));
+        String configFolder =  event.getModConfigurationDirectory().getAbsolutePath() + File.separator + MODID + File.separator;
+        BugTorchConfig.loadBaseConfig(new File(configFolder + "base.cfg"));
+        BugTorchConfig.loadModdedConfig(new File(configFolder + "modSupport.cfg"));
 
         LoadedMods.detectLoadedMods();
         

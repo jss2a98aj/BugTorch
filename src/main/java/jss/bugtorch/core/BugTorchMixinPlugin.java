@@ -95,6 +95,7 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
         //Tweaks
         if(BugTorchConfig.farmlandImprovements)mixins.add("minecraft.block.MixinBlockFarmland");
         if(BugTorchConfig.lanPortOverride) mixins.add("minecraft.server.integrated.MixinIntegratedServer");
+        if(BugTorchConfig.placeEndPortalsAnywhere)mixins.add("minecraft.block.MixinBlockEndPortal");
         if(BugTorchConfig.removeEntityDuplicateExtendedPropertiesIdentifierSpam) mixins.add("minecraft.entity.MixinEntity");
 
         //Mod bugfixes
