@@ -1,7 +1,6 @@
 package jss.bugtorch.core;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -12,7 +11,6 @@ import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
 import jss.bugtorch.config.BugTorchConfig;
 import net.minecraft.launchwrapper.Launch;
-import ru.timeconqueror.spongemixins.MinecraftURLClassPath;
 
 public class BugTorchMixinPlugin implements IMixinConfigPlugin {
 

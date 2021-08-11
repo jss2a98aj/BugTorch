@@ -18,7 +18,7 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'forge'
 
-version = "1.1.1"
+version = "1.1.2"
 group = "jss.bugtorch"
 archivesBaseName = "BugTorch"
 sourceCompatibility = 1.8

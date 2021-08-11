@@ -43,7 +43,7 @@ public class MixinBlockWeb extends Block implements IShearable {
      */
     @Override
     public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int meta) {
-        if(player.getItemInUse() != null && !(player.getItemInUse().getItem() instanceof ItemShears)) {
+        if(!(player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemShears)) {
             super.harvestBlock(world, player, x, y, z, meta);
         }
     }

@@ -15,7 +15,7 @@ import jss.bugtorch.util.LoadedMods;
 @Mod(
         modid = BugTorchCore.MODID,
         name = BugTorchCore.NAME,
-        version = "1.1.1",
+        version = "1.1.2",
         dependencies = "required-after:spongemixins@[1.2.0,);after:Thaumcraft;"
         //dependencies = "required-after:spongemixins@[1.3.0,);after:Thaumcraft;after:witchery;after:ganyssurface;"
     )
