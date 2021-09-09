@@ -12,3 +12,6 @@ Fixes bugs, backports some stuff that don't add new content, and optionally some
 
 ## Modpacks
 Yes, you can use this mod in your modpack.
+
+## Disclaimer
+This software and its developer are not affiliated with BugTorch Systems, LLC, a maker of self-filling and self-lighting tiki torches sold under the brand name “BugTorch”.
