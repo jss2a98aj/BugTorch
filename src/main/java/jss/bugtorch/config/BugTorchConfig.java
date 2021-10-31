@@ -21,6 +21,7 @@ public class BugTorchConfig {
 
     //Mod tweaks
     public static boolean craftThaumcraftAncientStoneSlabsAndStairs;
+    public static boolean enableVillageNamesMetadataSensitiveTrades;
     public static boolean reverseCraftThaumcraftSlabs;
 
     //Mixin backports
@@ -49,6 +50,7 @@ public class BugTorchConfig {
     public static boolean fasterEntityLivingBaseIsPotionActiveAndSetAir;
     public static boolean fasterGetBlockByIdForAirBlocks;
     public static boolean fasterSnowBlockTicks;
+    public static boolean moreAccurateLayeredSnowFaceCulling;
     public static boolean replaceRandomInEffectRenderer;
     public static boolean replaceRandomInEntity;
     public static boolean replaceRandomInItem;
@@ -105,6 +107,7 @@ public class BugTorchConfig {
 
         //Tweaks
         craftThaumcraftAncientStoneSlabsAndStairs = config.getBoolean("craftThaumcraftAncientStoneSlabs", categoryTweaks, true, "Craft Thaumcraft Ancient Stone slabs and stairs.");
+        enableVillageNamesMetadataSensitiveTrades = config.getBoolean("enableVillageNamesMetadataSensitiveTrades", categoryTweaks, true, "Enables metadata sensitive trades in Village Names.\nDoes nothing if fixVillagerTradeMetadataDetection in \"bugtorch\\mixins.cfg\" is not enabled.") && fixVillagerTradeMetadataDetection;
         reverseCraftThaumcraftSlabs = config.getBoolean("reverseCraftThaumcraftSlabs", categoryTweaks, true, "Craft Thaumcraft slabs back into blocks.");
 
         if(config.hasChanged()) {
@@ -142,6 +145,7 @@ public class BugTorchConfig {
         fasterDroppedItemStackingChecks = config.getBoolean("fasterDroppedItemStackingChecks", categoryPerformance, true, "Dropped item nearby stack checks are faster for full stacks.");
         fasterEntityLivingBaseIsPotionActiveAndSetAir = config.getBoolean("fasterEntityLivingBaseIsPotionActiveAndSetAir", categoryPerformance, true, "isPotionActive returns immediately if there are no active potions.\nsetAir only updates it's datawatcher when needed.");
         fasterGetBlockByIdForAirBlocks = config.getBoolean("fasterGetBlockByIdForAirBlocks", categoryPerformance, true, "When something gets air blocks from ID it will return faster.");
+        moreAccurateLayeredSnowFaceCulling = config.getBoolean("moreAccurateLayeredSnowFaceCulling", categoryPerformance, true, "The faces of layered snow get culled more accurately when chunk meshes are created.");
         fasterSnowBlockTicks = config.getBoolean("fasterSnowBlockTicks", categoryPerformance, true, "Non-layered snow block ticking is faster.");
         replaceRandomInEffectRenderer = config.getBoolean("replaceRandomInEffectRenderer", categoryPerformance, true, "Makes EffectRenderer.class use a faster implementation of random.") && !serverSide;
         replaceRandomInEntity = config.getBoolean("replaceRandomInEntity", categoryPerformance, true, "Makes Entity.class use a faster implementation of random.");

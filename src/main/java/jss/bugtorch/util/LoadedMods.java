@@ -5,9 +5,11 @@ import cpw.mods.fml.common.Loader;
 public class LoadedMods {
 
     public static boolean thaumcraftLoaded;
+    public static boolean villageNamesLoaded;
 
     public static void detectLoadedMods() {
         thaumcraftLoaded = Loader.isModLoaded("Thaumcraft");
+        villageNamesLoaded = Loader.isModLoaded("VillageNames");
     }
 
 }

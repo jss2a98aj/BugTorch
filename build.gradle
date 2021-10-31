@@ -1,31 +1,38 @@
 buildscript {
-    repositories {
-        mavenCentral()
-        maven {
-            name = "forge"
-            url = "http://files.minecraftforge.net/maven"
-        }
-        maven {
-            name = "sonatype"
-            url = "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
-    }
-    dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
-    }
+	repositories {
+		mavenCentral()
+		maven {
+			name = "gt"
+			url = "https://gregtech.overminddl1.com/"
+		}
+	}
+	dependencies {
+		classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+	}
 }
 
-apply plugin: 'java'
+repositories {
+	maven {
+		name 'gt'
+		url "https://gregtech.overminddl1.com/"
+	}
+}
+
 apply plugin: 'forge'
 
-version = "1.1.2"
 group = "jss.bugtorch"
 archivesBaseName = "BugTorch"
+version = "1.1.3-beta"
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+compileJava.options.bootClasspath = org.gradle.internal.jvm.Jvm.current().getJre().getHomeDir().toString() +"/lib/rt.jar"
+compileJava {
+	options.encoding = "UTF-8"
+}
 
 minecraft {
-    version = "1.7.10-10.13.4.1614-1.7.10"
+	version = "1.7.10-10.13.4.1614-1.7.10"
 }
 
 configurations {
@@ -45,31 +52,43 @@ dependencies {
 }
 
 processResources {
-    // this will ensure that this task is redone when the versions change.
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
+	from(sourceSets.main.resources.srcDirs) {
+		include 'mcmod.info'
+		expand 'version': project.version, 'mcversion': project.minecraft.version
+	 }
 
-    // replace stuff in mcmod.info, nothing else
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-
-        // replace version and mcversion
-        expand(
-                'version': project.version,
-                'mcversion': project.minecraft.version
-        )
-    }
-
-    // copy everything else, that's not the mcmod.info
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
-    }
+	from(sourceSets.main.resources.srcDirs) {
+		exclude 'mcmod.info'
+	}
 }
 
 jar {
 	manifest {
-        attributes.put("AccessTransformer", "bugtorch_at.cfg")
+		attributes(
+			'FMLAT': "bugtorch_at.cfg",
+		)
 	}
+}
+
+task sourceJar(type: Jar) {
+	manifest {}
+	classifier = 'sources'
+	from sourceSets.main.allSource
+	exclude 'assets/**'
+}
+
+task devJar(type: Jar) {
+	manifest {
+		attributes(
+			'FMLAT': 'bugtorch_at.cfg',
+		)
+	}
+	classifier = 'dev'
+	from sourceSets.main.output
+}
+
+artifacts {
+	archives sourceJar, devJar
 }
 
 //##########################################################################################################

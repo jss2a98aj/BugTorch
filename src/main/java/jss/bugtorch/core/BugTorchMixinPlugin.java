@@ -67,7 +67,10 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
         if(BugTorchConfig.fixShearsNotTakingDamageFromNormalBlocks) mixins.add("minecraft.item.MixinItemShears");
         if(BugTorchConfig.fixSignPacketChatMessages) mixins.add("minecraft.client.network.MixinNetHandlerPlayClient");
         if(BugTorchConfig.fixVillagePathsHavePlantsOnTop) mixins.add("minecraft.world.gen.structure.MixinStructureVillagePieces_Path");
-        if(BugTorchConfig.fixVillagerTradeMetadataDetection) mixins.add("minecraft.village.MixinMerchantRecipe");
+        if(BugTorchConfig.fixVillagerTradeMetadataDetection) {
+        	mixins.add("minecraft.inventory.MixinSlotMerchantResult");
+        	mixins.add("minecraft.village.MixinMerchantRecipe");
+        }
         if(BugTorchConfig.fixVillageSieges) mixins.add("minecraft.village.MixinVillageSiege");
         if(BugTorchConfig.fixVillageWellDesertMaterial) mixins.add("minecraft.world.gen.structure.MixinStructureVillagePieces_Well");
 
@@ -78,6 +81,7 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
         if(BugTorchConfig.fasterEntityLivingBaseIsPotionActiveAndSetAir) mixins.add("minecraft.entity.MixinEntityLivingBase");
         if(BugTorchConfig.fasterGetBlockByIdForAirBlocks) mixins.add("minecraft.block.MixinBlock");
         if(BugTorchConfig.fasterSnowBlockTicks) mixins.add("minecraft.block.MixinBlockSnowBlock");
+        if(BugTorchConfig.moreAccurateLayeredSnowFaceCulling) mixins.add("minecraft.block.MixinBlockSnow");
         if(BugTorchConfig.replaceRandomInEffectRenderer) mixins.add("random.client.particle.MixinEffectRenderer");
         if(BugTorchConfig.replaceRandomInEntity) mixins.add("random.entity.MixinEntity");
         if(BugTorchConfig.replaceRandomInItem) mixins.add("random.item.MixinItem");
