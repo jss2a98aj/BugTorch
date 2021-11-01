@@ -1,6 +1,7 @@
 package jss.bugtorch.core;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -11,13 +12,14 @@ import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
 import jss.bugtorch.config.BugTorchConfig;
 import net.minecraft.launchwrapper.Launch;
+import ru.timeconqueror.spongemixins.MinecraftURLClassPath;
 
 public class BugTorchMixinPlugin implements IMixinConfigPlugin {
 
     static {
         String configFolder =  "config" + File.separator + BugTorchCore.MODID + File.separator;
         BugTorchConfig.loadBaseMixinConfig(new File(Launch.minecraftHome, configFolder + "mixins.cfg"));
-        //BugTorchConfig.loadModdedMixinConfig(new File(Launch.minecraftHome, configFolder + "mixinsModSupport.cfg"));
+        BugTorchConfig.loadModdedMixinConfig(new File(Launch.minecraftHome, configFolder + "mixinsModSupport.cfg"));
     }
     
     @Override
@@ -41,14 +43,17 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
     @Override
     public List<String> getMixins() {
         List<String> mixins = new ArrayList<>();
-        /*
+        
         if(BugTorchConfig.gannysSurfaceJarName == "d" || !loadJar(BugTorchConfig.gannysSurfaceJarName)) {
             BugTorchConfig.fixGanysSurfaceOpenTrapdoorBackTexture = false;
+        }
+        if(BugTorchConfig.thaumcraftJarName == "d" || !loadJar(BugTorchConfig.thaumcraftJarName)) {
+            BugTorchConfig.fixThaumcraftCandleColorArrayOutOfBounds = false;
         }
         if(BugTorchConfig.witcheryJarName == "d" || !loadJar(BugTorchConfig.witcheryJarName)) {
             BugTorchConfig.fixWitcheryGarlicGarlandBlockBounds = false;
         }
-        */
+        
         //Backports
         if(BugTorchConfig.cobwebsCanBeSheared) mixins.add("minecraft.block.MixinBlockWeb");
         if(BugTorchConfig.deadBushesDropSticks) mixins.add("minecraft.block.MixinBlockDeadBush");
@@ -101,11 +106,9 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
         if(BugTorchConfig.removeEntityDuplicateExtendedPropertiesIdentifierSpam) mixins.add("minecraft.entity.MixinEntity");
 
         //Mod bugfixes
-        //if(BugTorchConfig.fixGanysSurfaceOpenTrapdoorBackTexture) mixins.add("ganyssurface.blocks.MixinBlockWoodTrapdoor");
-        //if(BugTorchConfig.fixWitcheryGarlicGarlandBlockBounds) mixins.add("witchery.blocks.MixinBlockGarlicGarland");
-
-        //Test
-        //mixins.add("witchery.ritual.MixinRitual");
+        if(BugTorchConfig.fixGanysSurfaceOpenTrapdoorBackTexture) mixins.add("ganyssurface.blocks.MixinBlockWoodTrapdoor");
+        if(BugTorchConfig.fixThaumcraftCandleColorArrayOutOfBounds) mixins.add("thaumcraft.common.blocks.MixinBlockCandle");
+        if(BugTorchConfig.fixWitcheryGarlicGarlandBlockBounds) mixins.add("witchery.blocks.MixinBlockGarlicGarland");
 
         return mixins;
     }
@@ -118,19 +121,23 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
     public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
     }
 
-    /*private static boolean loadJar(String jarName) {
+    private static boolean loadJar(String jarName) {
         try {
             File jar = MinecraftURLClassPath.getJarInModPath(jarName);
-            BugTorchCore.logger.info("Attempting to add " + jar.toString() + " to the URL Class Path");
-            if(!jar.exists()) {
-                throw new FileNotFoundException(jar.toString());
+            if(jar == null) {
+            	BugTorchCore.logger.info("Jar not found: " + jarName);
+                return false;
             }
+
+            BugTorchCore.logger.info("Attempting to add " + jar.toString() + " to the URL Class Path");
+            if(!jar.exists())
+                throw new FileNotFoundException(jar.toString());
             MinecraftURLClassPath.addJar(jar);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
-    }*/
+    }
 
 }

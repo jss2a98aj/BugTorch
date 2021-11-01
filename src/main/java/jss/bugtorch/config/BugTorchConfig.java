@@ -15,6 +15,9 @@ public class BugTorchConfig {
     public static boolean fixSnowBlocksRandomlyTicking;
 
     //Mod bugfixes
+    public static boolean fixPamsTemperatePlantsBlockSound;
+
+    //Mod ore dictionary
     public static boolean registerThaumcraftLeavesToTheOreDictionary;
     public static boolean registerThaumcraftThaumiumBlockToTheOreDictionary;
     public static boolean registerThaumcraftWoodStairsToTheOreDictionary;
@@ -69,10 +72,12 @@ public class BugTorchConfig {
 
     //Mixin mod names
     public static String gannysSurfaceJarName;
+    public static String thaumcraftJarName;
     public static String witcheryJarName;
     
     //Mixin mod bugfixes
     public static boolean fixGanysSurfaceOpenTrapdoorBackTexture;
+    public static boolean fixThaumcraftCandleColorArrayOutOfBounds;
     public static boolean fixWitcheryGarlicGarlandBlockBounds;
 
     //Category names
@@ -100,11 +105,14 @@ public class BugTorchConfig {
     public static void loadModdedConfig(File configFile) {
         Configuration config = new Configuration(configFile);
 
-        //Ore Dictionary
+        //Bugfixes
+        fixPamsTemperatePlantsBlockSound = config.getBoolean("setPamsTemperatePlantsBlockSound", categoryBugfixes, true, "Sets Pam's Temperate Plants sound type to grass.");
+        
+        //Ore dictionary
         registerThaumcraftLeavesToTheOreDictionary = config.getBoolean("registerThaumcraftLeavesToTheOreDictionary", categoryOreDictionary, true, "Register Thaumcraft Greatwood and Silverwood leaves as treeLeaves.");
         registerThaumcraftThaumiumBlockToTheOreDictionary = config.getBoolean("registerThaumcraftThaumiumBlockToTheOreDictionary", categoryOreDictionary, true, "Register Thaumcraft Thaumium Blocks as blockThaumium.");
         registerThaumcraftWoodStairsToTheOreDictionary = config.getBoolean("registerThaumcraftWoodStairsToTheOreDictionary", categoryOreDictionary, true, "Register Thaumcraft Greatwood and Silverwood stairs as stairWood.");
-
+        
         //Tweaks
         craftThaumcraftAncientStoneSlabsAndStairs = config.getBoolean("craftThaumcraftAncientStoneSlabs", categoryTweaks, true, "Craft Thaumcraft Ancient Stone slabs and stairs.");
         enableVillageNamesMetadataSensitiveTrades = config.getBoolean("enableVillageNamesMetadataSensitiveTrades", categoryTweaks, true, "Enables metadata sensitive trades in Village Names.\nDoes nothing if fixVillagerTradeMetadataDetection in \"bugtorch\\mixins.cfg\" is not enabled.") && fixVillagerTradeMetadataDetection;
@@ -172,12 +180,14 @@ public class BugTorchConfig {
         Configuration config = new Configuration(configFile);
         
         //Mod file names
-        gannysSurfaceJarName = config.getString("gannysSurfaceJarName", categoryModNames, "Ganys+Surface-1.12.8", "The file name without extention that Ganny's Surface is expected to use.\n!This can break things if the wrong name is used!\nSet to 'd' to disable all mixins for Ganny's Surface.");
-        witcheryJarName = config.getString("witcheryJarName", categoryModNames, "witchery-1.7.10-0.24.1", "The file name without extention that Witchery is expected to use.\n!This can break things if the wrong name is used!\nSet to 'd' to disable all mixins for Witchery.");
+        gannysSurfaceJarName = config.getString("gannysSurfaceJarName", categoryModNames, "Ganys+Surface", "The partial file name assiciated with Ganny's Surface.\n!This can break things if the wrong name is used!\nSet to 'd' to disable all mixins for Ganny's Surface.");
+        thaumcraftJarName = config.getString("thaumcraftJarName", categoryModNames, "Thaumcraft-1.7.10", "The partial file name assiciated with Thaumcraft.\n!This can break things if the wrong name is used!\nSet to 'd' to disable all mixins for Thaumcraft.");
+        witcheryJarName = config.getString("witcheryJarName", categoryModNames, "witchery-1.7.10", "The partial file name assiciated with Witchery.\n!This can break things if the wrong name is used!\nSet to 'd' to disable all mixins for Witchery.");
 
         //Bugfixes
         fixGanysSurfaceOpenTrapdoorBackTexture = config.getBoolean("fixGanysSurfaceOpenTrapdoorBackTexture", categoryBugfixes, true, "Makes Gany's Surface trapdoors use the correct back texture when open.");
-        fixWitcheryGarlicGarlandBlockBounds = config.getBoolean("fixWitcheryGarlicGarlandBlockBounds", categoryBugfixes, true, "Makes Witchery Garlic Garlands use valid block bounds when facing .");
+        fixThaumcraftCandleColorArrayOutOfBounds = config.getBoolean("fixThaumcraftCandleColorArrayOutOfBounds", categoryBugfixes, true, "Makes Thaumcraft candles not cause an array out of bounds exception if rendered with metadata greater than 15.");
+        fixWitcheryGarlicGarlandBlockBounds = config.getBoolean("fixWitcheryGarlicGarlandBlockBounds", categoryBugfixes, true, "Makes Witchery Garlic Garlands use correct block bounds on every rotation.");
 
         if(config.hasChanged()) {
             config.save();

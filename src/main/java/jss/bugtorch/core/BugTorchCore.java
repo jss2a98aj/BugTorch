@@ -9,6 +9,7 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import jss.bugtorch.config.BugTorchConfig;
+import jss.bugtorch.modsupport.PamsTemperatePlantsSupport;
 import jss.bugtorch.modsupport.ThaumcraftSupport;
 import jss.bugtorch.modsupport.VillageNamesSupport;
 import jss.bugtorch.util.LoadedMods;
@@ -17,14 +18,14 @@ import jss.bugtorch.util.LoadedMods;
         modid = BugTorchCore.MODID,
         name = BugTorchCore.NAME,
         version = "1.1.3-beta",
-        dependencies = "required-after:spongemixins@[1.2.0,);after:Thaumcraft;after:VillageNames;"
+        dependencies = "required-after:spongemixins@[1.2.0,);after:Thaumcraft;after:temperateplants;after:VillageNames;"
         //after:witchery; after:ganyssurface;
     )
 
 public class BugTorchCore {
 
     public static final String MODID = "bugtorch";
-    public static final String NAME = "Bug Torch";
+    public static final String NAME = "BugTorch";
 
     public static final Logger logger = LogManager.getLogger(MODID);
 
@@ -37,6 +38,10 @@ public class BugTorchCore {
         LoadedMods.detectLoadedMods();
         
         VanillaSupport.enableSupport();
+        
+        if(LoadedMods.pamsTemperatePlantsLoaded) {
+        	//PamsTemperatePlantsSupport.enableSupport();
+        }
         
         if(LoadedMods.thaumcraftLoaded) {
             ThaumcraftSupport.enableSupport();

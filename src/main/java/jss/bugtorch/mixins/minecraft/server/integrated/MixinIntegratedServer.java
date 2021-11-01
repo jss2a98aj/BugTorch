@@ -45,7 +45,7 @@ public abstract class MixinIntegratedServer extends MinecraftServer {
             this.getConfigurationManager().func_152604_a(gameType);
             this.getConfigurationManager().setCommandsAllowedForAll(allowCommands);
             return i + "";
-        } catch (IOException ioexception1) {
+        } catch (IOException ex) {
             return null;
         }
     }

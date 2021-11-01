@@ -18,11 +18,10 @@ public class MixinBlockWoodTrapdoor extends BlockTrapDoor {
 
     @Shadow(remap = false)
     @Final
-    public int woodMeta;
+    public int woodMeta = 0;
 
     protected MixinBlockWoodTrapdoor(Material material) {
-        super(Material.wood);
-        woodMeta = 0;
+        super(material);
     }
 
     /**
