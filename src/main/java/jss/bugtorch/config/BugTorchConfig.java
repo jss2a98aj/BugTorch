@@ -168,11 +168,17 @@ public class BugTorchConfig {
         //Tweaks
         farmlandImprovements = config.getBoolean("farmlandImprovements", categoryTweaks, false, "Farmland will no longer get trampled and hydroponic farms will be possible.\nAlso has new side textures for both wet and dry farmland.\nThis will be moved to a seperate mod at some point.");
         lanPortOverride = config.getBoolean("lanPortOverride", categoryTweaks, false, "Override the port used when opening singleplayer to LAN.") && !serverSide;
-        lanPortToUseForOverride = config.getInt("lanPortToUSeForOverride", categoryTweaks, 25565, 1024 , 49151, "Port to use for lanPortOverride.");
         placeEndPortalsAnywhere = config.getBoolean("placeEndPortalsAnywhere", categoryTweaks, false, "Place End Portals outside of the overworld without them getting removed.");
         removeEntityDuplicateExtendedPropertiesIdentifierSpam = config.getBoolean("removeEntityDuplicateExtendedPropertiesIdentifierSpam", categoryTweaks, true, "Removes \"An attempt was made to register exended properties using an existing key\" log spam caused by some mods.");
         potionParticlesAreClearForClientPlayer = config.getBoolean("potionParticlesAreClearForClientPlayer", categoryTweaks, false, "Potion particles coming off of the player entity you control are always clear.");
 
+        lanPortToUseForOverride = config.getInt("lanPortToUseForOverride", categoryTweaks, 25565, 1024 , 49151, "Port to use for lanPortOverride.");
+        if(config.hasKey(categoryTweaks, "lanPortToUSeForOverride")) {
+        	lanPortToUseForOverride = config.getInt("lanPortToUSeForOverride", categoryTweaks, 25565, 1024 , 49151, "Port to use for lanPortOverride.");
+        	config.getCategory(categoryTweaks).get("lanPortToUseForOverride").set(lanPortToUseForOverride);
+        	config.getCategory(categoryTweaks).remove("lanPortToUSeForOverride");
+        }
+        
         if(config.hasChanged()) {
             config.save();
         }
