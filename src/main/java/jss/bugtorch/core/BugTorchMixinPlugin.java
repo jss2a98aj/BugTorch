@@ -44,7 +44,7 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
     public List<String> getMixins() {
         List<String> mixins = new ArrayList<>();
         
-        if(BugTorchConfig.gannysSurfaceJarName == "d" || !loadJar(BugTorchConfig.gannysSurfaceJarName)) {
+        if(BugTorchConfig.ganysSurfaceJarName == "d" || !loadJar(BugTorchConfig.ganysSurfaceJarName)) {
             BugTorchConfig.fixGanysSurfaceOpenTrapdoorBackTexture = false;
         }
         if(BugTorchConfig.thaumcraftJarName == "d" || !loadJar(BugTorchConfig.thaumcraftJarName)) {
@@ -104,6 +104,7 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
         if(BugTorchConfig.lanPortOverride) mixins.add("minecraft.server.integrated.MixinIntegratedServer");
         if(BugTorchConfig.placeEndPortalsAnywhere)mixins.add("minecraft.block.MixinBlockEndPortal");
         if(BugTorchConfig.removeEntityDuplicateExtendedPropertiesIdentifierSpam) mixins.add("minecraft.entity.MixinEntity");
+        if(BugTorchConfig.potionParticlesAreClearForClientPlayer) mixins.add("minecraft.entity.MixinEntityLivingBase2");
 
         //Mod bugfixes
         if(BugTorchConfig.fixGanysSurfaceOpenTrapdoorBackTexture) mixins.add("ganyssurface.blocks.MixinBlockWoodTrapdoor");

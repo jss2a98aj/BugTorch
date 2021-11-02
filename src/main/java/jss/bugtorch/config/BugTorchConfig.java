@@ -69,9 +69,10 @@ public class BugTorchConfig {
     public static int lanPortToUseForOverride;
     public static boolean placeEndPortalsAnywhere;
     public static boolean removeEntityDuplicateExtendedPropertiesIdentifierSpam;
+    public static boolean potionParticlesAreClearForClientPlayer;
 
     //Mixin mod names
-    public static String gannysSurfaceJarName;
+    public static String ganysSurfaceJarName;
     public static String thaumcraftJarName;
     public static String witcheryJarName;
     
@@ -170,6 +171,7 @@ public class BugTorchConfig {
         lanPortToUseForOverride = config.getInt("lanPortToUSeForOverride", categoryTweaks, 25565, 1024 , 49151, "Port to use for lanPortOverride.");
         placeEndPortalsAnywhere = config.getBoolean("placeEndPortalsAnywhere", categoryTweaks, false, "Place End Portals outside of the overworld without them getting removed.");
         removeEntityDuplicateExtendedPropertiesIdentifierSpam = config.getBoolean("removeEntityDuplicateExtendedPropertiesIdentifierSpam", categoryTweaks, true, "Removes \"An attempt was made to register exended properties using an existing key\" log spam caused by some mods.");
+        potionParticlesAreClearForClientPlayer = config.getBoolean("potionParticlesAreClearForClientPlayer", categoryTweaks, false, "Potion particles coming off of the player entity you control are always clear.");
 
         if(config.hasChanged()) {
             config.save();
@@ -180,7 +182,7 @@ public class BugTorchConfig {
         Configuration config = new Configuration(configFile);
         
         //Mod file names
-        gannysSurfaceJarName = config.getString("gannysSurfaceJarName", categoryModNames, "Ganys+Surface", "The partial file name assiciated with Ganny's Surface.\n!This can break things if the wrong name is used!\nSet to 'd' to disable all mixins for Ganny's Surface.");
+        ganysSurfaceJarName = config.getString("ganysSurfaceJarName", categoryModNames, "Ganys+Surface", "The partial file name assiciated with Gany's Surface.\n!This can break things if the wrong name is used!\nSet to 'd' to disable all mixins for Gany's Surface.");
         thaumcraftJarName = config.getString("thaumcraftJarName", categoryModNames, "Thaumcraft-1.7.10", "The partial file name assiciated with Thaumcraft.\n!This can break things if the wrong name is used!\nSet to 'd' to disable all mixins for Thaumcraft.");
         witcheryJarName = config.getString("witcheryJarName", categoryModNames, "witchery-1.7.10", "The partial file name assiciated with Witchery.\n!This can break things if the wrong name is used!\nSet to 'd' to disable all mixins for Witchery.");
 
