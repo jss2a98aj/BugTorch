@@ -174,8 +174,7 @@ public class BugTorchConfig {
 
         lanPortToUseForOverride = config.getInt("lanPortToUseForOverride", categoryTweaks, 25565, 1024 , 49151, "Port to use for lanPortOverride.");
         if(config.hasKey(categoryTweaks, "lanPortToUSeForOverride")) {
-        	lanPortToUseForOverride = config.getInt("lanPortToUSeForOverride", categoryTweaks, 25565, 1024 , 49151, "Port to use for lanPortOverride.");
-        	config.getCategory(categoryTweaks).get("lanPortToUseForOverride").set(lanPortToUseForOverride);
+        	config.getCategory(categoryTweaks).get("lanPortToUseForOverride").set(config.getInt("lanPortToUSeForOverride", categoryTweaks, 25565, 1024 , 49151, "Port to use for lanPortOverride."));
         	config.getCategory(categoryTweaks).remove("lanPortToUSeForOverride");
         }
         
