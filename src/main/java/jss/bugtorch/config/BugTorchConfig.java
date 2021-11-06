@@ -16,6 +16,7 @@ public class BugTorchConfig {
 
     //Mod bugfixes
     public static boolean fixPamsTemperatePlantsBlockSound;
+    public static boolean fixWitcheryIceBlockSound;
 
     //Mod ore dictionary
     public static boolean registerThaumcraftLeavesToTheOreDictionary;
@@ -107,13 +108,14 @@ public class BugTorchConfig {
         Configuration config = new Configuration(configFile);
 
         //Bugfixes
-        fixPamsTemperatePlantsBlockSound = config.getBoolean("setPamsTemperatePlantsBlockSound", categoryBugfixes, true, "Sets Pam's Temperate Plants sound type to grass.");
-        
+        fixPamsTemperatePlantsBlockSound = config.getBoolean("setPamsTemperatePlantsBlockSound", categoryBugfixes, true, "Sets Pam's Temperate Plants plant block sound type to grass.");
+        fixWitcheryIceBlockSound  = config.getBoolean("fixWitcheryIceBlockSound", categoryBugfixes, true, "Sets Witchery ice blocks sound type to glass.");
+
         //Ore dictionary
         registerThaumcraftLeavesToTheOreDictionary = config.getBoolean("registerThaumcraftLeavesToTheOreDictionary", categoryOreDictionary, true, "Register Thaumcraft Greatwood and Silverwood leaves as treeLeaves.");
         registerThaumcraftThaumiumBlockToTheOreDictionary = config.getBoolean("registerThaumcraftThaumiumBlockToTheOreDictionary", categoryOreDictionary, true, "Register Thaumcraft Thaumium Blocks as blockThaumium.");
         registerThaumcraftWoodStairsToTheOreDictionary = config.getBoolean("registerThaumcraftWoodStairsToTheOreDictionary", categoryOreDictionary, true, "Register Thaumcraft Greatwood and Silverwood stairs as stairWood.");
-        
+
         //Tweaks
         craftThaumcraftAncientStoneSlabsAndStairs = config.getBoolean("craftThaumcraftAncientStoneSlabs", categoryTweaks, true, "Craft Thaumcraft Ancient Stone slabs and stairs.");
         enableVillageNamesMetadataSensitiveTrades = config.getBoolean("enableVillageNamesMetadataSensitiveTrades", categoryTweaks, true, "Enables metadata sensitive trades in Village Names.\nDoes nothing if fixVillagerTradeMetadataDetection in \"bugtorch\\mixins.cfg\" is not enabled.") && fixVillagerTradeMetadataDetection;
@@ -126,7 +128,7 @@ public class BugTorchConfig {
 
     public static void loadBaseMixinConfig(File configFile) {
         boolean serverSide = FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER;
-        
+
         Configuration config = new Configuration(configFile);
 
         //Backports
@@ -174,11 +176,11 @@ public class BugTorchConfig {
 
         lanPortToUseForOverride = config.getInt("lanPortToUseForOverride", categoryTweaks, 25565, 1024 , 49151, "Port to use for lanPortOverride.");
         if(config.hasKey(categoryTweaks, "lanPortToUSeForOverride")) {
-        	lanPortToUseForOverride = config.getInt("lanPortToUSeForOverride", categoryTweaks, 25565, 1024 , 49151, "Port to use for lanPortOverride.");
-        	config.getCategory(categoryTweaks).get("lanPortToUseForOverride").set(lanPortToUseForOverride);
-        	config.getCategory(categoryTweaks).remove("lanPortToUSeForOverride");
+            lanPortToUseForOverride = config.getInt("lanPortToUSeForOverride", categoryTweaks, 25565, 1024 , 49151, "Port to use for lanPortOverride.");
+            config.getCategory(categoryTweaks).get("lanPortToUseForOverride").set(lanPortToUseForOverride);
+            config.getCategory(categoryTweaks).remove("lanPortToUSeForOverride");
         }
-        
+
         if(config.hasChanged()) {
             config.save();
         }
@@ -186,7 +188,7 @@ public class BugTorchConfig {
 
     public static void loadModdedMixinConfig(File configFile) {
         Configuration config = new Configuration(configFile);
-        
+
         //Mod file names
         ganysSurfaceJarName = config.getString("ganysSurfaceJarName", categoryModNames, "Ganys+Surface", "The partial file name assiciated with Gany's Surface.\n!This can break things if the wrong name is used!\nSet to 'd' to disable all mixins for Gany's Surface.");
         thaumcraftJarName = config.getString("thaumcraftJarName", categoryModNames, "Thaumcraft-1.7.10", "The partial file name assiciated with Thaumcraft.\n!This can break things if the wrong name is used!\nSet to 'd' to disable all mixins for Thaumcraft.");

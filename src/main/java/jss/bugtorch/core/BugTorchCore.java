@@ -12,14 +12,15 @@ import jss.bugtorch.config.BugTorchConfig;
 import jss.bugtorch.modsupport.PamsTemperatePlantsSupport;
 import jss.bugtorch.modsupport.ThaumcraftSupport;
 import jss.bugtorch.modsupport.VillageNamesSupport;
+import jss.bugtorch.modsupport.WitcherySupport;
 import jss.bugtorch.util.LoadedMods;
 
 @Mod(
         modid = BugTorchCore.MODID,
         name = BugTorchCore.NAME,
         version = "1.1.3-beta",
-        dependencies = "required-after:spongemixins@[1.2.0,);after:Thaumcraft;after:temperateplants;after:VillageNames;"
-        //after:witchery; after:ganyssurface;
+        dependencies = "required-after:spongemixins@[1.2.0,);after:Thaumcraft;after:temperateplants;after:VillageNames;after:witchery;"
+        //after:ganyssurface;
     )
 
 public class BugTorchCore {
@@ -40,11 +41,15 @@ public class BugTorchCore {
         VanillaSupport.enableSupport();
         
         if(LoadedMods.pamsTemperatePlantsLoaded) {
-        	//PamsTemperatePlantsSupport.enableSupport();
+            PamsTemperatePlantsSupport.enableSupport();
         }
         
         if(LoadedMods.thaumcraftLoaded) {
             ThaumcraftSupport.enableSupport();
+        }
+        
+        if(LoadedMods.witcheryLoaded) {
+            WitcherySupport.enableSupport();
         }
         
         if(LoadedMods.villageNamesLoaded) {
