@@ -78,6 +78,10 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
         }
         if(BugTorchConfig.fixVillageSieges) mixins.add("minecraft.village.MixinVillageSiege");
         if(BugTorchConfig.fixVillageWellDesertMaterial) mixins.add("minecraft.world.gen.structure.MixinStructureVillagePieces_Well");
+        if(BugTorchConfig.fixMineshaftAirPockets) {
+            mixins.add("minecraft.world.gen.structure.MixinStructureStart");
+            mixins.add("minecraft.world.gen.structure.MixinStructureMineshaftPieces$Room");
+        }
 
         //Performance
         if(BugTorchConfig.brokenChestsDontSplitStacks) mixins.add("minecraft.block.MixinBlockChest");

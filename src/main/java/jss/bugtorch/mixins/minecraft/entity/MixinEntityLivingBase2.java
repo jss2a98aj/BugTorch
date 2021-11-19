@@ -26,6 +26,8 @@ public class MixinEntityLivingBase2 {
         /*
          * For some reason this has a compile  error unless I cast this to EntityLivingBase
          * even though it is already an instance of EntityLivingBase...???
+         * 
+         * For this reason, this class no longer extends EntityLivingBase as that was all I'd need it for.
          */
         return flag || (EntityLivingBase)(Object)this instanceof AbstractClientPlayer;
 	}
