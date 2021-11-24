@@ -23,9 +23,7 @@ public class MixinStructureMineshaftPieces$Room extends StructureComponent imple
 	private List<StructureBoundingBox> roomsLinkedToTheRoom;
 	
 	public void offset(int x, int y, int z) {
-	    Iterator linkedComponentsIterator = this.roomsLinkedToTheRoom.iterator();
-	    while (linkedComponentsIterator.hasNext()) {
-	        StructureBoundingBox bb = (StructureBoundingBox) linkedComponentsIterator.next();
+	    for(StructureBoundingBox bb : (List<StructureBoundingBox>)roomsLinkedToTheRoom) {
 	        bb.offset(x, y, z);
 	    }
 	}
