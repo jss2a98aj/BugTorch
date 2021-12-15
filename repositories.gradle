@@ -1,0 +1,7 @@
+// Add any additional repositiroes for your dependencies here
+
+repositories {
+    maven {
+        url = "https://jitpack.io"
+    }
+}
