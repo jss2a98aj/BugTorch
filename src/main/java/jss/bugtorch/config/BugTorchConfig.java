@@ -16,12 +16,13 @@ public class BugTorchConfig {
 
     //Mod bugfixes
     public static boolean fixPamsTemperatePlantsBlockSound;
-    public static boolean fixWitcheryIceBlockSound;
+    public static boolean fixWitcheryBlockSound;
 
     //Mod ore dictionary
     public static boolean registerThaumcraftLeavesToTheOreDictionary;
     public static boolean registerThaumcraftThaumiumBlockToTheOreDictionary;
     public static boolean registerThaumcraftWoodStairsToTheOreDictionary;
+    public static boolean registerWitcheryWoodSlabsToTheOreDictionary;
 
     //Mod tweaks
     public static boolean craftThaumcraftAncientStoneSlabsAndStairs;
@@ -109,13 +110,14 @@ public class BugTorchConfig {
         Configuration config = new Configuration(configFile);
 
         //Bugfixes
-        fixPamsTemperatePlantsBlockSound = config.getBoolean("setPamsTemperatePlantsBlockSound", categoryBugfixes, true, "Sets Pam's Temperate Plants plant block sound type to grass.");
-        fixWitcheryIceBlockSound  = config.getBoolean("fixWitcheryIceBlockSound", categoryBugfixes, true, "Sets Witchery ice blocks sound type to glass.");
+        fixPamsTemperatePlantsBlockSound = config.getBoolean("setPamsTemperatePlantsBlockSound", categoryBugfixes, true, "Assigns the correct sound type to blocks from Pam's Temperate Plants.");
+        fixWitcheryBlockSound = config.getBoolean("fixWitcheryBlockSound", categoryBugfixes, true, "Assigns the correct sound type to blocks from Witchery.");
 
         //Ore dictionary
         registerThaumcraftLeavesToTheOreDictionary = config.getBoolean("registerThaumcraftLeavesToTheOreDictionary", categoryOreDictionary, true, "Register Thaumcraft Greatwood and Silverwood leaves as treeLeaves.");
         registerThaumcraftThaumiumBlockToTheOreDictionary = config.getBoolean("registerThaumcraftThaumiumBlockToTheOreDictionary", categoryOreDictionary, true, "Register Thaumcraft Thaumium Blocks as blockThaumium.");
         registerThaumcraftWoodStairsToTheOreDictionary = config.getBoolean("registerThaumcraftWoodStairsToTheOreDictionary", categoryOreDictionary, true, "Register Thaumcraft Greatwood and Silverwood stairs as stairWood.");
+        registerWitcheryWoodSlabsToTheOreDictionary = config.getBoolean("registerWitcheryWoodSlabsToTheOreDictionary", categoryOreDictionary, true, "Register Witchery wooden slabs as slabWood.");
 
         //Tweaks
         craftThaumcraftAncientStoneSlabsAndStairs = config.getBoolean("craftThaumcraftAncientStoneSlabs", categoryTweaks, true, "Craft Thaumcraft Ancient Stone slabs and stairs.");
