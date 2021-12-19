@@ -61,6 +61,7 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
         if(BugTorchConfig.throwEnderPearlsInCrativeMode) mixins.add("minecraft.item.MixinItemEnderPearl");
 
         //Bugfixes
+        if(BugTorchConfig.fixEnchantmentBlendFunc) mixins.add("minecraft.client.renderer.entity.MixinItemRenderer");
         if(BugTorchConfig.fixFireChargeUseSound) mixins.add("minecraft.item.MixinItemFireball");
         if(BugTorchConfig.fixLavaHissOnAirReplace) mixins.add("minecraft.block.MixinBlockLiquid");
         if(BugTorchConfig.fixPumpkinPlacementCheck) mixins.add("minecraft.block.MixinBlockPumpkin");
@@ -112,7 +113,10 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
 
         //Mod bugfixes
         if(BugTorchConfig.fixGanysSurfaceOpenTrapdoorBackTexture) mixins.add("ganyssurface.blocks.MixinBlockWoodTrapdoor");
-        if(BugTorchConfig.fixThaumcraftCandleColorArrayOutOfBounds) mixins.add("thaumcraft.common.blocks.MixinBlockCandle");
+        if(BugTorchConfig.fixThaumcraftCandleColorArrayOutOfBounds) {
+        	//mixins.add("thaumcraft.client.renderers.block.MixinBlockCandleRenderer");
+        	mixins.add("thaumcraft.common.blocks.MixinBlockCandle");
+        } 
         if(BugTorchConfig.fixWitcheryGarlicGarlandBlockBounds) mixins.add("witchery.blocks.MixinBlockGarlicGarland");
 
         return mixins;

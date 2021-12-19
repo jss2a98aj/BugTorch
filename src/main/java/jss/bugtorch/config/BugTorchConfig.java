@@ -36,6 +36,7 @@ public class BugTorchConfig {
     public static boolean throwEnderPearlsInCrativeMode;
 
     //Mixin bugfixes
+    public static boolean fixEnchantmentBlendFunc;
     public static boolean fixFireChargeUseSound;
     public static boolean fixLavaHissOnAirReplace;
     public static boolean fixPumpkinPlacementCheck;
@@ -141,6 +142,7 @@ public class BugTorchConfig {
         throwEnderPearlsInCrativeMode = config.getBoolean("throwEnderPearlsInCrativeMode", categoryBackport, true, "Ender Pearls can be thrown in creative mode.\nFrom MC 1.9, fixes MC-438");
 
         //Bugfixes
+        fixEnchantmentBlendFunc = config.getBoolean("fixEnchantmentBlendFunc", categoryBugfixes, true, "Fixes rendering issues caused by enchantments changing glBlendFunc and never reverting it.") && !serverSide;
         fixFireChargeUseSound = config.getBoolean("fixFireChargeUseSound", categoryBugfixes, true, "Fire Charges have the correct use sound.\nFrom MC 1.8, fixes MC-1831");
         fixLavaHissOnAirReplace = config.getBoolean("fixLavaHissOnAirReplace", categoryBugfixes, true, "Lava will only hiss when mixing with water.\nFrom MC 1.8, fixes MC-32301");
         fixPumpkinPlacementCheck = config.getBoolean("fixPumpkinPlacementCheck", categoryBackport, true, "Pumpkins and Jack o'Lanterns can be placed without a solid block below them.\nFrom MC 1.13, fixes MC-1947");
