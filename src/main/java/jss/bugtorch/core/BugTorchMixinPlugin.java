@@ -64,6 +64,10 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
 		if(BugTorchConfig.fixEnchantmentBlendFunc) mixins.add("minecraft.client.renderer.entity.MixinItemRenderer");
 		if(BugTorchConfig.fixFireChargeUseSound) mixins.add("minecraft.item.MixinItemFireball");
 		if(BugTorchConfig.fixLavaHissOnAirReplace) mixins.add("minecraft.block.MixinBlockLiquid");
+		if(BugTorchConfig.fixMineshaftAirPockets) {
+			mixins.add("minecraft.world.gen.structure.MixinStructureStart");
+			mixins.add("minecraft.world.gen.structure.MixinStructureMineshaftPieces$Room");
+		}
 		if(BugTorchConfig.fixPumpkinPlacementCheck) mixins.add("minecraft.block.MixinBlockPumpkin");
 		if(BugTorchConfig.fixStoneMonsterEggDoubleSpawns) mixins.add("minecraft.block.MixinBlockSilverfish");
 		if(BugTorchConfig.fixShearedBlocksDropExtraItems) {
@@ -79,10 +83,6 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
 		}
 		if(BugTorchConfig.fixVillageSieges) mixins.add("minecraft.village.MixinVillageSiege");
 		if(BugTorchConfig.fixVillageWellDesertMaterial) mixins.add("minecraft.world.gen.structure.MixinStructureVillagePieces_Well");
-		if(BugTorchConfig.fixMineshaftAirPockets) {
-			mixins.add("minecraft.world.gen.structure.MixinStructureStart");
-			mixins.add("minecraft.world.gen.structure.MixinStructureMineshaftPieces$Room");
-		}
 
 		//Performance
 		if(BugTorchConfig.brokenChestsDontSplitStacks) mixins.add("minecraft.block.MixinBlockChest");
@@ -108,8 +108,8 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
 		if(BugTorchConfig.farmlandImprovements)mixins.add("minecraft.block.MixinBlockFarmland");
 		if(BugTorchConfig.lanPortOverride) mixins.add("minecraft.server.integrated.MixinIntegratedServer");
 		if(BugTorchConfig.placeEndPortalsAnywhere)mixins.add("minecraft.block.MixinBlockEndPortal");
-		if(BugTorchConfig.removeEntityDuplicateExtendedPropertiesIdentifierSpam) mixins.add("minecraft.entity.MixinEntity");
 		if(BugTorchConfig.potionParticlesAreClearForClientPlayer) mixins.add("minecraft.entity.MixinEntityLivingBase2");
+		if(BugTorchConfig.removeEntityDuplicateExtendedPropertiesIdentifierSpam) mixins.add("minecraft.entity.MixinEntity");
 
 		//Mod bugfixes
 		if(BugTorchConfig.fixGanysSurfaceOpenTrapdoorBackTexture) mixins.add("ganyssurface.blocks.MixinBlockWoodTrapdoor");
