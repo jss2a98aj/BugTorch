@@ -12,13 +12,13 @@ import net.minecraft.client.multiplayer.WorldClient;
 @Mixin(value = WorldClient.class)
 public abstract class MixinWorldClient {
 
-    /**
-     * @author jss2a98aj
-     * @reason Xoshiro256** is faster than Random
-     */
-    @Redirect(method = "doVoidFogParticles", at = @At(value = "NEW", target = "java/util/Random"))
-    private Random redirectDoVoidFogParticlesRandom() {
-        return new RandomXoshiro256StarStar();
-    }
+	/**
+	 * @author jss2a98aj
+	 * @reason Xoshiro256** is faster than Random
+	 */
+	@Redirect(method = "doVoidFogParticles", at = @At(value = "NEW", target = "java/util/Random"))
+	private Random redirectDoVoidFogParticlesRandom() {
+		return new RandomXoshiro256StarStar();
+	}
 
 }

@@ -15,41 +15,42 @@ import net.minecraft.world.World;
 @Mixin(value = EntityLivingBase.class)
 public abstract class MixinEntityLivingBase extends Entity {
 
-    public MixinEntityLivingBase(World world) {
-        super(world);
-    }
+	MixinEntityLivingBase(World world) {
+		super(world);
+	}
 
-    @Shadow
-    @Final
-    private HashMap activePotionsMap;
+	@Shadow
+	@Final
+	private HashMap activePotionsMap;
 
-    /**
-     * @author jss2a98aj
-     * @reason If the potion array is empty don't waste time checking it
-     */
-    @Overwrite()
-    public boolean isPotionActive(int potionID) {
-        return this.activePotionsMap.size() != 0 && this.activePotionsMap.containsKey(Integer.valueOf(potionID));
-    }
+	/**
+	 * @author jss2a98aj
+	 * @reason If the potion array is empty don't waste time checking it
+	 */
+	@Overwrite()
+	public boolean isPotionActive(int potionID) {
+		return activePotionsMap.size() != 0 && activePotionsMap.containsKey(Integer.valueOf(potionID));
+	}
 
-    /**
-     * @author jss2a98aj
-     * @reason If the potion array is empty don't waste time checking it
-     */
-    @Overwrite()
-    public boolean isPotionActive(Potion potion) {
-        return this.activePotionsMap.size() != 0 && this.activePotionsMap.containsKey(Integer.valueOf(potion.id));
-    }
+	/**
+	 * @author jss2a98aj
+	 * @reason If the potion array is empty don't waste time checking it
+	 */
+	@Overwrite()
+	public boolean isPotionActive(Potion potion) {
+		return activePotionsMap.size() != 0 && activePotionsMap.containsKey(Integer.valueOf(potion.id));
+	}
 
-    /**
-     * @author jss2a98aj
-     * @reason Keeps the datawatcher from being updated when no change in air has occurred
-     */
-    @Override
-    public void setAir(int airAmount) {
-        if(this.getAir() != airAmount) {
-            super.setAir(airAmount);
-        }
-    }
-    
+	/**
+	 * @author jss2a98aj
+	 * @reason Keeps the datawatcher from being updated when no change in air has
+	 *         occurred
+	 */
+	@Override
+	public void setAir(int airAmount) {
+		if (this.getAir() != airAmount) {
+			super.setAir(airAmount);
+		}
+	}
+
 }

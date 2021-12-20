@@ -8,9 +8,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntitySenses;
 
 @Mixin(value = EntitySenses.class)
-public class MixinEntitySenses {
-    //TODO: see if this works and implement if so
-    //Replace List with HashSet
-    HashSet<Entity> seenEntities = new HashSet<Entity>();
-    HashSet<Entity> unseenEntities = new HashSet<Entity>();
+public abstract class MixinEntitySenses {
+	// TODO: see if this works and implement if so
+	// Replace List with HashSet
+	HashSet<Entity> seenEntities = new HashSet<Entity>();
+	HashSet<Entity> unseenEntities = new HashSet<Entity>();
 }

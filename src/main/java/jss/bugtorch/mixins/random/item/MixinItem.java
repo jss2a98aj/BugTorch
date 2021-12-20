@@ -8,11 +8,11 @@ import jss.util.RandomXoshiro256StarStar;
 import net.minecraft.item.Item;
 
 @Mixin(value = Item.class)
-public class MixinItem {
+public abstract class MixinItem {
 
-    /**
-     *Xoshiro256** is faster than Random
-     */
-    private static Random itemRand = new RandomXoshiro256StarStar();
+	/**
+	 * Xoshiro256** is faster than Random
+	 */
+	private static Random itemRand = new RandomXoshiro256StarStar();
 
 }

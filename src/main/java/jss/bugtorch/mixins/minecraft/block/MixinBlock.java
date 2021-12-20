@@ -10,21 +10,21 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.RegistryNamespaced;
 
 @Mixin(value = Block.class)
-public class MixinBlock {
+public abstract class MixinBlock {
 
-    @Shadow
-    @Final
-    public static RegistryNamespaced blockRegistry;
+	@Shadow
+	@Final
+	public static RegistryNamespaced blockRegistry;
 
-    /**
-     * @author jss2a98aj
-     * @reason Most calls have 0 (air), this makes those calls faster
-     */
-    @Overwrite()
-    public static Block getBlockById(int blockId) {
-        if(blockId == 0) return Blocks.air;
-        Block ret = (Block)blockRegistry.getObjectById(blockId);
-        return ret == null ? Blocks.air : ret;
-    }
+	/**
+	 * @author jss2a98aj
+	 * @reason Most calls have 0 (air), this makes those calls faster
+	 */
+	@Overwrite()
+	public static Block getBlockById(int blockId) {
+		if (blockId == 0) return Blocks.air;
+		Block ret = (Block) blockRegistry.getObjectById(blockId);
+		return ret == null ? Blocks.air : ret;
+	}
 
 }

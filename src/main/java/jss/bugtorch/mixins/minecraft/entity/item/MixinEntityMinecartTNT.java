@@ -11,36 +11,31 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 @Mixin(value = EntityMinecartTNT.class)
-public class MixinEntityMinecartTNT extends EntityMinecart {
+public abstract class MixinEntityMinecartTNT extends EntityMinecart {
 
-    public MixinEntityMinecartTNT(World world) {
-        super(world);
-    }
+	public MixinEntityMinecartTNT(World world) {
+		super(world);
+	}
 
-    @Shadow
-    public int getMinecartType() {
-        return 0;
-    }
+	@Shadow
+	protected void explodeCart(double p_94103_1_) {
+	}
 
-    @Shadow
-    protected void explodeCart(double p_94103_1_){ 
-    }
+	/**
+	 * @author jss2a98aj
+	 * @reason "Fire arrow make cart go boom"
+	 */
+	public boolean attackEntityFrom(DamageSource source, float amount) {
+		Entity entity = source.getSourceOfDamage();
 
-    /**
-     * @author jss2a98aj
-     * @reason "Fire arrow make cart go boom"
-     */
-    public boolean attackEntityFrom(DamageSource source, float amount) {
-        Entity entity = source.getSourceOfDamage();
+		if (entity instanceof EntityArrow) {
+			EntityArrow entityarrow = (EntityArrow) entity;
 
-        if (entity instanceof EntityArrow) {
-            EntityArrow entityarrow = (EntityArrow)entity;
-
-            if (entityarrow.isBurning()) {
-                this.explodeCart(entityarrow.motionX * entityarrow.motionX + entityarrow.motionY * entityarrow.motionY + entityarrow.motionZ * entityarrow.motionZ);
-            }
-        }
-        return super.attackEntityFrom(source, amount);
-    }
+			if (entityarrow.isBurning()) {
+				explodeCart(entityarrow.motionX * entityarrow.motionX + entityarrow.motionY * entityarrow.motionY + entityarrow.motionZ * entityarrow.motionZ);
+			}
+		}
+		return super.attackEntityFrom(source, amount);
+	}
 
 }

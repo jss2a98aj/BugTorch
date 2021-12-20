@@ -9,12 +9,12 @@ import jss.util.RandomXoshiro256StarStar;
 import net.minecraft.server.MinecraftServer;
 
 @Mixin(value = MinecraftServer.class)
-public class MixinMinecraftServer {
+public abstract class MixinMinecraftServer {
 
-    /**
-     *Xoshiro256** is faster than Random
-     */
-    @Final
-    private Random field_147146_q = new RandomXoshiro256StarStar();
+	/**
+	 * Xoshiro256** is faster than Random
+	 */
+	@Final
+	private Random field_147146_q = new RandomXoshiro256StarStar();
 
 }

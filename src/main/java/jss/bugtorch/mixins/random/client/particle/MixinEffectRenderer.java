@@ -8,11 +8,11 @@ import jss.util.RandomXoshiro256StarStar;
 import net.minecraft.client.particle.EffectRenderer;
 
 @Mixin(value = EffectRenderer.class)
-public class MixinEffectRenderer {
+public abstract class MixinEffectRenderer {
 
-    /**
-     *Xoshiro256** is faster than Random
-     */
-    public Random rand = new RandomXoshiro256StarStar();
+	/**
+	 * Xoshiro256** is faster than Random
+	 */
+	public Random rand = new RandomXoshiro256StarStar();
 
 }

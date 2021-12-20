@@ -18,101 +18,101 @@ import net.minecraft.world.SpawnerAnimals;
 import net.minecraft.world.World;
 
 @Mixin(value = VillageSiege.class)
-public class MixinVillageSiege {
+public abstract class MixinVillageSiege {
 
-    @Shadow
-    private World worldObj;
-    @Shadow
-    private int field_75533_d;
-    @Shadow
-    private int field_75534_e;
-    @Shadow
-    private Village theVillage;
-    @Shadow
-    private int field_75532_g;
-    @Shadow
-    private int field_75538_h;
-    @Shadow
-    private int field_75539_i;
-    
-    /**
-     * @author jss2a98aj
-     * @reason Allows Zombie sieges to start
-     */
-    @Overwrite()
-    private boolean func_75529_b() {
-        List<EntityPlayer> list = this.worldObj.playerEntities;
-        Iterator iterator = list.iterator();
+	@Shadow
+	private World worldObj;
+	@Shadow
+	private int field_75533_d;
+	@Shadow
+	private int field_75534_e;
+	@Shadow
+	private Village theVillage;
+	@Shadow
+	private int field_75532_g;
+	@Shadow
+	private int field_75538_h;
+	@Shadow
+	private int field_75539_i;
+	
+	/**
+	 * @author jss2a98aj
+	 * @reason Allows Zombie sieges to start
+	 */
+	@Overwrite()
+	private boolean func_75529_b() {
+		List<EntityPlayer> list = worldObj.playerEntities;
+		Iterator iterator = list.iterator();
 
-        while (true) {
-            if (!iterator.hasNext()) {
-                return false;
-            }
+		while (true) {
+			if (!iterator.hasNext()) {
+				return false;
+			}
 
-            EntityPlayer entityplayer = (EntityPlayer)iterator.next();
+			EntityPlayer entityplayer = (EntityPlayer)iterator.next();
 
-            this.theVillage = this.worldObj.villageCollectionObj.findNearestVillage((int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ, 1);
+			theVillage = worldObj.villageCollectionObj.findNearestVillage((int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ, 1);
 
-            if (this.theVillage != null && this.theVillage.getNumVillageDoors() >= 10 && this.theVillage.getTicksSinceLastDoorAdding() >= 20 && this.theVillage.getNumVillagers() >= 20) {
-                ChunkCoordinates chunkcoordinates = this.theVillage.getCenter();
-                float f = (float)this.theVillage.getVillageRadius();
-                boolean flag = false;
+			if (theVillage != null && theVillage.getNumVillageDoors() >= 10 && theVillage.getTicksSinceLastDoorAdding() >= 20 && theVillage.getNumVillagers() >= 20) {
+				ChunkCoordinates chunkcoordinates = theVillage.getCenter();
+				float f = (float)theVillage.getVillageRadius();
+				boolean flag = false;
 
-                for (int i = 0; i < 10; ++i) {
-                    float f1 = this.worldObj.rand.nextFloat() * (float)Math.PI * 2.0F;
-                    this.field_75532_g = chunkcoordinates.posX + (int)((double)(MathHelper.cos(f1) * f) * 0.9D);
-                    this.field_75538_h = chunkcoordinates.posY;
-                    this.field_75539_i = chunkcoordinates.posZ + (int)((double)(MathHelper.sin(f1) * f) * 0.9D);
-                    flag = false;
-                    Iterator iterator1 = this.worldObj.villageCollectionObj.getVillageList().iterator();
+				for (int i = 0; i < 10; ++i) {
+					float f1 = worldObj.rand.nextFloat() * (float)Math.PI * 2.0F;
+					field_75532_g = chunkcoordinates.posX + (int)((double)(MathHelper.cos(f1) * f) * 0.9D);
+					field_75538_h = chunkcoordinates.posY;
+					field_75539_i = chunkcoordinates.posZ + (int)((double)(MathHelper.sin(f1) * f) * 0.9D);
+					flag = false;
+					Iterator iterator1 = worldObj.villageCollectionObj.getVillageList().iterator();
 
-                    while (iterator1.hasNext()) {
-                        Village village = (Village)iterator1.next();
+					while (iterator1.hasNext()) {
+						Village village = (Village)iterator1.next();
 
-                        if (village != this.theVillage && village.isInRange(this.field_75532_g, this.field_75538_h, this.field_75539_i)) {
-                            flag = true;
-                            break;
-                        }
-                    }
+						if (village != theVillage && village.isInRange(field_75532_g, field_75538_h, field_75539_i)) {
+							flag = true;
+							break;
+						}
+					}
 
-                    if (!flag) {
-                        break;
-                    }
-                }
+					if (!flag) {
+						break;
+					}
+				}
 
-                if (flag) {
-                    return false;
-                }
+				if (flag) {
+					return false;
+				}
 
-                Vec3 vec3 = this.func_75527_a(this.field_75532_g, this.field_75538_h, this.field_75539_i);
+				Vec3 vec3 = func_75527_a(field_75532_g, field_75538_h, field_75539_i);
 
-                if (vec3 != null) {
-                    break;
-                }
-            }
-        }
+				if (vec3 != null) {
+					break;
+				}
+			}
+		}
 
-        this.field_75534_e = 0;
-        this.field_75533_d = 20;
-        return true;
-    }
+		field_75534_e = 0;
+		field_75533_d = 20;
+		return true;
+	}
 
-    /**
-     * @author jss2a98aj
-     * @reason Fixes Zombie spawn location selection
-     */
-    @Overwrite()
-    private Vec3 func_75527_a(int x, int y, int z) {
-        for (int i = 0; i < 10; ++i) {
-            int i1 = x + this.worldObj.rand.nextInt(16) - 8;
-            int j1 = y + this.worldObj.rand.nextInt(6) - 3;
-            int k1 = z + this.worldObj.rand.nextInt(16) - 8;
+	/**
+	 * @author jss2a98aj
+	 * @reason Fixes Zombie spawn location selection
+	 */
+	@Overwrite()
+	private Vec3 func_75527_a(int x, int y, int z) {
+		for (int i = 0; i < 10; ++i) {
+			int i1 = x + this.worldObj.rand.nextInt(16) - 8;
+			int j1 = y + this.worldObj.rand.nextInt(6) - 3;
+			int k1 = z + this.worldObj.rand.nextInt(16) - 8;
 
-            if (this.theVillage.isInRange(i1, j1, k1) && SpawnerAnimals.canCreatureTypeSpawnAtLocation(EnumCreatureType.monster, this.worldObj, i1, j1, k1)) {
-                return Vec3.createVectorHelper((double)i1, (double)j1, (double)k1);
-            }
-        }
-        return null;
-    }
+			if (theVillage.isInRange(i1, j1, k1) && SpawnerAnimals.canCreatureTypeSpawnAtLocation(EnumCreatureType.monster, this.worldObj, i1, j1, k1)) {
+				return Vec3.createVectorHelper((double)i1, (double)j1, (double)k1);
+			}
+		}
+		return null;
+	}
 
 }

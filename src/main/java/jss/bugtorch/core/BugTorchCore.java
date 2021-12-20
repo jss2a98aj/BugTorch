@@ -16,43 +16,43 @@ import jss.bugtorch.modsupport.WitcherySupport;
 import jss.bugtorch.util.LoadedMods;
 
 @Mod(
-        modid = BugTorchCore.MODID,
-        name = BugTorchCore.NAME,
-        version = "GRADLETOKEN_VERSION",
-        dependencies = "required-after:spongemixins@[1.2.0,);after:Thaumcraft;after:temperateplants;after:VillageNames;after:witchery;"
-    )
+		modid = BugTorchCore.MODID,
+		name = BugTorchCore.NAME,
+		version = "GRADLETOKEN_VERSION",
+		dependencies = "required-after:spongemixins@[1.2.0,);after:Thaumcraft;after:temperateplants;after:VillageNames;after:witchery;"
+	)
 public class BugTorchCore {
 
-    public static final String MODID = "bugtorch";
-    public static final String NAME = "BugTorch";
+	public static final String MODID = "bugtorch";
+	public static final String NAME = "BugTorch";
 
-    public static final Logger logger = LogManager.getLogger(MODID);
+	public static final Logger logger = LogManager.getLogger(MODID);
 
-    @EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
-        String configFolder =  event.getModConfigurationDirectory().getAbsolutePath() + File.separator + MODID + File.separator;
-        BugTorchConfig.loadBaseConfig(new File(configFolder + "base.cfg"));
-        BugTorchConfig.loadModdedConfig(new File(configFolder + "modSupport.cfg"));
+	@EventHandler
+	public void preInit(FMLPreInitializationEvent event) {
+		String configFolder =  event.getModConfigurationDirectory().getAbsolutePath() + File.separator + MODID + File.separator;
+		BugTorchConfig.loadBaseConfig(new File(configFolder + "base.cfg"));
+		BugTorchConfig.loadModdedConfig(new File(configFolder + "modSupport.cfg"));
 
-        LoadedMods.detectLoadedMods();
-        
-        VanillaSupport.enableSupport();
-        
-        if(LoadedMods.pamsTemperatePlantsLoaded) {
-            PamsTemperatePlantsSupport.enableSupport();
-        }
-        
-        if(LoadedMods.thaumcraftLoaded) {
-            ThaumcraftSupport.enableSupport();
-        }
-        
-        if(LoadedMods.witcheryLoaded) {
-            WitcherySupport.enableSupport();
-        }
-        
-        if(LoadedMods.villageNamesLoaded) {
-            VillageNamesSupport.enableSupport();
-        }
-    }
+		LoadedMods.detectLoadedMods();
+
+		VanillaSupport.enableSupport();
+
+		if(LoadedMods.pamsTemperatePlantsLoaded) {
+			PamsTemperatePlantsSupport.enableSupport();
+		}
+
+		if(LoadedMods.thaumcraftLoaded) {
+			ThaumcraftSupport.enableSupport();
+		}
+
+		if(LoadedMods.witcheryLoaded) {
+			WitcherySupport.enableSupport();
+		}
+
+		if(LoadedMods.villageNamesLoaded) {
+			VillageNamesSupport.enableSupport();
+		}
+	}
 
 }

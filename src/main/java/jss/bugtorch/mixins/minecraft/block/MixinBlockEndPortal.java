@@ -7,14 +7,14 @@ import net.minecraft.block.BlockEndPortal;
 import net.minecraft.world.World;
 
 @Mixin(value = BlockEndPortal.class)
-public class MixinBlockEndPortal {
+public abstract class MixinBlockEndPortal {
 
-    /**
-     * @author jss2a98aj
-     * @reason Allows end portals to be placed outside of the overworld
-     */
-    @Overwrite()
-    public void onBlockAdded(World worldIn, int x, int y, int z) {
-    }
+	/**
+	 * @author jss2a98aj
+	 * @reason Allows end portals to be placed outside of the overworld
+	 */
+	@Overwrite()
+	public void onBlockAdded(World worldIn, int x, int y, int z) {
+	}
 
 }

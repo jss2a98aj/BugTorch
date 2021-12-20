@@ -14,40 +14,40 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
 
 @Mixin(value = BlockWoodTrapdoor.class)
-public class MixinBlockWoodTrapdoor extends BlockTrapDoor {
+public abstract class MixinBlockWoodTrapdoor extends BlockTrapDoor {
 
-    @Shadow(remap = false)
-    @Final
-    public int woodMeta = 0;
+	@Shadow(remap = false)
+	@Final
+	public int woodMeta = 0;
 
-    protected MixinBlockWoodTrapdoor(Material material) {
-        super(material);
-    }
+	protected MixinBlockWoodTrapdoor(Material material) {
+		super(material);
+	}
 
-    /**
-     * @author jss2a98aj
-     * @reason Makes trapdoors from Gany's Surface have the correct back texture when open
-     */
-    @Overwrite()
-    @Override
-    @SideOnly(Side.CLIENT)
-    public IIcon getIcon(int side, int meta) {
-        if (func_150118_d(meta)) {
-            switch (meta & 3) {
-            case 0:// North/South
-            case 1:
-                if (side == 2 | side == 3)
-                    return super.getIcon(side, meta);
-                break;
-            case 2:// East/West
-            case 3:
-                if (side == 4 | side == 5)
-                    return super.getIcon(side, meta);
-                break;
-            }
-            return Blocks.planks.getIcon(side, woodMeta);
-        }
-        return side == 0 || side == 1 ? super.getIcon(side, meta) : Blocks.planks.getIcon(side, woodMeta);
-    }
+	/**
+	 * @author jss2a98aj
+	 * @reason Makes trapdoors from Gany's Surface have the correct back texture when open
+	 */
+	@Overwrite()
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(int side, int meta) {
+		if (func_150118_d(meta)) {
+			switch (meta & 3) {
+			case 0:// North/South
+			case 1:
+				if (side == 2 | side == 3)
+					return super.getIcon(side, meta);
+				break;
+			case 2:// East/West
+			case 3:
+				if (side == 4 | side == 5)
+					return super.getIcon(side, meta);
+				break;
+			}
+			return Blocks.planks.getIcon(side, woodMeta);
+		}
+		return side == 0 || side == 1 ? super.getIcon(side, meta) : Blocks.planks.getIcon(side, woodMeta);
+	}
 
 }

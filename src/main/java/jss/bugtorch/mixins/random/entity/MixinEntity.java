@@ -10,15 +10,15 @@ import jss.util.RandomXoshiro256StarStar;
 import net.minecraft.entity.Entity;
 
 @Mixin(value = Entity.class)
-public class MixinEntity {
+public abstract class MixinEntity {
 
-    /**
-     * @author jss2a98aj
-     * @reason Xoshiro256** is faster than Random
-     */
-    @Redirect(method = "<init>*", at = @At(value = "NEW", target = "java/util/Random"))
-    private Random redirectInitRandom() {
-        return new RandomXoshiro256StarStar();
-    }
+	/**
+	 * @author jss2a98aj
+	 * @reason Xoshiro256** is faster than Random
+	 */
+	@Redirect(method = "<init>*", at = @At(value = "NEW", target = "java/util/Random"))
+	private Random redirectInitRandom() {
+		return new RandomXoshiro256StarStar();
+	}
 
 }
