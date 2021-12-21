@@ -6,16 +6,20 @@ import net.minecraft.init.Blocks;
 
 public class VanillaSupport {
 
-    public static void enableSupport() {
-    	//Backports
-        if(BugTorchConfig.enableFloatingTrapDoors) {
-            BlockTrapDoor.disableValidation = true;
-        }
+	public static void enableSupport() {
+		//Backports
+		if(BugTorchConfig.enableFloatingTrapDoors) {
+			BlockTrapDoor.disableValidation = true;
+		}
 
-        //Bugfixes
-        if(BugTorchConfig.fixSnowBlocksRandomlyTicking) {
-            Blocks.snow.setTickRandomly(false);
-        }
-    }
+		//Bugfixes
+		if(BugTorchConfig.fixPumpkinBlocksRandomlyTicking) {
+			Blocks.pumpkin.setTickRandomly(false);
+			Blocks.lit_pumpkin.setTickRandomly(false);
+		}
+		if(BugTorchConfig.fixSnowBlocksRandomlyTicking) {
+			Blocks.snow.setTickRandomly(false);
+		}
+	}
 
 }

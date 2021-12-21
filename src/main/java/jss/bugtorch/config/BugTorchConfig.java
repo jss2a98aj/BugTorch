@@ -12,6 +12,7 @@ public class BugTorchConfig {
 	public static boolean enableFloatingTrapDoors;
 
 	//Base bugfixes
+	public static boolean fixPumpkinBlocksRandomlyTicking;
 	public static boolean fixSnowBlocksRandomlyTicking;
 
 	//Mod bugfixes
@@ -100,6 +101,7 @@ public class BugTorchConfig {
 		enableFloatingTrapDoors = config.getBoolean("freeFloatingTrapDoors", categoryBackport, true, "Trapdoors no longer require attachment blocks.\nFrom MC 1.9");
 
 		//Bugfixes
+		fixPumpkinBlocksRandomlyTicking = config.getBoolean("fixPumpkinBlocksRandomlyTicking", categoryBugfixes, true, "Pumpkin blocks will no longer randomly tick.");
 		fixSnowBlocksRandomlyTicking = config.getBoolean("fixSnowBlocksRandomlyTicking", categoryBugfixes, true, "Non-layered snow blocks will no longer randomly tick.\nFrom MC 1.14, fixes MC-88097");
 
 		if(config.hasChanged()) {
