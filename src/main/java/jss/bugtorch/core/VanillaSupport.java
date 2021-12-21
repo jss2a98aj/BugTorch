@@ -21,6 +21,10 @@ public class VanillaSupport {
 		if(BugTorchConfig.fixSnowBlocksRandomlyTicking) {
 			Blocks.snow.setTickRandomly(false);
 		}
+		
+		if(BugTorchConfig.fixTorchBlocksRandomlyTicking) {
+			Blocks.torch.setTickRandomly(false);
+		}
 	}
 
 }

@@ -14,6 +14,7 @@ public class BugTorchConfig {
 	//Base bugfixes
 	public static boolean fixPumpkinBlocksRandomlyTicking;
 	public static boolean fixSnowBlocksRandomlyTicking;
+	public static boolean fixTorchBlocksRandomlyTicking;
 
 	//Mod bugfixes
 	public static boolean fixPamsTemperatePlantsBlockSounds;
@@ -106,6 +107,7 @@ public class BugTorchConfig {
 		//Bugfixes
 		fixPumpkinBlocksRandomlyTicking = config.getBoolean("fixPumpkinBlocksRandomlyTicking", categoryBugfixes, true, "Pumpkin blocks will no longer randomly tick.");
 		fixSnowBlocksRandomlyTicking = config.getBoolean("fixSnowBlocksRandomlyTicking", categoryBugfixes, true, "Non-layered snow blocks will no longer randomly tick.\nFrom MC 1.14, fixes MC-88097");
+		fixTorchBlocksRandomlyTicking = config.getBoolean("fixTorchBlocksRandomlyTicking", categoryBugfixes, true, "Torch blocks will no longer randomly tick.");
 
 		if(config.hasChanged()) {
 			config.save();
