@@ -13,15 +13,18 @@ public class VanillaSupport {
 		}
 
 		//Bugfixes
+		if(BugTorchConfig.fixJackOLanternBlocksRandomlyTicking) {
+			Blocks.lit_pumpkin.setTickRandomly(false);
+		}
+
 		if(BugTorchConfig.fixPumpkinBlocksRandomlyTicking) {
 			Blocks.pumpkin.setTickRandomly(false);
-			Blocks.lit_pumpkin.setTickRandomly(false);
 		}
 
 		if(BugTorchConfig.fixSnowBlocksRandomlyTicking) {
 			Blocks.snow.setTickRandomly(false);
 		}
-		
+
 		if(BugTorchConfig.fixTorchBlocksRandomlyTicking) {
 			Blocks.torch.setTickRandomly(false);
 		}
