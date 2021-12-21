@@ -73,6 +73,9 @@ public class BugTorchConfig {
 	public static boolean lanPortOverride;
 	public static int lanPortToUseForOverride;
 	public static boolean placeEndPortalsAnywhere;
+	public static boolean placePressurePlatesOnAnyWallOrFence;
+	public static boolean placeTorchesOnAnyFence;
+	public static boolean placeTorchesOnAnyWall;
 	public static boolean potionParticlesAreClearForClientPlayer;
 	public static boolean removeEntityDuplicateExtendedPropertiesIdentifierSpam;
 
@@ -179,6 +182,9 @@ public class BugTorchConfig {
 		farmlandImprovements = config.getBoolean("farmlandImprovements", categoryTweaks, false, "Farmland will no longer get trampled and hydroponic farms will be possible.\nAlso has new side textures for both wet and dry farmland.\nThis will be moved to a seperate mod at some point.");
 		lanPortOverride = config.getBoolean("lanPortOverride", categoryTweaks, false, "Override the port used when opening singleplayer to LAN.") && !serverSide;
 		placeEndPortalsAnywhere = config.getBoolean("placeEndPortalsAnywhere", categoryTweaks, false, "Place End Portals outside of the overworld without them getting removed.");
+		placePressurePlatesOnAnyWallOrFence = config.getBoolean("placePressurePlatesOnAnyWallOrFence", categoryTweaks, true, "Place pressure plates on almost any wall or fence.");
+		placeTorchesOnAnyFence = config.getBoolean("placeTorchesOnAnyFence", categoryTweaks, true, "Place torches on almost any fence.");
+		placeTorchesOnAnyWall = config.getBoolean("placeTorchesOnAnyWall", categoryTweaks, true, "Place torches on almost any wall.");
 		potionParticlesAreClearForClientPlayer = config.getBoolean("potionParticlesAreClearForClientPlayer", categoryTweaks, false, "Potion particles coming off of the player entity you control are always clear.") && !serverSide;
 		removeEntityDuplicateExtendedPropertiesIdentifierSpam = config.getBoolean("removeEntityDuplicateExtendedPropertiesIdentifierSpam", categoryTweaks, true, "Removes \"An attempt was made to register exended properties using an existing key\" log spam caused by some mods.");
 
