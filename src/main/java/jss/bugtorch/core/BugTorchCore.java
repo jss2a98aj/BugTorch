@@ -18,7 +18,7 @@ import jss.bugtorch.util.LoadedMods;
 @Mod(
 		modid = BugTorchCore.MODID,
 		name = BugTorchCore.NAME,
-		version = "GRADLETOKEN_VERSION",
+		version = "1.1.4",
 		dependencies = "required-after:spongemixins@[1.2.0,);after:Thaumcraft;after:temperateplants;after:VillageNames;after:witchery;"
 	)
 public class BugTorchCore {
