@@ -16,6 +16,10 @@ public abstract class MixinBlockGarlicGarland extends Block {
 		super(material);
 	}
 
+	/**
+	 * @author jss2a98aj
+	 * @reason Corrects a bound that had a coordinate added to it
+	 */
 	@Overwrite()
 	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
 		int meta = world.getBlockMetadata(x, y, z);

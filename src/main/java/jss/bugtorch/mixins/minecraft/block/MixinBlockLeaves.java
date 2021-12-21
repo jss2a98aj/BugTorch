@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 @Mixin(value = BlockLeaves.class)
 public abstract class MixinBlockLeaves extends BlockLeavesBase {
 
-	protected MixinBlockLeaves(Material material, boolean p_i45433_2_) {
+	MixinBlockLeaves(Material material, boolean p_i45433_2_) {
 		super(material, p_i45433_2_);
 	}
 
@@ -33,13 +33,16 @@ public abstract class MixinBlockLeaves extends BlockLeavesBase {
 	 * @reason Prevents duplicate drops when shearing
 	 */
 	@Overwrite()
-	@Override
 	public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int meta) {
 		if (!(player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemShears)) {
 			super.harvestBlock(world, player, x, y, z, meta);
 		}
 	}
 
+	/**
+	 * @author jss2a98aj
+	 * @reason Extends the decay check range so naturally grown jungle trees to not have decay
+	 */
 	@Overwrite()
 	public void updateTick(World world, int x, int y, int z, Random random) {
 		if (!world.isRemote) {
