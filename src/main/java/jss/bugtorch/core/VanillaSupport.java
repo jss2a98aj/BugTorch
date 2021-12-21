@@ -17,6 +17,7 @@ public class VanillaSupport {
 			Blocks.pumpkin.setTickRandomly(false);
 			Blocks.lit_pumpkin.setTickRandomly(false);
 		}
+
 		if(BugTorchConfig.fixSnowBlocksRandomlyTicking) {
 			Blocks.snow.setTickRandomly(false);
 		}
