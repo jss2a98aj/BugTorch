@@ -29,8 +29,7 @@ public abstract class MixinItemRenderer {
 		final long systemTime = Minecraft.getSystemTime();
 
 		for (int j1 = 0; j1 < 2; ++j1) {
-			final float f2 = (float) (systemTime % (long) (3000 + j1 * 1873)) / (3000.0F + (float) (j1 * 1873))
-					* 256.0F;
+			final float f2 = (float) (systemTime % (long) (3000 + j1 * 1873)) / (3000.0F + (float) (j1 * 1873)) * 256.0F;
 			float f4 = 4.0F;
 			if (j1 == 1) {
 				f4 = -1.0F;

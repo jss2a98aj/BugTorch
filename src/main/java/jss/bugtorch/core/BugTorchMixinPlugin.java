@@ -105,12 +105,12 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
 		if(BugTorchConfig.skipInitialWorldChunkLoad) mixins.add("minecraft.server.MixinMinecraftServer");
 
 		//Tweaks
-		if(BugTorchConfig.farmlandImprovements)mixins.add("minecraft.block.MixinBlockFarmland");
+		if(BugTorchConfig.farmlandImprovements) mixins.add("minecraft.block.MixinBlockFarmland");
 		if(BugTorchConfig.lanPortOverride) mixins.add("minecraft.server.integrated.MixinIntegratedServer");
-		if(BugTorchConfig.placeEndPortalsAnywhere)mixins.add("minecraft.block.MixinBlockEndPortal");
-		if(BugTorchConfig.placePressurePlatesOnAnyWallOrFence)mixins.add("minecraft.block.MixinBlockBasePressurePlate");
-		if(BugTorchConfig.placeTorchesOnAnyFence)mixins.add("minecraft.block.MixinBlockFence");
-		if(BugTorchConfig.placeTorchesOnAnyWall)mixins.add("minecraft.block.MixinBlockWall");
+		if(BugTorchConfig.placeEndPortalsAnywhere) mixins.add("minecraft.block.MixinBlockEndPortal");
+		if(BugTorchConfig.placePressurePlatesOnAnyWallOrFence) mixins.add("minecraft.block.MixinBlockBasePressurePlate");
+		if(BugTorchConfig.placeTorchesOnAnyFence) mixins.add("minecraft.block.MixinBlockFence");
+		if(BugTorchConfig.placeTorchesOnAnyWall) mixins.add("minecraft.block.MixinBlockWall");
 		if(BugTorchConfig.potionParticlesAreClearForClientPlayer) mixins.add("minecraft.entity.MixinEntityLivingBase2");
 		if(BugTorchConfig.removeEntityDuplicateExtendedPropertiesIdentifierSpam) mixins.add("minecraft.entity.MixinEntity");
 
