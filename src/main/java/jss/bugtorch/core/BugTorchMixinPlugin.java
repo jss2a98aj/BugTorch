@@ -69,6 +69,7 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
 			mixins.add("minecraft.world.gen.structure.MixinStructureMineshaftPieces$Room");
 		}
 		if(BugTorchConfig.fixPumpkinPlacementCheck) mixins.add("minecraft.block.MixinBlockPumpkin");
+		if(BugTorchConfig.fixRedstoneTorchMemoryLeak) mixins.add("minecraft.block.MixinBlockRedstoneTorch");
 		if(BugTorchConfig.fixStoneMonsterEggDoubleSpawns) mixins.add("minecraft.block.MixinBlockSilverfish");
 		if(BugTorchConfig.fixShearedBlocksDropExtraItems) {
 			mixins.add("minecraft.block.MixinBlockLeaves");
@@ -121,6 +122,7 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
 			mixins.add("thaumcraft.common.blocks.MixinBlockCandle");
 		}
 		if(BugTorchConfig.fixWitcheryGarlicGarlandBlockBounds) mixins.add("witchery.blocks.MixinBlockGarlicGarland");
+		if(BugTorchConfig.fixWitcheryLeavesShearDupeAndOptifineRendering) mixins.add("witchery.blocks.MixinBlockWitchLeaves");
 
 		return mixins;
 	}
