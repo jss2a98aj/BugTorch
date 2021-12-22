@@ -42,6 +42,7 @@ public class BugTorchConfig {
 	public static boolean fixLavaHissOnAirReplace;
 	public static boolean fixMineshaftAirPockets;
 	public static boolean fixPumpkinPlacementCheck;
+	public static boolean fixRedstoneTorchMemoryLeak;
 	public static boolean fixShearedBlocksDropExtraItems;
 	public static boolean fixShearsNotTakingDamageFromNormalBlocks;
 	public static boolean fixSignPacketChatMessages;
@@ -88,6 +89,7 @@ public class BugTorchConfig {
 	public static boolean fixGanysSurfaceOpenTrapdoorBackTexture;
 	public static boolean fixThaumcraftCandleColorArrayOutOfBounds;
 	public static boolean fixWitcheryGarlicGarlandBlockBounds;
+	public static boolean fixWitcheryLeavesShearDupeAndOptifineRendering;
 
 	//Category names
 	static final String categoryBackport = "backported features";
@@ -155,14 +157,15 @@ public class BugTorchConfig {
 		throwEnderPearlsInCrativeMode = config.getBoolean("throwEnderPearlsInCrativeMode", categoryBackport, true, "Ender Pearls can be thrown in creative mode.\nFrom MC 1.9, fixes MC-438");
 
 		//Bugfixes
-		fixEnchantmentBlendFunc = clientSide && config.getBoolean("fixEnchantmentBlendFunc", categoryBugfixes, true, "Fixes rendering issues caused by enchantments changing glBlendFunc and never reverting it.");
+		fixEnchantmentBlendFunc = config.getBoolean("fixEnchantmentBlendFunc", categoryBugfixes, true, "Fixes rendering issues caused by enchantments changing glBlendFunc and never reverting it.") && clientSide;
 		fixFireChargeUseSound = config.getBoolean("fixFireChargeUseSound", categoryBugfixes, true, "Fire Charges have the correct use sound.\nFrom MC 1.8, fixes MC-1831");
 		fixLavaHissOnAirReplace = config.getBoolean("fixLavaHissOnAirReplace", categoryBugfixes, true, "Lava will only hiss when mixing with water.\nFrom MC 1.8, fixes MC-32301");
 		fixMineshaftAirPockets = config.getBoolean("fixMineshaftAirPockets", categoryBugfixes, true, "Fixes the air bubbles mineshafts create above their dirt rooms, affects all terrain but very noticeable in oceans.\nThese air pockets were supposed to be in the dirt rooms so this also fixes the dirt rooms having blocked off entrances to some branches.\nFrom MC 1.8, fixes MC-954");
 		fixPumpkinPlacementCheck = config.getBoolean("fixPumpkinPlacementCheck", categoryBackport, true, "Pumpkins and Jack o'Lanterns can be placed without a solid block below them.\nFrom MC 1.13, fixes MC-1947");
+		fixRedstoneTorchMemoryLeak = config.getBoolean("fixRedstoneTorchMemoryLeak", categoryBackport, true, "Stops Redstone Torches from causing a memory leak by making them use a weak has map to store burnt out torches.\nFixes MC-101233");
 		fixShearedBlocksDropExtraItems = config.getBoolean("fixShearedBlocksDropExtraItems", categoryBugfixes, true, "Shearing a block will not give drops in addition to itself.");
 		fixShearsNotTakingDamageFromNormalBlocks = config.getBoolean("fixShearsNotTakingDamageFromNormalBlocks", categoryBugfixes, true, "Shears will take damage when used to mine any block.\nAlso stops Forge shearing logic from dropping things in creative mode.\nFrom MC 1.9, fixes MC-8180");
-		fixSignPacketChatMessages = clientSide && config.getBoolean("fixSignPacketChatMessages", categoryBugfixes, true, "Sign update packets for signs in unloaded chunks will not send chat messages.\nFrom MC 1.9, fixes MC-3564");
+		fixSignPacketChatMessages = config.getBoolean("fixSignPacketChatMessages", categoryBugfixes, true, "Sign update packets for signs in unloaded chunks will not send chat messages.\nFrom MC 1.9, fixes MC-3564") && clientSide;
 		fixStoneMonsterEggDoubleSpawns = config.getBoolean("fixStoneMonsterEggDoubleSpawns", categoryBugfixes, true, "Stone Monster Eggs only spawn one Silverfish when broken.\nFrom MC 1.8, fixes MC-31081");
 		fixVillagePathsHavePlantsOnTop = config.getBoolean("fixVillagePathsHavePlantsOnTop", categoryBugfixes, true, "Village paths will not have flowers or grass on top of them.\nFrom MC 1.10, fixes MC-3437");
 		fixVillagerTradeMetadataDetection = config.getBoolean("fixVillagerTradeMetadataDetection", categoryBugfixes, true, "Villager trades will respect metadata.\nFrom MC 1.8");
@@ -175,20 +178,20 @@ public class BugTorchConfig {
 		fasterDroppedItemStackingChecks = config.getBoolean("fasterDroppedItemStackingChecks", categoryPerformance, true, "Dropped item nearby stack checks are faster for full stacks.");
 		fasterEntityLivingBaseIsPotionActiveAndSetAir = config.getBoolean("fasterEntityLivingBaseIsPotionActiveAndSetAir", categoryPerformance, true, "isPotionActive returns immediately if there are no active potions.\nsetAir only updates its datawatcher when needed.");
 		fasterGetBlockByIdForAirBlocks = config.getBoolean("fasterGetBlockByIdForAirBlocks", categoryPerformance, true, "When something gets air blocks from ID it will return faster.");
-		moreAccurateLayeredSnowFaceCulling = clientSide && config.getBoolean("moreAccurateLayeredSnowFaceCulling", categoryPerformance, true, "The faces of layered snow get culled more accurately when chunk meshes are created.");
+		moreAccurateLayeredSnowFaceCulling = config.getBoolean("moreAccurateLayeredSnowFaceCulling", categoryPerformance, true, "The faces of layered snow get culled more accurately when chunk meshes are created.") && clientSide;
 		fasterSnowBlockTicks = config.getBoolean("fasterSnowBlockTicks", categoryPerformance, true, "Non-layered snow block ticking is faster.");
-		replaceRandomInEffectRenderer = clientSide && config.getBoolean("replaceRandomInEffectRenderer", categoryPerformance, true, "Makes EffectRenderer.class use a faster implementation of random.");
+		replaceRandomInEffectRenderer = config.getBoolean("replaceRandomInEffectRenderer", categoryPerformance, true, "Makes EffectRenderer.class use a faster implementation of random.") && clientSide;
 		replaceRandomInEntity = config.getBoolean("replaceRandomInEntity", categoryPerformance, true, "Makes Entity.class use a faster implementation of random.");
 		replaceRandomInItem = config.getBoolean("replaceRandomInItem", categoryPerformance, true, "Makes Item.class use a faster implementation of random.");
 		replaceRandomInMinecraftServer = config.getBoolean("replaceRandomInMinecraftServer", categoryPerformance, true, "Makes MinecraftServer.class use a faster implementation of random.");
-		replaceRandomInRenderItem = clientSide && config.getBoolean("replaceRandomInRenderItem", categoryPerformance, true, "Makes RenderItem.class use a faster implementation of random.");
+		replaceRandomInRenderItem = config.getBoolean("replaceRandomInRenderItem", categoryPerformance, true, "Makes RenderItem.class use a faster implementation of random.") && clientSide;
 		replaceRandomInWorld = config.getBoolean("replaceRandomInWorld", categoryPerformance, false, "Makes World.class use a faster implementation of random.\n!This impacts world generation slightly!");
-		replaceRandomInWorldClient = clientSide && config.getBoolean("replaceRandomInWorldClient", categoryPerformance, true, "Makes WorldClient.class use a faster implementation of random.");
-		skipInitialWorldChunkLoad = clientSide && config.getBoolean("skipInitialWorldChunkLoad", categoryPerformance, true, "Speeds up initial world loading by not waiting for chunks to preload.");
+		replaceRandomInWorldClient = config.getBoolean("replaceRandomInWorldClient", categoryPerformance, true, "Makes WorldClient.class use a faster implementation of random.") && clientSide;
+		skipInitialWorldChunkLoad = config.getBoolean("skipInitialWorldChunkLoad", categoryPerformance, true, "Speeds up initial world loading by not waiting for chunks to preload.") && clientSide;
 
 		//Tweaks
 		farmlandImprovements = config.getBoolean("farmlandImprovements", categoryTweaks, false, "Farmland will no longer get trampled and hydroponic farms will be possible.\nAlso has new side textures for both wet and dry farmland.\nThis will be moved to a seperate mod at some point.");
-		lanPortOverride = clientSide && config.getBoolean("lanPortOverride", categoryTweaks, false, "Override the port used when opening singleplayer to LAN.");
+		lanPortOverride = config.getBoolean("lanPortOverride", categoryTweaks, false, "Override the port used when opening singleplayer to LAN.") && clientSide;
 		placeEndPortalsAnywhere = config.getBoolean("placeEndPortalsAnywhere", categoryTweaks, false, "Place End Portals outside of the overworld without them getting removed.");
 		placePressurePlatesOnAnyWallOrFence = config.getBoolean("placePressurePlatesOnAnyWallOrFence", categoryTweaks, true, "Place pressure plates on almost any wall or fence.");
 		placeTorchesOnAnyFence = config.getBoolean("placeTorchesOnAnyFence", categoryTweaks, true, "Place torches on almost any fence.");
@@ -220,6 +223,7 @@ public class BugTorchConfig {
 		fixGanysSurfaceOpenTrapdoorBackTexture = config.getBoolean("fixGanysSurfaceOpenTrapdoorBackTexture", categoryBugfixes, true, "Makes Gany's Surface trapdoors use the correct back texture when open.");
 		fixThaumcraftCandleColorArrayOutOfBounds = config.getBoolean("fixThaumcraftCandleColorArrayOutOfBounds", categoryBugfixes, true, "Makes Thaumcraft candles not cause an array out of bounds exception if rendered with metadata greater than 15.");
 		fixWitcheryGarlicGarlandBlockBounds = config.getBoolean("fixWitcheryGarlicGarlandBlockBounds", categoryBugfixes, true, "Makes Witchery Garlic Garlands use correct block bounds on every rotation.");
+		fixWitcheryLeavesShearDupeAndOptifineRendering = config.getBoolean("fixWitcheryLeavesShearDupeAndOptifineRendering", categoryBugfixes, true, "Makes Witchery Leaves respect Optifine render settings and partially fixes a Forge shearing bug.");
 
 		if(config.hasChanged()) {
 			config.save();
