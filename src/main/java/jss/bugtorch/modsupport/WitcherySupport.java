@@ -28,6 +28,7 @@ public class WitcherySupport {
 			Witchery.Blocks.REFILLING_CHEST.setStepSound(Block.soundTypeWood);
 			Witchery.Blocks.LEECH_CHEST.setStepSound(Block.soundTypeWood);
 			Witchery.Blocks.COFFIN.setStepSound(Block.soundTypeWood);
+			Witchery.Blocks.CURSED_BUTTON_WOOD.setStepSound(Block.soundTypeWood);
 		}
 
 		//Ore dictionary
