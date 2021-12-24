@@ -52,6 +52,7 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
 		}
 		if(BugTorchConfig.witcheryJarName.equals("d") || !loadJar(BugTorchConfig.witcheryJarName)) {
 			BugTorchConfig.fixWitcheryGarlicGarlandBlockBounds = false;
+			BugTorchConfig.fixWitcheryLeavesShearDupeAndOptifineRendering = false;
 		}
 
 		//Backports
