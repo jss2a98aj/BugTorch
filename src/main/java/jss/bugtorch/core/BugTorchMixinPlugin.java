@@ -44,13 +44,13 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
 	public List<String> getMixins() {
 		List<String> mixins = new ArrayList<>();
 
-		if(BugTorchConfig.ganysSurfaceJarName == "d" || !loadJar(BugTorchConfig.ganysSurfaceJarName)) {
+		if(BugTorchConfig.ganysSurfaceJarName.equals("d")  || !loadJar(BugTorchConfig.ganysSurfaceJarName)) {
 			BugTorchConfig.fixGanysSurfaceOpenTrapdoorBackTexture = false;
 		}
-		if(BugTorchConfig.thaumcraftJarName == "d" || !loadJar(BugTorchConfig.thaumcraftJarName)) {
+		if(BugTorchConfig.thaumcraftJarName.equals("d") || !loadJar(BugTorchConfig.thaumcraftJarName)) {
 			BugTorchConfig.fixThaumcraftCandleColorArrayOutOfBounds = false;
 		}
-		if(BugTorchConfig.witcheryJarName == "d" || !loadJar(BugTorchConfig.witcheryJarName)) {
+		if(BugTorchConfig.witcheryJarName.equals("d") || !loadJar(BugTorchConfig.witcheryJarName)) {
 			BugTorchConfig.fixWitcheryGarlicGarlandBlockBounds = false;
 		}
 
