@@ -44,13 +44,13 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
 	public List<String> getMixins() {
 		List<String> mixins = new ArrayList<>();
 
-		if(BugTorchConfig.ganysSurfaceJarName.equals("d")  || !loadJar(BugTorchConfig.ganysSurfaceJarName)) {
+		if(BugTorchConfig.ganysSurfaceJarName.equals("d")  || !loadJar(BugTorchConfig.ganysSurfaceJarName, "Gany's Surface")) {
 			BugTorchConfig.fixGanysSurfaceOpenTrapdoorBackTexture = false;
 		}
-		if(BugTorchConfig.thaumcraftJarName.equals("d") || !loadJar(BugTorchConfig.thaumcraftJarName)) {
+		if(BugTorchConfig.thaumcraftJarName.equals("d") || !loadJar(BugTorchConfig.thaumcraftJarName, "Thaumcraft")) {
 			BugTorchConfig.fixThaumcraftCandleColorArrayOutOfBounds = false;
 		}
-		if(BugTorchConfig.witcheryJarName.equals("d") || !loadJar(BugTorchConfig.witcheryJarName)) {
+		if(BugTorchConfig.witcheryJarName.equals("d") || !loadJar(BugTorchConfig.witcheryJarName, "Witchery")) {
 			BugTorchConfig.fixWitcheryGarlicGarlandBlockBounds = false;
 			BugTorchConfig.fixWitcheryLeavesShearDupeAndOptifineRendering = false;
 		}
@@ -136,11 +136,11 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
 	public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
 	}
 
-	private static boolean loadJar(String jarName) {
+	private static boolean loadJar(String jarName, String modName) {
 		try {
 			File jar = MinecraftURLClassPath.getJarInModPath(jarName);
 			if(jar == null) {
-				BugTorchCore.logger.info("Jar not found: " + jarName);
+				BugTorchCore.logger.info(modName + " jar not found: " + jarName);
 				return false;
 			}
 
