@@ -54,6 +54,9 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
 			BugTorchConfig.fixWitcheryGarlicGarlandBlockBounds = false;
 			BugTorchConfig.fixWitcheryLeavesShearDupeAndOptifineRendering = false;
 		}
+		if(BugTorchConfig.aetherIIJarName.equals("d") || !loadJar(BugTorchConfig.aetherIIJarName, "The Aether II")) {
+			BugTorchConfig.reuseAetherIIRenderPlayer = false;
+		}
 
 		//Backports
 		if(BugTorchConfig.cobwebsCanBeSheared) mixins.add("minecraft.block.MixinBlockWeb");
@@ -124,6 +127,8 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
 		}
 		if(BugTorchConfig.fixWitcheryGarlicGarlandBlockBounds) mixins.add("witchery.blocks.MixinBlockGarlicGarland");
 		if(BugTorchConfig.fixWitcheryLeavesShearDupeAndOptifineRendering) mixins.add("witchery.blocks.MixinBlockWitchLeaves");
+		
+		if(BugTorchConfig.reuseAetherIIRenderPlayer) mixins.add("aetherii.client.MixinClientEventHandler");
 
 		return mixins;
 	}

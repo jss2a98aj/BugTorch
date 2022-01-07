@@ -84,12 +84,14 @@ public class BugTorchConfig {
 	public static String ganysSurfaceJarName;
 	public static String thaumcraftJarName;
 	public static String witcheryJarName;
+	public static String aetherIIJarName;
 
 	//Mixin mod bugfixes
 	public static boolean fixGanysSurfaceOpenTrapdoorBackTexture;
 	public static boolean fixThaumcraftCandleColorArrayOutOfBounds;
 	public static boolean fixWitcheryGarlicGarlandBlockBounds;
 	public static boolean fixWitcheryLeavesShearDupeAndOptifineRendering;
+	public static boolean reuseAetherIIRenderPlayer;
 
 	//Category names
 	static final String categoryBackport = "backported features";
@@ -218,13 +220,15 @@ public class BugTorchConfig {
 		ganysSurfaceJarName = config.getString("ganysSurfaceJarName", categoryModNames, "Ganys+Surface", "The partial file name assiciated with Gany's Surface.\n!This can break things if the wrong name is used!\nSet to 'd' to disable all mixins for Gany's Surface.");
 		thaumcraftJarName = config.getString("thaumcraftJarName", categoryModNames, "Thaumcraft-1.7.10", "The partial file name assiciated with Thaumcraft.\n!This can break things if the wrong name is used!\nSet to 'd' to disable all mixins for Thaumcraft.");
 		witcheryJarName = config.getString("witcheryJarName", categoryModNames, "witchery-1.7.10", "The partial file name assiciated with Witchery.\n!This can break things if the wrong name is used!\nSet to 'd' to disable all mixins for Witchery.");
+		aetherIIJarName = config.getString("aetherIIJarName", categoryModNames, "aether-1.7.10-1.", "The partial file name assiciated with The Aether II.\n!This can break things if the wrong name is used!\nSet to 'd' to disable all mixins for The Aether II.");
 
 		//Bugfixes
 		fixGanysSurfaceOpenTrapdoorBackTexture = config.getBoolean("fixGanysSurfaceOpenTrapdoorBackTexture", categoryBugfixes, true, "Makes Gany's Surface trapdoors use the correct back texture when open.");
 		fixThaumcraftCandleColorArrayOutOfBounds = config.getBoolean("fixThaumcraftCandleColorArrayOutOfBounds", categoryBugfixes, true, "Makes Thaumcraft candles not cause an array out of bounds exception if rendered with metadata greater than 15.");
 		fixWitcheryGarlicGarlandBlockBounds = config.getBoolean("fixWitcheryGarlicGarlandBlockBounds", categoryBugfixes, true, "Makes Witchery Garlic Garlands use correct block bounds on every rotation.");
 		fixWitcheryLeavesShearDupeAndOptifineRendering = config.getBoolean("fixWitcheryLeavesShearDupeAndOptifineRendering", categoryBugfixes, true, "Makes Witchery Leaves respect Optifine render settings and partially fixes a Forge shearing bug.");
-
+		reuseAetherIIRenderPlayer = config.getBoolean("reuseAetherIIRenderPlayer", categoryPerformance, true, "Makes Aether II reuse the same player renderer object across frames.");
+		
 		if(config.hasChanged()) {
 			config.save();
 		}
