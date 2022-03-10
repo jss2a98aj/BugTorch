@@ -170,7 +170,8 @@ public class BugTorchConfig {
 		fixSignPacketChatMessages = config.getBoolean("fixSignPacketChatMessages", categoryBugfixes, true, "Sign update packets for signs in unloaded chunks will not send chat messages.\nFrom MC 1.9, fixes MC-3564") && clientSide;
 		fixStoneMonsterEggDoubleSpawns = config.getBoolean("fixStoneMonsterEggDoubleSpawns", categoryBugfixes, true, "Stone Monster Eggs only spawn one Silverfish when broken.\nFrom MC 1.8, fixes MC-31081");
 		fixVillagePathsHavePlantsOnTop = config.getBoolean("fixVillagePathsHavePlantsOnTop", categoryBugfixes, true, "Village paths will not have flowers or grass on top of them.\nFrom MC 1.10, fixes MC-3437");
-		fixVillagerTradeMetadataDetection = config.getBoolean("fixVillagerTradeMetadataDetection", categoryBugfixes, true, "Villager trades will respect metadata.\nFrom MC 1.8");
+		fixVillagerTradeMetadataDetection = config.getBoolean("fixVillagerTradeMetadataDetection", categoryBugfixes, true, "Villager trades will respect metadata.\nCurrently unfinished and disabled internally.\nFrom MC 1.8");
+		fixVillagerTradeMetadataDetection = false;
 		fixVillageSieges = config.getBoolean("fixVillageSieges", categoryBugfixes, true, "Zombies will seige villages that are large enough at night.\nFrom MC 1.8, fixes MC-7432 and MC-7488");
 		fixVillageWellDesertMaterial = config.getBoolean("fixVillageWellDesertMaterial", categoryBugfixes, true, "Wells in desert villages will use the correct material.\nFrom MC 1.8, fixes MC-32514");
 
