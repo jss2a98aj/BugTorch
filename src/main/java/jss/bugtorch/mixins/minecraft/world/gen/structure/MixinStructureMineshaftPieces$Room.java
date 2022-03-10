@@ -13,8 +13,6 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureMineshaftPieces;
 
-//Doesn't work because the class I need to target just to happens to be a subclass, and static
-//And one of those stops the mixin from functioning...
 @Mixin(value = StructureMineshaftPieces.Room.class)
 public abstract class MixinStructureMineshaftPieces$Room extends StructureComponent implements IOffsetDuck {
 
