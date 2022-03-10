@@ -1,15 +1,11 @@
-// Add your dependencies here
-
 dependencies {
-    compileOnly("thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev") {
-        transitive = false
-    }
+    compileOnly("thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev")
 
-    //compile("curse.maven:witchery-69673:2234410") {
-    //    transitive = false
-    //}
+    //compile('curse.maven:witchery-69673:2234410') 
     
     //TODO: Properly configure deps
     compile files('libs/witchery-1.7.10-0.24.1-deobf.jar')
     compile files('libs/GanysSurface-1.12.8-deobf.jar')
+    compile files('libs/gilded-games-util-1.7.10-2.0-deobf.jar')
+    compile files('libs/aether-1.7.10-1.6-deobf.jar')
 }
