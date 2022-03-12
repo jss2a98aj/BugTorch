@@ -44,18 +44,20 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
 	public List<String> getMixins() {
 		List<String> mixins = new ArrayList<>();
 
-		if(BugTorchConfig.ganysSurfaceJarName.equals("d")  || !loadJar(BugTorchConfig.ganysSurfaceJarName, "Gany's Surface")) {
-			BugTorchConfig.fixGanysSurfaceOpenTrapdoorBackTexture = false;
-		}
-		if(BugTorchConfig.thaumcraftJarName.equals("d") || !loadJar(BugTorchConfig.thaumcraftJarName, "Thaumcraft")) {
-			BugTorchConfig.fixThaumcraftCandleColorArrayOutOfBounds = false;
-		}
-		if(BugTorchConfig.witcheryJarName.equals("d") || !loadJar(BugTorchConfig.witcheryJarName, "Witchery")) {
-			BugTorchConfig.fixWitcheryGarlicGarlandBlockBounds = false;
-			BugTorchConfig.fixWitcheryLeavesShearDupeAndOptifineRendering = false;
-		}
-		if(BugTorchConfig.aetherIIJarName.equals("d") || !loadJar(BugTorchConfig.aetherIIJarName, "The Aether II")) {
-			BugTorchConfig.reuseAetherIIRenderPlayer = false;
+		if(!(Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment")) {
+			if(BugTorchConfig.ganysSurfaceJarName.equals("d")  || !loadJar(BugTorchConfig.ganysSurfaceJarName, "Gany's Surface")) {
+				BugTorchConfig.fixGanysSurfaceOpenTrapdoorBackTexture = false;
+			}
+			if(BugTorchConfig.thaumcraftJarName.equals("d") || !loadJar(BugTorchConfig.thaumcraftJarName, "Thaumcraft")) {
+				BugTorchConfig.fixThaumcraftCandleColorArrayOutOfBounds = false;
+			}
+			if(BugTorchConfig.witcheryJarName.equals("d") || !loadJar(BugTorchConfig.witcheryJarName, "Witchery")) {
+				BugTorchConfig.fixWitcheryGarlicGarlandBlockBounds = false;
+				BugTorchConfig.fixWitcheryLeavesShearDupeAndOptifineRendering = false;
+			}
+			if(BugTorchConfig.aetherIIJarName.equals("d") || !loadJar(BugTorchConfig.aetherIIJarName, "The Aether II")) {
+				BugTorchConfig.reuseAetherIIRenderPlayer = false;
+			}
 		}
 
 		//Backports
