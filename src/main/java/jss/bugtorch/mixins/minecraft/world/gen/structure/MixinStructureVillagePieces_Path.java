@@ -20,12 +20,12 @@ public abstract class MixinStructureVillagePieces_Path extends StructureVillageP
 	 * @reason Keeps flowers and grass from being left above village paths
 	 */
 	@Overwrite()
-	public boolean addComponentParts(World world, Random random, StructureBoundingBox boundingBox) {
+	public boolean addComponentParts(World world, Random random, StructureBoundingBox structBoundingBox) {
 		Block block = func_151558_b(Blocks.gravel, 0);
 
 		for (int x = boundingBox.minX; x <= boundingBox.maxX; ++x) {
 			for (int z = boundingBox.minZ; z <= boundingBox.maxZ; ++z) {
-				if (boundingBox.isVecInside(x, 64, z)) {
+				if (structBoundingBox.isVecInside(x, 64, z)) {
 					int y = world.getTopSolidOrLiquidBlock(x, z) - 1;
 					world.setBlock(x, y, z, block, 0, 2);
 					if(!world.getBlock(x, y + 1, z).canBlockStay(world, x, y + 1, z)) {
