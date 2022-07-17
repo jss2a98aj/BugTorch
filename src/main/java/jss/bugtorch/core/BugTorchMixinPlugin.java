@@ -74,6 +74,7 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
 			mixins.add("minecraft.world.gen.structure.MixinStructureStart");
 			mixins.add("minecraft.world.gen.structure.MixinStructureMineshaftPieces$Room");
 		}
+		if(BugTorchConfig.fixNettyConnectionFailureResourceLeak) mixins.add("netty.channel.socket.nio.MixinNioSocketChannel");
 		if(BugTorchConfig.fixPumpkinPlacementCheck) mixins.add("minecraft.block.MixinBlockPumpkin");
 		if(BugTorchConfig.fixRedstoneTorchMemoryLeak) mixins.add("minecraft.block.MixinBlockRedstoneTorch");
 		if(BugTorchConfig.fixStoneMonsterEggDoubleSpawns) mixins.add("minecraft.block.MixinBlockSilverfish");

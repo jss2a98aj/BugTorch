@@ -41,6 +41,7 @@ public class BugTorchConfig {
 	public static boolean fixFireChargeUseSound;
 	public static boolean fixLavaHissOnAirReplace;
 	public static boolean fixMineshaftAirPockets;
+	public static boolean fixNettyConnectionFailureResourceLeak;
 	public static boolean fixPumpkinPlacementCheck;
 	public static boolean fixRedstoneTorchMemoryLeak;
 	public static boolean fixShearedBlocksDropExtraItems;
@@ -163,6 +164,7 @@ public class BugTorchConfig {
 		fixFireChargeUseSound = config.getBoolean("fixFireChargeUseSound", categoryBugfixes, true, "Fire Charges have the correct use sound.\nFrom MC 1.8, fixes MC-1831");
 		fixLavaHissOnAirReplace = config.getBoolean("fixLavaHissOnAirReplace", categoryBugfixes, true, "Lava will only hiss when mixing with water.\nFrom MC 1.8, fixes MC-32301");
 		fixMineshaftAirPockets = config.getBoolean("fixMineshaftAirPockets", categoryBugfixes, true, "Fixes the air bubbles mineshafts create above their dirt rooms, affects all terrain but very noticeable in oceans.\nThese air pockets were supposed to be in the dirt rooms so this also fixes the dirt rooms having blocked off entrances to some branches.\nFrom MC 1.8, fixes MC-954");
+		fixNettyConnectionFailureResourceLeak = config.getBoolean("fixNettyConnectionFailureResourceLeak", categoryBugfixes, false, "Fixes improperly terminated client connections sometimes causing a severe resource leak.\n!This has not been well tested yet!");
 		fixPumpkinPlacementCheck = config.getBoolean("fixPumpkinPlacementCheck", categoryBackport, true, "Pumpkins and Jack O' Lanterns can be placed without a solid block below them.\nFrom MC 1.13, fixes MC-1947");
 		fixRedstoneTorchMemoryLeak = config.getBoolean("fixRedstoneTorchMemoryLeak", categoryBackport, true, "Stops Redstone Torches from causing a memory leak by making them use a weak hash map to store burnt out torches.\nFixes MC-101233");
 		fixShearedBlocksDropExtraItems = config.getBoolean("fixShearedBlocksDropExtraItems", categoryBugfixes, true, "Shearing a block will not give drops in addition to itself.");
@@ -229,7 +231,7 @@ public class BugTorchConfig {
 		fixWitcheryGarlicGarlandBlockBounds = config.getBoolean("fixWitcheryGarlicGarlandBlockBounds", categoryBugfixes, true, "Makes Witchery Garlic Garlands use correct block bounds on every rotation.");
 		fixWitcheryLeavesShearDupeAndOptifineRendering = config.getBoolean("fixWitcheryLeavesShearDupeAndOptifineRendering", categoryBugfixes, true, "Makes Witchery Leaves respect Optifine render settings and partially fixes a Forge shearing bug.");
 		reuseAetherIIRenderPlayer = config.getBoolean("reuseAetherIIRenderPlayer", categoryPerformance, true, "Makes Aether II reuse the same player renderer object across frames.");
-		
+
 		if(config.hasChanged()) {
 			config.save();
 		}
