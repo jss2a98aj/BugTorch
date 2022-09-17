@@ -44,15 +44,6 @@ public abstract class MixinBlockWitchLeaves extends BlockLeavesBase {
 	 * @author jss2a98aj
 	 * @reason Optifine and CoFH Tweaks compatible fast/fancy rendering
 	 */
-	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered (IBlockAccess world, int x, int y, int z, int side) {
-        return !world.getBlock(x, y, z).isOpaqueCube();
-    }
-
-	/**
-	 * @author jss2a98aj
-	 * @reason Optifine and CoFH Tweaks compatible fast/fancy rendering
-	 */
 	@Overwrite()
 	@SideOnly(Side.CLIENT)
     public IIcon getIcon (int side, int metadata) {
