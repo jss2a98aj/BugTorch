@@ -78,6 +78,7 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
 		if(BugTorchConfig.fixPumpkinPlacementCheck) mixins.add("minecraft.block.MixinBlockPumpkin");
 		if(BugTorchConfig.fixRedstoneTorchMemoryLeak) mixins.add("minecraft.block.MixinBlockRedstoneTorch");
 		if(BugTorchConfig.fixStoneMonsterEggDoubleSpawns) mixins.add("minecraft.block.MixinBlockSilverfish");
+		if(BugTorchConfig.fixStructureComponentDownfillReplacement) mixins.add("minecraft.world.gen.structure.MixinStructureComponent");
 		if(BugTorchConfig.fixShearedBlocksDropExtraItems) {
 			mixins.add("minecraft.block.MixinBlockLeaves");
 			mixins.add("minecraft.block.MixinBlockTallGrass");

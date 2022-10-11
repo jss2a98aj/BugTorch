@@ -48,6 +48,7 @@ public class BugTorchConfig {
 	public static boolean fixShearsNotTakingDamageFromNormalBlocks;
 	public static boolean fixSignPacketChatMessages;
 	public static boolean fixStoneMonsterEggDoubleSpawns;
+	public static boolean fixStructureComponentDownfillReplacement;
 	public static boolean fixVillagePathsHavePlantsOnTop;
 	public static boolean fixVillagerTradeMetadataDetection;
 	public static boolean fixVillageSieges;
@@ -171,6 +172,7 @@ public class BugTorchConfig {
 		fixShearsNotTakingDamageFromNormalBlocks = config.getBoolean("fixShearsNotTakingDamageFromNormalBlocks", categoryBugfixes, true, "Shears will take damage when used to mine any block.\nAlso stops Forge shearing logic from dropping things in creative mode.\nFrom MC 1.9, fixes MC-8180");
 		fixSignPacketChatMessages = config.getBoolean("fixSignPacketChatMessages", categoryBugfixes, true, "Sign update packets for signs in unloaded chunks will not send chat messages.\nFrom MC 1.9, fixes MC-3564") && clientSide;
 		fixStoneMonsterEggDoubleSpawns = config.getBoolean("fixStoneMonsterEggDoubleSpawns", categoryBugfixes, true, "Stone Monster Eggs only spawn one Silverfish when broken.\nFrom MC 1.8, fixes MC-31081");
+		fixStructureComponentDownfillReplacement = config.getBoolean("fixStructureComponentDownfillReplacement", categoryBugfixes, true, "Makes structure component downfilling also replace blocks flagged as replacable.\nMostly prevents tall grass and flowers from embedding in structure foundations.");
 		fixVillagePathsHavePlantsOnTop = config.getBoolean("fixVillagePathsHavePlantsOnTop", categoryBugfixes, true, "Village paths will not have flowers or grass on top of them.\nFrom MC 1.10, fixes MC-3437");
 		fixVillagerTradeMetadataDetection = config.getBoolean("fixVillagerTradeMetadataDetection", categoryBugfixes, true, "Villager trades will respect metadata.\nCurrently unfinished and disabled internally.\nFrom MC 1.8");
 		fixVillagerTradeMetadataDetection = false;
@@ -203,7 +205,7 @@ public class BugTorchConfig {
 		placeTorchesOnAnyWall = config.getBoolean("placeTorchesOnAnyWall", categoryTweaks, true, "Place torches on almost any wall.");
 		potionParticlesAreClearForClientPlayer = clientSide && config.getBoolean("potionParticlesAreClearForClientPlayer", categoryTweaks, false, "Potion particles coming off of the player entity you control are always clear.");
 		removeEntityDuplicateExtendedPropertiesIdentifierSpam = config.getBoolean("removeEntityDuplicateExtendedPropertiesIdentifierSpam", categoryTweaks, true, "Removes \"An attempt was made to register exended properties using an existing key\" log spam caused by some mods.");
-
+		
 		lanPortToUseForOverride = config.getInt("lanPortToUseForOverride", categoryTweaks, 25565, 1024 , 49151, "Port to use for lanPortOverride.");
 		if(config.hasKey(categoryTweaks, "lanPortToUSeForOverride")) {
 			lanPortToUseForOverride = config.getInt("lanPortToUSeForOverride", categoryTweaks, 25565, 1024 , 49151, "Port to use for lanPortOverride.");
