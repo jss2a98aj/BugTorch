@@ -72,6 +72,7 @@ public class BugTorchConfig {
 	public static boolean skipInitialWorldChunkLoad;
 
 	//Mixin tweaks
+	public static boolean enchantmentParticlesForPowerAboveZero;
 	public static boolean farmlandImprovements;
 	public static boolean lanPortOverride;
 	public static int lanPortToUseForOverride;
@@ -197,6 +198,7 @@ public class BugTorchConfig {
 		skipInitialWorldChunkLoad = config.getBoolean("skipInitialWorldChunkLoad", categoryPerformance, true, "Speeds up initial world loading by not waiting for chunks to preload.") && clientSide;
 
 		//Tweaks
+		enchantmentParticlesForPowerAboveZero = config.getBoolean("enchantmentParticlesForPowerAboveZero", categoryTweaks, true, "Makes Enchantment Tables emit particles for any block with enchantment power.") && clientSide;
 		farmlandImprovements = config.getBoolean("farmlandImprovements", categoryTweaks, false, "Farmland will no longer get trampled and hydroponic farms will be possible.\nAlso has new side textures for both wet and dry farmland.\nThis will be moved to a seperate mod at some point.");
 		lanPortOverride = config.getBoolean("lanPortOverride", categoryTweaks, false, "Override the port used when opening singleplayer to LAN.") && clientSide;
 		placeEndPortalsAnywhere = config.getBoolean("placeEndPortalsAnywhere", categoryTweaks, false, "Place End Portals outside of the overworld without them getting removed.");

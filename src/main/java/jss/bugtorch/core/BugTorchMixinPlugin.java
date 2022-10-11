@@ -114,6 +114,7 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
 		if(BugTorchConfig.skipInitialWorldChunkLoad) mixins.add("minecraft.server.MixinMinecraftServer");
 
 		//Tweaks
+		if(BugTorchConfig.enchantmentParticlesForPowerAboveZero) mixins.add("minecraft.block.MixinBlockEnchantmentTable");
 		if(BugTorchConfig.farmlandImprovements) mixins.add("minecraft.block.MixinBlockFarmland");
 		if(BugTorchConfig.lanPortOverride) mixins.add("minecraft.server.integrated.MixinIntegratedServer");
 		if(BugTorchConfig.placeEndPortalsAnywhere) mixins.add("minecraft.block.MixinBlockEndPortal");
