@@ -28,6 +28,10 @@ public abstract class MixinStructureComponent {
         return 0;
     }
 
+    /**
+     * @author jss2a98aj
+     * @reason Makes func_151554_b replace blocks that are consider replaceable.
+     */
     @Overwrite()
     protected void func_151554_b(World world, Block block, int metadata, int x, int y, int z, StructureBoundingBox sbb) {
         final int i1 = getXWithOffset(x, z);
