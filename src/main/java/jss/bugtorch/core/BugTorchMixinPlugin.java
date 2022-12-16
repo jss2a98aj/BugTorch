@@ -127,7 +127,7 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
 		//Mod bugfixes
 		if(BugTorchConfig.fixGanysSurfaceOpenTrapdoorBackTexture) mixins.add("ganyssurface.blocks.MixinBlockWoodTrapdoor");
 		if(BugTorchConfig.fixThaumcraftCandleColorArrayOutOfBounds) {
-			//mixins.add("thaumcraft.client.renderers.block.MixinBlockCandleRenderer");
+			mixins.add("thaumcraft.client.renderers.block.MixinBlockCandleRenderer");
 			mixins.add("thaumcraft.common.blocks.MixinBlockCandle");
 		}
 		if(BugTorchConfig.fixWitcheryGarlicGarlandBlockBounds) mixins.add("witchery.blocks.MixinBlockGarlicGarland");
