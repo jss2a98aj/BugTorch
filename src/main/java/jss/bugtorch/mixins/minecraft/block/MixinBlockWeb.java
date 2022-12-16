@@ -25,7 +25,7 @@ public abstract class MixinBlockWeb extends Block implements IShearable {
 
 	/**
 	 * @author jss2a98aj
-	 * @reason Allows spiderwebs to be sheared without the need for silk touch
+	 * @reason Allows spiderwebs to be sheared without silk touch
 	 */
 	@Override
 	public boolean isShearable(ItemStack item, IBlockAccess world, int x, int y, int z) {

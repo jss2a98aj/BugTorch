@@ -18,7 +18,7 @@ public abstract class MixinBlockWoodTrapdoor extends BlockTrapDoor {
 
 	@Shadow(remap = false)
 	@Final
-	public int woodMeta = 0;
+	public int woodMeta;
 
 	protected MixinBlockWoodTrapdoor(Material material) {
 		super(material);

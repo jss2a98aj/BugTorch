@@ -32,7 +32,7 @@ public abstract class MixinBlockChest extends BlockContainer {
 	 * @reason Splitting dropped item stacks just for them to stack right after is basically pointless
 	 */
 	@Overwrite()
-	public void breakBlock(World world, int x, int y, int z, Block block, int p_149749_6_) {
+	public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
 		TileEntityChest tileEntityChest = (TileEntityChest) world.getTileEntity(x, y, z);
 		if (tileEntityChest != null) {
 			for (int slot = 0; slot < tileEntityChest.getSizeInventory(); ++slot) {
@@ -55,7 +55,7 @@ public abstract class MixinBlockChest extends BlockContainer {
 			}
 			world.func_147453_f(x, y, z, block);
 		}
-		super.breakBlock(world, x, y, z, block, p_149749_6_);
+		super.breakBlock(world, x, y, z, block, meta);
 	}
 
 }

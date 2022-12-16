@@ -43,12 +43,11 @@ public abstract class MixinEntityLivingBase extends Entity {
 
 	/**
 	 * @author jss2a98aj
-	 * @reason Keeps the datawatcher from being updated when no change in air has
-	 *         occurred
+	 * @reason Keeps the datawatcher from being updated when no change in air has occurred
 	 */
 	@Override
 	public void setAir(int airAmount) {
-		if (this.getAir() != airAmount) {
+		if (getAir() != airAmount) {
 			super.setAir(airAmount);
 		}
 	}
