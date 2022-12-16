@@ -20,29 +20,46 @@ public abstract class MixinItemRenderer {
 	 * @reason Makes renderGlint faster and fixes glBlendFunc being left with the wrong values
 	 */
 	@Overwrite
-	private void renderGlint(int p_77018_1_, int p_77018_2_, int p_77018_3_, int p_77018_4_, int p_77018_5_) {
-		OpenGlHelper.glBlendFunc(772, 1, 0, 0);
-		final float f = 0.00390625F;
-		final float f1 = 0.00390625F;
-		final float f3 = 0.0F;
-		final Tessellator tessellator = Tessellator.instance;
-		final long systemTime = Minecraft.getSystemTime();
+    private void renderGlint(int unused, int posX, int posY, int width, int height) {
+        final float timeUVSpeed = 0.00390625F;
+        final Tessellator tessellator = Tessellator.instance;
+        final long time = Minecraft.getSystemTime();
 
-		for (int j1 = 0; j1 < 2; ++j1) {
-			final float f2 = (float) (systemTime % (long) (3000 + j1 * 1873)) / (3000.0F + (float) (j1 * 1873)) * 256.0F;
-			float f4 = 4.0F;
-			if (j1 == 1) {
-				f4 = -1.0F;
-			}
+        float layerUVNoise = 4.0F;
 
-			tessellator.startDrawingQuads();
-			tessellator.addVertexWithUV((double) (p_77018_2_ + 0), (double) (p_77018_3_ + p_77018_5_), (double) zLevel, (double) ((f2 + (float) p_77018_5_ * f4) * f), (double) ((f3 + (float) p_77018_5_) * f1));
-			tessellator.addVertexWithUV((double) (p_77018_2_ + p_77018_4_), (double) (p_77018_3_ + p_77018_5_), (double) zLevel, (double) ((f2 + (float) p_77018_4_ + (float) p_77018_5_ * f4) * f), (double) ((f3 + (float) p_77018_5_) * f1));
-			tessellator.addVertexWithUV((double) (p_77018_2_ + p_77018_4_), (double) (p_77018_3_ + 0), (double) zLevel, (double) ((f2 + (float) p_77018_4_) * f), (double) ((f3 + 0.0F) * f1));
-			tessellator.addVertexWithUV((double) (p_77018_2_ + 0), (double) (p_77018_3_ + 0), (double) zLevel, (double) ((f2 + 0.0F) * f), (double) ((f3 + 0.0F) * f1));
-			tessellator.draw();
-		}
-		OpenGlHelper.glBlendFunc(770, 771, 1, 0);
-	}
+        OpenGlHelper.glBlendFunc(772, 1, 0, 0);
+        
+
+        for (int layer = 0; layer < 2; ++layer) {
+        	
+        	final int timeUVDenominator = 3000 + layer * 1873;
+            final float timeUVNoise = (float)(time % (long)timeUVDenominator) / (float)timeUVDenominator * 256F;
+
+            if (layer == 1) {
+                layerUVNoise = -1.0F;
+            }
+
+            tessellator.startDrawingQuads();
+            tessellator.addVertexWithUV(
+            	(double)posX, (double)(posY + height), (double)zLevel,
+            	(double)((timeUVNoise + (float)height * layerUVNoise) * timeUVSpeed), (double)((float)height * timeUVSpeed)
+            );
+            tessellator.addVertexWithUV(
+            	(double)(posX + width), (double)(posY + height), (double)zLevel,
+            	(double)((timeUVNoise + (float)width + (float)height * layerUVNoise) * timeUVSpeed), (double)((float)height * timeUVSpeed)
+            );
+            tessellator.addVertexWithUV(
+            	(double)(posX + width), (double)posY, (double)zLevel,
+            	(double)((timeUVNoise + (float)width) * timeUVSpeed), 0D
+            );
+            tessellator.addVertexWithUV(
+            	(double)posX, (double)posY, (double)zLevel,
+            	(double)(timeUVNoise * timeUVSpeed), 0D
+            );
+            tessellator.draw();
+        }
+        
+        OpenGlHelper.glBlendFunc(770, 771, 1, 0);
+    }
 
 }
