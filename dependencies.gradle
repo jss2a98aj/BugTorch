@@ -1,13 +1,20 @@
+// Adapted from https://github.com/FalsePattern/ExampleMod1.7.10/blob/e85da4bd22966b5ba49614c3dbd0bfa206722f4e/build.gradle#L980-L988
+
+def deobfCurse(String mavenDep) {
+    def repoURL = "https://cursemaven.com/"
+    String[] parts = ("curse.maven:" + mavenDep).split(":")
+    parts[0] = parts[0].replace('.', '/')
+    def jarURL = repoURL + parts[0] + "/" + parts[1] + "/" + parts[2] + "/" + parts[1] + "-" + parts[2] + ".jar"
+    return deobf(jarURL)
+}
+
 dependencies {
     compileOnly("thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev")
 
-    //compile('curse.maven:witchery-69673:2234410') 
-    
-    //TODO: Properly configure deps
-    compile files("libs/witchery-1.7.10-0.24.1-deobf.jar")
-    compile files("libs/GanysSurface-1.12.8-deobf.jar")
-    compile files("libs/gilded-games-util-1.7.10-2.0-deobf.jar")
-    compile files("libs/aether-1.7.10-1.6-deobf.jar")
-    compile files("libs/Pam's+Temperate+Plants+1.7.2b-deobf.jar")
-    compile files("libs/VillageNames-1.7.10-4.4.3-deobf.jar")
+    compile deobfCurse("witchery-69673:2234410")
+    compile deobfCurse("ganys-surface-222303:2284819")
+    compile deobfCurse("gilded-games-util-228114:2273362")
+    compile deobfCurse("aether-ii-223796:2273367")
+    compile deobfCurse("pams-temperate-plants-221916:2206430")
+    compile deobfCurse("village-names-259230:4109402")
 }
