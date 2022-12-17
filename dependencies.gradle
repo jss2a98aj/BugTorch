@@ -4,8 +4,10 @@ dependencies {
     //compile('curse.maven:witchery-69673:2234410') 
     
     //TODO: Properly configure deps
-    compile files('libs/witchery-1.7.10-0.24.1-deobf.jar')
-    compile files('libs/GanysSurface-1.12.8-deobf.jar')
-    compile files('libs/gilded-games-util-1.7.10-2.0-deobf.jar')
-    compile files('libs/aether-1.7.10-1.6-deobf.jar')
+    compile files("libs/witchery-1.7.10-0.24.1-deobf.jar")
+    compile files("libs/GanysSurface-1.12.8-deobf.jar")
+    compile files("libs/gilded-games-util-1.7.10-2.0-deobf.jar")
+    compile files("libs/aether-1.7.10-1.6-deobf.jar")
+    compile files("libs/Pam's+Temperate+Plants+1.7.2b-deobf.jar")
+    compile files("libs/VillageNames-1.7.10-4.4.3-deobf.jar")
 }
