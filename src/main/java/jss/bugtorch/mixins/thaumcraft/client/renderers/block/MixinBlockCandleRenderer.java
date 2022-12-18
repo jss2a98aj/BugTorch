@@ -14,7 +14,7 @@ public abstract class MixinBlockCandleRenderer {
 	 * @author jss2a98aj
 	 * @reason Prevents an array out of bounds exception when metadata greater than 15 is used
 	 */
-	@ModifyVariable(method = "renderInventoryBlock(Lnet/minecraft/block/Block;IILnet/minecraft/client/renderer/RenderBlocks;)V", at = @At("HEAD"), ordinal = 0)
+	@ModifyVariable(method = "renderInventoryBlock(Lnet/minecraft/block/Block;IILnet/minecraft/client/renderer/RenderBlocks;)V", at = @At("HEAD"), ordinal = 0, remap = false)
 	private int metaGuardRenderInventoryBlock(int meta) {
 	  return meta >= Utils.colors.length ? 0 : meta;
 	}
