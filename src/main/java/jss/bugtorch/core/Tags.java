@@ -4,6 +4,6 @@ package jss.bugtorch.core;
 
 public class Tags {
 
-    // GRADLETOKEN_* will be replaced by your configuration values at build timeME";
+    // GRADLETOKEN_* will be replaced by your configuration values at build time";
     public static final String VERSION = "GRADLETOKEN_VERSION";
 }
