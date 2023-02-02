@@ -16,5 +16,5 @@ dependencies {
     compile deobfCurse("gilded-games-util-228114:2273362")
     compile deobfCurse("aether-ii-223796:2273367")
     compile deobfCurse("pams-temperate-plants-221916:2206430")
-    compile deobfCurse("village-names-259230:4109402")
+    compile deobfCurse("village-names-259230:4328516")
 }
