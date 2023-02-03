@@ -1,27 +1,21 @@
 package jss.bugtorch.mixins.witchery.rendering;
 
-import org.spongepowered.asm.mixin.Final;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-
 import com.emoniph.witchery.blocks.BlockWitchLeaves;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockLeavesBase;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemShears;
 import net.minecraft.util.IIcon;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
 
 @Mixin(value = BlockWitchLeaves.class, remap = false)
-public abstract class MixinBlockWitchLeaves {
+public abstract class MixinBlockWitchLeaves extends BlockLeavesBase {
+
+	MixinBlockWitchLeaves(Material material, boolean renderFlag) {
+		super(material, renderFlag);
+	}
 
 	@Shadow(remap = false)
 	private IIcon[][] iconsForModes;
