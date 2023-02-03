@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(value = EntityLivingBase.class)
-public class MixinScalingSuffocationDamage  {
+public abstract class MixinScalingSuffocationDamage  {
 
     /**
      * @author jss2a98aj
