@@ -43,6 +43,7 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
 	@Override
 	public List<String> getMixins() {
 		List<String> mixins = new ArrayList<>();
+		boolean clientSide = BugTorchConfig.clientSide;
 
 		if(!(Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment")) {
 			if(BugTorchConfig.ganysSurfaceJarName.equals("d")  || !loadJar(BugTorchConfig.ganysSurfaceJarName, "Gany's Surface")) {
@@ -53,7 +54,8 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
 			}
 			if(BugTorchConfig.witcheryJarName.equals("d") || !loadJar(BugTorchConfig.witcheryJarName, "Witchery")) {
 				BugTorchConfig.fixWitcheryGarlicGarlandBlockBounds = false;
-				BugTorchConfig.fixWitcheryLeavesShearDupeAndOptifineRendering = false;
+				BugTorchConfig.fixWitcheryLeavesOptifineRendering = false;
+				BugTorchConfig.fixWitcheryLeavesShearDupe = false;
 			}
 			if(BugTorchConfig.aetherIIJarName.equals("d") || !loadJar(BugTorchConfig.aetherIIJarName, "The Aether II")) {
 				BugTorchConfig.reuseAetherIIRenderPlayer = false;
@@ -61,79 +63,195 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
 		}
 
 		//Backports
-		if(BugTorchConfig.cobwebsCanBeSheared) mixins.add("minecraft.block.MixinBlockWeb");
-		if(BugTorchConfig.deadBushesDropSticks) mixins.add("minecraft.block.MixinBlockDeadBush");
-		if(BugTorchConfig.fireArrowsDetonateTNTCarts) mixins.add("minecraft.entity.item.MixinEntityMinecartTNT");
-		if(BugTorchConfig.throwEnderPearlsInCrativeMode) mixins.add("minecraft.item.MixinItemEnderPearl");
+		if(BugTorchConfig.cobwebsCanBeSheared) {
+			mixins.add("minecraft.backport.MixinBlockWeb");
+		}
+		if(BugTorchConfig.deadBushesDropSticks) {
+			mixins.add("minecraft.backport.MixinBlockDeadBush");
+		}
+		if(BugTorchConfig.fireArrowsDetonateTNTCarts) {
+			mixins.add("minecraft.backport.MixinEntityMinecartTNT");
+		}
+		if(BugTorchConfig.throwEnderPearlsInCreativeMode) {
+			mixins.add("minecraft.backport.MixinItemEnderPearl");
+		}
 
 		//Bugfixes
-		if(BugTorchConfig.fixEnchantmentBlendFunc) mixins.add("minecraft.client.renderer.entity.MixinItemRenderer");
-		if(BugTorchConfig.fixFireChargeUseSound) mixins.add("minecraft.item.MixinItemFireball");
-		if(BugTorchConfig.fixLavaHissOnAirReplace) mixins.add("minecraft.block.MixinBlockLiquid");
+		if(clientSide && BugTorchConfig.fixEnchantmentBlendFunc) {
+			mixins.add("minecraft.rendering.MixinRenderItem");
+		}
+		if(clientSide && BugTorchConfig.fixFireChargeUseSound) {
+			mixins.add("minecraft.backport.MixinItemFireball");
+		}
+		if(clientSide && BugTorchConfig.fixLavaHissOnAirReplace) {
+			mixins.add("minecraft.fix.MixinBlockLiquid");
+		}
 		if(BugTorchConfig.fixMineshaftAirPockets) {
-			mixins.add("minecraft.world.gen.structure.MixinStructureStart");
-			mixins.add("minecraft.world.gen.structure.MixinStructureMineshaftPieces$Room");
+			mixins.add("minecraft.worldgen.MixinStructureStart");
+			mixins.add("minecraft.worldgen.MixinStructureMineshaftPieces$Room");
 		}
-		if(BugTorchConfig.fixNettyConnectionFailureResourceLeak) mixins.add("netty.channel.socket.nio.MixinNioSocketChannel");
-		if(BugTorchConfig.fixPumpkinPlacementCheck) mixins.add("minecraft.block.MixinBlockPumpkin");
-		if(BugTorchConfig.fixRedstoneTorchMemoryLeak) mixins.add("minecraft.block.MixinBlockRedstoneTorch");
-		if(BugTorchConfig.fixStoneMonsterEggDoubleSpawns) mixins.add("minecraft.block.MixinBlockSilverfish");
-		if(BugTorchConfig.fixStructureComponentDownfillReplacement) mixins.add("minecraft.world.gen.structure.MixinStructureComponent");
-		if(BugTorchConfig.fixShearedBlocksDropExtraItems) {
-			mixins.add("minecraft.block.MixinBlockLeaves");
-			mixins.add("minecraft.block.MixinBlockTallGrass");
+		if(BugTorchConfig.fixNettyConnectionFailureResourceLeak) {
+			mixins.add("minecraft.logcleanup.MixinNioSocketChannel");
 		}
-		if(BugTorchConfig.fixShearsNotTakingDamageFromNormalBlocks) mixins.add("minecraft.item.MixinItemShears");
-		if(BugTorchConfig.fixSignPacketChatMessages) mixins.add("minecraft.client.network.MixinNetHandlerPlayClient");
-		if(BugTorchConfig.fixVillagePathsHavePlantsOnTop) mixins.add("minecraft.world.gen.structure.MixinStructureVillagePieces_Path");
+		if(clientSide && BugTorchConfig.fixParticleDepthSorting) {
+			mixins.add("minecraft.rendering.MixinEffectRenderer");
+		}
+		//mixins.add("minecraft.rendering.MixinEffectRenderer");
+		if(BugTorchConfig.fixPumpkinPlacementCheck) {
+			mixins.add("minecraft.placement.MixinBlockPumpkin");
+		}
+		if(BugTorchConfig.fixRedstoneTorchMemoryLeak) {
+			mixins.add("minecraft.optimization.MixinBlockRedstoneTorch");
+		}
+		if(BugTorchConfig.fixStoneMonsterEggDoubleSpawns) {
+			mixins.add("minecraft.fix.MixinBlockSilverfish");
+		}
+		if(BugTorchConfig.fixStructureComponentDownfillReplacement) {
+			mixins.add("minecraft.worldgen.MixinStructureComponent");
+		}
+		if(BugTorchConfig.fixShearedGrassDropDupe) {
+			mixins.add("minecraft.shearing.MixinBlockTallGrass");
+		}
+		if(BugTorchConfig.fixShearedLeavesDropDupe) {
+			mixins.add("minecraft.shearing.MixinBlockLeaves");
+		}
+		if(BugTorchConfig.fixShearsNotTakingDamageFromNormalBlocks) {
+			mixins.add("minecraft.shearing.MixinItemShears");
+		}
+		if(clientSide && BugTorchConfig.fixSignPacketChatMessages) {
+			mixins.add("minecraft.logcleanup.MixinNetHandlerPlayClient");
+		}
+		if(BugTorchConfig.fixVillagePathsHavePlantsOnTop) {
+			mixins.add("minecraft.worldgen.MixinStructureVillagePieces_Path");
+		}
 		if(BugTorchConfig.fixVillagerTradeMetadataDetection) {
-			mixins.add("minecraft.inventory.MixinSlotMerchantResult");
-			mixins.add("minecraft.village.MixinMerchantRecipe");
+			mixins.add("minecraft.villagertrademeta.MixinSlotMerchantResult");
+			mixins.add("minecraft.villagertrademeta.MixinMerchantRecipe");
 		}
-		if(BugTorchConfig.fixVillageSieges) mixins.add("minecraft.village.MixinVillageSiege");
-		if(BugTorchConfig.fixVillageWellDesertMaterial) mixins.add("minecraft.world.gen.structure.MixinStructureVillagePieces_Well");
+		if(BugTorchConfig.fixVillageSieges) {
+			mixins.add("minecraft.fix.MixinVillageSiege");
+		}
+		if(BugTorchConfig.fixVillageWellDesertMaterial) {
+			mixins.add("minecraft.worldgen.MixinStructureVillagePieces_Well");
+		}
 
 		//Performance
-		if(BugTorchConfig.brokenChestsDontSplitStacks) mixins.add("minecraft.block.MixinBlockChest");
-		if(BugTorchConfig.brokenHoppersDontSplitStacks) mixins.add("minecraft.block.MixinBlockHopper");
-		if(BugTorchConfig.fasterDroppedItemStackingChecks) mixins.add("minecraft.entity.item.MixinEntityItem");
-		if(BugTorchConfig.fasterEntityLivingBaseIsPotionActiveAndSetAir) mixins.add("minecraft.entity.MixinEntityLivingBase");
-		if(BugTorchConfig.fasterGetBlockByIdForAirBlocks) mixins.add("minecraft.block.MixinBlock");
-		if(BugTorchConfig.fasterSnowBlockTicks) mixins.add("minecraft.block.MixinBlockSnowBlock");
-		if(BugTorchConfig.moreAccurateLayeredSnowFaceCulling) mixins.add("minecraft.block.MixinBlockSnow");
-		if(BugTorchConfig.replaceRandomInEffectRenderer) mixins.add("random.client.particle.MixinEffectRenderer");
-		if(BugTorchConfig.replaceRandomInEntity) mixins.add("random.entity.MixinEntity");
-		if(BugTorchConfig.replaceRandomInItem) mixins.add("random.item.MixinItem");
-		if(BugTorchConfig.replaceRandomInMinecraftServer) mixins.add("random.server.MixinMinecraftServer");
-		if(BugTorchConfig.replaceRandomInRenderItem) mixins.add("random.client.renderer.entity.MixinRenderItem");
+		if(BugTorchConfig.brokenChestsDontSplitStacks) {
+			mixins.add("minecraft.optimization.MixinBlockChest");
+		}
+		if(BugTorchConfig.brokenHoppersDontSplitStacks) {
+			mixins.add("minecraft.optimization.MixinBlockHopper");
+		}
+		if(BugTorchConfig.fasterDroppedItemStackingChecks) {
+			mixins.add("minecraft.optimization.MixinEntityItem");
+		}
+		if(BugTorchConfig.fasterEntityLivingBaseIsPotionActiveAndSetAir) {
+			mixins.add("minecraft.optimization.MixinEntityLivingBase");
+		}
+		if(BugTorchConfig.fasterGetBlockByIdForAirBlocks) {
+			mixins.add("minecraft.optimization.MixinBlock");
+		}
+		if(BugTorchConfig.fasterSnowBlockTicks) {
+			mixins.add("minecraft.optimization.MixinBlockSnowBlock");
+		}
+		if(clientSide && BugTorchConfig.moreAccurateLayeredSnowFaceCulling) {
+			mixins.add("minecraft.optimization.MixinBlockSnow");
+		}
+		if(clientSide && BugTorchConfig.replaceRandomInEffectRenderer) {
+			mixins.add("minecraft.fastrandom.MixinEffectRenderer");
+		}
+		if(BugTorchConfig.replaceRandomInEntity) {
+			mixins.add("minecraft.fastrandom.MixinEntity");
+		}
+		if(BugTorchConfig.replaceRandomInItem) {
+			mixins.add("minecraft.fastrandom.MixinItem");
+		}
+		if(BugTorchConfig.replaceRandomInMinecraftServer) {
+			mixins.add("minecraft.fastrandom.MixinMinecraftServer");
+		}
+		if(clientSide && BugTorchConfig.replaceRandomInRenderItem) {
+			mixins.add("minecraft.fastrandom.MixinRenderItem");
+		}
 		if(BugTorchConfig.replaceRandomInWorld) {
 			BugTorchCore.logger.info("World.class will use a faster Random implementation, this impacts world generation slightly.");
-			mixins.add("random.world.MixinWorld");
+			mixins.add("minecraft.fastrandom.MixinWorld");
 		}
-		if(BugTorchConfig.replaceRandomInWorldClient) mixins.add("random.client.multiplayer.MixinWorldClient");
-		if(BugTorchConfig.skipInitialWorldChunkLoad) mixins.add("minecraft.server.MixinMinecraftServer");
+		if(clientSide && BugTorchConfig.replaceRandomInWorldClient) {
+			mixins.add("minecraft.fastrandom.MixinWorldClient");
+		}
+		if(clientSide && BugTorchConfig.skipInitialWorldChunkLoad) {
+			mixins.add("minecraft.optimization.MixinMinecraftServer");
+		}
 
 		//Tweaks
-		if(BugTorchConfig.enchantmentParticlesForPowerAboveZero) mixins.add("minecraft.block.MixinBlockEnchantmentTable");
-		if(BugTorchConfig.farmlandImprovements) mixins.add("minecraft.block.MixinBlockFarmland");
-		if(BugTorchConfig.lanPortOverride) mixins.add("minecraft.server.integrated.MixinIntegratedServer");
-		if(BugTorchConfig.placeEndPortalsAnywhere) mixins.add("minecraft.block.MixinBlockEndPortal");
-		if(BugTorchConfig.placePressurePlatesOnAnyWallOrFence) mixins.add("minecraft.block.MixinBlockBasePressurePlate");
-		if(BugTorchConfig.placeTorchesOnAnyFence) mixins.add("minecraft.block.MixinBlockFence");
-		if(BugTorchConfig.placeTorchesOnAnyWall) mixins.add("minecraft.block.MixinBlockWall");
-		if(BugTorchConfig.potionParticlesAreClearForClientPlayer) mixins.add("minecraft.entity.MixinEntityLivingBase2");
-		if(BugTorchConfig.removeEntityDuplicateExtendedPropertiesIdentifierSpam) mixins.add("minecraft.entity.MixinEntity");
+		if(clientSide && BugTorchConfig.enchantmentParticlesForPowerAboveZero) {
+			mixins.add("minecraft.rendering.MixinBlockEnchantmentTable");
+		}
+		if(BugTorchConfig.farmlandHydroponics) {
+			mixins.add("minecraft.tweaks.blockfarmland.MixinHydroponics");
+		}
+		if(clientSide && BugTorchConfig.farmlandNewTextures) {
+			mixins.add("minecraft.tweaks.blockfarmland.MixinNewTextures");
+		}
+		if(BugTorchConfig.farmlandNoTrample) {
+			mixins.add("minecraft.tweaks.blockfarmland.MixinNoTrample");
+		}
+		if(clientSide && BugTorchConfig.lanPortOverride) {
+			mixins.add("minecraft.tweaks.MixinIntegratedServer");
+		}
+		if(BugTorchConfig.placeEndPortalsAnywhere) {
+			mixins.add("minecraft.tweaks.MixinBlockEndPortal");
+		}
+		if(BugTorchConfig.placePressurePlatesOnAnyWallOrFence) {
+			mixins.add("minecraft.placement.MixinBlockBasePressurePlate");
+		}
+		if(BugTorchConfig.placeTorchesOnAnyFence) {
+			mixins.add("minecraft.placement.MixinBlockFence");
+		}
+		if(BugTorchConfig.placeTorchesOnAnyWall) {
+			mixins.add("minecraft.placement.MixinBlockWall");
+		}
+		if(clientSide && BugTorchConfig.potionParticlesAreClearForClientPlayer) {
+			mixins.add("minecraft.tweaks.entitylivingbase.MixinTranslucentClientPotionEffects");
+		}
+		if(BugTorchConfig.reduceLightningVolume < 10000f) {
+			mixins.add("minecraft.tweaks.MixinEntityLightningBolt");
+		}
+		if(BugTorchConfig.removeEntityDuplicateExtendedPropertiesIdentifierSpam) {
+			mixins.add("minecraft.logcleanup.MixinEntity");
+		}
+		if(BugTorchConfig.scaledDrowningDamageMaxHealthMult > 0f) {
+			mixins.add("minecraft.tweaks.entitylivingbase.MixinScalingDrowningDamage");
+		}
+		if(BugTorchConfig.scaledStarvationDamageMaxHealthMult > 0f) {
+			mixins.add("minecraft.tweaks.MixinFoodStats");
+		}
+		if(BugTorchConfig.scaledDrowningDamageMaxHealthMult > 0f) {
+			mixins.add("minecraft.tweaks.entitylivingbase.MixinScalingSuffocationDamage");
+		}
 
 		//Mod bugfixes
-		if(BugTorchConfig.fixGanysSurfaceOpenTrapdoorBackTexture) mixins.add("ganyssurface.blocks.MixinBlockWoodTrapdoor");
-		if(BugTorchConfig.fixThaumcraftCandleColorArrayOutOfBounds) {
-			mixins.add("thaumcraft.client.renderers.block.MixinBlockCandleRenderer");
-			mixins.add("thaumcraft.common.blocks.MixinBlockCandle");
+		if(clientSide && BugTorchConfig.fixGanysSurfaceOpenTrapdoorBackTexture) {
+			mixins.add("ganyssurface.rendering.MixinBlockWoodTrapdoor");
 		}
-		if(BugTorchConfig.fixWitcheryGarlicGarlandBlockBounds) mixins.add("witchery.blocks.MixinBlockGarlicGarland");
-		if(BugTorchConfig.fixWitcheryLeavesShearDupeAndOptifineRendering) mixins.add("witchery.blocks.MixinBlockWitchLeaves");
-		
-		if(BugTorchConfig.reuseAetherIIRenderPlayer) mixins.add("aetherii.client.MixinClientEventHandler");
+		if(BugTorchConfig.fixThaumcraftCandleColorArrayOutOfBounds) {
+			if(clientSide) {
+				mixins.add("thaumcraft.sanitizearrayaccess.MixinBlockCandleRenderer");
+			}
+			mixins.add("thaumcraft.sanitizearrayaccess.MixinBlockCandle");
+		}
+		if(BugTorchConfig.fixWitcheryGarlicGarlandBlockBounds) {
+			mixins.add("witchery.fix.MixinBlockGarlicGarland");
+		}
+		if(clientSide && BugTorchConfig.fixWitcheryLeavesOptifineRendering) {
+			mixins.add("witchery.rendering.MixinBlockWitchLeaves");
+		}
+		if(BugTorchConfig.fixWitcheryLeavesShearDupe) {
+			mixins.add("witchery.shearing.MixinBlockWitchLeaves");
+		}
+		if(clientSide && BugTorchConfig.reuseAetherIIRenderPlayer) {
+			mixins.add("aetherii.optimization.MixinClientEventHandler");
+		}
 
 		return mixins;
 	}

@@ -6,6 +6,8 @@ import net.minecraftforge.common.config.Configuration;
 
 public class BugTorchConfig {
 
+	public static boolean clientSide = true;
+
 	//Base backports
 	public static boolean enableFloatingTrapDoors;
 
@@ -34,7 +36,7 @@ public class BugTorchConfig {
 	public static boolean cobwebsCanBeSheared;
 	public static boolean deadBushesDropSticks;
 	public static boolean fireArrowsDetonateTNTCarts;
-	public static boolean throwEnderPearlsInCrativeMode;
+	public static boolean throwEnderPearlsInCreativeMode;
 
 	//Mixin bugfixes
 	public static boolean fixEnchantmentBlendFunc;
@@ -42,9 +44,11 @@ public class BugTorchConfig {
 	public static boolean fixLavaHissOnAirReplace;
 	public static boolean fixMineshaftAirPockets;
 	public static boolean fixNettyConnectionFailureResourceLeak;
+	public static boolean fixParticleDepthSorting;
 	public static boolean fixPumpkinPlacementCheck;
 	public static boolean fixRedstoneTorchMemoryLeak;
-	public static boolean fixShearedBlocksDropExtraItems;
+	public static boolean fixShearedGrassDropDupe;
+	public static boolean fixShearedLeavesDropDupe;
 	public static boolean fixShearsNotTakingDamageFromNormalBlocks;
 	public static boolean fixSignPacketChatMessages;
 	public static boolean fixStoneMonsterEggDoubleSpawns;
@@ -73,7 +77,9 @@ public class BugTorchConfig {
 
 	//Mixin tweaks
 	public static boolean enchantmentParticlesForPowerAboveZero;
-	public static boolean farmlandImprovements;
+	public static boolean farmlandHydroponics;
+	public static boolean farmlandNewTextures;
+	public static boolean farmlandNoTrample;
 	public static boolean lanPortOverride;
 	public static int lanPortToUseForOverride;
 	public static boolean placeEndPortalsAnywhere;
@@ -81,7 +87,11 @@ public class BugTorchConfig {
 	public static boolean placeTorchesOnAnyFence;
 	public static boolean placeTorchesOnAnyWall;
 	public static boolean potionParticlesAreClearForClientPlayer;
+	public static float reduceLightningVolume;
 	public static boolean removeEntityDuplicateExtendedPropertiesIdentifierSpam;
+	public static float scaledDrowningDamageMaxHealthMult;
+	public static float scaledStarvationDamageMaxHealthMult;
+	public static float scaledSuffocationDamageMaxHealthMult;
 
 	//Mixin mod names
 	public static String ganysSurfaceJarName;
@@ -93,7 +103,8 @@ public class BugTorchConfig {
 	public static boolean fixGanysSurfaceOpenTrapdoorBackTexture;
 	public static boolean fixThaumcraftCandleColorArrayOutOfBounds;
 	public static boolean fixWitcheryGarlicGarlandBlockBounds;
-	public static boolean fixWitcheryLeavesShearDupeAndOptifineRendering;
+	public static boolean fixWitcheryLeavesOptifineRendering;
+	public static boolean fixWitcheryLeavesShearDupe;
 	public static boolean reuseAetherIIRenderPlayer;
 
 	//Category names
@@ -148,7 +159,6 @@ public class BugTorchConfig {
 
 		Configuration config = new Configuration(configFile);
 
-		boolean clientSide = true;
 		try {
 			Class.forName("net.minecraft.client.gui.FontRenderer", false, config.getClass().getClassLoader());
 		} catch (ClassNotFoundException e) {
@@ -159,19 +169,21 @@ public class BugTorchConfig {
 		cobwebsCanBeSheared = config.getBoolean("cobwebsCanBeSheared", categoryBackport, true, "Cobwebs can be collected with Shears without Silk Touch.\nFrom MC 1.9, fixes MC-93001");
 		deadBushesDropSticks = config.getBoolean("deadBushesDropSticks", categoryBackport, true, "Dead Bushes drop 0-2 Sticks.\nFrom MC 1.9");
 		fireArrowsDetonateTNTCarts = config.getBoolean("fireArrowsDetonateTNTCarts", categoryBackport, true, "Minecarts with TNT explode when hit by fire arrows.\nFrom MC 1.8, fixes MC-8987");
-		throwEnderPearlsInCrativeMode = config.getBoolean("throwEnderPearlsInCrativeMode", categoryBackport, true, "Ender Pearls can be thrown in creative mode.\nFrom MC 1.9, fixes MC-438");
+		throwEnderPearlsInCreativeMode = config.getBoolean("throwEnderPearlsInCreativeMode", categoryBackport, true, "Ender Pearls can be thrown in creative mode.\nFrom MC 1.9, fixes MC-438");
 
 		//Bugfixes
-		fixEnchantmentBlendFunc = config.getBoolean("fixEnchantmentBlendFunc", categoryBugfixes, true, "Fixes rendering issues caused by enchantments changing glBlendFunc and never reverting it.") && clientSide;
+		fixEnchantmentBlendFunc = config.getBoolean("fixEnchantmentBlendFunc", categoryBugfixes, true, "Fixes rendering issues caused by enchantments changing glBlendFunc and never reverting it.");
 		fixFireChargeUseSound = config.getBoolean("fixFireChargeUseSound", categoryBugfixes, true, "Fire Charges have the correct use sound.\nFrom MC 1.8, fixes MC-1831");
 		fixLavaHissOnAirReplace = config.getBoolean("fixLavaHissOnAirReplace", categoryBugfixes, true, "Lava will only hiss when mixing with water.\nFrom MC 1.8, fixes MC-32301");
 		fixMineshaftAirPockets = config.getBoolean("fixMineshaftAirPockets", categoryBugfixes, true, "Fixes the air bubbles mineshafts create above their dirt rooms, affects all terrain but very noticeable in oceans.\nThese air pockets were supposed to be in the dirt rooms so this also fixes the dirt rooms having blocked off entrances to some branches.\nFrom MC 1.8, fixes MC-954");
-		fixNettyConnectionFailureResourceLeak = config.getBoolean("fixNettyConnectionFailureResourceLeak", categoryBugfixes, false, "Fixes improperly terminated client connections sometimes causing a severe resource leak.\n!This has not been well tested yet!");
+		fixNettyConnectionFailureResourceLeak = config.getBoolean("fixNettyConnectionFailureResourceLeak", categoryBugfixes, true, "Fixes improperly terminated client connections sometimes causing a severe resource leak.");
+		fixParticleDepthSorting = config.getBoolean("fixParticleDepthSorting", categoryBugfixes, true, "Fixes particle depth being incorrectly calculated.");
 		fixPumpkinPlacementCheck = config.getBoolean("fixPumpkinPlacementCheck", categoryBackport, true, "Pumpkins and Jack O' Lanterns can be placed without a solid block below them.\nFrom MC 1.13, fixes MC-1947");
 		fixRedstoneTorchMemoryLeak = config.getBoolean("fixRedstoneTorchMemoryLeak", categoryBackport, true, "Stops Redstone Torches from causing a memory leak by making them use a weak hash map to store burnt out torches.\nFixes MC-101233");
-		fixShearedBlocksDropExtraItems = config.getBoolean("fixShearedBlocksDropExtraItems", categoryBugfixes, true, "Shearing a block will not give drops in addition to itself.");
+		fixShearedGrassDropDupe = config.getBoolean("fixShearedGrassDropDupe", categoryBugfixes, true, "Shearing tall grass will not give drops in addition to itself.");
+		fixShearedLeavesDropDupe = config.getBoolean("fixShearedLeavesDropDupe", categoryBugfixes, true, "Shearing leaves will not give drops in addition to itself.");
 		fixShearsNotTakingDamageFromNormalBlocks = config.getBoolean("fixShearsNotTakingDamageFromNormalBlocks", categoryBugfixes, true, "Shears will take damage when used to mine any block.\nAlso stops Forge shearing logic from dropping things in creative mode.\nFrom MC 1.9, fixes MC-8180");
-		fixSignPacketChatMessages = config.getBoolean("fixSignPacketChatMessages", categoryBugfixes, true, "Sign update packets for signs in unloaded chunks will not send chat messages.\nFrom MC 1.9, fixes MC-3564") && clientSide;
+		fixSignPacketChatMessages = config.getBoolean("fixSignPacketChatMessages", categoryBugfixes, true, "Sign update packets for signs in unloaded chunks will not send chat messages.\nFrom MC 1.9, fixes MC-3564");
 		fixStoneMonsterEggDoubleSpawns = config.getBoolean("fixStoneMonsterEggDoubleSpawns", categoryBugfixes, true, "Stone Monster Eggs only spawn one Silverfish when broken.\nFrom MC 1.8, fixes MC-31081");
 		fixStructureComponentDownfillReplacement = config.getBoolean("fixStructureComponentDownfillReplacement", categoryBugfixes, true, "Makes structure component downfilling also replace blocks flagged as replaceable.\nMostly prevents tall grass and flowers from embedding in structure foundations.");
 		fixVillagePathsHavePlantsOnTop = config.getBoolean("fixVillagePathsHavePlantsOnTop", categoryBugfixes, true, "Village paths will not have flowers or grass on top of them.\nFrom MC 1.10, fixes MC-3437");
@@ -186,33 +198,59 @@ public class BugTorchConfig {
 		fasterDroppedItemStackingChecks = config.getBoolean("fasterDroppedItemStackingChecks", categoryPerformance, true, "Dropped item nearby stack checks are faster for full stacks.");
 		fasterEntityLivingBaseIsPotionActiveAndSetAir = config.getBoolean("fasterEntityLivingBaseIsPotionActiveAndSetAir", categoryPerformance, true, "isPotionActive returns immediately if there are no active potions.\nsetAir only updates its datawatcher when needed.");
 		fasterGetBlockByIdForAirBlocks = config.getBoolean("fasterGetBlockByIdForAirBlocks", categoryPerformance, true, "When something gets air blocks from ID it will return faster.");
-		moreAccurateLayeredSnowFaceCulling = config.getBoolean("moreAccurateLayeredSnowFaceCulling", categoryPerformance, true, "The faces of layered snow get culled more accurately when chunk meshes are created.") && clientSide;
+		moreAccurateLayeredSnowFaceCulling = config.getBoolean("moreAccurateLayeredSnowFaceCulling", categoryPerformance, true, "The faces of layered snow get culled more accurately when chunk meshes are created.");
 		fasterSnowBlockTicks = config.getBoolean("fasterSnowBlockTicks", categoryPerformance, true, "Non-layered snow block ticking is faster.");
-		replaceRandomInEffectRenderer = config.getBoolean("replaceRandomInEffectRenderer", categoryPerformance, true, "Makes EffectRenderer.class use a faster implementation of random.") && clientSide;
+		replaceRandomInEffectRenderer = config.getBoolean("replaceRandomInEffectRenderer", categoryPerformance, true, "Makes EffectRenderer.class use a faster implementation of random.");
 		replaceRandomInEntity = config.getBoolean("replaceRandomInEntity", categoryPerformance, true, "Makes Entity.class use a faster implementation of random.");
 		replaceRandomInItem = config.getBoolean("replaceRandomInItem", categoryPerformance, true, "Makes Item.class use a faster implementation of random.");
 		replaceRandomInMinecraftServer = config.getBoolean("replaceRandomInMinecraftServer", categoryPerformance, true, "Makes MinecraftServer.class use a faster implementation of random.");
-		replaceRandomInRenderItem = config.getBoolean("replaceRandomInRenderItem", categoryPerformance, true, "Makes RenderItem.class use a faster implementation of random.") && clientSide;
+		replaceRandomInRenderItem = config.getBoolean("replaceRandomInRenderItem", categoryPerformance, true, "Makes RenderItem.class use a faster implementation of random.");
 		replaceRandomInWorld = config.getBoolean("replaceRandomInWorld", categoryPerformance, false, "Makes World.class use a faster implementation of random.\n!This impacts world generation slightly!");
-		replaceRandomInWorldClient = config.getBoolean("replaceRandomInWorldClient", categoryPerformance, true, "Makes WorldClient.class use a faster implementation of random.") && clientSide;
-		skipInitialWorldChunkLoad = config.getBoolean("skipInitialWorldChunkLoad", categoryPerformance, true, "Speeds up initial world loading by not waiting for chunks to preload.") && clientSide;
+		replaceRandomInWorldClient = config.getBoolean("replaceRandomInWorldClient", categoryPerformance, true, "Makes WorldClient.class use a faster implementation of random.");
+		skipInitialWorldChunkLoad = config.getBoolean("skipInitialWorldChunkLoad", categoryPerformance, true, "Speeds up initial world loading by not waiting for chunks to preload.");
 
 		//Tweaks
-		enchantmentParticlesForPowerAboveZero = config.getBoolean("enchantmentParticlesForPowerAboveZero", categoryTweaks, true, "Makes Enchantment Tables emit particles for any block with enchantment power.") && clientSide;
-		farmlandImprovements = config.getBoolean("farmlandImprovements", categoryTweaks, false, "Farmland will no longer get trampled and hydroponic farms will be possible.\nAlso has new side textures for both wet and dry farmland.\nThis will be moved to a seperate mod at some point.");
-		lanPortOverride = config.getBoolean("lanPortOverride", categoryTweaks, false, "Override the port used when opening singleplayer to LAN.") && clientSide;
+		enchantmentParticlesForPowerAboveZero = config.getBoolean("enchantmentParticlesForPowerAboveZero", categoryTweaks, true, "Makes Enchantment Tables emit particles for any block with enchantment power.");
+		farmlandHydroponics = config.getBoolean("farmlandHydroponics", categoryTweaks, false, "Farmland can use hydroponics.");
+		farmlandNewTextures = config.getBoolean("farmlandNewTextures", categoryTweaks, false, "New side textures for both wet and dry farmland.");
+		farmlandNoTrample = config.getBoolean("farmlandNoTrample", categoryTweaks, false, "Farmland will no longer get trampled.");
+		lanPortOverride = config.getBoolean("lanPortOverride", categoryTweaks, false, "Override the port used when opening singleplayer to LAN.");
 		placeEndPortalsAnywhere = config.getBoolean("placeEndPortalsAnywhere", categoryTweaks, false, "Place End Portals outside of the overworld without them getting removed.");
 		placePressurePlatesOnAnyWallOrFence = config.getBoolean("placePressurePlatesOnAnyWallOrFence", categoryTweaks, true, "Place pressure plates on almost any wall or fence.");
 		placeTorchesOnAnyFence = config.getBoolean("placeTorchesOnAnyFence", categoryTweaks, true, "Place torches on almost any fence.");
 		placeTorchesOnAnyWall = config.getBoolean("placeTorchesOnAnyWall", categoryTweaks, true, "Place torches on almost any wall.");
-		potionParticlesAreClearForClientPlayer = config.getBoolean("potionParticlesAreClearForClientPlayer", categoryTweaks, false, "Potion particles coming off of the player entity you control are always clear.") && clientSide;
-		removeEntityDuplicateExtendedPropertiesIdentifierSpam = config.getBoolean("removeEntityDuplicateExtendedPropertiesIdentifierSpam", categoryTweaks, true, "Removes \"An attempt was made to register exended properties using an existing key\" log spam caused by some mods.");
-		
+		potionParticlesAreClearForClientPlayer = config.getBoolean("potionParticlesAreClearForClientPlayer", categoryTweaks, false, "Potion particles coming off of the player entity you control are always clear.");
+		reduceLightningVolume = config.getFloat("reduceLightningVolume", categoryTweaks, 10000f, 2f, 10000f, "Reduces lightning volume and effective range.\nSet to 10,000 to disable.");
+		removeEntityDuplicateExtendedPropertiesIdentifierSpam = config.getBoolean("removeEntityDuplicateExtendedPropertiesIdentifierSpam", categoryTweaks, true, "Removes \"An attempt was made to register extended properties using an existing key\" log spam caused by some mods.");
+		scaledDrowningDamageMaxHealthMult = config.getFloat("scaledDrowningDamageMaxHealthMult", categoryTweaks, 0f, 0f, 1f, "Portion of max player health to remove each drowning tick.\nSet to 0 to disable.");
+		scaledStarvationDamageMaxHealthMult = config.getFloat("scaledStarvationDamageMaxHealthMult", categoryTweaks, 0f, 0f, 1f, "Portion of max player health to remove each starvation tick.\nSet to 0 to disable.");
+		scaledSuffocationDamageMaxHealthMult = config.getFloat("scaledSuffocationDamageMaxHealthMult", categoryTweaks, 0f, 0f, 1f, "Portion of max player health to remove each suffocation tick.\nSet to 0 to disable.");
+
 		lanPortToUseForOverride = config.getInt("lanPortToUseForOverride", categoryTweaks, 25565, 1024 , 49151, "Port to use for lanPortOverride.");
+
+		//Update old config options
 		if(config.hasKey(categoryTweaks, "lanPortToUSeForOverride")) {
-			lanPortToUseForOverride = config.getInt("lanPortToUSeForOverride", categoryTweaks, 25565, 1024 , 49151, "Port to use for lanPortOverride.");
+			lanPortToUseForOverride = config.getInt("lanPortToUSeForOverride", categoryTweaks, 25565, 1024 , 49151, "");
 			config.getCategory(categoryTweaks).get("lanPortToUseForOverride").set(lanPortToUseForOverride);
 			config.getCategory(categoryTweaks).remove("lanPortToUSeForOverride");
+		}
+		if(config.hasKey(categoryBackport, "throwEnderPearlsInCrativeMode")) {
+			throwEnderPearlsInCreativeMode = config.getBoolean("throwEnderPearlsInCrativeMode", categoryBackport, true, "");
+			config.getCategory(categoryBackport).get("throwEnderPearlsInCrativeMode").set(throwEnderPearlsInCreativeMode);
+			config.getCategory(categoryBackport).remove("throwEnderPearlsInCrativeMode");
+		}
+		if(config.hasKey(categoryBugfixes, "fixShearedBlocksDropExtraItems")) {
+			boolean fixShearedBlocksDropExtraItems  = config.getBoolean("fixShearedBlocksDropExtraItems", categoryBackport, true, "");
+			config.getCategory(categoryBugfixes).get("fixShearedGrassDropDupe").set(fixShearedBlocksDropExtraItems);
+			config.getCategory(categoryBugfixes).get("fixShearedLeavesDropDupe").set(fixShearedBlocksDropExtraItems);
+			config.getCategory(categoryBugfixes).remove("fixShearedBlocksDropExtraItems");
+		}
+		if(config.hasKey(categoryTweaks, "farmlandImprovements")) {
+			boolean farmlandImprovements = config.getBoolean("farmlandImprovements", categoryTweaks, false, "");
+			config.getCategory(categoryTweaks).get("farmlandHydroponics").set(farmlandImprovements);
+			config.getCategory(categoryTweaks).get("farmlandNewTextures").set(farmlandImprovements);
+			config.getCategory(categoryTweaks).get("farmlandNoTrample").set(farmlandImprovements);
+			config.getCategory(categoryTweaks).remove("farmlandImprovements");
 		}
 
 		if(config.hasChanged()) {
@@ -233,8 +271,17 @@ public class BugTorchConfig {
 		fixGanysSurfaceOpenTrapdoorBackTexture = config.getBoolean("fixGanysSurfaceOpenTrapdoorBackTexture", categoryBugfixes, true, "Makes Gany's Surface trapdoors use the correct back texture when open.");
 		fixThaumcraftCandleColorArrayOutOfBounds = config.getBoolean("fixThaumcraftCandleColorArrayOutOfBounds", categoryBugfixes, true, "Makes Thaumcraft candles not cause an array out of bounds exception if rendered with metadata greater than 15.");
 		fixWitcheryGarlicGarlandBlockBounds = config.getBoolean("fixWitcheryGarlicGarlandBlockBounds", categoryBugfixes, true, "Makes Witchery Garlic Garlands use correct block bounds on every rotation.");
-		fixWitcheryLeavesShearDupeAndOptifineRendering = config.getBoolean("fixWitcheryLeavesShearDupeAndOptifineRendering", categoryBugfixes, true, "Makes Witchery Leaves respect Optifine render settings and partially fixes a Forge shearing bug.");
+		fixWitcheryLeavesOptifineRendering = config.getBoolean("fixWitcheryLeavesOptifineRendering", categoryBugfixes, true, "Makes Witchery Leaves respect Optifine render settings.");
+		fixWitcheryLeavesShearDupe = config.getBoolean("fixWitcheryLeavesShearDupe", categoryBugfixes, true, "Partially fixes a Forge shearing bug that impacts Witchery Leaves.");
 		reuseAetherIIRenderPlayer = config.getBoolean("reuseAetherIIRenderPlayer", categoryPerformance, true, "Makes Aether II reuse the same player renderer object across frames.");
+
+		//Update old config options
+		if(config.hasKey(categoryBugfixes, "fixWitcheryLeavesShearDupeAndOptifineRendering")) {
+			boolean leafFix = config.getBoolean("fixWitcheryLeavesShearDupeAndOptifineRendering", categoryBugfixes, true, "");
+			config.getCategory(categoryBugfixes).get("fixWitcheryLeavesOptifineRendering").set(leafFix);
+			config.getCategory(categoryBugfixes).get("fixWitcheryLeavesShearDupe").set(leafFix);
+			config.getCategory(categoryBugfixes).remove("fixWitcheryLeavesShearDupeAndOptifineRendering");
+		}
 
 		if(config.hasChanged()) {
 			config.save();
