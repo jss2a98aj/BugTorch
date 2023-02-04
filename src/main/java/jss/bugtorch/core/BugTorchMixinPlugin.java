@@ -8,7 +8,7 @@ import java.util.Set;
 
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
-import org.spongepowered.libraries.org.objectweb.asm.tree.ClassNode;
+import org.spongepowered.asm.lib.tree.ClassNode;
 
 import jss.bugtorch.config.BugTorchConfig;
 import net.minecraft.launchwrapper.Launch;
@@ -256,12 +256,22 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
 		return mixins;
 	}
 
-	@Override
+	//@Override
 	public void preApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
 	}
 
-	@Override
+	//@Override
 	public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
+	}
+
+	@Override
+	public void preApply(String s, org.spongepowered.libraries.org.objectweb.asm.tree.ClassNode classNode, String s1, IMixinInfo iMixinInfo) {
+
+	}
+
+	@Override
+	public void postApply(String s, org.spongepowered.libraries.org.objectweb.asm.tree.ClassNode classNode, String s1, IMixinInfo iMixinInfo) {
+
 	}
 
 	private static boolean loadJar(String jarName, String modName) {
