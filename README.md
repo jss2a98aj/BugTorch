@@ -6,11 +6,11 @@ BugTorch is a mod for Minecraft 1.7.10. It mostly fixes bugs. The name was picke
 
 One and only one of the following:
 
+[UniMixins](https://github.com/LegacyModdingMC/UniMixins) (highly suggested)
+
 [GTNH Mixins](https://github.com/GTNewHorizons/GTNHMixins) with [MixingASM](https://github.com/makamys/Mixingasm)
 
-[GasStation](https://github.com/FalsePattern/GasStation) (includes MixingASM)
-
-A Mixins provider with [SpongeMixins](https://github.com/GTNewHorizons/SpongeMixins)'s jar loader and [MixingASM](https://github.com/makamys/Mixingasm) functionality.
+[GasStation](https://github.com/FalsePattern/GasStation)
 
 ## What it does
 
