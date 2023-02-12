@@ -8,10 +8,10 @@ import java.util.Set;
 
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
-import org.spongepowered.asm.lib.tree.ClassNode;
 
 import jss.bugtorch.config.BugTorchConfig;
 import net.minecraft.launchwrapper.Launch;
+import org.spongepowered.libraries.org.objectweb.asm.tree.ClassNode;
 import ru.timeconqueror.spongemixins.MinecraftURLClassPath;
 
 public class BugTorchMixinPlugin implements IMixinConfigPlugin {
@@ -258,19 +258,11 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
 
 	//@Override
 	public void preApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
+
 	}
 
 	//@Override
 	public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
-	}
-
-	@Override
-	public void preApply(String s, org.spongepowered.libraries.org.objectweb.asm.tree.ClassNode classNode, String s1, IMixinInfo iMixinInfo) {
-
-	}
-
-	@Override
-	public void postApply(String s, org.spongepowered.libraries.org.objectweb.asm.tree.ClassNode classNode, String s1, IMixinInfo iMixinInfo) {
 
 	}
 
@@ -282,7 +274,7 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
 				return false;
 			}
 
-			BugTorchCore.logger.info("Attempting to add " + jar.toString() + " to the URL Class Path");
+			BugTorchCore.logger.info("Attempting to add " + jar + " to the URL Class Path");
 			if(!jar.exists())
 				throw new FileNotFoundException(jar.toString());
 			MinecraftURLClassPath.addJar(jar);
