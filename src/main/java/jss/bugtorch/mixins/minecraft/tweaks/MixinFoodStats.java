@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-@Mixin(value = FoodStats.class)
+@Mixin(value = FoodStats.class, priority = 1010)
 public abstract class MixinFoodStats {
 
     /**
