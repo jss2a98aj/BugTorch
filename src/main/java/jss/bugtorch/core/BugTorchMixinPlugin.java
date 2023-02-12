@@ -256,12 +256,12 @@ public class BugTorchMixinPlugin implements IMixinConfigPlugin {
 		return mixins;
 	}
 
-	//@Override
+	@Override
 	public void preApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
 
 	}
 
-	//@Override
+	@Override
 	public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
 
 	}
