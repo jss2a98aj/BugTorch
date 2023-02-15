@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import java.util.List;
 
 @Mixin(value = WebUtils.class, remap = false)
-public class MixinWebUtils {
+public abstract class MixinWebUtils {
 
 
     /**
