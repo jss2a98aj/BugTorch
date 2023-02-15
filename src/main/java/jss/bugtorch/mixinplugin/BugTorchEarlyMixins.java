@@ -38,6 +38,7 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
             BugTorchConfig.fixEnchantmentBlendFunc = false;
             BugTorchConfig.fixParticleDepthSorting = false;
             BugTorchConfig.replaceRandomInWorldClient = false;
+            BugTorchConfig.enchantmentParticlesForPowerAboveZero = false;
         }
 
         //Backports
