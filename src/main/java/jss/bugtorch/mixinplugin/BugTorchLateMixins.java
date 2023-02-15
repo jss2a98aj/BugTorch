@@ -5,7 +5,6 @@ import com.gtnewhorizon.gtnhmixins.LateMixin;
 import cpw.mods.fml.relauncher.FMLLaunchHandler;
 import jss.bugtorch.BugTorch;
 import jss.bugtorch.config.BugTorchConfig;
-import net.minecraft.launchwrapper.Launch;
 
 import java.util.ArrayList;
 import java.util.List;
