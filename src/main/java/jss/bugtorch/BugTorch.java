@@ -1,9 +1,10 @@
-package jss.bugtorch.core;
+package jss.bugtorch;
 
 import java.io.File;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import jss.bugtorch.modsupport.VanillaSupport;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,17 +17,17 @@ import jss.bugtorch.modsupport.VillageNamesSupport;
 import jss.bugtorch.modsupport.WitcherySupport;
 
 @Mod(
-		modid = BugTorchCore.MODID,
-		name = BugTorchCore.NAME,
-		version = Tags.VERSION,
+		modid = BugTorch.MODID,
+		name = BugTorch.NAME,
+		version = BugTorch.VERSION,
 		acceptableRemoteVersions = "*",
-		dependencies = "required-after:spongemixins@[1.3.0,);after:Thaumcraft;after:temperateplants;after:VillageNames;after:witchery;"
+		dependencies = "after:Thaumcraft;after:temperateplants;after:VillageNames;after:witchery;"
 	)
-public class BugTorchCore {
+public class BugTorch {
 
 	public static final String MODID = "bugtorch";
 	public static final String NAME = "BugTorch";
-
+	public static final String VERSION = "GRADLETOKEN_VERSION";
 	public static final Logger logger = LogManager.getLogger(MODID);
 
 	@Mod.EventHandler

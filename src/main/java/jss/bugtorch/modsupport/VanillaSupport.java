@@ -1,4 +1,4 @@
-package jss.bugtorch.core;
+package jss.bugtorch.modsupport;
 
 import jss.bugtorch.config.BugTorchConfig;
 import net.minecraft.block.BlockTrapDoor;

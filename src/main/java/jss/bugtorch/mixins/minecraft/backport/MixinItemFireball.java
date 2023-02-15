@@ -3,7 +3,7 @@ package jss.bugtorch.mixins.minecraft.backport;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
-import jss.bugtorch.core.BugTorchCore;
+import jss.bugtorch.BugTorch;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -49,7 +49,7 @@ public abstract class MixinItemFireball extends Item {
 				return false;
 			} else {
 				if (world.getBlock(x, y, z).getMaterial() == Material.air) {
-					world.playSoundEffect((double)x + 0.5D, (double)y + 0.5D, (double)z + 0.5D, BugTorchCore.MODID + ":item.fireCharge.use", 1.0F, (itemRand.nextFloat() - itemRand.nextFloat()) * 0.2F + 1.0F);
+					world.playSoundEffect((double)x + 0.5D, (double)y + 0.5D, (double)z + 0.5D, BugTorch.MODID + ":item.fireCharge.use", 1.0F, (itemRand.nextFloat() - itemRand.nextFloat()) * 0.2F + 1.0F);
 					world.setBlock(x, y, z, Blocks.fire);
 				}
 
