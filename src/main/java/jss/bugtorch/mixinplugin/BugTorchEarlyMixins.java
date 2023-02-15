@@ -32,6 +32,14 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
         boolean client = FMLLaunchHandler.side().isClient();
         List<String> mixins = new ArrayList<>();
 
+        if(loadedCoreMods.contains("jss.notfine.mixinplugin.NotFineEarlyMixins")) {
+            BugTorch.logger.info("NotFine detected, skipping redundant mixins.");
+
+            BugTorchConfig.fixEnchantmentBlendFunc = false;
+            BugTorchConfig.fixParticleDepthSorting = false;
+            BugTorchConfig.replaceRandomInWorldClient = false;
+        }
+
         //Backports
         if(BugTorchConfig.cobwebsCanBeSheared) {
             mixins.add("minecraft.backport.MixinBlockWeb");
@@ -66,7 +74,6 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
         if(client && BugTorchConfig.fixParticleDepthSorting) {
             mixins.add("minecraft.rendering.MixinEffectRenderer");
         }
-        //mixins.add("minecraft.rendering.MixinEffectRenderer");
         if(BugTorchConfig.fixPumpkinPlacementCheck) {
             mixins.add("minecraft.placement.MixinBlockPumpkin");
         }
