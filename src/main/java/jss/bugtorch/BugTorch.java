@@ -28,7 +28,7 @@ public class BugTorch {
 	public static final String MODID = "bugtorch";
 	public static final String NAME = "BugTorch";
 	public static final String VERSION = "GRADLETOKEN_VERSION";
-	public static final Logger logger = LogManager.getLogger(MODID);
+	public static final Logger logger = LogManager.getLogger(NAME);
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
