@@ -99,6 +99,9 @@ public class BugTorchConfig {
 	public static boolean fixWitcheryLeavesShearDupe;
 	public static boolean reuseAetherIIRenderPlayer;
 
+	//Mixin mod tweaks
+	public static boolean proxyLLibraryPasebin;
+
 	//Category names
 	static final String categoryBackport = "backported features";
 	static final String categoryBugfixes = "bug fixes";
@@ -253,6 +256,9 @@ public class BugTorchConfig {
 		fixWitcheryLeavesOptifineRendering = config.getBoolean("fixWitcheryLeavesOptifineRendering", categoryBugfixes, true, "Makes Witchery Leaves respect Optifine render settings.");
 		fixWitcheryLeavesShearDupe = config.getBoolean("fixWitcheryLeavesShearDupe", categoryBugfixes, true, "Partially fixes a Forge shearing bug that impacts Witchery Leaves.");
 		reuseAetherIIRenderPlayer = config.getBoolean("reuseAetherIIRenderPlayer", categoryPerformance, true, "Makes Aether II reuse the same player renderer object across frames.");
+
+		//Tweaks
+		proxyLLibraryPasebin = config.getBoolean("proxyLLibraryPasebin", categoryTweaks, false, "Use a pastebin proxy to keep LLibrary from crashing with some regional blocks.");
 
 		//Update old config options
 		if(config.hasKey(categoryBugfixes, "fixWitcheryLeavesShearDupeAndOptifineRendering")) {

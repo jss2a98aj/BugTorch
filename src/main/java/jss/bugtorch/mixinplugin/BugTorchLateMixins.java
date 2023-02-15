@@ -24,6 +24,9 @@ public class BugTorchLateMixins implements ILateMixinLoader {
         if(!loadedMods.contains("ganyssurface")) {
             BugTorchConfig.fixGanysSurfaceOpenTrapdoorBackTexture = false;
         }
+        if(!loadedMods.contains("llibrary")) {
+            BugTorchConfig.proxyLLibraryPasebin = false;
+        }
         if(!loadedMods.contains("Thaumcraft")) {
             BugTorchConfig.fixThaumcraftCandleColorArrayOutOfBounds = false;
         }
@@ -61,6 +64,11 @@ public class BugTorchLateMixins implements ILateMixinLoader {
         }
         if(client && BugTorchConfig.reuseAetherIIRenderPlayer) {
             mixins.add("aetherii.optimization.MixinClientEventHandler");
+        }
+
+        //Mod tweaks
+        if(BugTorchConfig.proxyLLibraryPasebin) {
+            mixins.add("llibrary.fix.MixinWebUtils");
         }
 
         return mixins;

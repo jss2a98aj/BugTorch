@@ -17,4 +17,5 @@ dependencies {
     compile deobfCurse("aether-ii-223796:2273367")
     compile deobfCurse("pams-temperate-plants-221916:2206430")
     compile deobfCurse("village-names-259230:4328516")
+    compile deobfCurse("llibrary-243298:2319767")
 }
