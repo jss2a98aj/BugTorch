@@ -1,0 +1,19 @@
+package jss.bugtorch.mixins.early.minecraft.optimization;
+
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
+
+import net.minecraft.server.MinecraftServer;
+
+@Mixin(value = MinecraftServer.class)
+public abstract class MixinMinecraftServer {
+
+	/**
+	 * @author jss2a98aj
+	 * @reason Makes initial world loading faster.
+	 */
+	@Overwrite()
+	public void initialWorldChunkLoad() {
+	}
+
+}

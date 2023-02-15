@@ -2,11 +2,10 @@ package jss.bugtorch.config;
 
 import java.io.File;
 
+import cpw.mods.fml.relauncher.FMLLaunchHandler;
 import net.minecraftforge.common.config.Configuration;
 
 public class BugTorchConfig {
-
-	public static boolean clientSide = true;
 
 	//Base backports
 	public static boolean enableFloatingTrapDoors;
@@ -93,12 +92,6 @@ public class BugTorchConfig {
 	public static float scaledStarvationDamageMaxHealthMult;
 	public static float scaledSuffocationDamageMaxHealthMult;
 
-	//Mixin mod names
-	public static String ganysSurfaceJarName;
-	public static String thaumcraftJarName;
-	public static String witcheryJarName;
-	public static String aetherIIJarName;
-
 	//Mixin mod bugfixes
 	public static boolean fixGanysSurfaceOpenTrapdoorBackTexture;
 	public static boolean fixThaumcraftCandleColorArrayOutOfBounds;
@@ -110,7 +103,6 @@ public class BugTorchConfig {
 	//Category names
 	static final String categoryBackport = "backported features";
 	static final String categoryBugfixes = "bug fixes";
-	static final String categoryModNames = "mod file names";
 	static final String categoryOreDictionary = "ore dictionary";
 	static final String categoryPerformance = "performance improvements";
 	static final String categoryTweaks = "tweaks";
@@ -158,12 +150,6 @@ public class BugTorchConfig {
 	public static void loadBaseMixinConfig(File configFile) {
 
 		Configuration config = new Configuration(configFile);
-
-		try {
-			Class.forName("net.minecraft.client.gui.FontRenderer", false, config.getClass().getClassLoader());
-		} catch (ClassNotFoundException e) {
-			clientSide = false;
-		}
 
 		//Backports
 		cobwebsCanBeSheared = config.getBoolean("cobwebsCanBeSheared", categoryBackport, true, "Cobwebs can be collected with Shears without Silk Touch.\nFrom MC 1.9, fixes MC-93001");
@@ -261,12 +247,6 @@ public class BugTorchConfig {
 	public static void loadModdedMixinConfig(File configFile) {
 		Configuration config = new Configuration(configFile);
 
-		//Mod file names
-		ganysSurfaceJarName = config.getString("ganysSurfaceJarName", categoryModNames, "Ganys+Surface", "The partial file name associated with Gany's Surface.\n!This can break things if the wrong name is used!\nSet to 'd' to disable all mixins for Gany's Surface.");
-		thaumcraftJarName = config.getString("thaumcraftJarName", categoryModNames, "Thaumcraft-1.7.10", "The partial file name associated with Thaumcraft.\n!This can break things if the wrong name is used!\nSet to 'd' to disable all mixins for Thaumcraft.");
-		witcheryJarName = config.getString("witcheryJarName", categoryModNames, "witchery-1.7.10", "The partial file name associated with Witchery.\n!This can break things if the wrong name is used!\nSet to 'd' to disable all mixins for Witchery.");
-		aetherIIJarName = config.getString("aetherIIJarName", categoryModNames, "aether-1.7.10-1.", "The partial file name associated with The Aether II.\n!This can break things if the wrong name is used!\nSet to 'd' to disable all mixins for The Aether II.");
-
 		//Bugfixes
 		fixGanysSurfaceOpenTrapdoorBackTexture = config.getBoolean("fixGanysSurfaceOpenTrapdoorBackTexture", categoryBugfixes, true, "Makes Gany's Surface trapdoors use the correct back texture when open.");
 		fixThaumcraftCandleColorArrayOutOfBounds = config.getBoolean("fixThaumcraftCandleColorArrayOutOfBounds", categoryBugfixes, true, "Makes Thaumcraft candles not cause an array out of bounds exception if rendered with metadata greater than 15.");
@@ -281,6 +261,9 @@ public class BugTorchConfig {
 			config.getCategory(categoryBugfixes).get("fixWitcheryLeavesOptifineRendering").set(leafFix);
 			config.getCategory(categoryBugfixes).get("fixWitcheryLeavesShearDupe").set(leafFix);
 			config.getCategory(categoryBugfixes).remove("fixWitcheryLeavesShearDupeAndOptifineRendering");
+		}
+		if(config.hasCategory("mod file names")) {
+			config.removeCategory(config.getCategory("mod file names"));
 		}
 
 		if(config.hasChanged()) {
