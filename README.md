@@ -10,7 +10,7 @@ One and only one of the following:
 
 [GTNH Mixins](https://github.com/GTNewHorizons/GTNHMixins) with [MixingASM](https://github.com/makamys/Mixingasm)
 
-[GasStation](https://github.com/FalsePattern/GasStation)
+[GasStation](https://github.com/FalsePattern/GasStation) with [UniMixins'](https://github.com/makamys/Mixingasm) unimixins-gtnhmixins module.
 
 ## What it does
 
