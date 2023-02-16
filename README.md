@@ -8,7 +8,7 @@ One and only one of the following:
 
 [UniMixins](https://github.com/LegacyModdingMC/UniMixins) (highly suggested)
 
-[GTNH Mixins](https://github.com/GTNewHorizons/GTNHMixins) with [MixingASM](https://github.com/makamys/Mixingasm)
+[GTNH Mixins](https://github.com/GTNewHorizons/GTNHMixins) with [Mixingasm](https://github.com/makamys/Mixingasm)
 
 [GasStation](https://github.com/FalsePattern/GasStation) with [UniMixins'](https://github.com/makamys/Mixingasm) unimixins-gtnhmixins module.
 
