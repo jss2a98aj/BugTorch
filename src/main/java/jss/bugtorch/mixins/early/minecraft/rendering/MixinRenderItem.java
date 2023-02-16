@@ -29,31 +29,33 @@ public abstract class MixinRenderItem {
 
         OpenGlHelper.glBlendFunc(772, 1, 0, 0);
 
-        for (int layer = 0; layer < 2; ++layer) {
-        	final int timeUVDenominator = 3000 + layer * 1873;
+        OpenGlHelper.glBlendFunc(772, 1, 0, 0/*1*/);
+
+        //for(int layer = 0; layer < 2; ++layer) {
+            final int timeUVDenominator = 3000 /*+ layer * 1873*/;
             final float timeUVNoise = (float)(time % (long)timeUVDenominator) / (float)timeUVDenominator * 256F;
 
             tessellator.startDrawingQuads();
             tessellator.addVertexWithUV(
-            	(double)posX, (double)(posY + height), (double)zLevel,
-            	(double)((timeUVNoise + (float)height * layerUVNoise) * timeUVSpeed), (double)((float)height * timeUVSpeed)
+                 posX, (posY + height), zLevel,
+                 ((timeUVNoise + (float)height * layerUVNoise) * timeUVSpeed), ((float)height * timeUVSpeed)
             );
             tessellator.addVertexWithUV(
-            	(double)(posX + width), (double)(posY + height), (double)zLevel,
-            	(double)((timeUVNoise + (float)width + (float)height * layerUVNoise) * timeUVSpeed), (double)((float)height * timeUVSpeed)
+                (posX + width), (posY + height), zLevel,
+                ((timeUVNoise + (float)width + (float)height * layerUVNoise) * timeUVSpeed), ((float)height * timeUVSpeed)
             );
             tessellator.addVertexWithUV(
-            	(double)(posX + width), (double)posY, (double)zLevel,
-            	(double)((timeUVNoise + (float)width) * timeUVSpeed), 0D
+                 (posX + width), posY, zLevel,
+                 ((timeUVNoise + (float)width) * timeUVSpeed), 0D
             );
             tessellator.addVertexWithUV(
-            	(double)posX, (double)posY, (double)zLevel,
-            	(double)(timeUVNoise * timeUVSpeed), 0D
+                 posX, posY, zLevel,
+                 (timeUVNoise * timeUVSpeed), 0D
             );
             tessellator.draw();
 
-            layerUVNoise = -1.0F;
-        }
+        //layerUVNoise = -1.0F;
+        //}
 
         OpenGlHelper.glBlendFunc(770, 771, 1, 0);
     }
