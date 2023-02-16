@@ -62,6 +62,8 @@ public class BugTorchConfig {
 	public static boolean fasterDroppedItemStackingChecks;
 	public static boolean fasterEntityLivingBaseIsPotionActiveAndSetAir;
 	public static boolean fasterGetBlockByIdForAirBlocks;
+	public static boolean fasterOptionInteractions;
+	public static boolean fasterOptionLoading;
 	public static boolean fasterSnowBlockTicks;
 	public static boolean moreAccurateLayeredSnowFaceCulling;
 	public static boolean replaceRandomInEffectRenderer;
@@ -100,7 +102,7 @@ public class BugTorchConfig {
 	public static boolean reuseAetherIIRenderPlayer;
 
 	//Mixin mod tweaks
-	public static boolean proxyLLibraryPasebin;
+	public static boolean proxyLLibraryPastebin;
 
 	//Category names
 	static final String categoryBackport = "backported features";
@@ -186,6 +188,10 @@ public class BugTorchConfig {
 		fasterDroppedItemStackingChecks = config.getBoolean("fasterDroppedItemStackingChecks", categoryPerformance, true, "Dropped item nearby stack checks are faster for full stacks.");
 		fasterEntityLivingBaseIsPotionActiveAndSetAir = config.getBoolean("fasterEntityLivingBaseIsPotionActiveAndSetAir", categoryPerformance, true, "isPotionActive returns immediately if there are no active potions.\nsetAir only updates its datawatcher when needed.");
 		fasterGetBlockByIdForAirBlocks = config.getBoolean("fasterGetBlockByIdForAirBlocks", categoryPerformance, true, "When something gets air blocks from ID it will return faster.");
+
+		fasterOptionInteractions = config.getBoolean("fasterOptionInteractions", categoryPerformance, true, "Makes several functions used by option buttons faster.");
+		fasterOptionLoading = config.getBoolean("fasterOptionLoading", categoryPerformance, false, "Makes the function that reads options.txt much faster.");
+
 		moreAccurateLayeredSnowFaceCulling = config.getBoolean("moreAccurateLayeredSnowFaceCulling", categoryPerformance, true, "The faces of layered snow get culled more accurately when chunk meshes are created.");
 		fasterSnowBlockTicks = config.getBoolean("fasterSnowBlockTicks", categoryPerformance, true, "Non-layered snow block ticking is faster.");
 		replaceRandomInEffectRenderer = config.getBoolean("replaceRandomInEffectRenderer", categoryPerformance, true, "Makes EffectRenderer.class use a faster implementation of random.");
@@ -258,7 +264,7 @@ public class BugTorchConfig {
 		reuseAetherIIRenderPlayer = config.getBoolean("reuseAetherIIRenderPlayer", categoryPerformance, true, "Makes Aether II reuse the same player renderer object across frames.");
 
 		//Tweaks
-		proxyLLibraryPasebin = config.getBoolean("proxyLLibraryPasebin", categoryTweaks, false, "Use a pastebin proxy to keep LLibrary from crashing with some regional blocks.");
+		proxyLLibraryPastebin = config.getBoolean("proxyLLibraryPastebin", categoryTweaks, false, "Use a pastebin proxy to keep LLibrary from crashing with some regional blocks.");
 
 		//Update old config options
 		if(config.hasKey(categoryBugfixes, "fixWitcheryLeavesShearDupeAndOptifineRendering")) {
@@ -266,6 +272,11 @@ public class BugTorchConfig {
 			config.getCategory(categoryBugfixes).get("fixWitcheryLeavesOptifineRendering").set(leafFix);
 			config.getCategory(categoryBugfixes).get("fixWitcheryLeavesShearDupe").set(leafFix);
 			config.getCategory(categoryBugfixes).remove("fixWitcheryLeavesShearDupeAndOptifineRendering");
+		}
+		if(config.hasKey(categoryTweaks, "proxyLLibraryPasebin")) {
+			proxyLLibraryPastebin = config.getBoolean("proxyLLibraryPasebin", categoryTweaks, true, "");
+			config.getCategory(categoryTweaks).get("proxyLLibraryPastebin").set(proxyLLibraryPastebin);
+			config.getCategory(categoryTweaks).remove("proxyLLibraryPasebin");
 		}
 		if(config.hasCategory("mod file names")) {
 			config.removeCategory(config.getCategory("mod file names"));

@@ -32,13 +32,10 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
         boolean client = FMLLaunchHandler.side().isClient();
         List<String> mixins = new ArrayList<>();
 
+        boolean useNotFineOverlap = true;
         if(loadedCoreMods.contains("jss.notfine.mixinplugin.NotFineEarlyMixins")) {
-            BugTorch.logger.info("NotFine detected, skipping redundant mixins.");
-
-            BugTorchConfig.fixEnchantmentBlendFunc = false;
-            BugTorchConfig.fixParticleDepthSorting = false;
-            BugTorchConfig.replaceRandomInWorldClient = false;
-            BugTorchConfig.enchantmentParticlesForPowerAboveZero = false;
+            BugTorch.logger.info("NotFine detected, skipping redundant early mixins.");
+            useNotFineOverlap = false;
         }
 
         //Backports
@@ -56,7 +53,7 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
         }
 
         //Bugfixes
-        if(client && BugTorchConfig.fixEnchantmentBlendFunc) {
+        if(client && useNotFineOverlap && BugTorchConfig.fixEnchantmentBlendFunc) {
             mixins.add("minecraft.rendering.MixinRenderItem");
         }
         if(client && BugTorchConfig.fixFireChargeUseSound) {
@@ -72,7 +69,7 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
         if(BugTorchConfig.fixNettyConnectionFailureResourceLeak) {
             mixins.add("minecraft.logcleanup.MixinNioSocketChannel");
         }
-        if(client && BugTorchConfig.fixParticleDepthSorting) {
+        if(client && useNotFineOverlap && BugTorchConfig.fixParticleDepthSorting) {
             mixins.add("minecraft.rendering.MixinEffectRenderer");
         }
         if(BugTorchConfig.fixPumpkinPlacementCheck) {
@@ -129,6 +126,15 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
         if(BugTorchConfig.fasterGetBlockByIdForAirBlocks) {
             mixins.add("minecraft.optimization.MixinBlock");
         }
+        if(BugTorchConfig.fasterOptionInteractions) {
+            if(useNotFineOverlap) {
+                mixins.add("minecraft.optimization.gamesettings.MixinFasterSetOptions");
+            }
+            mixins.add("minecraft.optimization.MixinGameSettings_Options");
+        }
+        if(BugTorchConfig.fasterOptionLoading) {
+            mixins.add("minecraft.optimization.gamesettings.MixinFasterLoadOptions");
+        }
         if(BugTorchConfig.fasterSnowBlockTicks) {
             mixins.add("minecraft.optimization.MixinBlockSnowBlock");
         }
@@ -154,7 +160,7 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
             BugTorch.logger.info("World.class will use a faster Random implementation, this impacts world generation slightly.");
             mixins.add("minecraft.fastrandom.MixinWorld");
         }
-        if(client && BugTorchConfig.replaceRandomInWorldClient) {
+        if(client && useNotFineOverlap && BugTorchConfig.replaceRandomInWorldClient) {
             mixins.add("minecraft.fastrandom.MixinWorldClient");
         }
         if(client && BugTorchConfig.skipInitialWorldChunkLoad) {
@@ -162,7 +168,7 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
         }
 
         //Tweaks
-        if(client && BugTorchConfig.enchantmentParticlesForPowerAboveZero) {
+        if(client && useNotFineOverlap && BugTorchConfig.enchantmentParticlesForPowerAboveZero) {
             mixins.add("minecraft.rendering.MixinBlockEnchantmentTable");
         }
         if(BugTorchConfig.farmlandHydroponics) {

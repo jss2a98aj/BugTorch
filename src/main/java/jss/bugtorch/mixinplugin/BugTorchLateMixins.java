@@ -25,7 +25,7 @@ public class BugTorchLateMixins implements ILateMixinLoader {
             BugTorchConfig.fixGanysSurfaceOpenTrapdoorBackTexture = false;
         }
         if(!loadedMods.contains("llibrary")) {
-            BugTorchConfig.proxyLLibraryPasebin = false;
+            BugTorchConfig.proxyLLibraryPastebin = false;
         }
         if(!loadedMods.contains("Thaumcraft")) {
             BugTorchConfig.fixThaumcraftCandleColorArrayOutOfBounds = false;
@@ -67,7 +67,7 @@ public class BugTorchLateMixins implements ILateMixinLoader {
         }
 
         //Mod tweaks
-        if(BugTorchConfig.proxyLLibraryPasebin) {
+        if(BugTorchConfig.proxyLLibraryPastebin) {
             mixins.add("llibrary.fix.MixinWebUtils");
         }
 
