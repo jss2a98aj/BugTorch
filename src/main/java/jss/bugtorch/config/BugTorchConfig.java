@@ -89,9 +89,16 @@ public class BugTorchConfig {
 	public static boolean potionParticlesAreClearForClientPlayer;
 	public static float reduceLightningVolume;
 	public static boolean removeEntityDuplicateExtendedPropertiesIdentifierSpam;
+	public static float scaledDrowningDamageMaxHealthFlat;
 	public static float scaledDrowningDamageMaxHealthMult;
+	public static float scaledPoisonDamageMaxHealthFlat;
+	public static float scaledPoisonDamageMaxHealthMult;
+	public static float scaledStarvationDamageMaxHealthFlat;
 	public static float scaledStarvationDamageMaxHealthMult;
+	public static float scaledSuffocationDamageMaxHealthFlat;
 	public static float scaledSuffocationDamageMaxHealthMult;
+	public static float scaledWitherDamageMaxHealthFlat;
+	public static float scaledWitherDamageMaxHealthMult;
 
 	//Mixin mod bugfixes
 	public static boolean fixGanysSurfaceOpenTrapdoorBackTexture;
@@ -216,9 +223,16 @@ public class BugTorchConfig {
 		potionParticlesAreClearForClientPlayer = config.getBoolean("potionParticlesAreClearForClientPlayer", categoryTweaks, false, "Potion particles coming off of the player entity you control are always clear.");
 		reduceLightningVolume = config.getFloat("reduceLightningVolume", categoryTweaks, 10000f, 2f, 10000f, "Reduces lightning volume and effective range.\nSet to 10,000 to disable.");
 		removeEntityDuplicateExtendedPropertiesIdentifierSpam = config.getBoolean("removeEntityDuplicateExtendedPropertiesIdentifierSpam", categoryTweaks, true, "Removes \"An attempt was made to register extended properties using an existing key\" log spam caused by some mods.");
+		scaledDrowningDamageMaxHealthFlat = config.getFloat("scaledDrowningDamageMaxHealthFlat", categoryTweaks, 0f, 0f, 20000f, "Amount of flat player health to remove each drowning tick.\nSet to 0 to disable.");
 		scaledDrowningDamageMaxHealthMult = config.getFloat("scaledDrowningDamageMaxHealthMult", categoryTweaks, 0f, 0f, 1f, "Portion of max player health to remove each drowning tick.\nSet to 0 to disable.");
+		scaledPoisonDamageMaxHealthFlat = config.getFloat("scaledPoisonDamageMaxHealthFlat", categoryTweaks, 0f, 0f, 20000f, "Portion of max player health to remove each poison effect tick.\nSet to 0 to disable.");
+		scaledPoisonDamageMaxHealthMult = config.getFloat("scaledPoisonDamageMaxHealthMult", categoryTweaks, 0f, 0f, 1f, "Portion of max player health to remove each poison effect tick.\nSet to 0 to disable.");
+		scaledStarvationDamageMaxHealthFlat = config.getFloat("scaledStarvationDamageMaxHealthFlat", categoryTweaks, 0f, 0f, 20000f, "Amount of flat player health to remove each starvation tick.\nSet to 0 to disable.");
 		scaledStarvationDamageMaxHealthMult = config.getFloat("scaledStarvationDamageMaxHealthMult", categoryTweaks, 0f, 0f, 1f, "Portion of max player health to remove each starvation tick.\nSet to 0 to disable.");
+		scaledSuffocationDamageMaxHealthFlat = config.getFloat("scaledSuffocationDamageMaxHealthFlat", categoryTweaks, 0f, 0f, 20000f, "Portion of max player health to remove each suffocation tick.\nSet to 0 to disable.");
 		scaledSuffocationDamageMaxHealthMult = config.getFloat("scaledSuffocationDamageMaxHealthMult", categoryTweaks, 0f, 0f, 1f, "Portion of max player health to remove each suffocation tick.\nSet to 0 to disable.");
+		scaledWitherDamageMaxHealthFlat = config.getFloat("scaledWitherDamageMaxHealthFlat", categoryTweaks, 0f, 0f, 20000f, "Portion of max player health to remove each wither effect tick.\nSet to 0 to disable.");
+		scaledWitherDamageMaxHealthMult = config.getFloat("scaledWitherDamageMaxHealthMult", categoryTweaks, 0f, 0f, 1f, "Portion of max player health to remove each wither effect tick.\nSet to 0 to disable.");
 
 		lanPortToUseForOverride = config.getInt("lanPortToUseForOverride", categoryTweaks, 25565, 1024 , 49151, "Port to use for lanPortOverride.");
 

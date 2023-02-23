@@ -1,34 +1,34 @@
-package jss.bugtorch.mixins.early.minecraft.tweaks.entitylivingbase;
+package jss.bugtorch.mixins.early.minecraft.tweaks.potion;
 
 import jss.bugtorch.config.BugTorchConfig;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-@Mixin(value = EntityLivingBase.class)
-public abstract class MixinScalingDrowningDamage {
+@Mixin(value = Potion.class)
+public class MixinsPotionWither {
 
     /**
      * @author jss2a98aj
-     * @reason Makes drowning damage scale with max health on players.
+     * @reason Makes wither effect damage scale with max health.
      */
     @Redirect(
-            method = "onEntityUpdate",
+            method = "performEffect",
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/entity/EntityLivingBase;attackEntityFrom(Lnet/minecraft/util/DamageSource;F)Z",
                     ordinal = 1
             )
     )
-    private boolean bugTorch$scalingDrowningDamage(EntityLivingBase entity, DamageSource source, float damage) {
+    private boolean bugTorch$scalingWitherEffectDamage(EntityLivingBase entity, DamageSource source, float damage) {
         return entity.attackEntityFrom(source,
                 (entity instanceof EntityPlayer)
-                        ? BugTorchConfig.scaledDrowningDamageMaxHealthMult * entity.getMaxHealth() + BugTorchConfig.scaledDrowningDamageMaxHealthFlat
-                        : damage
-        );
+                        ? BugTorchConfig.scaledWitherDamageMaxHealthMult * entity.getMaxHealth() + BugTorchConfig.scaledWitherDamageMaxHealthFlat
+                        : damage);
     }
 
 }

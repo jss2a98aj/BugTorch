@@ -23,9 +23,12 @@ public abstract class MixinFoodStats {
                     target = "Lnet/minecraft/entity/player/EntityPlayer;attackEntityFrom(Lnet/minecraft/util/DamageSource;F)Z"
             )
     )
-    private boolean starvationDamage(EntityPlayer player, DamageSource source, float damage) {
+    private boolean bugTorch$scalingStarvationDamage(EntityPlayer player, DamageSource source, float damage) {
         float survivalThreshold = player.worldObj.difficultySetting == EnumDifficulty.HARD ? 0f : 1f;
-        return player.attackEntityFrom(source, Math.min(player.getHealth() - survivalThreshold, BugTorchConfig.scaledStarvationDamageMaxHealthMult * player.getMaxHealth()));
+        return player.attackEntityFrom(source, Math.min(
+                BugTorchConfig.scaledStarvationDamageMaxHealthMult * player.getMaxHealth() + BugTorchConfig.scaledStarvationDamageMaxHealthFlat,
+                player.getHealth() - survivalThreshold
+        ));
     }
 
 }

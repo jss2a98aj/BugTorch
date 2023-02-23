@@ -204,14 +204,20 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
         if(BugTorchConfig.removeEntityDuplicateExtendedPropertiesIdentifierSpam) {
             mixins.add("minecraft.logcleanup.MixinEntity");
         }
-        if(BugTorchConfig.scaledDrowningDamageMaxHealthMult > 0f) {
+        if(BugTorchConfig.scaledDrowningDamageMaxHealthFlat > 0f || BugTorchConfig.scaledDrowningDamageMaxHealthMult > 0f) {
             mixins.add("minecraft.tweaks.entitylivingbase.MixinScalingDrowningDamage");
         }
-        if(BugTorchConfig.scaledStarvationDamageMaxHealthMult > 0f) {
+        if(BugTorchConfig.scaledStarvationDamageMaxHealthFlat > 0f || BugTorchConfig.scaledStarvationDamageMaxHealthMult > 0f) {
             mixins.add("minecraft.tweaks.MixinFoodStats");
         }
-        if(BugTorchConfig.scaledDrowningDamageMaxHealthMult > 0f) {
+        if(BugTorchConfig.scaledDrowningDamageMaxHealthFlat > 0f || BugTorchConfig.scaledDrowningDamageMaxHealthMult > 0f) {
             mixins.add("minecraft.tweaks.entitylivingbase.MixinScalingSuffocationDamage");
+        }
+        if(BugTorchConfig.scaledPoisonDamageMaxHealthFlat > 0f || BugTorchConfig.scaledPoisonDamageMaxHealthMult > 0f) {
+            mixins.add("minecraft.tweaks.potion.MixinsPotionPoison");
+        }
+        if(BugTorchConfig.scaledWitherDamageMaxHealthFlat > 0f || BugTorchConfig.scaledWitherDamageMaxHealthMult > 0f) {
+            mixins.add("minecraft.tweaks.potion.MixinsPotionWither");
         }
 
         return mixins;
