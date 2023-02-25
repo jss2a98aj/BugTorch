@@ -196,7 +196,7 @@ public class BugTorchConfig {
 		fasterEntityLivingBaseIsPotionActiveAndSetAir = config.getBoolean("fasterEntityLivingBaseIsPotionActiveAndSetAir", categoryPerformance, true, "isPotionActive returns immediately if there are no active potions.\nsetAir only updates its datawatcher when needed.");
 		fasterGetBlockByIdForAirBlocks = config.getBoolean("fasterGetBlockByIdForAirBlocks", categoryPerformance, true, "When something gets air blocks from ID it will return faster.");
 
-		fasterOptionInteractions = config.getBoolean("fasterOptionInteractions", categoryPerformance, true, "Makes several functions used by option buttons faster.");
+		fasterOptionInteractions = config.getBoolean("fasterOptionInteractions", categoryPerformance, false, "Makes several functions used by option buttons faster.");
 		fasterOptionLoading = config.getBoolean("fasterOptionLoading", categoryPerformance, false, "Makes the function that reads options.txt much faster.");
 
 		moreAccurateLayeredSnowFaceCulling = config.getBoolean("moreAccurateLayeredSnowFaceCulling", categoryPerformance, true, "The faces of layered snow get culled more accurately when chunk meshes are created.");
