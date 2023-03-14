@@ -38,6 +38,9 @@ public class BugTorchLateMixins implements ILateMixinLoader {
         if(!loadedMods.contains("aether")) {
             BugTorchConfig.reuseAetherIIRenderPlayer = false;
         }
+        if(loadedMods.contains("notfine")) {
+            BugTorchConfig.fixWitcheryLeavesOptifineRendering = false;
+        }
 
         BugTorch.logger.info("Kicking off BugTorch late mixins.");
         boolean client = FMLLaunchHandler.side().isClient();
