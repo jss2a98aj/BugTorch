@@ -1,4 +1,4 @@
-package jss.bugtorch.core.ducks;
+package jss.bugtorch.ducks;
 
 public interface IOffsetDuck {
 
