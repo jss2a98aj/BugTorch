@@ -2,9 +2,13 @@ package jss.bugtorch;
 
 import java.io.File;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.relauncher.Side;
+import jss.bugtorch.listeners.BroadcastSettingsRemover;
 import jss.bugtorch.modsupport.VanillaSupport;
+import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -37,6 +41,13 @@ public class BugTorch {
 		BugTorchConfig.loadModdedConfig(new File(configFolder + "modSupport.cfg"));
 
 		VanillaSupport.enableSupport();
+
+		if(event.getSide() == Side.CLIENT) {
+			if(BugTorchConfig.removeBroadcastSettingsButton) {
+				FMLCommonHandler.instance().bus().register(BroadcastSettingsRemover.INSTANCE);
+				MinecraftForge.EVENT_BUS.register(BroadcastSettingsRemover.INSTANCE);
+			}
+		}
 	}
 
 	@Mod.EventHandler

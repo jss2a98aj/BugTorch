@@ -15,6 +15,9 @@ public class BugTorchConfig {
 	public static boolean fixSnowBlocksRandomlyTicking;
 	public static boolean fixTorchBlocksRandomlyTicking;
 
+	//Base tweaks
+	public static boolean removeBroadcastSettingsButton;
+
 	//Mod bugfixes
 	public static boolean fixPamsTemperatePlantsBlockSounds;
 	public static boolean fixWitcheryBlockSounds;
@@ -131,6 +134,8 @@ public class BugTorchConfig {
 		fixPumpkinBlocksRandomlyTicking = config.getBoolean("fixPumpkinBlocksRandomlyTicking", categoryBugfixes, true, "Pumpkin blocks will no longer randomly tick.");
 		fixSnowBlocksRandomlyTicking = config.getBoolean("fixSnowBlocksRandomlyTicking", categoryBugfixes, true, "Non-layered snow blocks will no longer randomly tick.\nFrom MC 1.14, fixes MC-88097");
 		fixTorchBlocksRandomlyTicking = config.getBoolean("fixTorchBlocksRandomlyTicking", categoryBugfixes, true, "Torch blocks will no longer randomly tick.");
+
+		removeBroadcastSettingsButton = config.getBoolean("removeBroadcastSettingsButton", categoryTweaks, false, "Remove the Broadcast Settings button from the options menu.");
 
 		if(config.hasChanged()) {
 			config.save();
