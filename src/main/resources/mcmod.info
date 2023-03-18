@@ -14,7 +14,7 @@
 		"screenshots": [],
 		"parent": "",
 		"requiredMods": [],
-		"dependencies": [],
+		"dependencies": ["Thaumcraft", "temperateplants", "VillageNames", "witchery"],
 		"dependants": [],
 		"useDependencyInformation": true
 	}]
