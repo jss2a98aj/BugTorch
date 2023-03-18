@@ -1,0 +1,11 @@
+# Missing lang entries for Mystcraft
+myst.symbol.TerrainFlat.name=Normale Flachland-Welt
+myst.symbol.TerrainVoid.name=Leeren-Welt
+
+# Missing lang entries for Thaumcraft
+tile.blockCosmeticDoubleSlabStone.name=Steinstufe
+tile.blockCosmeticDoubleSlabWood.name=Holzstufe
+
+# Missing lang entries for Extra Utilities
+tile.dirt.name=Erde
+tile.sand.name=Sand
