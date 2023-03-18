@@ -15,6 +15,9 @@ public class BugTorchConfig {
 	public static boolean fixSnowBlocksRandomlyTicking;
 	public static boolean fixTorchBlocksRandomlyTicking;
 
+	//Base tweaks
+	public static boolean removeBroadcastSettingsButton;
+
 	//Mod bugfixes
 	public static boolean fixPamsTemperatePlantsBlockSounds;
 	public static boolean fixWitcheryBlockSounds;
@@ -101,6 +104,7 @@ public class BugTorchConfig {
 	public static float scaledWitherDamageMaxHealthMult;
 
 	//Mixin mod bugfixes
+	public static boolean fixCrayfishFurnitureNullPointerException;
 	public static boolean fixGanysSurfaceOpenTrapdoorBackTexture;
 	public static boolean fixThaumcraftCandleColorArrayOutOfBounds;
 	public static boolean fixWitcheryGarlicGarlandBlockBounds;
@@ -109,6 +113,7 @@ public class BugTorchConfig {
 	public static boolean reuseAetherIIRenderPlayer;
 
 	//Mixin mod tweaks
+	public static boolean disableCrayfishFurnitureAchievements;
 	public static boolean proxyLLibraryPastebin;
 
 	//Category names
@@ -129,6 +134,8 @@ public class BugTorchConfig {
 		fixPumpkinBlocksRandomlyTicking = config.getBoolean("fixPumpkinBlocksRandomlyTicking", categoryBugfixes, true, "Pumpkin blocks will no longer randomly tick.");
 		fixSnowBlocksRandomlyTicking = config.getBoolean("fixSnowBlocksRandomlyTicking", categoryBugfixes, true, "Non-layered snow blocks will no longer randomly tick.\nFrom MC 1.14, fixes MC-88097");
 		fixTorchBlocksRandomlyTicking = config.getBoolean("fixTorchBlocksRandomlyTicking", categoryBugfixes, true, "Torch blocks will no longer randomly tick.");
+
+		removeBroadcastSettingsButton = config.getBoolean("removeBroadcastSettingsButton", categoryTweaks, false, "Remove the Broadcast Settings button from the options menu.");
 
 		if(config.hasChanged()) {
 			config.save();
@@ -270,6 +277,7 @@ public class BugTorchConfig {
 		Configuration config = new Configuration(configFile);
 
 		//Bugfixes
+		fixCrayfishFurnitureNullPointerException = config.getBoolean("fixCrayfishFurnitureNullPointerExceptions", categoryBugfixes, true, "Makes several TEs from MrCrayfish's Furniture Mod implement ISidedInventory correctly.");
 		fixGanysSurfaceOpenTrapdoorBackTexture = config.getBoolean("fixGanysSurfaceOpenTrapdoorBackTexture", categoryBugfixes, true, "Makes Gany's Surface trapdoors use the correct back texture when open.");
 		fixThaumcraftCandleColorArrayOutOfBounds = config.getBoolean("fixThaumcraftCandleColorArrayOutOfBounds", categoryBugfixes, true, "Makes Thaumcraft candles not cause an array out of bounds exception if rendered with metadata greater than 15.");
 		fixWitcheryGarlicGarlandBlockBounds = config.getBoolean("fixWitcheryGarlicGarlandBlockBounds", categoryBugfixes, true, "Makes Witchery Garlic Garlands use correct block bounds on every rotation.");
@@ -278,6 +286,7 @@ public class BugTorchConfig {
 		reuseAetherIIRenderPlayer = config.getBoolean("reuseAetherIIRenderPlayer", categoryPerformance, true, "Makes Aether II reuse the same player renderer object across frames.");
 
 		//Tweaks
+		disableCrayfishFurnitureAchievements= config.getBoolean("disableCrayfishFurnitureAchievements", categoryTweaks, false, "Disables MrCrayfish's Furniture Mod achievements.");
 		proxyLLibraryPastebin = config.getBoolean("proxyLLibraryPastebin", categoryTweaks, false, "Use a pastebin proxy to keep LLibrary from crashing with some regional blocks.");
 
 		//Update old config options

@@ -9,13 +9,17 @@ def deobfCurse(String mavenDep) {
 }
 
 dependencies {
-    compileOnly("thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev")
+    runtimeOnly("com.github.GTNewHorizons:Baubles:1.0.1.16:dev")
 
-    compile deobfCurse("witchery-69673:2234410")
-    compile deobfCurse("ganys-surface-222303:2284819")
-    compile deobfCurse("gilded-games-util-228114:2273362")
-    compile deobfCurse("aether-ii-223796:2273367")
-    compile deobfCurse("pams-temperate-plants-221916:2206430")
-    compile deobfCurse("village-names-259230:4328516")
-    compile deobfCurse("llibrary-243298:2319767")
+    implementation("thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev")
+    implementation deobfCurse("witchery-69673:2234410")
+    implementation deobfCurse("village-names-259230:4328516")
+
+    compileOnly deobfCurse("gilded-games-util-228114:2273362")
+    compileOnly deobfCurse("aether-ii-223796:2273367")
+
+    compileOnly deobfCurse("ganys-surface-222303:2284819")
+    compileOnly deobfCurse("pams-temperate-plants-221916:2206430")
+    compileOnly deobfCurse("llibrary-243298:2319767")
+    compileOnly deobfCurse("mrcrayfish-furniture-mod-55438:2221679")
 }
