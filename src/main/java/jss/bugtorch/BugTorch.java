@@ -25,7 +25,7 @@ import jss.bugtorch.modsupport.WitcherySupport;
 		name = BugTorch.NAME,
 		version = BugTorch.VERSION,
 		acceptableRemoteVersions = "*",
-		dependencies = "after:Thaumcraft;after:temperateplants;after:VillageNames;after:witchery;"
+		dependencies = "required-after:gtnhmixins@[2.0.0,);after:Thaumcraft;after:temperateplants;after:VillageNames;after:witchery;"
 	)
 public class BugTorch {
 
