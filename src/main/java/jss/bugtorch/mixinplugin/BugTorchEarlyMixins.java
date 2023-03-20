@@ -62,6 +62,13 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
         if(client && BugTorchConfig.fixLavaHissOnAirReplace) {
             mixins.add("minecraft.fix.MixinBlockLiquid");
         }
+        if(BugTorchConfig.fixMergeItemStack) {
+            if(loadedCoreMods.contains("cofh.asm.LoadingPlugin")) {
+                mixins.add("cofhcore.fix.MixinInventoryHelper");
+            } else {
+                mixins.add("minecraft.fix.MixinContainer");
+            }
+        }
         if(BugTorchConfig.fixMineshaftAirPockets) {
             mixins.add("minecraft.worldgen.MixinStructureStart");
             mixins.add("minecraft.worldgen.MixinStructureMineshaftPieces$Room");

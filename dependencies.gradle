@@ -18,6 +18,7 @@ dependencies {
     compileOnly deobfCurse("gilded-games-util-228114:2273362")
     compileOnly deobfCurse("aether-ii-223796:2273367")
 
+    compileOnly deobfCurse("cofh-core-69162:2388750")
     compileOnly deobfCurse("ganys-surface-222303:2284819")
     compileOnly deobfCurse("pams-temperate-plants-221916:2206430")
     compileOnly deobfCurse("llibrary-243298:2319767")
