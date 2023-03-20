@@ -53,6 +53,9 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
         }
 
         //Bugfixes
+        if(client && BugTorchConfig.fixAnvilSoundTypeStepSound) {
+            mixins.add("minecraft.fix.block.MixinSoundTypeAnvil");
+        }
         if(client && useNotFineOverlap && BugTorchConfig.fixEnchantmentBlendFunc) {
             mixins.add("minecraft.rendering.MixinRenderItem");
         }
