@@ -4,13 +4,7 @@ BugTorch is a mod for Minecraft 1.7.10. It mostly fixes bugs. The name was picke
 
 ## Requirements
 
-One and only one of the following:
-
-[UniMixins](https://github.com/LegacyModdingMC/UniMixins) (highly suggested)
-
-[GTNH Mixins](https://github.com/GTNewHorizons/GTNHMixins) with [Mixingasm](https://github.com/makamys/Mixingasm)
-
-[GasStation](https://github.com/FalsePattern/GasStation) with [UniMixins'](https://github.com/LegacyModdingMC/UniMixins) unimixins-gtnhmixins module.
+- [UniMixins](https://github.com/LegacyModdingMC/UniMixins)
 
 ## What it does
 
@@ -24,4 +18,4 @@ Go ahead. Its using the MIT license, I couldn't stop you even if I wanted to.
 
 ## Disclaimer
 
-This software and its developer are not affiliated with BugTorch Systems, LLC, a maker of self-filling and self-lighting tiki torches sold under the brand name “BugTorch”.
+This software and its developers are not affiliated with BugTorch Systems, LLC, a maker of self-filling and self-lighting tiki torches sold under the brand name “BugTorch”.
