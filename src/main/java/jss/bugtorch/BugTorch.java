@@ -60,6 +60,10 @@ public class BugTorch {
 			ThaumcraftSupport.enableSupport();
 		}
 
+		if(Loader.isModLoaded("torchLevers")) {
+			TorchLeversSupport.enableSupport();
+		}
+
 		if(Loader.isModLoaded("witchery")) {
 			WitcherySupport.enableSupport();
 		}
