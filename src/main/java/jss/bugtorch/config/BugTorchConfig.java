@@ -10,6 +10,7 @@ public class BugTorchConfig {
 	public static boolean enableFloatingTrapDoors;
 
 	//Base bugfixes
+	public static boolean fixBlockSounds;
 	public static boolean fixJackOLanternBlocksRandomlyTicking;
 	public static boolean fixPumpkinBlocksRandomlyTicking;
 	public static boolean fixSnowBlocksRandomlyTicking;
@@ -133,6 +134,7 @@ public class BugTorchConfig {
 		enableFloatingTrapDoors = config.getBoolean("freeFloatingTrapDoors", categoryBackport, true, "Trapdoors no longer require attachment blocks.\nFrom MC 1.9");
 
 		//Bugfixes
+		fixBlockSounds = config.getBoolean("fixBlockSounds", categoryBugfixes, true, "Assigns the correct sound types to some blocks.");
 		fixJackOLanternBlocksRandomlyTicking = config.getBoolean("fixJackOLanternBlocksRandomlyTicking", categoryBugfixes, true, "Jack O' Lantern blocks will no longer randomly tick.");
 		fixPumpkinBlocksRandomlyTicking = config.getBoolean("fixPumpkinBlocksRandomlyTicking", categoryBugfixes, true, "Pumpkin blocks will no longer randomly tick.");
 		fixSnowBlocksRandomlyTicking = config.getBoolean("fixSnowBlocksRandomlyTicking", categoryBugfixes, true, "Non-layered snow blocks will no longer randomly tick.\nFrom MC 1.14, fixes MC-88097");
@@ -149,9 +151,9 @@ public class BugTorchConfig {
 		Configuration config = new Configuration(configFile);
 
 		//Bugfixes
-		fixExtraUtilitiesBlockSounds = config.getBoolean("fixExtraUtilitiesBlockSounds", categoryBugfixes, true, "Assigns the correct sound type to blocks from Extra Utilities.");
-		fixPamsTemperatePlantsBlockSounds = config.getBoolean("fixPamsTemperatePlantsBlockSounds", categoryBugfixes, true, "Assigns the correct sound type to blocks from Pam's Temperate Plants.");
-		fixWitcheryBlockSounds = config.getBoolean("fixWitcheryBlockSounds", categoryBugfixes, true, "Assigns the correct sound type to blocks from Witchery.");
+		fixExtraUtilitiesBlockSounds = config.getBoolean("fixExtraUtilitiesBlockSounds", categoryBugfixes, true, "Assigns the correct sound types to some blocks from Extra Utilities.");
+		fixPamsTemperatePlantsBlockSounds = config.getBoolean("fixPamsTemperatePlantsBlockSounds", categoryBugfixes, true, "Assigns the correct sound types to some blocks from Pam's Temperate Plants.");
+		fixWitcheryBlockSounds = config.getBoolean("fixWitcheryBlockSounds", categoryBugfixes, true, "Assigns the correct sound types to some blocks from Witchery.");
 
 		//Ore dictionary
 		registerThaumcraftLeavesToTheOreDictionary = config.getBoolean("registerThaumcraftLeavesToTheOreDictionary", categoryOreDictionary, true, "Register Thaumcraft Greatwood and Silverwood leaves as treeLeaves.");
