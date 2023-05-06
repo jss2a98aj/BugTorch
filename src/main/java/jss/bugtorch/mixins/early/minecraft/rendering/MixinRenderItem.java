@@ -29,7 +29,7 @@ public abstract class MixinRenderItem {
 
         OpenGlHelper.glBlendFunc(772, 1, 0, 0);
 
-        OpenGlHelper.glBlendFunc(772, 1, 0, 0/*1*/);
+        OpenGlHelper.glBlendFunc(772, 1, 0, 1);
 
         //for(int layer = 0; layer < 2; ++layer) {
             final int timeUVDenominator = 3000 /*+ layer * 1873*/;
