@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(value = Potion.class)
-public class MixinsPotionWither {
+public abstract class MixinsPotionWither {
 
     /**
      * @author jss2a98aj
