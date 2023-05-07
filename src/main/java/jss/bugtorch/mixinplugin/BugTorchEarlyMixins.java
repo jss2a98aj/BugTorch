@@ -220,7 +220,7 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
         if(BugTorchConfig.scaledStarvationDamageMaxHealthFlat > 0f || BugTorchConfig.scaledStarvationDamageMaxHealthMult > 0f) {
             mixins.add("minecraft.tweaks.MixinFoodStats");
         }
-        if(BugTorchConfig.scaledDrowningDamageMaxHealthFlat > 0f || BugTorchConfig.scaledDrowningDamageMaxHealthMult > 0f) {
+        if(BugTorchConfig.scaledSuffocationDamageMaxHealthFlat > 0f || BugTorchConfig.scaledSuffocationDamageMaxHealthMult > 0f) {
             mixins.add("minecraft.tweaks.entitylivingbase.MixinScalingSuffocationDamage");
         }
         if(BugTorchConfig.scaledPoisonDamageMaxHealthFlat > 0f || BugTorchConfig.scaledPoisonDamageMaxHealthMult > 0f) {
