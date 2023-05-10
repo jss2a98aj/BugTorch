@@ -1,6 +1,7 @@
 .gradle
 .settings
 /.idea/
+/.vscode/
 /run/
 /build/
 /eclipse/
@@ -25,6 +26,7 @@ whitelist.json
 *.iml
 *.ipr
 *.iws
-src/main/resources/mixins.*.json
-
-/libs/
+src/main/resources/mixins.*([!.]).json
+*.bat
+*.DS_Store
+!gradlew.bat
