@@ -98,6 +98,10 @@ public class BugTorchConfig {
 	public static boolean removeEntityDuplicateExtendedPropertiesIdentifierSpam;
 	public static float scaledDrowningDamageMaxHealthFlat;
 	public static float scaledDrowningDamageMaxHealthMult;
+	public static float scaledFireDamageMaxHealthFlat;
+	public static float scaledFireDamageMaxHealthMult;
+	public static float scaledLavaDamageMaxHealthFlat;
+	public static float scaledLavaDamageMaxHealthMult;
 	public static float scaledPoisonDamageMaxHealthFlat;
 	public static float scaledPoisonDamageMaxHealthMult;
 	public static float scaledStarvationDamageMaxHealthFlat;
@@ -240,6 +244,10 @@ public class BugTorchConfig {
 		removeEntityDuplicateExtendedPropertiesIdentifierSpam = config.getBoolean("removeEntityDuplicateExtendedPropertiesIdentifierSpam", categoryTweaks, true, "Removes \"An attempt was made to register extended properties using an existing key\" log spam caused by some mods.");
 		scaledDrowningDamageMaxHealthFlat = config.getFloat("scaledDrowningDamageMaxHealthFlat", categoryTweaks, 0f, 0f, 20000f, "Amount of flat player health to remove each drowning tick.\nSet to 0 to disable.");
 		scaledDrowningDamageMaxHealthMult = config.getFloat("scaledDrowningDamageMaxHealthMult", categoryTweaks, 0f, 0f, 1f, "Portion of max player health to remove each drowning tick.\nSet to 0 to disable.");
+		scaledFireDamageMaxHealthFlat = config.getFloat("scaledFireDamageMaxHealthFlat", categoryTweaks, 0f, 0f, 20000f, "Amount of flat player health to remove each fire tick.\nSet to 0 to disable.");
+        scaledFireDamageMaxHealthMult = config.getFloat("scaledFireDamageMaxHealthMult", categoryTweaks, 0f, 0f, 1f, "Portion of max player health to remove each fire tick.\nSet to 0 to disable.");
+        scaledLavaDamageMaxHealthFlat = config.getFloat("scaledLavaDamageMaxHealthFlat", categoryTweaks, 0f, 0f, 20000f, "Amount of flat player health to remove each lava tick.\nSet to 0 to disable.");
+		scaledLavaDamageMaxHealthMult = config.getFloat("scaledLavaDamageMaxHealthMult", categoryTweaks, 0f, 0f, 1f, "Portion of max player health to remove each lava tick.\nSet to 0 to disable.");
 		scaledPoisonDamageMaxHealthFlat = config.getFloat("scaledPoisonDamageMaxHealthFlat", categoryTweaks, 0f, 0f, 20000f, "Portion of max player health to remove each poison effect tick.\nSet to 0 to disable.");
 		scaledPoisonDamageMaxHealthMult = config.getFloat("scaledPoisonDamageMaxHealthMult", categoryTweaks, 0f, 0f, 1f, "Portion of max player health to remove each poison effect tick.\nSet to 0 to disable.");
 		scaledStarvationDamageMaxHealthFlat = config.getFloat("scaledStarvationDamageMaxHealthFlat", categoryTweaks, 0f, 0f, 20000f, "Amount of flat player health to remove each starvation tick.\nSet to 0 to disable.");
