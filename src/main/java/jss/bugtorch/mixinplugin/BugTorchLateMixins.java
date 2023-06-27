@@ -21,29 +21,33 @@ public class BugTorchLateMixins implements ILateMixinLoader {
     @Override
     public List<String> getMixins(Set<String> loadedMods) {
 
-        if (!loadedMods.contains("cfm")) {
+        if(!loadedMods.contains("cfm")) {
             BugTorchConfig.fixCrayfishFurnitureNullPointerException = false;
             BugTorchConfig.disableCrayfishFurnitureAchievements = false;
         }
-        if (!loadedMods.contains("ganyssurface")) {
+        if(!loadedMods.contains("ganyssurface")) {
             BugTorchConfig.fixGanysSurfaceOpenTrapdoorBackTexture = false;
         }
-        if (!loadedMods.contains("llibrary")) {
+        if(!loadedMods.contains("llibrary")) {
             BugTorchConfig.proxyLLibraryPastebin = false;
         }
-        if (!loadedMods.contains("Thaumcraft")) {
+        if(!loadedMods.contains("Thaumcraft")) {
             BugTorchConfig.fixThaumcraftCandleColorArrayOutOfBounds = false;
         }
-        if (!loadedMods.contains("witchery")) {
+        if(!loadedMods.contains("witchery")) {
             BugTorchConfig.fixWitcheryGarlicGarlandBlockBounds = false;
             BugTorchConfig.fixWitcheryLeavesOptifineRendering = false;
             BugTorchConfig.fixWitcheryLeavesShearDupe = false;
         }
-        if (!loadedMods.contains("aether")) {
+        if(!loadedMods.contains("aether")) {
             BugTorchConfig.reuseAetherIIRenderPlayer = false;
         }
-        if (loadedMods.contains("notfine")) {
+        if(loadedMods.contains("notfine")) {
             BugTorchConfig.fixWitcheryLeavesOptifineRendering = false;
+        }
+        if(!loadedMods.contains("ExtraUtilities")) {
+            BugTorchConfig.scaledExtraUtilitiesDarknessDamageMaxHealthFlat = 0;
+            BugTorchConfig.scaledExtraUtilitiesDarknessDamageMaxHealthMult = 0;
         }
 
         BugTorch.logger.info("Kicking off BugTorch late mixins.");
@@ -51,30 +55,30 @@ public class BugTorchLateMixins implements ILateMixinLoader {
         List<String> mixins = new ArrayList<>();
 
         //Mod bugfixes
-        if (BugTorchConfig.fixCrayfishFurnitureNullPointerException) {
+        if(BugTorchConfig.fixCrayfishFurnitureNullPointerException) {
             mixins.add("crayfishfurniture.fix.MixinTileEntityDishwasher");
             mixins.add("crayfishfurniture.fix.MixinTileEntityMicrowave");
             mixins.add("crayfishfurniture.fix.MixinTileEntityWashingMachine");
         }
-        if (client && BugTorchConfig.fixGanysSurfaceOpenTrapdoorBackTexture) {
+        if(client && BugTorchConfig.fixGanysSurfaceOpenTrapdoorBackTexture) {
             mixins.add("ganyssurface.rendering.MixinBlockWoodTrapdoor");
         }
-        if (BugTorchConfig.fixThaumcraftCandleColorArrayOutOfBounds) {
+        if(BugTorchConfig.fixThaumcraftCandleColorArrayOutOfBounds) {
             if (client) {
                 mixins.add("thaumcraft.sanitizearrayaccess.MixinBlockCandleRenderer");
             }
             mixins.add("thaumcraft.sanitizearrayaccess.MixinBlockCandle");
         }
-        if (BugTorchConfig.fixWitcheryGarlicGarlandBlockBounds) {
+        if(BugTorchConfig.fixWitcheryGarlicGarlandBlockBounds) {
             mixins.add("witchery.fix.MixinBlockGarlicGarland");
         }
-        if (client && BugTorchConfig.fixWitcheryLeavesOptifineRendering) {
+        if(client && BugTorchConfig.fixWitcheryLeavesOptifineRendering) {
             mixins.add("witchery.rendering.MixinBlockWitchLeaves");
         }
-        if (BugTorchConfig.fixWitcheryLeavesShearDupe) {
+        if(BugTorchConfig.fixWitcheryLeavesShearDupe) {
             mixins.add("witchery.shearing.MixinBlockWitchLeaves");
         }
-        if (client && BugTorchConfig.reuseAetherIIRenderPlayer) {
+        if(client && BugTorchConfig.reuseAetherIIRenderPlayer) {
             mixins.add("aetherii.optimization.MixinClientEventHandler");
         }
 
@@ -84,6 +88,10 @@ public class BugTorchLateMixins implements ILateMixinLoader {
         }
         if(BugTorchConfig.proxyLLibraryPastebin) {
             mixins.add("llibrary.fix.MixinWebUtils");
+        }
+
+        if(BugTorchConfig.scaledExtraUtilitiesDarknessDamageMaxHealthFlat > 0f || BugTorchConfig.scaledExtraUtilitiesDarknessDamageMaxHealthMult > 0f) {
+            mixins.add("extrautils.tweaks.damage.MixinDarknessDamage");
         }
 
         return mixins;
