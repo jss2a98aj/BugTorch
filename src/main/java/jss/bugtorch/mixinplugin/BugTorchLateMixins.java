@@ -46,8 +46,12 @@ public class BugTorchLateMixins implements ILateMixinLoader {
             BugTorchConfig.fixWitcheryLeavesOptifineRendering = false;
         }
         if(!loadedMods.contains("ExtraUtilities")) {
+            BugTorchConfig.extraUtilitiesTradingPostVillageNamesNitwitFilter = false;
             BugTorchConfig.scaledExtraUtilitiesDarknessDamageMaxHealthFlat = 0;
             BugTorchConfig.scaledExtraUtilitiesDarknessDamageMaxHealthMult = 0;
+        }
+        if(!loadedMods.contains("VillageNames")) {
+            BugTorchConfig.extraUtilitiesTradingPostVillageNamesNitwitFilter = false;
         }
 
         BugTorch.logger.info("Kicking off BugTorch late mixins.");
@@ -86,10 +90,12 @@ public class BugTorchLateMixins implements ILateMixinLoader {
         if(BugTorchConfig.disableCrayfishFurnitureAchievements) {
             mixins.add("crayfishfurniture.tweak.MixinFurnitureAchievements");
         }
+        if(BugTorchConfig.extraUtilitiesTradingPostVillageNamesNitwitFilter) {
+            mixins.add("extrautils.tweaks.MixinTileEntityTradingPost");
+        }
         if(BugTorchConfig.proxyLLibraryPastebin) {
             mixins.add("llibrary.fix.MixinWebUtils");
         }
-
         if(BugTorchConfig.scaledExtraUtilitiesDarknessDamageMaxHealthFlat > 0f || BugTorchConfig.scaledExtraUtilitiesDarknessDamageMaxHealthMult > 0f) {
             mixins.add("extrautils.tweaks.damage.MixinDarknessDamage");
         }

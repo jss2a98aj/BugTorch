@@ -122,6 +122,7 @@ public class BugTorchConfig {
 
 	//Mixin mod tweaks
 	public static boolean disableCrayfishFurnitureAchievements;
+    public static boolean extraUtilitiesTradingPostVillageNamesNitwitFilter;
 	public static boolean proxyLLibraryPastebin;
     public static float scaledExtraUtilitiesDarknessDamageMaxHealthFlat;
     public static float scaledExtraUtilitiesDarknessDamageMaxHealthMult;
@@ -304,8 +305,9 @@ public class BugTorchConfig {
 		reuseAetherIIRenderPlayer = config.getBoolean("reuseAetherIIRenderPlayer", categoryPerformance, true, "Makes Aether II reuse the same player renderer object across frames.");
 
 		//Tweaks
-		disableCrayfishFurnitureAchievements= config.getBoolean("disableCrayfishFurnitureAchievements", categoryTweaks, false, "Disables MrCrayfish's Furniture Mod achievements.");
-		proxyLLibraryPastebin = config.getBoolean("proxyLLibraryPastebin", categoryTweaks, false, "Use a pastebin proxy to keep LLibrary from crashing with some regional blocks.");
+		disableCrayfishFurnitureAchievements = config.getBoolean("disableCrayfishFurnitureAchievements", categoryTweaks, false, "Disables MrCrayfish's Furniture Mod achievements.");
+        extraUtilitiesTradingPostVillageNamesNitwitFilter = config.getBoolean("extraUtilitiesTradingPostVillageNamesNitwitFilter", categoryTweaks, true, "Filters Village Names Nitwit villagers from Extra Utilities Trading Post.");
+        proxyLLibraryPastebin = config.getBoolean("proxyLLibraryPastebin", categoryTweaks, false, "Use a pastebin proxy to keep LLibrary from crashing with some regional blocks.");
         scaledExtraUtilitiesDarknessDamageMaxHealthFlat = config.getFloat("scaledExtraUtilitiesDarknessDamageMaxHealthFlat", categoryTweaks, 0f, 0f, 20000f, "Portion of max player health to remove each darkness tick.\nSet to 0 to disable.");
         scaledExtraUtilitiesDarknessDamageMaxHealthMult = config.getFloat("scaledExtraUtilitiesDarknessDamageMaxHealthMult", categoryTweaks, 0f, 0f, 1f, "Portion of max player health to remove each darkness tick.\nSet to 0 to disable.");
 
