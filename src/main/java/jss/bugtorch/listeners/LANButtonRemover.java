@@ -10,16 +10,13 @@ import net.minecraftforge.client.event.GuiScreenEvent;
 import java.util.List;
 
 public class LANButtonRemover {
-    public static final BroadcastSettingsRemover INSTANCE = new BroadcastSettingsRemover();
+    public static final LANButtonRemover INSTANCE = new LANButtonRemover();
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void onGui(GuiScreenEvent.InitGuiEvent.Post event) {
         if(event.gui instanceof GuiIngameMenu) {
             GuiButton openToLANButton = ((List<GuiButton>)event.buttonList).stream().filter(button -> button.id == 7).findFirst().get();
             openToLANButton.visible = false;
-            if (openToLANButton != null) {
-                event.buttonList.remove(openToLANButton);
-            }
         }
     }
 }
