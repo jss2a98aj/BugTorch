@@ -7,6 +7,7 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
 import jss.bugtorch.listeners.BroadcastSettingsRemover;
+import jss.bugtorch.listeners.LANButtonRemover;
 import jss.bugtorch.modsupport.*;
 import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.LogManager;
@@ -44,6 +45,13 @@ public class BugTorch {
 				MinecraftForge.EVENT_BUS.register(BroadcastSettingsRemover.INSTANCE);
 			}
 		}
+        if(event.getSide() == Side.CLIENT) {
+            if(BugTorchConfig.removeLANButton) {
+                FMLCommonHandler.instance().bus().register(LANButtonRemover.INSTANCE);
+                MinecraftForge.EVENT_BUS.register(LANButtonRemover.INSTANCE);
+            }
+        }
+
 	}
 
 	@Mod.EventHandler

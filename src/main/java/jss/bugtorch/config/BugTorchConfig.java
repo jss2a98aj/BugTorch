@@ -19,6 +19,8 @@ public class BugTorchConfig {
 	//Base tweaks
 	public static boolean removeBroadcastSettingsButton;
 
+    public static boolean removeLANButton;
+
 	//Mod bugfixes
 	public static boolean fixExtraUtilitiesBlockSounds;
 	public static boolean fixPamsTemperatePlantsBlockSounds;
@@ -148,6 +150,8 @@ public class BugTorchConfig {
 		fixTorchBlocksRandomlyTicking = config.getBoolean("fixTorchBlocksRandomlyTicking", categoryBugfixes, true, "Torch blocks will no longer randomly tick.");
 
 		removeBroadcastSettingsButton = config.getBoolean("removeBroadcastSettingsButton", categoryTweaks, false, "Remove the Broadcast Settings button from the options menu.");
+
+        removeLANButton = config.getBoolean("removeLANButton", categoryTweaks, false, "Remove the Open to LAN button from the game  menu.");
 
 		if(config.hasChanged()) {
 			config.save();
