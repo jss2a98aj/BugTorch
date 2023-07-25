@@ -21,6 +21,8 @@ public class BugTorchConfig {
 
     public static boolean removeLANButton;
 
+    public static boolean removeSuperSecretSettingsButton;
+
 	//Mod bugfixes
 	public static boolean fixExtraUtilitiesBlockSounds;
 	public static boolean fixPamsTemperatePlantsBlockSounds;
@@ -151,7 +153,9 @@ public class BugTorchConfig {
 
 		removeBroadcastSettingsButton = config.getBoolean("removeBroadcastSettingsButton", categoryTweaks, false, "Remove the Broadcast Settings button from the options menu.");
 
-        removeLANButton = config.getBoolean("removeLANButton", categoryTweaks, false, "Remove the Open to LAN button from the game  menu.");
+        removeLANButton = config.getBoolean("removeLANButton", categoryTweaks, false, "Remove the Open to LAN button from the game menu.");
+
+        removeSuperSecretSettingsButton = config.getBoolean("removeSuperSecretSettingsButton", categoryTweaks, false, "Remove the Super Secret Settings button from the options menu.");
 
 		if(config.hasChanged()) {
 			config.save();
