@@ -111,6 +111,8 @@ public class BugTorchConfig {
 	public static float scaledWitherDamageMaxHealthFlat;
 	public static float scaledWitherDamageMaxHealthMult;
 
+    public static boolean patchArmorDyeRecipe;
+
 	//Mixin mod bugfixes
 	public static boolean fixCrayfishFurnitureNullPointerException;
 	public static boolean fixGanysSurfaceOpenTrapdoorBackTexture;
@@ -259,6 +261,8 @@ public class BugTorchConfig {
 		scaledSuffocationDamageMaxHealthMult = config.getFloat("scaledSuffocationDamageMaxHealthMult", categoryTweaks, 0f, 0f, 1f, "Portion of max player health to remove each suffocation tick.\nSet to 0 to disable.");
 		scaledWitherDamageMaxHealthFlat = config.getFloat("scaledWitherDamageMaxHealthFlat", categoryTweaks, 0f, 0f, 20000f, "Portion of max player health to remove each wither effect tick.\nSet to 0 to disable.");
 		scaledWitherDamageMaxHealthMult = config.getFloat("scaledWitherDamageMaxHealthMult", categoryTweaks, 0f, 0f, 1f, "Portion of max player health to remove each wither effect tick.\nSet to 0 to disable.");
+
+        patchArmorDyeRecipe = config.getBoolean("patchArmorDyeRecipe", categoryTweaks, true, "Removes the hardcoded vanilla dye limitation from the vanilla recipe for dying Leather Armor.");
 
 		lanPortToUseForOverride = config.getInt("lanPortToUseForOverride", categoryTweaks, 25565, 1024 , 49151, "Port to use for lanPortOverride.");
 
