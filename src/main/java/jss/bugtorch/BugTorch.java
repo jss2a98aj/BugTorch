@@ -6,9 +6,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
-import jss.bugtorch.listeners.BroadcastSettingsRemover;
-import jss.bugtorch.listeners.LANButtonRemover;
-import jss.bugtorch.listeners.SuperSecretSettingsRemover;
+import jss.bugtorch.listeners.*;
 import jss.bugtorch.modsupport.*;
 import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.LogManager;
@@ -57,6 +55,24 @@ public class BugTorch {
             if(BugTorchConfig.removeSuperSecretSettingsButton) {
                 FMLCommonHandler.instance().bus().register(SuperSecretSettingsRemover.INSTANCE);
                 MinecraftForge.EVENT_BUS.register(SuperSecretSettingsRemover.INSTANCE);
+            }
+        }
+        if(event.getSide() == Side.CLIENT) {
+            if(BugTorchConfig.DisableBroadcastSettings) {
+                FMLCommonHandler.instance().bus().register(BroadcastSettingsDisable.INSTANCE);
+                MinecraftForge.EVENT_BUS.register(BroadcastSettingsDisable.INSTANCE);
+            }
+        }
+        if(event.getSide() == Side.CLIENT) {
+            if(BugTorchConfig.DisableLANButton) {
+                FMLCommonHandler.instance().bus().register(LANButtonDisable.INSTANCE);
+                MinecraftForge.EVENT_BUS.register(LANButtonDisable.INSTANCE);
+            }
+        }
+        if(event.getSide() == Side.CLIENT) {
+            if(BugTorchConfig.DisableSuperSecretSettings) {
+                FMLCommonHandler.instance().bus().register(SuperSecretSettingsDisable.INSTANCE);
+                MinecraftForge.EVENT_BUS.register(SuperSecretSettingsDisable.INSTANCE);
             }
         }
 
