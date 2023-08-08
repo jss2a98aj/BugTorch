@@ -9,6 +9,7 @@ import cpw.mods.fml.relauncher.Side;
 import jss.bugtorch.listeners.BroadcastSettingsRemover;
 import jss.bugtorch.modsupport.*;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.oredict.OreDictionary;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,60 +18,85 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import jss.bugtorch.config.BugTorchConfig;
 
 @Mod(
-		modid = BugTorch.MODID,
-		name = BugTorch.NAME,
-		version = BugTorch.VERSION,
-		acceptableRemoteVersions = "*",
-		dependencies = "required-after:gtnhmixins@[2.0.0,);after:Thaumcraft;after:temperateplants;after:VillageNames;after:witchery;"
-	)
+    modid = BugTorch.MODID,
+    name = BugTorch.NAME,
+    version = BugTorch.VERSION,
+    acceptableRemoteVersions = "*",
+    dependencies = "required-after:gtnhmixins@[2.0.0,);after:Thaumcraft;after:temperateplants;after:VillageNames;after:witchery;"
+)
 public class BugTorch {
 
-	public static final String MODID = "bugtorch";
-	public static final String NAME = "BugTorch";
-	public static final String VERSION = "GRADLETOKEN_VERSION";
-	public static final Logger logger = LogManager.getLogger(NAME);
+    public static final String MODID = "bugtorch";
+    public static final String NAME = "BugTorch";
+    public static final String VERSION = "GRADLETOKEN_VERSION";
+    public static final Logger logger = LogManager.getLogger(NAME);
+    // cached to boost looping, should be used pretty often due to how recipe lookup works
+    public static final int[] dyeOreIds = new int[16];
 
-	@Mod.EventHandler
-	public void preInit(FMLPreInitializationEvent event) {
-		String configFolder =  event.getModConfigurationDirectory().getAbsolutePath() + File.separator + MODID + File.separator;
-		BugTorchConfig.loadBaseConfig(new File(configFolder + "base.cfg"));
-		BugTorchConfig.loadModdedConfig(new File(configFolder + "modSupport.cfg"));
+    @Mod.EventHandler
+    public void preInit(FMLPreInitializationEvent event) {
+        String configFolder =  event.getModConfigurationDirectory().getAbsolutePath() + File.separator + MODID + File.separator;
+        BugTorchConfig.loadBaseConfig(new File(configFolder + "base.cfg"));
+        BugTorchConfig.loadModdedConfig(new File(configFolder + "modSupport.cfg"));
 
-		VanillaSupport.enableSupport();
+        VanillaSupport.enableSupport();
 
-		if(event.getSide() == Side.CLIENT) {
-			if(BugTorchConfig.removeBroadcastSettingsButton) {
-				FMLCommonHandler.instance().bus().register(BroadcastSettingsRemover.INSTANCE);
-				MinecraftForge.EVENT_BUS.register(BroadcastSettingsRemover.INSTANCE);
-			}
-		}
-	}
+        if(event.getSide() == Side.CLIENT) {
+            if(BugTorchConfig.removeBroadcastSettingsButton) {
+                FMLCommonHandler.instance().bus().register(BroadcastSettingsRemover.INSTANCE);
+                MinecraftForge.EVENT_BUS.register(BroadcastSettingsRemover.INSTANCE);
+            }
+        }
+    }
 
-	@Mod.EventHandler
-	public void postInit(FMLPostInitializationEvent event) {
-		if(Loader.isModLoaded("ExtraUtilities")) {
-			ExtraUtilitiesSupport.enableSupport();
-		}
+    @Mod.EventHandler
+    public void postInit(FMLPostInitializationEvent event) {
+        // 👽
+        String[] dyes = {
+            "dyeBlack",
+            "dyeRed",
+            "dyeGreen",
+            "dyeBrown",
+            "dyeBlue",
+            "dyePurple",
+            "dyeCyan",
+            "dyeLightGray",
+            "dyeGray",
+            "dyePink",
+            "dyeLime",
+            "dyeYellow",
+            "dyeLightBlue",
+            "dyeMagenta",
+            "dyeOrange",
+            "dyeWhite"
+        };
+        for (int i = 0; i < dyes.length; i++) {
+            dyeOreIds[i] = OreDictionary.getOreID(dyes[i]);
+        }
 
-		if(Loader.isModLoaded("temperateplants")) {
-			PamsTemperatePlantsSupport.enableSupport();
-		}
+        if(Loader.isModLoaded("ExtraUtilities")) {
+            ExtraUtilitiesSupport.enableSupport();
+        }
 
-		if(Loader.isModLoaded("Thaumcraft")) {
-			ThaumcraftSupport.enableSupport();
-		}
+        if(Loader.isModLoaded("temperateplants")) {
+            PamsTemperatePlantsSupport.enableSupport();
+        }
 
-		if(Loader.isModLoaded("torchLevers")) {
-			TorchLeversSupport.enableSupport();
-		}
+        if(Loader.isModLoaded("Thaumcraft")) {
+            ThaumcraftSupport.enableSupport();
+        }
 
-		if(Loader.isModLoaded("witchery")) {
-			WitcherySupport.enableSupport();
-		}
+        if(Loader.isModLoaded("torchLevers")) {
+            TorchLeversSupport.enableSupport();
+        }
 
-		if(Loader.isModLoaded("VillageNames")) {
-			VillageNamesSupport.enableSupport();
-		}
-	}
+        if(Loader.isModLoaded("witchery")) {
+            WitcherySupport.enableSupport();
+        }
+
+        if(Loader.isModLoaded("VillageNames")) {
+            VillageNamesSupport.enableSupport();
+        }
+    }
 
 }

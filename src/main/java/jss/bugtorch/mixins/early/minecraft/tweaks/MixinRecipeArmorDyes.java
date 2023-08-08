@@ -1,5 +1,6 @@
 package jss.bugtorch.mixins.early.minecraft.tweaks;
 
+import jss.bugtorch.BugTorch;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
@@ -20,19 +21,25 @@ public abstract class MixinRecipeArmorDyes {
     @Inject(method = "matches", at = @At("HEAD"), cancellable = true)
     public void matchBetter(InventoryCrafting inv, World world, CallbackInfoReturnable<Boolean> ctx) {
         boolean hasArmor = false, hasDye = false;
-        //every OD'd dye should be in this
-        int dyeAny = OreDictionary.getOreID("dye");
+
         for (int i = 0; i < inv.getSizeInventory(); i++) {
             ItemStack stack = inv.getStackInSlot(i);
             //the ide has no idea how vital this llwyd continue is
             if (stack == null) continue;
-            else if (stack.getItem() instanceof ItemArmor && ((ItemArmor) stack.getItem()).getArmorMaterial() == ItemArmor.ArmorMaterial.CLOTH) {
+            else if (stack.getItem() instanceof ItemArmor && !hasArmor && ((ItemArmor) stack.getItem()).getArmorMaterial() == ItemArmor.ArmorMaterial.CLOTH) {
                 hasArmor = true;
-            } else if (ArrayUtils.contains(OreDictionary.getOreIDs(stack), dyeAny)) {
-                hasDye = true;
             } else {
-                ctx.setReturnValue(false);
-                return;
+                boolean pass = false;
+                int[] ids = OreDictionary.getOreIDs(stack);
+                for (int dyeOreId : BugTorch.dyeOreIds) {
+                    if (ArrayUtils.contains(ids, dyeOreId)) {
+                        pass = hasDye = true;
+                    }
+                }
+                if (!pass) {
+                    ctx.setReturnValue(false);
+                    return;
+                }
             }
         }
         ctx.setReturnValue(hasArmor && hasDye);
@@ -47,27 +54,8 @@ public abstract class MixinRecipeArmorDyes {
     @Redirect(method = "getCraftingResult", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;getItemDamage()I"))
     public int spinTheWheelAndLaughAtGod(ItemStack stack) {
         int[] od = OreDictionary.getOreIDs(stack);
-        //dye ore ids could be cached externally but this codebase is 👽 to me
-        String[] dyes = {
-            "dyeBlack",
-            "dyeRed",
-            "dyeGreen",
-            "dyeBrown",
-            "dyeBlue",
-            "dyePurple",
-            "dyeCyan",
-            "dyeLightGray",
-            "dyeGray",
-            "dyePink",
-            "dyeLime",
-            "dyeYellow",
-            "dyeLightBlue",
-            "dyeMagenta",
-            "dyeOrange",
-            "dyeWhite"
-        };
-        for (int i = 0; i < dyes.length; i++) {
-            if (ArrayUtils.contains(od, OreDictionary.getOreID(dyes[i]))) return i;
+        for (int i = 0; i < BugTorch.dyeOreIds.length; i++) {
+            if (ArrayUtils.contains(od, BugTorch.dyeOreIds[i])) return i;
         }
         return 15;
     }
