@@ -24,7 +24,7 @@ public abstract class MixinEntityItem extends Entity {
 	@Inject(method = "searchForOtherItemsNearby", at = @At("HEAD"), cancellable = true)
 	private void searchForOtherItemsNearbyHead(CallbackInfo ci) {
 		final ItemStack stack = getDataWatcher().getWatchableObjectItemStack(10);
-		if (stack.stackSize >= stack.getMaxStackSize()) {
+		if ( stack != null && stack.stackSize >= stack.getMaxStackSize()) {
 			ci.cancel();
 		}
 	}
