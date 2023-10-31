@@ -237,6 +237,10 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
             mixins.add("minecraft.tweaks.potion.MixinsPotionWither");
         }
 
+        if (BugTorchConfig.patchArmorDyeRecipe) {
+            mixins.add("minecraft.tweaks.MixinRecipeArmorDyes");
+        }
+
         return mixins;
     }
 
