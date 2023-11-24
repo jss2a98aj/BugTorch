@@ -24,7 +24,7 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
 
     @Override
     public List<String> getMixins(Set<String> loadedCoreMods) {
-        String configFolder =  "config" + File.separator + BugTorch.MODID + File.separator;
+        String configFolder = "config" + File.separator + BugTorch.MODID + File.separator;
         BugTorchConfig.loadBaseMixinConfig(new File(Launch.minecraftHome, configFolder + "mixins.cfg"));
         BugTorchConfig.loadModdedMixinConfig(new File(Launch.minecraftHome, configFolder + "mixinsModSupport.cfg"));
 
@@ -64,6 +64,9 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
         }
         if(client && BugTorchConfig.fixLavaHissOnAirReplace) {
             mixins.add("minecraft.fix.MixinBlockLiquid");
+        }
+        if(BugTorchConfig.fixLeadsBreakingOnSomeFenceInstances) {
+            mixins.add("minecraft.fix.MixinEntityLeashKnot");
         }
         if(BugTorchConfig.fixMergeItemStack) {
             if(loadedCoreMods.contains("cofh.asm.LoadingPlugin")) {
@@ -148,7 +151,7 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
         if(BugTorchConfig.fasterSnowBlockTicks) {
             mixins.add("minecraft.optimization.MixinBlockSnowBlock");
         }
-        if(client && BugTorchConfig.moreAccurateLayeredSnowFaceCulling) {
+        if(client && useNotFineOverlap && BugTorchConfig.moreAccurateLayeredSnowFaceCulling) {
             mixins.add("minecraft.optimization.MixinBlockSnow");
         }
         if(client && BugTorchConfig.replaceRandomInEffectRenderer) {
