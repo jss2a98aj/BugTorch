@@ -16,8 +16,13 @@ public class BugTorchConfig {
 	public static boolean fixSnowBlocksRandomlyTicking;
 	public static boolean fixTorchBlocksRandomlyTicking;
 
-	//Base tweaks
+    //Buttons
+    public static boolean DisableBroadcastSettings;
+    public static boolean DisableLANButton;
+    public static boolean DisableSuperSecretSettings;
 	public static boolean removeBroadcastSettingsButton;
+    public static boolean removeLANButton;
+    public static boolean removeSuperSecretSettingsButton;
 
 	//Mod bugfixes
 	public static boolean fixExtraUtilitiesBlockSounds;
@@ -136,6 +141,8 @@ public class BugTorchConfig {
 	static final String categoryPerformance = "performance improvements";
 	static final String categoryTweaks = "tweaks";
 
+    static final String categoryButtons = "buttons";
+
 	public static void loadBaseConfig(File configFile) {
 		Configuration config = new Configuration(configFile);
 
@@ -149,7 +156,13 @@ public class BugTorchConfig {
 		fixSnowBlocksRandomlyTicking = config.getBoolean("fixSnowBlocksRandomlyTicking", categoryBugfixes, true, "Non-layered snow blocks will no longer randomly tick.\nFrom MC 1.14, fixes MC-88097");
 		fixTorchBlocksRandomlyTicking = config.getBoolean("fixTorchBlocksRandomlyTicking", categoryBugfixes, true, "Torch blocks will no longer randomly tick.");
 
-		removeBroadcastSettingsButton = config.getBoolean("removeBroadcastSettingsButton", categoryTweaks, false, "Remove the Broadcast Settings button from the options menu.");
+        //Buttons
+		removeBroadcastSettingsButton = config.getBoolean("removeBroadcastSettingsButton", categoryButtons, false, "Remove the Broadcast Settings button from the options menu.");
+        removeLANButton = config.getBoolean("removeLANButton", categoryButtons, false, "Remove the Open to LAN button from the game menu.");
+        removeSuperSecretSettingsButton = config.getBoolean("removeSuperSecretSettingsButton", categoryButtons, false, "Remove the Super Secret Settings button from the options menu.");
+        DisableBroadcastSettings = config.getBoolean("DisableBroadcastSettingsButton", categoryButtons, false, "Disable the Broadcast Settings button from the options menu.");
+        DisableLANButton = config.getBoolean("DisableLANButton", categoryButtons, false, "Disable the Open to LAN button from the game menu.");
+        DisableSuperSecretSettings = config.getBoolean("DisableSuperSecretSettingsButton", categoryButtons, false, "Disable the Super Secret Settings button from the options menu.");
 
 		if(config.hasChanged()) {
 			config.save();

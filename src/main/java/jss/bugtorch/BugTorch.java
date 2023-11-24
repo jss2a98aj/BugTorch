@@ -52,6 +52,26 @@ public class BugTorch {
                 FMLCommonHandler.instance().bus().register(BroadcastSettingsRemover.INSTANCE);
                 MinecraftForge.EVENT_BUS.register(BroadcastSettingsRemover.INSTANCE);
             }
+            if(BugTorchConfig.removeLANButton) {
+                FMLCommonHandler.instance().bus().register(LANButtonRemover.INSTANCE);
+                MinecraftForge.EVENT_BUS.register(LANButtonRemover.INSTANCE);
+            }
+            if(BugTorchConfig.removeSuperSecretSettingsButton) {
+                FMLCommonHandler.instance().bus().register(SuperSecretSettingsRemover.INSTANCE);
+                MinecraftForge.EVENT_BUS.register(SuperSecretSettingsRemover.INSTANCE);
+            }
+            if(BugTorchConfig.DisableBroadcastSettings) {
+                FMLCommonHandler.instance().bus().register(BroadcastSettingsDisable.INSTANCE);
+                MinecraftForge.EVENT_BUS.register(BroadcastSettingsDisable.INSTANCE);
+            }
+            if(BugTorchConfig.DisableLANButton) {
+                FMLCommonHandler.instance().bus().register(LANButtonDisable.INSTANCE);
+                MinecraftForge.EVENT_BUS.register(LANButtonDisable.INSTANCE);
+            }
+            if(BugTorchConfig.DisableSuperSecretSettings) {
+                FMLCommonHandler.instance().bus().register(SuperSecretSettingsDisable.INSTANCE);
+                MinecraftForge.EVENT_BUS.register(SuperSecretSettingsDisable.INSTANCE);
+            }
         }
     }
 
