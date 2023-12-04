@@ -68,7 +68,7 @@ public class BugTorchLateMixins implements ILateMixinLoader {
             mixins.add("ganyssurface.rendering.MixinBlockWoodTrapdoor");
         }
         if(BugTorchConfig.fixThaumcraftCandleColorArrayOutOfBounds) {
-            if (client) {
+            if(client) {
                 mixins.add("thaumcraft.sanitizearrayaccess.MixinBlockCandleRenderer");
             }
             mixins.add("thaumcraft.sanitizearrayaccess.MixinBlockCandle");

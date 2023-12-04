@@ -17,9 +17,9 @@ public class BugTorchConfig {
 	public static boolean fixTorchBlocksRandomlyTicking;
 
     //Buttons
-    public static boolean DisableBroadcastSettings;
-    public static boolean DisableLANButton;
-    public static boolean DisableSuperSecretSettings;
+    public static boolean disableBroadcastSettings;
+    public static boolean disableLANButton;
+    public static boolean disableSuperSecretSettings;
 	public static boolean removeBroadcastSettingsButton;
     public static boolean removeLANButton;
     public static boolean removeSuperSecretSettingsButton;
@@ -161,9 +161,9 @@ public class BugTorchConfig {
 		removeBroadcastSettingsButton = config.getBoolean("removeBroadcastSettingsButton", categoryButtons, false, "Remove the Broadcast Settings button from the options menu.");
         removeLANButton = config.getBoolean("removeLANButton", categoryButtons, false, "Remove the Open to LAN button from the game menu.");
         removeSuperSecretSettingsButton = config.getBoolean("removeSuperSecretSettingsButton", categoryButtons, false, "Remove the Super Secret Settings button from the options menu.");
-        DisableBroadcastSettings = config.getBoolean("DisableBroadcastSettingsButton", categoryButtons, false, "Disable the Broadcast Settings button from the options menu.");
-        DisableLANButton = config.getBoolean("DisableLANButton", categoryButtons, false, "Disable the Open to LAN button from the game menu.");
-        DisableSuperSecretSettings = config.getBoolean("DisableSuperSecretSettingsButton", categoryButtons, false, "Disable the Super Secret Settings button from the options menu.");
+        disableBroadcastSettings = config.getBoolean("DisableBroadcastSettingsButton", categoryButtons, false, "Disable the Broadcast Settings button from the options menu.");
+        disableLANButton = config.getBoolean("DisableLANButton", categoryButtons, false, "Disable the Open to LAN button from the game menu.");
+        disableSuperSecretSettings = config.getBoolean("DisableSuperSecretSettingsButton", categoryButtons, false, "Disable the Super Secret Settings button from the options menu.");
 
 		if(config.hasChanged()) {
 			config.save();
@@ -284,29 +284,6 @@ public class BugTorchConfig {
 		lanPortToUseForOverride = config.getInt("lanPortToUseForOverride", categoryTweaks, 25565, 1024 , 49151, "Port to use for lanPortOverride.");
 
 		//Update old config options
-		if(config.hasKey(categoryTweaks, "lanPortToUSeForOverride")) {
-			lanPortToUseForOverride = config.getInt("lanPortToUSeForOverride", categoryTweaks, 25565, 1024 , 49151, "");
-			config.getCategory(categoryTweaks).get("lanPortToUseForOverride").set(lanPortToUseForOverride);
-			config.getCategory(categoryTweaks).remove("lanPortToUSeForOverride");
-		}
-		if(config.hasKey(categoryBackport, "throwEnderPearlsInCrativeMode")) {
-			throwEnderPearlsInCreativeMode = config.getBoolean("throwEnderPearlsInCrativeMode", categoryBackport, true, "");
-			config.getCategory(categoryBackport).get("throwEnderPearlsInCrativeMode").set(throwEnderPearlsInCreativeMode);
-			config.getCategory(categoryBackport).remove("throwEnderPearlsInCrativeMode");
-		}
-		if(config.hasKey(categoryBugfixes, "fixShearedBlocksDropExtraItems")) {
-			boolean fixShearedBlocksDropExtraItems  = config.getBoolean("fixShearedBlocksDropExtraItems", categoryBackport, true, "");
-			config.getCategory(categoryBugfixes).get("fixShearedGrassDropDupe").set(fixShearedBlocksDropExtraItems);
-			config.getCategory(categoryBugfixes).get("fixShearedLeavesDropDupe").set(fixShearedBlocksDropExtraItems);
-			config.getCategory(categoryBugfixes).remove("fixShearedBlocksDropExtraItems");
-		}
-		if(config.hasKey(categoryTweaks, "farmlandImprovements")) {
-			boolean farmlandImprovements = config.getBoolean("farmlandImprovements", categoryTweaks, false, "");
-			config.getCategory(categoryTweaks).get("farmlandHydroponics").set(farmlandImprovements);
-			config.getCategory(categoryTweaks).get("farmlandNewTextures").set(farmlandImprovements);
-			config.getCategory(categoryTweaks).get("farmlandNoTrample").set(farmlandImprovements);
-			config.getCategory(categoryTweaks).remove("farmlandImprovements");
-		}
 
 		if(config.hasChanged()) {
 			config.save();
@@ -333,20 +310,6 @@ public class BugTorchConfig {
         scaledExtraUtilitiesDarknessDamageMaxHealthMult = config.getFloat("scaledExtraUtilitiesDarknessDamageMaxHealthMult", categoryTweaks, 0f, 0f, 1f, "Portion of max player health to remove each darkness tick.\nSet to 0 to disable.");
 
 		//Update old config options
-		if(config.hasKey(categoryBugfixes, "fixWitcheryLeavesShearDupeAndOptifineRendering")) {
-			boolean leafFix = config.getBoolean("fixWitcheryLeavesShearDupeAndOptifineRendering", categoryBugfixes, true, "");
-			config.getCategory(categoryBugfixes).get("fixWitcheryLeavesOptifineRendering").set(leafFix);
-			config.getCategory(categoryBugfixes).get("fixWitcheryLeavesShearDupe").set(leafFix);
-			config.getCategory(categoryBugfixes).remove("fixWitcheryLeavesShearDupeAndOptifineRendering");
-		}
-		if(config.hasKey(categoryTweaks, "proxyLLibraryPasebin")) {
-			proxyLLibraryPastebin = config.getBoolean("proxyLLibraryPasebin", categoryTweaks, true, "");
-			config.getCategory(categoryTweaks).get("proxyLLibraryPastebin").set(proxyLLibraryPastebin);
-			config.getCategory(categoryTweaks).remove("proxyLLibraryPasebin");
-		}
-		if(config.hasCategory("mod file names")) {
-			config.removeCategory(config.getCategory("mod file names"));
-		}
 
 		if(config.hasChanged()) {
 			config.save();
