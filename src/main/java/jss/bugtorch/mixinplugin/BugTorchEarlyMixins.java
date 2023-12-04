@@ -142,14 +142,16 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
         if(BugTorchConfig.fasterGetBlockByIdForAirBlocks) {
             mixins.add("minecraft.optimization.MixinBlock");
         }
-        if(BugTorchConfig.fasterOptionInteractions) {
-            if(useNotFineOverlap) {
-                mixins.add("minecraft.optimization.gamesettings.MixinFasterSetOptions");
+        if(!loadedCoreMods.contains("optifine.OptiFineForgeTweaker")) {
+            if(BugTorchConfig.fasterOptionInteractions) {
+                if(useNotFineOverlap) {
+                    mixins.add("minecraft.optimization.gamesettings.MixinFasterSetOptions");
+                }
+                mixins.add("minecraft.optimization.MixinGameSettings_Options");
             }
-            mixins.add("minecraft.optimization.MixinGameSettings_Options");
-        }
-        if(BugTorchConfig.fasterOptionLoading) {
-            mixins.add("minecraft.optimization.gamesettings.MixinFasterLoadOptions");
+            if(BugTorchConfig.fasterOptionLoading) {
+                mixins.add("minecraft.optimization.gamesettings.MixinFasterLoadOptions");
+            }
         }
         if(BugTorchConfig.fasterSnowBlockTicks) {
             mixins.add("minecraft.optimization.MixinBlockSnowBlock");
