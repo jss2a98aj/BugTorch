@@ -28,7 +28,7 @@ public abstract class MixinTileEntityTradingPost {
         return mature && (locationAlreadyChecked || getAABB().isVecInside(Vec3.createVectorHelper(entity.posX, entity.posY, entity.posZ)));
     }
 
-    @Shadow
+    @Shadow(remap = false)
     public AxisAlignedBB getAABB() { return null; }
 
 }
