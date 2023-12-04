@@ -6,12 +6,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
-import jss.bugtorch.listeners.BroadcastSettingsDisable;
-import jss.bugtorch.listeners.BroadcastSettingsRemover;
-import jss.bugtorch.listeners.LANButtonDisable;
-import jss.bugtorch.listeners.LANButtonRemover;
-import jss.bugtorch.listeners.SuperSecretSettingsDisable;
-import jss.bugtorch.listeners.SuperSecretSettingsRemover;
+import jss.bugtorch.listeners.ButtonManager;
 import jss.bugtorch.modsupport.ExtraUtilitiesSupport;
 import jss.bugtorch.modsupport.PamsTemperatePlantsSupport;
 import jss.bugtorch.modsupport.ThaumcraftSupport;
@@ -53,36 +48,13 @@ public class BugTorch {
         VanillaSupport.enableSupport();
 
         if(event.getSide() == Side.CLIENT) {
-            if(BugTorchConfig.removeBroadcastSettingsButton) {
-                FMLCommonHandler.instance().bus().register(BroadcastSettingsRemover.INSTANCE);
-                MinecraftForge.EVENT_BUS.register(BroadcastSettingsRemover.INSTANCE);
-            }
-            if(BugTorchConfig.removeLANButton) {
-                FMLCommonHandler.instance().bus().register(LANButtonRemover.INSTANCE);
-                MinecraftForge.EVENT_BUS.register(LANButtonRemover.INSTANCE);
-            }
-            if(BugTorchConfig.removeSuperSecretSettingsButton) {
-                FMLCommonHandler.instance().bus().register(SuperSecretSettingsRemover.INSTANCE);
-                MinecraftForge.EVENT_BUS.register(SuperSecretSettingsRemover.INSTANCE);
-            }
-            if(BugTorchConfig.disableBroadcastSettings) {
-                FMLCommonHandler.instance().bus().register(BroadcastSettingsDisable.INSTANCE);
-                MinecraftForge.EVENT_BUS.register(BroadcastSettingsDisable.INSTANCE);
-            }
-            if(BugTorchConfig.disableLANButton) {
-                FMLCommonHandler.instance().bus().register(LANButtonDisable.INSTANCE);
-                MinecraftForge.EVENT_BUS.register(LANButtonDisable.INSTANCE);
-            }
-            if(BugTorchConfig.disableSuperSecretSettings) {
-                FMLCommonHandler.instance().bus().register(SuperSecretSettingsDisable.INSTANCE);
-                MinecraftForge.EVENT_BUS.register(SuperSecretSettingsDisable.INSTANCE);
-            }
+            FMLCommonHandler.instance().bus().register(ButtonManager.INSTANCE);
+            MinecraftForge.EVENT_BUS.register(ButtonManager.INSTANCE);
         }
     }
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        // 👽
         String[] dyes = {
             "dyeBlack",
             "dyeRed",

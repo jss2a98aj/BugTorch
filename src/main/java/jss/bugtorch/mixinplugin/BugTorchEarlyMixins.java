@@ -244,8 +244,7 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
         if(BugTorchConfig.scaledWitherDamageMaxHealthFlat > 0f || BugTorchConfig.scaledWitherDamageMaxHealthMult > 0f) {
             mixins.add("minecraft.tweaks.potion.MixinsPotionWither");
         }
-
-        if (BugTorchConfig.patchArmorDyeRecipe) {
+        if (BugTorchConfig.useAnyDyeOnLeatherArmor) {
             mixins.add("minecraft.tweaks.MixinRecipeArmorDyes");
         }
 

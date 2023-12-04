@@ -16,13 +16,10 @@ public class BugTorchConfig {
 	public static boolean fixSnowBlocksRandomlyTicking;
 	public static boolean fixTorchBlocksRandomlyTicking;
 
-    //Buttons
-    public static boolean disableBroadcastSettings;
-    public static boolean disableLANButton;
-    public static boolean disableSuperSecretSettings;
-	public static boolean removeBroadcastSettingsButton;
-    public static boolean removeLANButton;
-    public static boolean removeSuperSecretSettingsButton;
+	//Base tweaks
+	public static int showBroadcastSettingsButton;
+	public static int showOpenToLanButton;
+	public static int showSuperSecretSettingsButton;
 
 	//Mod bugfixes
 	public static boolean fixExtraUtilitiesBlockSounds;
@@ -52,7 +49,7 @@ public class BugTorchConfig {
 	public static boolean fixFireChargeUseSound;
 	public static boolean fixLavaHissOnAirReplace;
 	public static boolean fixLeadsBreakingOnSomeFenceInstances;
-    public static boolean fixLeafDecayCheckRange;
+	public static boolean fixLeafDecayCheckRange;
 	public static boolean fixMergeItemStack;
 	public static boolean fixMineshaftAirPockets;
 	public static boolean fixNettyConnectionFailureResourceLeak;
@@ -118,7 +115,7 @@ public class BugTorchConfig {
 	public static float scaledWitherDamageMaxHealthFlat;
 	public static float scaledWitherDamageMaxHealthMult;
 
-    public static boolean patchArmorDyeRecipe;
+	public static boolean useAnyDyeOnLeatherArmor;
 
 	//Mixin mod bugfixes
 	public static boolean fixCrayfishFurnitureNullPointerException;
@@ -131,10 +128,10 @@ public class BugTorchConfig {
 
 	//Mixin mod tweaks
 	public static boolean disableCrayfishFurnitureAchievements;
-    public static boolean extraUtilitiesTradingPostVillageNamesNitwitFilter;
+	public static boolean extraUtilitiesTradingPostVillageNamesNitwitFilter;
 	public static boolean proxyLLibraryPastebin;
-    public static float scaledExtraUtilitiesDarknessDamageMaxHealthFlat;
-    public static float scaledExtraUtilitiesDarknessDamageMaxHealthMult;
+	public static float scaledExtraUtilitiesDarknessDamageMaxHealthFlat;
+	public static float scaledExtraUtilitiesDarknessDamageMaxHealthMult;
 
 	//Category names
 	static final String categoryBackport = "backported features";
@@ -142,8 +139,6 @@ public class BugTorchConfig {
 	static final String categoryOreDictionary = "ore dictionary";
 	static final String categoryPerformance = "performance improvements";
 	static final String categoryTweaks = "tweaks";
-
-    static final String categoryButtons = "buttons";
 
 	public static void loadBaseConfig(File configFile) {
 		Configuration config = new Configuration(configFile);
@@ -158,13 +153,18 @@ public class BugTorchConfig {
 		fixSnowBlocksRandomlyTicking = config.getBoolean("fixSnowBlocksRandomlyTicking", categoryBugfixes, true, "Non-layered snow blocks will no longer randomly tick.\nFrom MC 1.14, fixes MC-88097");
 		fixTorchBlocksRandomlyTicking = config.getBoolean("fixTorchBlocksRandomlyTicking", categoryBugfixes, true, "Torch blocks will no longer randomly tick.");
 
-        //Buttons
-		removeBroadcastSettingsButton = config.getBoolean("removeBroadcastSettingsButton", categoryButtons, false, "Remove the Broadcast Settings button from the options menu.");
-        removeLANButton = config.getBoolean("removeLANButton", categoryButtons, false, "Remove the Open to LAN button from the game menu.");
-        removeSuperSecretSettingsButton = config.getBoolean("removeSuperSecretSettingsButton", categoryButtons, false, "Remove the Super Secret Settings button from the options menu.");
-        disableBroadcastSettings = config.getBoolean("DisableBroadcastSettingsButton", categoryButtons, false, "Disable the Broadcast Settings button from the options menu.");
-        disableLANButton = config.getBoolean("DisableLANButton", categoryButtons, false, "Disable the Open to LAN button from the game menu.");
-        disableSuperSecretSettings = config.getBoolean("DisableSuperSecretSettingsButton", categoryButtons, false, "Disable the Super Secret Settings button from the options menu.");
+		//Tweaks
+		showBroadcastSettingsButton = config.getInt("showBroadcastSettingsButton", categoryTweaks, 1, -1, 1, "Show (1), disable(0), or remove(-1) the Broadcast Settings button in the options menu.");
+		showOpenToLanButton = config.getInt("showOpenToLanButton", categoryTweaks, 1, -1, 1, "Show (1), disable(0), or remove(-1) the Open to LAN button in the escape menu.");
+		showSuperSecretSettingsButton = config.getInt("showSuperSecretSettingsButton", categoryTweaks, 1, -1, 1, "Show (1), disable(0), or remove(-1) the Super Secret Settings button in the options menu.");
+
+		//Update old config options
+		if(config.hasKey(categoryTweaks, "removeBroadcastSettingsButton")) {
+			boolean show = config.getBoolean("removeBroadcastSettingsButton", categoryTweaks, true, "");
+			showBroadcastSettingsButton = show ? 1 : -1;
+			config.getCategory(categoryTweaks).get("showBroadcastSettingsButton").set(show);
+			config.getCategory(categoryTweaks).remove("removeBroadcastSettingsButton");
+		}
 
 		if(config.hasChanged()) {
 			config.save();
@@ -210,9 +210,9 @@ public class BugTorchConfig {
 		fixEnchantmentBlendFunc = config.getBoolean("fixEnchantmentBlendFunc", categoryBugfixes, true, "Fixes rendering issues caused by enchantments changing glBlendFunc and never reverting it.");
 		fixFireChargeUseSound = config.getBoolean("fixFireChargeUseSound", categoryBugfixes, true, "Fire Charges have the correct use sound.\nFrom MC 1.8, fixes MC-1831");
 		fixLavaHissOnAirReplace = config.getBoolean("fixLavaHissOnAirReplace", categoryBugfixes, true, "Lava will only hiss when mixing with water.\nFrom MC 1.8, fixes MC-32301");
-        fixLeadsBreakingOnSomeFenceInstances = config.getBoolean("fixLeadsBreakingOnSomeFenceInstances", categoryBugfixes, true, "Fixes Leads breaking when placed on some modded fences.");
-        fixLeafDecayCheckRange = config.getBoolean("fixLeafDecayCheckRange", categoryBugfixes, true, "Stops vanilla and some modded leaves from decaying when part of some larger naturally occurring trees.");
-        fixMergeItemStack = config.getBoolean("fixMergeItemStack", categoryBugfixes, true, "Fixes edge case bugs when shift clicking item stacks.\nAn alternate version is used if CoFHCore is installed to fix dupes and item deletion it introduces.");
+		fixLeadsBreakingOnSomeFenceInstances = config.getBoolean("fixLeadsBreakingOnSomeFenceInstances", categoryBugfixes, true, "Fixes Leads breaking when placed on some modded fences.");
+		fixLeafDecayCheckRange = config.getBoolean("fixLeafDecayCheckRange", categoryBugfixes, true, "Stops vanilla and some modded leaves from decaying when part of some larger naturally occurring trees.");
+		fixMergeItemStack = config.getBoolean("fixMergeItemStack", categoryBugfixes, true, "Fixes edge case bugs when shift clicking item stacks.\nAn alternate version is used if CoFHCore is installed to fix dupes and item deletion it introduces.");
 		fixMineshaftAirPockets = config.getBoolean("fixMineshaftAirPockets", categoryBugfixes, true, "Fixes the air bubbles mineshafts create above their dirt rooms, affects all terrain but very noticeable in oceans.\\nThese air pockets were supposed to be in the dirt rooms so this also fixes the dirt rooms having blocked off entrances to some branches.\\nFrom MC 1.8, fixes MC-954");
 		fixMineshaftAirPockets = config.getBoolean("fixMineshaftAirPockets", categoryBugfixes, true, "Fixes the air bubbles mineshafts create above their dirt rooms, affects all terrain but very noticeable in oceans.\\nThese air pockets were supposed to be in the dirt rooms so this also fixes the dirt rooms having blocked off entrances to some branches.\\nFrom MC 1.8, fixes MC-954");
 		fixNettyConnectionFailureResourceLeak = config.getBoolean("fixNettyConnectionFailureResourceLeak", categoryBugfixes, true, "Fixes improperly terminated client connections sometimes causing a severe resource leak.");
@@ -226,8 +226,7 @@ public class BugTorchConfig {
 		fixStoneMonsterEggDoubleSpawns = config.getBoolean("fixStoneMonsterEggDoubleSpawns", categoryBugfixes, true, "Stone Monster Eggs only spawn one Silverfish when broken.\nFrom MC 1.8, fixes MC-31081");
 		fixStructureComponentDownfillReplacement = config.getBoolean("fixStructureComponentDownfillReplacement", categoryBugfixes, true, "Makes structure component downfilling also replace blocks flagged as replaceable.\nMostly prevents tall grass and flowers from embedding in structure foundations.");
 		fixVillagePathsHavePlantsOnTop = config.getBoolean("fixVillagePathsHavePlantsOnTop", categoryBugfixes, true, "Village paths will not have flowers or grass on top of them.\nFrom MC 1.10, fixes MC-3437");
-		fixVillagerTradeMetadataDetection = config.getBoolean("fixVillagerTradeMetadataDetection", categoryBugfixes, true, "Villager trades will respect metadata.\nCurrently unfinished and disabled internally.\nFrom MC 1.8");
-		fixVillagerTradeMetadataDetection = false;
+		fixVillagerTradeMetadataDetection = false; config.getBoolean("fixVillagerTradeMetadataDetection", categoryBugfixes, true, "Villager trades will respect metadata.\nCurrently unfinished and disabled internally.\nFrom MC 1.8");
 		fixVillageSieges = config.getBoolean("fixVillageSieges", categoryBugfixes, true, "Zombies will siege villages that are large enough at night.\nFrom MC 1.8, fixes MC-7432 and MC-7488");
 		fixVillageWellDesertMaterial = config.getBoolean("fixVillageWellDesertMaterial", categoryBugfixes, true, "Wells in desert villages will use the correct material.\nFrom MC 1.8, fixes MC-32514");
 
@@ -268,8 +267,8 @@ public class BugTorchConfig {
 		scaledDrowningDamageMaxHealthFlat = config.getFloat("scaledDrowningDamageMaxHealthFlat", categoryTweaks, 0f, 0f, 20000f, "Amount of flat player health to remove each drowning tick.\nSet to 0 to disable.");
 		scaledDrowningDamageMaxHealthMult = config.getFloat("scaledDrowningDamageMaxHealthMult", categoryTweaks, 0f, 0f, 1f, "Portion of max player health to remove each drowning tick.\nSet to 0 to disable.");
 		scaledFireDamageMaxHealthFlat = config.getFloat("scaledFireDamageMaxHealthFlat", categoryTweaks, 0f, 0f, 20000f, "Amount of flat player health to remove each fire tick.\nSet to 0 to disable.");
-        scaledFireDamageMaxHealthMult = config.getFloat("scaledFireDamageMaxHealthMult", categoryTweaks, 0f, 0f, 1f, "Portion of max player health to remove each fire tick.\nSet to 0 to disable.");
-        scaledLavaDamageMaxHealthFlat = config.getFloat("scaledLavaDamageMaxHealthFlat", categoryTweaks, 0f, 0f, 20000f, "Amount of flat player health to remove each lava tick.\nSet to 0 to disable.");
+		scaledFireDamageMaxHealthMult = config.getFloat("scaledFireDamageMaxHealthMult", categoryTweaks, 0f, 0f, 1f, "Portion of max player health to remove each fire tick.\nSet to 0 to disable.");
+		scaledLavaDamageMaxHealthFlat = config.getFloat("scaledLavaDamageMaxHealthFlat", categoryTweaks, 0f, 0f, 20000f, "Amount of flat player health to remove each lava tick.\nSet to 0 to disable.");
 		scaledLavaDamageMaxHealthMult = config.getFloat("scaledLavaDamageMaxHealthMult", categoryTweaks, 0f, 0f, 1f, "Portion of max player health to remove each lava tick.\nSet to 0 to disable.");
 		scaledPoisonDamageMaxHealthFlat = config.getFloat("scaledPoisonDamageMaxHealthFlat", categoryTweaks, 0f, 0f, 20000f, "Portion of max player health to remove each poison effect tick.\nSet to 0 to disable.");
 		scaledPoisonDamageMaxHealthMult = config.getFloat("scaledPoisonDamageMaxHealthMult", categoryTweaks, 0f, 0f, 1f, "Portion of max player health to remove each poison effect tick.\nSet to 0 to disable.");
@@ -279,13 +278,11 @@ public class BugTorchConfig {
 		scaledSuffocationDamageMaxHealthMult = config.getFloat("scaledSuffocationDamageMaxHealthMult", categoryTweaks, 0f, 0f, 1f, "Portion of max player health to remove each suffocation tick.\nSet to 0 to disable.");
 		scaledWitherDamageMaxHealthFlat = config.getFloat("scaledWitherDamageMaxHealthFlat", categoryTweaks, 0f, 0f, 20000f, "Portion of max player health to remove each wither effect tick.\nSet to 0 to disable.");
 		scaledWitherDamageMaxHealthMult = config.getFloat("scaledWitherDamageMaxHealthMult", categoryTweaks, 0f, 0f, 1f, "Portion of max player health to remove each wither effect tick.\nSet to 0 to disable.");
-
-        patchArmorDyeRecipe = config.getBoolean("patchArmorDyeRecipe", categoryTweaks, true, "Removes the hardcoded vanilla dye limitation from the vanilla recipe for dying Leather Armor.");
+		useAnyDyeOnLeatherArmor = config.getBoolean("useAnyDyeOnLeatherArmor", categoryTweaks, true, "Allows Leather Armor to be dyed using any properly tagged dye.");
 
 		lanPortToUseForOverride = config.getInt("lanPortToUseForOverride", categoryTweaks, 25565, 1024 , 49151, "Port to use for lanPortOverride.");
 
 		//Update old config options
-
 		if(config.hasChanged()) {
 			config.save();
 		}
@@ -305,10 +302,10 @@ public class BugTorchConfig {
 
 		//Tweaks
 		disableCrayfishFurnitureAchievements = config.getBoolean("disableCrayfishFurnitureAchievements", categoryTweaks, false, "Disables MrCrayfish's Furniture Mod achievements.");
-        extraUtilitiesTradingPostVillageNamesNitwitFilter = config.getBoolean("extraUtilitiesTradingPostVillageNamesNitwitFilter", categoryTweaks, true, "Filters Village Names Nitwit villagers from Extra Utilities Trading Post.");
-        proxyLLibraryPastebin = config.getBoolean("proxyLLibraryPastebin", categoryTweaks, false, "Use a pastebin proxy to keep LLibrary from crashing with some regional blocks.");
-        scaledExtraUtilitiesDarknessDamageMaxHealthFlat = config.getFloat("scaledExtraUtilitiesDarknessDamageMaxHealthFlat", categoryTweaks, 0f, 0f, 20000f, "Portion of max player health to remove each darkness tick.\nSet to 0 to disable.");
-        scaledExtraUtilitiesDarknessDamageMaxHealthMult = config.getFloat("scaledExtraUtilitiesDarknessDamageMaxHealthMult", categoryTweaks, 0f, 0f, 1f, "Portion of max player health to remove each darkness tick.\nSet to 0 to disable.");
+		extraUtilitiesTradingPostVillageNamesNitwitFilter = config.getBoolean("extraUtilitiesTradingPostVillageNamesNitwitFilter", categoryTweaks, true, "Filters Village Names Nitwit villagers from Extra Utilities Trading Post.");
+		proxyLLibraryPastebin = config.getBoolean("proxyLLibraryPastebin", categoryTweaks, false, "Use a pastebin proxy to keep LLibrary from crashing with some regional blocks.");
+		scaledExtraUtilitiesDarknessDamageMaxHealthFlat = config.getFloat("scaledExtraUtilitiesDarknessDamageMaxHealthFlat", categoryTweaks, 0f, 0f, 20000f, "Portion of max player health to remove each darkness tick.\nSet to 0 to disable.");
+		scaledExtraUtilitiesDarknessDamageMaxHealthMult = config.getFloat("scaledExtraUtilitiesDarknessDamageMaxHealthMult", categoryTweaks, 0f, 0f, 1f, "Portion of max player health to remove each darkness tick.\nSet to 0 to disable.");
 
 		//Update old config options
 
