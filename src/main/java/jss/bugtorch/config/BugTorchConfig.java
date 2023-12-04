@@ -52,6 +52,7 @@ public class BugTorchConfig {
 	public static boolean fixFireChargeUseSound;
 	public static boolean fixLavaHissOnAirReplace;
 	public static boolean fixLeadsBreakingOnSomeFenceInstances;
+    public static boolean fixLeafDecayCheckRange;
 	public static boolean fixMergeItemStack;
 	public static boolean fixMineshaftAirPockets;
 	public static boolean fixNettyConnectionFailureResourceLeak;
@@ -210,8 +211,8 @@ public class BugTorchConfig {
 		fixFireChargeUseSound = config.getBoolean("fixFireChargeUseSound", categoryBugfixes, true, "Fire Charges have the correct use sound.\nFrom MC 1.8, fixes MC-1831");
 		fixLavaHissOnAirReplace = config.getBoolean("fixLavaHissOnAirReplace", categoryBugfixes, true, "Lava will only hiss when mixing with water.\nFrom MC 1.8, fixes MC-32301");
         fixLeadsBreakingOnSomeFenceInstances = config.getBoolean("fixLeadsBreakingOnSomeFenceInstances", categoryBugfixes, true, "Fixes Leads breaking when placed on some modded fences.");
-
-		fixMergeItemStack = config.getBoolean("fixMergeItemStack", categoryBugfixes, true, "Fixes edge case bugs when shift clicking item stacks.\nAn alternate version is used if CoFHCore is installed to fix dupes and item deletion it introduces.");
+        fixLeafDecayCheckRange = config.getBoolean("fixLeafDecayCheckRange", categoryBugfixes, true, "Stops vanilla and some modded leaves from decaying when part of some larger naturally occurring trees.");
+        fixMergeItemStack = config.getBoolean("fixMergeItemStack", categoryBugfixes, true, "Fixes edge case bugs when shift clicking item stacks.\nAn alternate version is used if CoFHCore is installed to fix dupes and item deletion it introduces.");
 		fixMineshaftAirPockets = config.getBoolean("fixMineshaftAirPockets", categoryBugfixes, true, "Fixes the air bubbles mineshafts create above their dirt rooms, affects all terrain but very noticeable in oceans.\\nThese air pockets were supposed to be in the dirt rooms so this also fixes the dirt rooms having blocked off entrances to some branches.\\nFrom MC 1.8, fixes MC-954");
 		fixMineshaftAirPockets = config.getBoolean("fixMineshaftAirPockets", categoryBugfixes, true, "Fixes the air bubbles mineshafts create above their dirt rooms, affects all terrain but very noticeable in oceans.\\nThese air pockets were supposed to be in the dirt rooms so this also fixes the dirt rooms having blocked off entrances to some branches.\\nFrom MC 1.8, fixes MC-954");
 		fixNettyConnectionFailureResourceLeak = config.getBoolean("fixNettyConnectionFailureResourceLeak", categoryBugfixes, true, "Fixes improperly terminated client connections sometimes causing a severe resource leak.");

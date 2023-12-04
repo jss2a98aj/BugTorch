@@ -68,6 +68,9 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
         if(BugTorchConfig.fixLeadsBreakingOnSomeFenceInstances) {
             mixins.add("minecraft.fix.MixinEntityLeashKnot");
         }
+        if(BugTorchConfig.fixLeafDecayCheckRange) {
+            mixins.add("minecraft.fix.MixinBlockLeaves");
+        }
         if(BugTorchConfig.fixMergeItemStack) {
             if(loadedCoreMods.contains("cofh.asm.LoadingPlugin")) {
                 mixins.add("cofhcore.fix.MixinInventoryHelper");
