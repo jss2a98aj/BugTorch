@@ -1,5 +1,6 @@
 package jss.bugtorch.mixins.early.minecraft.worldgen;
 
+import net.minecraftforge.common.IPlantable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
@@ -34,18 +35,20 @@ public abstract class MixinStructureComponent {
      */
     @Overwrite()
     protected void func_151554_b(World world, Block block, int metadata, int x, int y, int z, StructureBoundingBox sbb) {
-        final int i1 = getXWithOffset(x, z);
-        int j1 = getYWithOffset(y);
-        final int k1 = getZWithOffset(x, z);
+        final int xWithOffset = getXWithOffset(x, z);
+        int yWithOffset = getYWithOffset(y);
+        final int zWithOffset = getZWithOffset(x, z);
 
-        if (sbb.isVecInside(i1, j1, k1)) {
+        if(sbb.isVecInside(xWithOffset, yWithOffset, zWithOffset)) {
             Material material;
+            Block otherBlock;
             boolean stopPointFound = false;
             do {
-                material = world.getBlock(i1, j1, k1).getMaterial();
-                if(j1 > 1 && (material.isReplaceable() || material.isLiquid() || world.isAirBlock(i1, j1, k1))) {
-                     world.setBlock(i1, j1, k1, block, metadata, 2);
-                     --j1;
+                otherBlock = world.getBlock(xWithOffset, yWithOffset, zWithOffset);
+                material = otherBlock.getMaterial();
+                if(yWithOffset > 1 && (material.isReplaceable() || material.isLiquid() || otherBlock instanceof IPlantable || world.isAirBlock(xWithOffset, yWithOffset, zWithOffset))) {
+                     world.setBlock(xWithOffset, yWithOffset, zWithOffset, otherBlock, metadata, 2);
+                     --yWithOffset;
                 } else {
                     stopPointFound = true;
                 }
