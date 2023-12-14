@@ -40,15 +40,15 @@ public abstract class MixinStructureComponent {
         final int zWithOffset = getZWithOffset(x, z);
 
         if(sbb.isVecInside(xWithOffset, yWithOffset, zWithOffset)) {
-            Material material;
             Block otherBlock;
+            Material material;
             boolean stopPointFound = false;
             do {
                 otherBlock = world.getBlock(xWithOffset, yWithOffset, zWithOffset);
                 material = otherBlock.getMaterial();
                 if(yWithOffset > 1 && (material.isReplaceable() || material.isLiquid() || otherBlock instanceof IPlantable || world.isAirBlock(xWithOffset, yWithOffset, zWithOffset))) {
-                     world.setBlock(xWithOffset, yWithOffset, zWithOffset, otherBlock, metadata, 2);
-                     --yWithOffset;
+                    world.setBlock(xWithOffset, yWithOffset, zWithOffset, block, metadata, 2);
+                    --yWithOffset;
                 } else {
                     stopPointFound = true;
                 }
