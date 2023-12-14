@@ -16,17 +16,18 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(RecipesArmorDyes.class)
+@Mixin(value = RecipesArmorDyes.class, priority = 1100)
 public abstract class MixinRecipeArmorDyes {
     @Inject(method = "matches", at = @At("HEAD"), cancellable = true)
-    public void matchBetter(InventoryCrafting inv, World world, CallbackInfoReturnable<Boolean> ctx) {
+    public void recipesArmorDyesMatchBetter(InventoryCrafting inv, World world, CallbackInfoReturnable<Boolean> ctx) {
         boolean hasArmor = false, hasDye = false;
 
         for (int i = 0; i < inv.getSizeInventory(); i++) {
             ItemStack stack = inv.getStackInSlot(i);
-            //the ide has no idea how vital this llwyd continue is
-            if (stack == null) continue;
-            else if (stack.getItem() instanceof ItemArmor && !hasArmor && ((ItemArmor) stack.getItem()).getArmorMaterial() == ItemArmor.ArmorMaterial.CLOTH) {
+            //the ide has no idea how vital this continue is
+            if (stack == null) {
+                continue;
+            } else if (stack.getItem() instanceof ItemArmor && !hasArmor && ((ItemArmor) stack.getItem()).getArmorMaterial() == ItemArmor.ArmorMaterial.CLOTH) {
                 hasArmor = true;
             } else {
                 boolean pass = false;
@@ -46,16 +47,16 @@ public abstract class MixinRecipeArmorDyes {
     }
 
     @Redirect(method = "getCraftingResult", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;getItem()Lnet/minecraft/item/Item;", ordinal = 2))
-    public Item pretendo64(ItemStack stack) {
+    public Item recipesArmorDyesPreventEarlyReturn(ItemStack stack) {
         //early return prevention
         return Items.dye;
     }
 
     @Redirect(method = "getCraftingResult", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;getItemDamage()I"))
-    public int spinTheWheelAndLaughAtGod(ItemStack stack) {
+    public int recipesArmorDyesMatchDyeToColorMeta(ItemStack stack) {
         int[] od = OreDictionary.getOreIDs(stack);
         for (int i = 0; i < BugTorch.dyeOreIds.length; i++) {
-            if (ArrayUtils.contains(od, BugTorch.dyeOreIds[i])) return i;
+            if(ArrayUtils.contains(od, BugTorch.dyeOreIds[i])) return i;
         }
         return 15;
     }
