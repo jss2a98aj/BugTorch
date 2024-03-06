@@ -272,13 +272,13 @@ public class BugTorchConfig {
 		scaledFireDamageMaxHealthMult = config.getFloat("scaledFireDamageMaxHealthMult", categoryTweaks, 0f, 0f, 1f, "Portion of max player health to remove each fire tick.\nSet to 0 to disable.");
 		scaledLavaDamageMaxHealthFlat = config.getFloat("scaledLavaDamageMaxHealthFlat", categoryTweaks, 0f, 0f, 20000f, "Amount of flat player health to remove each lava tick.\nSet to 0 to disable.");
 		scaledLavaDamageMaxHealthMult = config.getFloat("scaledLavaDamageMaxHealthMult", categoryTweaks, 0f, 0f, 1f, "Portion of max player health to remove each lava tick.\nSet to 0 to disable.");
-		scaledPoisonDamageMaxHealthFlat = config.getFloat("scaledPoisonDamageMaxHealthFlat", categoryTweaks, 0f, 0f, 20000f, "Portion of max player health to remove each poison effect tick.\nSet to 0 to disable.");
+		scaledPoisonDamageMaxHealthFlat = config.getFloat("scaledPoisonDamageMaxHealthFlat", categoryTweaks, 0f, 0f, 20000f, "Amount of flat player health to remove each poison effect tick.\nSet to 0 to disable.");
 		scaledPoisonDamageMaxHealthMult = config.getFloat("scaledPoisonDamageMaxHealthMult", categoryTweaks, 0f, 0f, 1f, "Portion of max player health to remove each poison effect tick.\nSet to 0 to disable.");
 		scaledStarvationDamageMaxHealthFlat = config.getFloat("scaledStarvationDamageMaxHealthFlat", categoryTweaks, 0f, 0f, 20000f, "Amount of flat player health to remove each starvation tick.\nSet to 0 to disable.");
 		scaledStarvationDamageMaxHealthMult = config.getFloat("scaledStarvationDamageMaxHealthMult", categoryTweaks, 0f, 0f, 1f, "Portion of max player health to remove each starvation tick.\nSet to 0 to disable.");
-		scaledSuffocationDamageMaxHealthFlat = config.getFloat("scaledSuffocationDamageMaxHealthFlat", categoryTweaks, 0f, 0f, 20000f, "Portion of max player health to remove each suffocation tick.\nSet to 0 to disable.");
+		scaledSuffocationDamageMaxHealthFlat = config.getFloat("scaledSuffocationDamageMaxHealthFlat", categoryTweaks, 0f, 0f, 20000f, "Amount of flat player health to remove each suffocation tick.\nSet to 0 to disable.");
 		scaledSuffocationDamageMaxHealthMult = config.getFloat("scaledSuffocationDamageMaxHealthMult", categoryTweaks, 0f, 0f, 1f, "Portion of max player health to remove each suffocation tick.\nSet to 0 to disable.");
-		scaledWitherDamageMaxHealthFlat = config.getFloat("scaledWitherDamageMaxHealthFlat", categoryTweaks, 0f, 0f, 20000f, "Portion of max player health to remove each wither effect tick.\nSet to 0 to disable.");
+		scaledWitherDamageMaxHealthFlat = config.getFloat("scaledWitherDamageMaxHealthFlat", categoryTweaks, 0f, 0f, 20000f, "Amount of flat player health to remove each wither effect tick.\nSet to 0 to disable.");
 		scaledWitherDamageMaxHealthMult = config.getFloat("scaledWitherDamageMaxHealthMult", categoryTweaks, 0f, 0f, 1f, "Portion of max player health to remove each wither effect tick.\nSet to 0 to disable.");
 		useAnyDyeOnLeatherArmor = config.getBoolean("useAnyDyeOnLeatherArmor", categoryTweaks, true, "Allows Leather Armor to be dyed using any properly tagged dye.");
 
@@ -306,7 +306,7 @@ public class BugTorchConfig {
 		disableCrayfishFurnitureAchievements = config.getBoolean("disableCrayfishFurnitureAchievements", categoryTweaks, false, "Disables MrCrayfish's Furniture Mod achievements.");
 		extraUtilitiesTradingPostVillageNamesNitwitFilter = config.getBoolean("extraUtilitiesTradingPostVillageNamesNitwitFilter", categoryTweaks, true, "Filters Village Names Nitwit villagers from Extra Utilities Trading Post.");
 		proxyLLibraryPastebin = config.getBoolean("proxyLLibraryPastebin", categoryTweaks, false, "Use a pastebin proxy to keep LLibrary from crashing with some regional blocks.");
-		scaledExtraUtilitiesDarknessDamageMaxHealthFlat = config.getFloat("scaledExtraUtilitiesDarknessDamageMaxHealthFlat", categoryTweaks, 0f, 0f, 20000f, "Portion of max player health to remove each darkness tick.\nSet to 0 to disable.");
+		scaledExtraUtilitiesDarknessDamageMaxHealthFlat = config.getFloat("scaledExtraUtilitiesDarknessDamageMaxHealthFlat", categoryTweaks, 0f, 0f, 20000f, "Amount of flat player health to remove each darkness tick.\nSet to 0 to disable.");
 		scaledExtraUtilitiesDarknessDamageMaxHealthMult = config.getFloat("scaledExtraUtilitiesDarknessDamageMaxHealthMult", categoryTweaks, 0f, 0f, 1f, "Portion of max player health to remove each darkness tick.\nSet to 0 to disable.");
 
 		//Update old config options
