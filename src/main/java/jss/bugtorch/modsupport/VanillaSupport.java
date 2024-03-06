@@ -29,6 +29,10 @@ public class VanillaSupport {
 			Blocks.light_weighted_pressure_plate.setStepSound(Block.soundTypeMetal);
 		}
 
+        if(BugTorchConfig.fixCarpetBlocksRandomlyTicking) {
+            Blocks.carpet.setTickRandomly(false);
+        }
+
 		if(BugTorchConfig.fixJackOLanternBlocksRandomlyTicking) {
 			Blocks.lit_pumpkin.setTickRandomly(false);
 		}

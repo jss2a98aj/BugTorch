@@ -11,6 +11,7 @@ public class BugTorchConfig {
 
 	//Base bugfixes
 	public static boolean fixBlockSounds;
+    public static boolean fixCarpetBlocksRandomlyTicking;
 	public static boolean fixJackOLanternBlocksRandomlyTicking;
 	public static boolean fixPumpkinBlocksRandomlyTicking;
 	public static boolean fixSnowBlocksRandomlyTicking;
@@ -148,6 +149,7 @@ public class BugTorchConfig {
 
 		//Bugfixes
 		fixBlockSounds = config.getBoolean("fixBlockSounds", categoryBugfixes, true, "Assigns the correct sound types to some blocks.");
+		fixCarpetBlocksRandomlyTicking = config.getBoolean("fixCarpetBlocksRandomlyTicking", categoryBugfixes, true, "Carpet blocks will no longer randomly tick.");
 		fixJackOLanternBlocksRandomlyTicking = config.getBoolean("fixJackOLanternBlocksRandomlyTicking", categoryBugfixes, true, "Jack O' Lantern blocks will no longer randomly tick.");
 		fixPumpkinBlocksRandomlyTicking = config.getBoolean("fixPumpkinBlocksRandomlyTicking", categoryBugfixes, true, "Pumpkin blocks will no longer randomly tick.");
 		fixSnowBlocksRandomlyTicking = config.getBoolean("fixSnowBlocksRandomlyTicking", categoryBugfixes, true, "Non-layered snow blocks will no longer randomly tick.\nFrom MC 1.14, fixes MC-88097");
