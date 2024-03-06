@@ -1,5 +1,7 @@
 package jss.bugtorch.mixins.early.minecraft.worldgen;
 
+import net.minecraft.block.BlockLog;
+import net.minecraft.init.Blocks;
 import net.minecraftforge.common.IPlantable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -14,46 +16,60 @@ import net.minecraft.world.gen.structure.StructureComponent;
 @Mixin(value = StructureComponent.class)
 public abstract class MixinStructureComponent {
 
-    @Shadow
-    protected int getXWithOffset(int x, int z) {
-        return 0;
-    }
-
-    @Shadow
-    protected int getYWithOffset(int y) {
-        return 0;
-    }
-
-    @Shadow
-    protected int getZWithOffset(int x, int z) {
-        return 0;
-    }
-
     /**
      * @author jss2a98aj
      * @reason Makes func_151554_b replace blocks that are considered replaceable.
      */
     @Overwrite()
-    protected void func_151554_b(World world, Block block, int metadata, int x, int y, int z, StructureBoundingBox sbb) {
-        final int xWithOffset = getXWithOffset(x, z);
-        int yWithOffset = getYWithOffset(y);
-        final int zWithOffset = getZWithOffset(x, z);
+    protected void func_151554_b(World world, Block block, int metadata, int structX, int structY, int structZ, StructureBoundingBox sbb) {
+        final int x = getXWithOffset(structX, structZ);
+        int y = getYWithOffset(structY);
+        final int z = getZWithOffset(structX, structZ);
 
-        if(sbb.isVecInside(xWithOffset, yWithOffset, zWithOffset)) {
+        if(sbb.isVecInside(x, y, z)) {
             Block otherBlock;
             Material material;
-            boolean stopPointFound = false;
             do {
-                otherBlock = world.getBlock(xWithOffset, yWithOffset, zWithOffset);
+                otherBlock = world.getBlock(x, y, z);
                 material = otherBlock.getMaterial();
-                if(yWithOffset > 1 && (material.isReplaceable() || material.isLiquid() || otherBlock instanceof IPlantable || world.isAirBlock(xWithOffset, yWithOffset, zWithOffset))) {
-                    world.setBlock(xWithOffset, yWithOffset, zWithOffset, block, metadata, 2);
-                    --yWithOffset;
+                if(y > 1 && (material.isReplaceable() || material.isLiquid() || otherBlock instanceof IPlantable || world.isAirBlock(x, y, z))) {
+                    world.setBlock(x, y, z, block, metadata, 2);
+                    --y;
                 } else {
-                    stopPointFound = true;
+                    break;
                 }
-            } while(!stopPointFound);
+            } while(true);
         }
     }
+
+    /**
+     * @author jss2a98aj
+     * @reason Makes clearCurrentPositionBlocksUpwards treat logs and leaves as air.
+     */
+    @Overwrite()
+    protected void clearCurrentPositionBlocksUpwards(World world, int structX, int structY, int structZ, StructureBoundingBox sbb) {
+        final int x = this.getXWithOffset(structX, structZ);
+        int y = this.getYWithOffset(structY);
+        final int z = this.getZWithOffset(structX, structZ);
+
+        if(!sbb.isVecInside(x, y, z)) {
+            return;
+        }
+        while(y < 255) {
+            Block block = world.getBlock(x, y, z);
+            if(block.isAir(world, x, y, z) || block.isLeaves(world, x, y, z) || block instanceof BlockLog || block.getMaterial() == Material.vine) {
+                return;
+            }
+            world.setBlock(x, y, z, Blocks.air, 0, 2);
+            ++y;
+        }
+    }
+
+    @Shadow
+    protected abstract int getXWithOffset(int x, int z);
+    @Shadow
+    protected abstract int getYWithOffset(int y);
+    @Shadow
+    protected abstract int getZWithOffset(int x, int z);
 
 }

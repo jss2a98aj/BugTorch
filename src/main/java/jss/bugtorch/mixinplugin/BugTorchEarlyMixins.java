@@ -97,7 +97,7 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
         if(BugTorchConfig.fixStoneMonsterEggDoubleSpawns) {
             mixins.add("minecraft.fix.MixinBlockSilverfish");
         }
-        if(BugTorchConfig.fixStructureComponentDownfillReplacement) {
+        if(BugTorchConfig.fixStructureComponentFillReplacement) {
             mixins.add("minecraft.worldgen.MixinStructureComponent");
         }
         if(BugTorchConfig.fixShearedGrassDropDupe) {
@@ -188,6 +188,9 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
         //Tweaks
         if(client && useNotFineOverlap && BugTorchConfig.enchantmentParticlesForPowerAboveZero) {
             mixins.add("minecraft.rendering.MixinBlockEnchantmentTable");
+        }
+        if(BugTorchConfig.excludeLogsFromTopSolidOrLiquidBlock) {
+            mixins.add("minecraft.worldgen.MixinWorld");
         }
         if(BugTorchConfig.farmlandHydroponics) {
             mixins.add("minecraft.tweaks.blockfarmland.MixinHydroponics");
