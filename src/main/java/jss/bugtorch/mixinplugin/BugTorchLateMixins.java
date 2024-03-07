@@ -46,6 +46,7 @@ public class BugTorchLateMixins implements ILateMixinLoader {
             BugTorchConfig.fixWitcheryLeavesOptifineRendering = false;
         }
         if(!loadedMods.contains("ExtraUtilities")) {
+            BugTorchConfig.extraUtilitiesGoldenLassoBlacklist = new String[0];
             BugTorchConfig.extraUtilitiesTradingPostVillageNamesNitwitFilter = false;
             BugTorchConfig.scaledExtraUtilitiesDarknessDamageMaxHealthFlat = 0;
             BugTorchConfig.scaledExtraUtilitiesDarknessDamageMaxHealthMult = 0;
@@ -89,6 +90,9 @@ public class BugTorchLateMixins implements ILateMixinLoader {
         //Mod tweaks
         if(BugTorchConfig.disableCrayfishFurnitureAchievements) {
             mixins.add("crayfishfurniture.tweak.MixinFurnitureAchievements");
+        }
+        if(BugTorchConfig.extraUtilitiesGoldenLassoBlacklist.length > 0) {
+            mixins.add("extrautils.tweaks.MixinItemGoldenLasso");
         }
         if(BugTorchConfig.extraUtilitiesTradingPostVillageNamesNitwitFilter) {
             mixins.add("extrautils.tweaks.MixinTileEntityTradingPost");

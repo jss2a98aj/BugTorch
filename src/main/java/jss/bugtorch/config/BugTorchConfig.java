@@ -131,6 +131,7 @@ public class BugTorchConfig {
 	//Mixin mod tweaks
 	public static boolean disableCrayfishFurnitureAchievements;
 	public static boolean extraUtilitiesTradingPostVillageNamesNitwitFilter;
+    public static String[] extraUtilitiesGoldenLassoBlacklist;
 	public static boolean proxyLLibraryPastebin;
 	public static float scaledExtraUtilitiesDarknessDamageMaxHealthFlat;
 	public static float scaledExtraUtilitiesDarknessDamageMaxHealthMult;
@@ -311,6 +312,9 @@ public class BugTorchConfig {
 
 		//Tweaks
 		disableCrayfishFurnitureAchievements = config.getBoolean("disableCrayfishFurnitureAchievements", categoryTweaks, false, "Disables MrCrayfish's Furniture Mod achievements.");
+		extraUtilitiesGoldenLassoBlacklist = config.getStringList("extraUtilitiesGoldenLassoBlacklist", categoryTweaks, new String[] {
+			"noppes.npcs.entity.EntityCustomNpc"
+		}, "Blacklist entities from Extra Utilities Golden Lasso.");
 		extraUtilitiesTradingPostVillageNamesNitwitFilter = config.getBoolean("extraUtilitiesTradingPostVillageNamesNitwitFilter", categoryTweaks, true, "Filters Village Names Nitwit villagers from Extra Utilities Trading Post.");
 		proxyLLibraryPastebin = config.getBoolean("proxyLLibraryPastebin", categoryTweaks, false, "Use a pastebin proxy to keep LLibrary from crashing with some regional blocks.");
 		scaledExtraUtilitiesDarknessDamageMaxHealthFlat = config.getFloat("scaledExtraUtilitiesDarknessDamageMaxHealthFlat", categoryTweaks, 0f, 0f, 20000f, "Amount of flat player health to remove each darkness tick.\nSet to 0 to disable.");
