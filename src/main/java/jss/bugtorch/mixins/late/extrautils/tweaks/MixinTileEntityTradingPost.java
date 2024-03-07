@@ -29,6 +29,6 @@ public abstract class MixinTileEntityTradingPost {
     }
 
     @Shadow(remap = false)
-    public AxisAlignedBB getAABB() { return null; }
+    public abstract AxisAlignedBB getAABB();
 
 }
