@@ -2,6 +2,7 @@ package jss.bugtorch.mixins.early.minecraft.worldgen;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
+import net.minecraft.block.material.Material;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
@@ -19,11 +20,12 @@ public abstract class MixinWorld implements IBlockAccess {
     @Overwrite
 	public int getTopSolidOrLiquidBlock(int x, int z) {
 		Chunk chunk = getChunkFromBlockCoords(x, z);
-		int chunkX = x &= 15;
-		int chunkZ = z &= 15;
+		int chunkX = x & 15;
+		int chunkZ = z & 15;
 		for(int y = chunk.getTopFilledSegment() + 15; y > 0; --y) {
 			Block block = chunk.getBlock(chunkX, y, chunkZ);
-			if(block.getMaterial().blocksMovement() && !block.isLeaves(this, x, y, z) && !block.isFoliage(this, x, y, z) && !(block instanceof BlockLog)) {
+            Material material = block.getMaterial();
+			if(material.isLiquid() || (material.blocksMovement() && !material.isReplaceable() && !block.isLeaves(this, x, y, z) && !block.isFoliage(this, x, y, z) && !(block instanceof BlockLog))) {
 				return y + 1;
 			}
 		}
