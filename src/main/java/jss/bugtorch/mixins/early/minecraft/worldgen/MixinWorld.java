@@ -25,7 +25,7 @@ public abstract class MixinWorld implements IBlockAccess {
 		for(int y = chunk.getTopFilledSegment() + 15; y > 0; --y) {
 			Block block = chunk.getBlock(chunkX, y, chunkZ);
             Material material = block.getMaterial();
-			if(material.blocksMovement() && !material.isReplaceable() && !block.isLeaves(this, x, y, z) && !block.isFoliage(this, x, y, z) && !(block instanceof BlockLog)) {
+			if(material.blocksMovement() && !material.isReplaceable() && !block.isLeaves(this, x, y, z) && !block.isFoliage(this, x, y, z) && !block.isWood(this, x, y, z)) {
 				return y + 1;
 			}
 		}
