@@ -39,14 +39,14 @@ public abstract class MixinBlockHopper extends BlockContainer {
 			for (int slot = 0; slot < tileEntityHopper.getSizeInventory(); ++slot) {
 				ItemStack itemStack = tileEntityHopper.getStackInSlot(slot);
 				if (itemStack != null) {
-					float randX = this.field_149922_a.nextFloat() * 0.8F + 0.1F;
-					float randY = this.field_149922_a.nextFloat() * 0.8F + 0.1F;
-					float randZ = this.field_149922_a.nextFloat() * 0.8F + 0.1F;
-					EntityItem entityitem = new EntityItem(world, (double) ((float) x + randX), (double) ((float) y + randY), (double) ((float) z + randZ), itemStack);
+					float randX = field_149922_a.nextFloat() * 0.8F + 0.1F;
+					float randY = field_149922_a.nextFloat() * 0.8F + 0.1F;
+					float randZ = field_149922_a.nextFloat() * 0.8F + 0.1F;
+					EntityItem entityitem = new EntityItem(world, (float) x + randX, (float) y + randY, (float) z + randZ, itemStack);
 					float motionMult = 0.05F;
-					entityitem.motionX = (double) ((float) this.field_149922_a.nextGaussian() * motionMult);
-					entityitem.motionY = (double) ((float) this.field_149922_a.nextGaussian() * motionMult + 0.2F);
-					entityitem.motionZ = (double) ((float) this.field_149922_a.nextGaussian() * motionMult);
+					entityitem.motionX = (float) field_149922_a.nextGaussian() * motionMult;
+					entityitem.motionY = (float) field_149922_a.nextGaussian() * motionMult + 0.2F;
+					entityitem.motionZ = (float) field_149922_a.nextGaussian() * motionMult;
 					if (itemStack.hasTagCompound()) {
 						entityitem.getEntityItem().setTagCompound((NBTTagCompound) itemStack.getTagCompound().copy());
 					}

@@ -17,18 +17,18 @@ public abstract class MixinsPotionWither {
      * @reason Makes wither effect damage scale with max health.
      */
     @Redirect(
-            method = "performEffect",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/entity/EntityLivingBase;attackEntityFrom(Lnet/minecraft/util/DamageSource;F)Z",
-                    ordinal = 1
-            )
+        method = "performEffect",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/entity/EntityLivingBase;attackEntityFrom(Lnet/minecraft/util/DamageSource;F)Z",
+            ordinal = 1
+        )
     )
     private boolean bugTorch$scalingWitherEffectDamage(EntityLivingBase entity, DamageSource source, float damage) {
         return entity.attackEntityFrom(source,
-                (entity instanceof EntityPlayer)
-                        ? BugTorchConfig.scaledWitherDamageMaxHealthMult * entity.getMaxHealth() + BugTorchConfig.scaledWitherDamageMaxHealthFlat
-                        : damage);
+            (entity instanceof EntityPlayer)
+                ? BugTorchConfig.scaledWitherDamageMaxHealthMult * entity.getMaxHealth() + BugTorchConfig.scaledWitherDamageMaxHealthFlat
+                : damage);
     }
 
 }

@@ -26,12 +26,12 @@ public abstract class MixinsPotionPoison {
     )
     private boolean bugTorch$scalingWitherEffectDamage(EntityLivingBase entity, DamageSource source, float damage) {
         return entity.attackEntityFrom(source,
-                (entity instanceof EntityPlayer)
-                        ? Math.min(
-                                BugTorchConfig.scaledPoisonDamageMaxHealthMult * entity.getMaxHealth() + BugTorchConfig.scaledPoisonDamageMaxHealthFlat,
-                                entity.getHealth() - 1f
-                        )
-                        : damage);
+            (entity instanceof EntityPlayer)
+                ? Math.min(
+                    BugTorchConfig.scaledPoisonDamageMaxHealthMult * entity.getMaxHealth() + BugTorchConfig.scaledPoisonDamageMaxHealthFlat,
+                        entity.getHealth() - 1f
+                    )
+                : damage);
     }
 
 }

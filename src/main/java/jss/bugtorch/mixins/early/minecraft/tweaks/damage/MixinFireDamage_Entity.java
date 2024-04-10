@@ -16,11 +16,11 @@ public abstract class MixinFireDamage_Entity {
      * @reason Makes fire damage scale with max health.
      */
     @Redirect(
-            method = "onEntityUpdate()V",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/entity/Entity;attackEntityFrom(Lnet/minecraft/util/DamageSource;F)Z"
-            )
+        method = "onEntityUpdate()V",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/entity/Entity;attackEntityFrom(Lnet/minecraft/util/DamageSource;F)Z"
+        )
     )
     private boolean bugTorch$scalingFireDamage(Entity entity, DamageSource source, float damage) {
         return bugTorch$doFireDamage();

@@ -20,7 +20,7 @@ public abstract class MixinStructureMineshaftPieces$Room extends StructureCompon
 	 * Used to move Mineshaft air pockets to the intended place.
 	 */
 	public void offset(int x, int y, int z) {
-	    for(StructureBoundingBox bb : (List<StructureBoundingBox>)roomsLinkedToTheRoom) {
+	    for(StructureBoundingBox bb : roomsLinkedToTheRoom) {
 	        bb.offset(x, y, z);
 	    }
 	}

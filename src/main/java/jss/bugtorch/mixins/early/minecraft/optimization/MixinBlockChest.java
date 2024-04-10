@@ -39,15 +39,14 @@ public abstract class MixinBlockChest extends BlockContainer {
 			for (int slot = 0; slot < tileEntityChest.getSizeInventory(); ++slot) {
 				ItemStack itemStack = tileEntityChest.getStackInSlot(slot);
 				if (itemStack != null) {
-					float randX = this.field_149955_b.nextFloat() * 0.8F + 0.1F;
-					float randY = this.field_149955_b.nextFloat() * 0.8F + 0.1F;
-					float randZ = this.field_149955_b.nextFloat() * 0.8F + 0.1F;
-					EntityItem entityitem = new EntityItem(world, (double) ((float) x + randX),
-							(double) ((float) y + randY), (double) ((float) z + randZ), itemStack);
+					float randX = field_149955_b.nextFloat() * 0.8F + 0.1F;
+					float randY = field_149955_b.nextFloat() * 0.8F + 0.1F;
+					float randZ = field_149955_b.nextFloat() * 0.8F + 0.1F;
+					EntityItem entityitem = new EntityItem(world,(float) x + randX, (float) y + randY, (float) z + randZ, itemStack);
 					float motionMult = 0.05F;
-					entityitem.motionX = (double) ((float) this.field_149955_b.nextGaussian() * motionMult);
-					entityitem.motionY = (double) ((float) this.field_149955_b.nextGaussian() * motionMult + 0.2F);
-					entityitem.motionZ = (double) ((float) this.field_149955_b.nextGaussian() * motionMult);
+					entityitem.motionX = (float) field_149955_b.nextGaussian() * motionMult;
+					entityitem.motionY = (float) field_149955_b.nextGaussian() * motionMult + 0.2F;
+					entityitem.motionZ = (float) field_149955_b.nextGaussian() * motionMult;
 					if (itemStack.hasTagCompound()) {
 						entityitem.getEntityItem().setTagCompound((NBTTagCompound) itemStack.getTagCompound().copy());
 					}
