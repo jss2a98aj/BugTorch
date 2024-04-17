@@ -29,6 +29,7 @@ public class BugTorchLateMixins implements ILateMixinLoader {
             BugTorchConfig.fixGanysSurfaceOpenTrapdoorBackTexture = false;
         }
         if(!loadedMods.contains("llibrary")) {
+            BugTorchConfig.fixLLibraryMalformedJsonCrash = false;
             BugTorchConfig.proxyLLibraryPastebin = false;
         }
         if(!loadedMods.contains("Thaumcraft")) {
@@ -68,6 +69,9 @@ public class BugTorchLateMixins implements ILateMixinLoader {
         if(client && BugTorchConfig.fixGanysSurfaceOpenTrapdoorBackTexture) {
             mixins.add("ganyssurface.rendering.MixinBlockWoodTrapdoor");
         }
+        if(BugTorchConfig.fixLLibraryMalformedJsonCrash && !BugTorchConfig.proxyLLibraryPastebin) {
+            mixins.add("llibrary.fix.MixinWebUtils");
+        }
         if(BugTorchConfig.fixThaumcraftCandleColorArrayOutOfBounds) {
             if(client) {
                 mixins.add("thaumcraft.sanitizearrayaccess.MixinBlockCandleRenderer");
@@ -98,7 +102,7 @@ public class BugTorchLateMixins implements ILateMixinLoader {
             mixins.add("extrautils.tweaks.MixinTileEntityTradingPost");
         }
         if(BugTorchConfig.proxyLLibraryPastebin) {
-            mixins.add("llibrary.fix.MixinWebUtils");
+            mixins.add("llibrary.tweak.MixinWebUtils");
         }
         if(BugTorchConfig.scaledExtraUtilitiesDarknessDamageMaxHealthFlat > 0f || BugTorchConfig.scaledExtraUtilitiesDarknessDamageMaxHealthMult > 0f) {
             mixins.add("extrautils.tweaks.damage.MixinDarknessDamage");

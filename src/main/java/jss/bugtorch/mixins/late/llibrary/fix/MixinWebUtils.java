@@ -5,28 +5,19 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
-import java.util.List;
-
 @Mixin(value = WebUtils.class, remap = false)
 public abstract class MixinWebUtils {
 
-
     /**
      * @author jss2a98aj
-     * @reason Fixes a crash caused by invalid data being provided from regional blocks.
+     * @reason Fixes a crash caused by invalid data being provided for unknown reasons.
      */
     @Overwrite
     public static String readPastebin(String pasteID) {
-        return readURL("http://pastebinp.com/raw.php?i=" + pasteID);
-    }
-
-    /**
-     * @author jss2a98aj
-     * @reason Fixes a crash caused by invalid data being provided from regional blocks.
-     */
-    @Overwrite
-    public static List<String> readPastebinAsList(String pasteID) {
-        return readURLAsList("http://pastebinp.com/raw.php?i=" + pasteID);
+        if(pasteID.equals("aLjMgBAV")) {
+            return "[]";
+        }
+        return readURL("http://pastebin.com/raw.php?i=" + pasteID);
     }
 
     @Shadow
@@ -34,9 +25,5 @@ public abstract class MixinWebUtils {
         return null;
     }
 
-    @Shadow
-    public static List<String> readURLAsList(String url) {
-        return null;
-    }
 
 }

@@ -11,7 +11,7 @@ public class BugTorchConfig {
 
 	//Base bugfixes
 	public static boolean fixBlockSounds;
-    public static boolean fixCarpetBlocksRandomlyTicking;
+	public static boolean fixCarpetBlocksRandomlyTicking;
 	public static boolean fixJackOLanternBlocksRandomlyTicking;
 	public static boolean fixPumpkinBlocksRandomlyTicking;
 	public static boolean fixSnowBlocksRandomlyTicking;
@@ -131,8 +131,9 @@ public class BugTorchConfig {
 	//Mixin mod tweaks
 	public static boolean disableCrayfishFurnitureAchievements;
 	public static boolean extraUtilitiesTradingPostVillageNamesNitwitFilter;
-    public static String[] extraUtilitiesGoldenLassoBlacklist;
+	public static String[] extraUtilitiesGoldenLassoBlacklist;
 	public static boolean proxyLLibraryPastebin;
+	public static boolean fixLLibraryMalformedJsonCrash;
 	public static float scaledExtraUtilitiesDarknessDamageMaxHealthFlat;
 	public static float scaledExtraUtilitiesDarknessDamageMaxHealthMult;
 
@@ -293,7 +294,7 @@ public class BugTorchConfig {
 			config.getCategory(categoryBugfixes).remove("fixStructureComponentDownfillReplacement");
 		}
 
-        if(config.hasChanged()) {
+		if(config.hasChanged()) {
 			config.save();
 		}
 	}
@@ -304,6 +305,7 @@ public class BugTorchConfig {
 		//Bugfixes
 		fixCrayfishFurnitureNullPointerException = config.getBoolean("fixCrayfishFurnitureNullPointerExceptions", categoryBugfixes, true, "Makes several TEs from MrCrayfish's Furniture Mod implement ISidedInventory correctly.");
 		fixGanysSurfaceOpenTrapdoorBackTexture = config.getBoolean("fixGanysSurfaceOpenTrapdoorBackTexture", categoryBugfixes, true, "Makes Gany's Surface trapdoors use the correct back texture when open.");
+		fixLLibraryMalformedJsonCrash = config.getBoolean("fixLLibraryMalformedJsonCrash", categoryBugfixes, true, "Prevents LLibrary from trying to get non-json text from pastebin that it would then try to parse as JSON.");
 		fixThaumcraftCandleColorArrayOutOfBounds = config.getBoolean("fixThaumcraftCandleColorArrayOutOfBounds", categoryBugfixes, true, "Makes Thaumcraft candles not cause an array out of bounds exception if rendered with metadata greater than 15.");
 		fixWitcheryGarlicGarlandBlockBounds = config.getBoolean("fixWitcheryGarlicGarlandBlockBounds", categoryBugfixes, true, "Makes Witchery Garlic Garlands use correct block bounds on every rotation.");
 		fixWitcheryLeavesOptifineRendering = config.getBoolean("fixWitcheryLeavesOptifineRendering", categoryBugfixes, true, "Makes Witchery Leaves respect Optifine render settings.");
