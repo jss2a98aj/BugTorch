@@ -52,10 +52,13 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
             mixins.add("minecraft.backport.MixinItemEnderPearl");
         }
 
-        //Bugfixes
-        if(client && BugTorchConfig.fixAnvilSoundTypeStepSound) {
-            mixins.add("minecraft.fix.block.MixinSoundTypeAnvil");
-        }
+		//Bugfixes
+		if(client && BugTorchConfig.fixAnvilSoundTypeStepSound) {
+			mixins.add("minecraft.fix.block.MixinSoundTypeAnvil");
+		}
+		if(BugTorchConfig.fixDarkOakRemovingBlocks) {
+			mixins.add("minecraft.fix.MixinWorldGenCanopyTree");
+		}
         if(client && useNotFineOverlap && BugTorchConfig.fixEnchantmentBlendFunc) {
             mixins.add("minecraft.rendering.MixinRenderItem");
         }
@@ -247,7 +250,7 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
         if(BugTorchConfig.scaledWitherDamageMaxHealthFlat > 0f || BugTorchConfig.scaledWitherDamageMaxHealthMult > 0f) {
             mixins.add("minecraft.tweaks.potion.MixinsPotionWither");
         }
-        if (BugTorchConfig.useAnyDyeOnLeatherArmor) {
+        if(BugTorchConfig.useAnyDyeOnLeatherArmor) {
             mixins.add("minecraft.tweaks.MixinRecipeArmorDyes");
         }
 

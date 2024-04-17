@@ -46,6 +46,7 @@ public class BugTorchConfig {
 
 	//Mixin bugfixes
 	public static boolean fixAnvilSoundTypeStepSound;
+	public static boolean fixDarkOakRemovingBlocks;
 	public static boolean fixEnchantmentBlendFunc;
 	public static boolean fixFireChargeUseSound;
 	public static boolean fixLavaHissOnAirReplace;
@@ -211,6 +212,7 @@ public class BugTorchConfig {
 
 		//Bugfixes
 		fixAnvilSoundTypeStepSound = config.getBoolean("fixAnvilSoundTypeStepSound", categoryBugfixes, true, "Makes the anvil sound type step a valid sound\nAlso prevents log errors when walking on anvils.");
+		fixDarkOakRemovingBlocks = config.getBoolean("fixDarkOakRemovingBlocks", categoryBugfixes, true, "Makes Dark Oak trees check if replacement is allowed before putting down logs.");
 		fixEnchantmentBlendFunc = config.getBoolean("fixEnchantmentBlendFunc", categoryBugfixes, true, "Fixes rendering issues caused by enchantments changing glBlendFunc and never reverting it.");
 		fixFireChargeUseSound = config.getBoolean("fixFireChargeUseSound", categoryBugfixes, true, "Fire Charges have the correct use sound.\nFrom MC 1.8, fixes MC-1831");
 		fixLavaHissOnAirReplace = config.getBoolean("fixLavaHissOnAirReplace", categoryBugfixes, true, "Lava will only hiss when mixing with water.\nFrom MC 1.8, fixes MC-32301");
