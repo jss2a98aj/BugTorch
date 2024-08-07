@@ -12,10 +12,6 @@
 		"credits": "",
 		"logoFile": "",
 		"screenshots": [],
-		"parent": "",
-		"requiredMods": ["gtnhmixins@[2.0.0,)"],
-		"dependencies": ["gtnhmixins@[2.0.0,)", "Thaumcraft", "temperateplants", "VillageNames", "witchery"],
-		"dependants": [],
-		"useDependencyInformation": true
+		"parent": ""
 	}]
 }
