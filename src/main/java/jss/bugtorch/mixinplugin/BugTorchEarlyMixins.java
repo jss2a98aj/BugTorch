@@ -32,7 +32,7 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
         List<String> mixins = new ArrayList<>();
 
         boolean useNotFineOverlap = true;
-        if(loadedCoreMods.contains("jss.notfine.mixinplugin.NotFineEarlyMixins")) {
+        if(loadedCoreMods.contains("jss.notfine.mixinplugin.NotFineEarlyMixins") || loadedCoreMods.contains("com.gtnewhorizons.angelica.loading.AngelicaTweaker")) {
             BugTorch.logger.info("NotFine detected, skipping redundant early mixins.");
             useNotFineOverlap = false;
         }
@@ -146,9 +146,7 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
         }
         if(!loadedCoreMods.contains("optifine.OptiFineForgeTweaker")) {
             if(BugTorchConfig.fasterOptionInteractions) {
-                if(useNotFineOverlap) {
-                    mixins.add("minecraft.optimization.gamesettings.MixinFasterSetOptions");
-                }
+                mixins.add("minecraft.optimization.gamesettings.MixinFasterSetOptions");
                 mixins.add("minecraft.optimization.MixinGameSettings_Options");
             }
             if(BugTorchConfig.fasterOptionLoading) {
