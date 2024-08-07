@@ -201,7 +201,7 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
         if(BugTorchConfig.farmlandNoTrample) {
             mixins.add("minecraft.tweaks.blockfarmland.MixinNoTrample");
         }
-        if(client && BugTorchConfig.lanPortOverride) {
+        if(client && BugTorchConfig.lanPortOverride && !loadedCoreMods.contains("com.mitchej123.hodgepodge.core.HodgepodgeCore")) {
             mixins.add("minecraft.tweaks.MixinIntegratedServer");
         }
         if(BugTorchConfig.placeEndPortalsAnywhere) {
