@@ -13,7 +13,7 @@ dependencies {
 
     implementation("thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev")
     implementation deobfCurse("witchery-69673:2234410")
-    implementation deobfCurse("village-names-259230:4328516")
+    implementation deobfCurse("village-names-259230:5591137")
 
     compileOnly deobfCurse("gilded-games-util-228114:2273362")
     compileOnly deobfCurse("aether-ii-223796:2273367")
