@@ -56,7 +56,6 @@ public class BugTorchLateMixins implements ILateMixinLoader {
             BugTorchConfig.extraUtilitiesTradingPostVillageNamesNitwitFilter = false;
         }
 
-        BugTorch.logger.info("Kicking off BugTorch late mixins.");
         boolean client = FMLLaunchHandler.side().isClient();
         List<String> mixins = new ArrayList<>();
 

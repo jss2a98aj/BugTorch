@@ -28,7 +28,6 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
         BugTorchConfig.loadBaseMixinConfig(new File(Launch.minecraftHome, configFolder + "mixins.cfg"));
         BugTorchConfig.loadModdedMixinConfig(new File(Launch.minecraftHome, configFolder + "mixinsModSupport.cfg"));
 
-        BugTorch.logger.info("Kicking off BugTorch early mixins.");
         boolean client = FMLLaunchHandler.side().isClient();
         List<String> mixins = new ArrayList<>();
 
