@@ -80,6 +80,9 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
                 mixins.add("minecraft.fix.MixinContainer");
             }
         }
+        if(BugTorchConfig.fixLilyPadPlacementSide) {
+            mixins.add("minecraft.fix.MixinItemLilyPad");
+        }
         if(BugTorchConfig.fixMineshaftAirPockets) {
             mixins.add("minecraft.worldgen.MixinStructureStart");
             mixins.add("minecraft.worldgen.MixinStructureMineshaftPieces$Room");
