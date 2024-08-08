@@ -14,6 +14,7 @@ import java.util.Optional;
 public class ButtonManager {
     public static final ButtonManager INSTANCE = new ButtonManager();
 
+    @SuppressWarnings("unchecked")
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void onGui(GuiScreenEvent.InitGuiEvent.Post event) {
         if(event.gui instanceof GuiOptions) {

@@ -14,6 +14,7 @@ import jss.bugtorch.modsupport.TorchLeversSupport;
 import jss.bugtorch.modsupport.VanillaSupport;
 import jss.bugtorch.modsupport.VillageNamesSupport;
 import jss.bugtorch.modsupport.WitcherySupport;
+import jss.bugtorch.util.AssetLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.logging.log4j.LogManager;
@@ -34,17 +35,22 @@ public class BugTorch {
 
     public static final String MODID = "bugtorch";
     public static final String NAME = "BugTorch";
-    public static final String VERSION = "GRADLETOKEN_VERSION";
+    public static final String VERSION = Tags.VERSION;
     public static final Logger logger = LogManager.getLogger(NAME);
     // cached to boost looping, should be used pretty often due to how recipe lookup works
     public static final int[] dyeOreIds = new int[16];
+    
+    public BugTorch() {
+        String configFolder = Loader.instance().getConfigDir().getAbsolutePath() + File.separator + MODID + File.separator;
+        BugTorchConfig.loadBaseConfig(new File(configFolder + "base.cfg"));
+        BugTorchConfig.loadModdedConfig(new File(configFolder + "modSupport.cfg"));
+        if(BugTorchConfig.txLoaderPresent) {
+            AssetLoader.load();
+        }
+    }
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        String configFolder =  event.getModConfigurationDirectory().getAbsolutePath() + File.separator + MODID + File.separator;
-        BugTorchConfig.loadBaseConfig(new File(configFolder + "base.cfg"));
-        BugTorchConfig.loadModdedConfig(new File(configFolder + "modSupport.cfg"));
-
         VanillaSupport.enableSupport();
 
         if(event.getSide() == Side.CLIENT) {

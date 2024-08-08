@@ -13,6 +13,7 @@ public abstract class MixinItem {
 	/**
 	 * Xoshiro256** is faster than Random.
 	 */
-	private static Random itemRand = new RandomXoshiro256StarStar();
+	@SuppressWarnings("unused")
+    private static Random itemRand = new RandomXoshiro256StarStar();
 
 }

@@ -42,14 +42,14 @@ public abstract class MixinVillageSiege {
 	@Overwrite()
 	private boolean func_75529_b() {
 		List<EntityPlayer> list = worldObj.playerEntities;
-		Iterator iterator = list.iterator();
+		Iterator<EntityPlayer> iterator = list.iterator();
 
 		while (true) {
 			if (!iterator.hasNext()) {
 				return false;
 			}
 
-			EntityPlayer entityplayer = (EntityPlayer)iterator.next();
+			EntityPlayer entityplayer = iterator.next();
 
 			theVillage = worldObj.villageCollectionObj.findNearestVillage((int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ, 1);
 
@@ -64,10 +64,10 @@ public abstract class MixinVillageSiege {
 					field_75538_h = chunkcoordinates.posY;
 					field_75539_i = chunkcoordinates.posZ + (int)((double)(MathHelper.sin(f1) * f) * 0.9D);
 					flag = false;
-					Iterator iterator1 = worldObj.villageCollectionObj.getVillageList().iterator();
+					Iterator<Village> iterator1 = worldObj.villageCollectionObj.getVillageList().iterator();
 
 					while (iterator1.hasNext()) {
-						Village village = (Village)iterator1.next();
+						Village village = iterator1.next();
 
 						if (village != theVillage && village.isInRange(field_75532_g, field_75538_h, field_75539_i)) {
 							flag = true;

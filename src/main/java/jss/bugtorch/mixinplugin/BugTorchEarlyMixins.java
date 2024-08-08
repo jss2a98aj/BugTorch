@@ -36,6 +36,8 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
             BugTorch.logger.info("NotFine detected, skipping redundant early mixins.");
             useNotFineOverlap = false;
         }
+        
+        BugTorchConfig.txLoaderPresent = client && loadedCoreMods.contains("glowredman.txloader.TXLoaderCore");
 
         //Backports
         if(BugTorchConfig.cobwebsCanBeSheared) {

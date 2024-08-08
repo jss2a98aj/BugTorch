@@ -120,7 +120,7 @@ public abstract class MixinFasterLoadOptions {
                             case "resourcePacks":
                                 resourcePacks = gson.fromJson(optionsEntry.substring(optionsEntry.indexOf(58) + 1), typeListString);
                                 if (resourcePacks == null) {
-                                    resourcePacks = new ArrayList();
+                                    resourcePacks = new ArrayList<>();
                                 }
                                 break;
                             case "lastServer":
@@ -261,7 +261,7 @@ public abstract class MixinFasterLoadOptions {
     private static ParameterizedType typeListString;
 
     @Shadow protected Minecraft mc;
-    @Shadow private Map mapSoundLevels;
+    @Shadow private Map<SoundCategory, Float> mapSoundLevels;
     @Shadow private File optionsFile;
 
     @Shadow public KeyBinding[] keyBindings;
@@ -282,7 +282,7 @@ public abstract class MixinFasterLoadOptions {
     @Shadow public boolean fancyGraphics;
     @Shadow public int ambientOcclusion;
     @Shadow public boolean clouds;
-    @Shadow public List resourcePacks;
+    @Shadow public List<String> resourcePacks;
     @Shadow public String lastServer;
     @Shadow public String language;
     @Shadow public EntityPlayer.EnumChatVisibility chatVisibility;
