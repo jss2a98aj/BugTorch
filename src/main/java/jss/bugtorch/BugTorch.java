@@ -34,7 +34,7 @@ public class BugTorch {
 
     public static final String MODID = "bugtorch";
     public static final String NAME = "BugTorch";
-    public static final String VERSION = "GRADLETOKEN_VERSION";
+    public static final String VERSION = Tags.VERSION;
     public static final Logger logger = LogManager.getLogger(NAME);
     // cached to boost looping, should be used pretty often due to how recipe lookup works
     public static final int[] dyeOreIds = new int[16];

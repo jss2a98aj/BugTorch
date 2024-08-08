@@ -12,14 +12,14 @@ import net.minecraft.item.ItemFireball;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-@Mixin(value = ItemFireball.class)
+@Mixin(ItemFireball.class)
 public abstract class MixinItemFireball extends Item {
 
 	/**
 	 * @author jss2a98aj
 	 * @reason Corrects the fire charge use sound.
 	 */
-	@Overwrite()
+	@Overwrite
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
 		if (world.isRemote) {
 			return true;
