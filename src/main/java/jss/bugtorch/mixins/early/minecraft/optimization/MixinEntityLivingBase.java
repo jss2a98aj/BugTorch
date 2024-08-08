@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
 @Mixin(value = EntityLivingBase.class)
@@ -21,7 +22,7 @@ public abstract class MixinEntityLivingBase extends Entity {
 
 	@Shadow
 	@Final
-	private HashMap activePotionsMap;
+	private HashMap<Integer, PotionEffect> activePotionsMap;
 
 	/**
 	 * @author jss2a98aj
