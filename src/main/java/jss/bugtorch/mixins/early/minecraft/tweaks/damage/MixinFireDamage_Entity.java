@@ -1,6 +1,5 @@
 package jss.bugtorch.mixins.early.minecraft.tweaks.damage;
 
-import jss.bugtorch.BugTorch;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.DamageSource;
 import org.spongepowered.asm.mixin.Mixin;
