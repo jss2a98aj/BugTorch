@@ -85,6 +85,8 @@ public abstract class MixinFasterSetOptions {
             case STREAM_FPS:
                 field_152404_N = value;
                 break;
+            default:
+                break;
         }
     }
 
@@ -181,6 +183,8 @@ public abstract class MixinFasterSetOptions {
             case ENABLE_VSYNC:
                 enableVsync = !enableVsync;
                 Display.setVSyncEnabled(enableVsync);
+                break;
+            default:
                 break;
         }
         saveOptions();
