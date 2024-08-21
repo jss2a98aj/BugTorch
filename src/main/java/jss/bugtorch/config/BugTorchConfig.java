@@ -21,8 +21,6 @@ public class BugTorchConfig {
 	public static int showBroadcastSettingsButton;
 	public static int showOpenToLanButton;
 	public static int showSuperSecretSettingsButton;
-	public static boolean addSquidsSounds;
-	public static boolean txLoaderPresent;
 
 	//Mod bugfixes
 	public static boolean fixExtraUtilitiesBlockSounds;
@@ -161,7 +159,6 @@ public class BugTorchConfig {
 		fixPumpkinBlocksRandomlyTicking = config.getBoolean("fixPumpkinBlocksRandomlyTicking", categoryBugfixes, true, "Pumpkin blocks will no longer randomly tick.");
 		fixSnowBlocksRandomlyTicking = config.getBoolean("fixSnowBlocksRandomlyTicking", categoryBugfixes, true, "Non-layered snow blocks will no longer randomly tick.\nFrom MC 1.14, fixes MC-88097");
 		fixTorchBlocksRandomlyTicking = config.getBoolean("fixTorchBlocksRandomlyTicking", categoryBugfixes, true, "Torch blocks will no longer randomly tick.");
-		addSquidsSounds = config.getBoolean("fixSquidsSounds", categoryBugfixes, true, "Squids will make sounds (requires TX Loader)");
 
 		//Tweaks
 		showBroadcastSettingsButton = config.getInt("showBroadcastSettingsButton", categoryTweaks, 1, -1, 1, "Show (1), disable(0), or remove(-1) the Broadcast Settings button in the options menu.");

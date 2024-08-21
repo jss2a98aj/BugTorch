@@ -6,7 +6,10 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
+import glowredman.txloader.TXLoaderCore;
+import glowredman.txloader.Asset.Source;
 import jss.bugtorch.listeners.ButtonManager;
+import jss.bugtorch.mixinplugin.BugTorchEarlyMixins;
 import jss.bugtorch.modsupport.ExtraUtilitiesSupport;
 import jss.bugtorch.modsupport.PamsTemperatePlantsSupport;
 import jss.bugtorch.modsupport.ThaumcraftSupport;
@@ -14,7 +17,6 @@ import jss.bugtorch.modsupport.TorchLeversSupport;
 import jss.bugtorch.modsupport.VanillaSupport;
 import jss.bugtorch.modsupport.VillageNamesSupport;
 import jss.bugtorch.modsupport.WitcherySupport;
-import jss.bugtorch.util.AssetLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.logging.log4j.LogManager;
@@ -44,8 +46,17 @@ public class BugTorch {
         String configFolder = Loader.instance().getConfigDir().getAbsolutePath() + File.separator + MODID + File.separator;
         BugTorchConfig.loadBaseConfig(new File(configFolder + "base.cfg"));
         BugTorchConfig.loadModdedConfig(new File(configFolder + "modSupport.cfg"));
-        if(BugTorchConfig.txLoaderPresent) {
-            AssetLoader.load();
+        if (BugTorchEarlyMixins.txLoaderPresent) {
+            new Runnable() {
+                @Override
+                public void run() {
+                    TXLoaderCore.getAssetBuilder("minecraft/sounds/mob/ghast/fireball4.ogg")
+                    .setOverride("bugtorch/sounds/mob/ghast/fireball4.ogg")
+                    .setSource(Source.ASSET)
+                    .setVersion("1.19.2")
+                    .add();
+                }
+            }.run();
         }
     }
 

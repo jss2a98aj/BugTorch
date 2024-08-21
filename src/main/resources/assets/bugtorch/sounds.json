@@ -4,40 +4,5 @@
         "sounds": [
             "mob/ghast/fireball4"
         ]
-    },
-    "entity.squid.say": {
-        "category": "neutral",
-        "sounds": [
-            "entity/squid/ambient1",
-            "entity/squid/ambient2",
-            "entity/squid/ambient3",
-            "entity/squid/ambient4",
-            "entity/squid/ambient5"
-        ]
-    },
-    "entity.squid.hurt": {
-        "category": "neutral",
-        "sounds": [
-            "entity/squid/hurt1",
-            "entity/squid/hurt2",
-            "entity/squid/hurt3",
-            "entity/squid/hurt4"
-        ]
-    },
-    "entity.squid.death": {
-        "category": "neutral",
-        "sounds": [
-            "entity/squid/death1",
-            "entity/squid/death2",
-            "entity/squid/death3"
-        ]
-    },
-    "entity.squid.shoot": {
-        "category": "neutral",
-        "sounds": [
-            "entity/squid/squirt1",
-            "entity/squid/squirt2",
-            "entity/squid/squirt3"
-        ]
     }
 }

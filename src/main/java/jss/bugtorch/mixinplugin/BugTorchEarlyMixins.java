@@ -17,6 +17,8 @@ import java.util.Set;
 @IFMLLoadingPlugin.MCVersion("1.7.10")
 public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader {
 
+    public static boolean txLoaderPresent;
+
     @Override
     public String getMixinConfig() {
         return "mixins.bugtorch.early.json";
@@ -37,7 +39,7 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
             useNotFineOverlap = false;
         }
         
-        BugTorchConfig.txLoaderPresent = client && loadedCoreMods.contains("glowredman.txloader.TXLoaderCore");
+        txLoaderPresent = client && loadedCoreMods.contains("glowredman.txloader.TXLoaderCore");
 
         //Backports
         if(BugTorchConfig.cobwebsCanBeSheared) {
