@@ -65,7 +65,7 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
         if(client && useNotFineOverlap && BugTorchConfig.fixEnchantmentBlendFunc) {
             mixins.add("minecraft.rendering.MixinRenderItem");
         }
-        if(client && BugTorchConfig.fixFireChargeUseSound) {
+        if(txLoaderPresent && BugTorchConfig.fixFireChargeUseSound) {
             mixins.add("minecraft.backport.MixinItemFireball");
         }
         if(client && BugTorchConfig.fixLavaHissOnAirReplace) {
