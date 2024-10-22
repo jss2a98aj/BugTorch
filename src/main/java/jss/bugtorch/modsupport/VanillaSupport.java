@@ -48,7 +48,6 @@ public class VanillaSupport {
 		if(BugTorchConfig.fixTorchBlocksRandomlyTicking) {
 			Blocks.torch.setTickRandomly(false);
 		}
-
 	}
 
 }

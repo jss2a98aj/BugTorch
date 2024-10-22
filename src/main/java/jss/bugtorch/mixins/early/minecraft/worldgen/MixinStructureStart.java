@@ -23,7 +23,7 @@ public abstract class MixinStructureStart {
 	 * @reason Move Mineshaft air pockets to the intended place.
 	 */
 	@Inject(method = "markAvailableHeight(Lnet/minecraft/world/World;Ljava/util/Random;I)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/gen/structure/StructureBoundingBox;offset(III)V", ordinal = 1), locals = LocalCapture.CAPTURE_FAILHARD)
-	private void offsetCustom(World world, Random rand, int p_75067_3_, CallbackInfo info, int i, int k, int l, Iterator iterator, StructureComponent component) {
+	private void offsetCustom(World world, Random rand, int p_75067_3_, CallbackInfo info, int i, int k, int l, Iterator<StructureComponent> iterator, StructureComponent component) {
 		if(component instanceof StructureMineshaftPieces.Room) {
 			((IOffsetDuck)component).offset(0, l, 0);
 		}

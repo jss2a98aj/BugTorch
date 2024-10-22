@@ -17,6 +17,8 @@ import java.util.Set;
 @IFMLLoadingPlugin.MCVersion("1.7.10")
 public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader {
 
+    public static boolean txLoaderPresent;
+
     @Override
     public String getMixinConfig() {
         return "mixins.bugtorch.early.json";
@@ -36,6 +38,8 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
             BugTorch.logger.info("NotFine detected, skipping redundant early mixins.");
             useNotFineOverlap = false;
         }
+        
+        txLoaderPresent = client && loadedCoreMods.contains("glowredman.txloader.TXLoaderCore");
 
         //Backports
         if(BugTorchConfig.cobwebsCanBeSheared) {
@@ -61,7 +65,7 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
         if(client && useNotFineOverlap && BugTorchConfig.fixEnchantmentBlendFunc) {
             mixins.add("minecraft.rendering.MixinRenderItem");
         }
-        if(client && BugTorchConfig.fixFireChargeUseSound) {
+        if(txLoaderPresent && BugTorchConfig.fixFireChargeUseSound) {
             mixins.add("minecraft.backport.MixinItemFireball");
         }
         if(client && BugTorchConfig.fixLavaHissOnAirReplace) {

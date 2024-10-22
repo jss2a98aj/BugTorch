@@ -6,7 +6,10 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
+import glowredman.txloader.TXLoaderCore;
+import glowredman.txloader.Asset.Source;
 import jss.bugtorch.listeners.ButtonManager;
+import jss.bugtorch.mixinplugin.BugTorchEarlyMixins;
 import jss.bugtorch.modsupport.ExtraUtilitiesSupport;
 import jss.bugtorch.modsupport.PamsTemperatePlantsSupport;
 import jss.bugtorch.modsupport.ThaumcraftSupport;
@@ -34,17 +37,31 @@ public class BugTorch {
 
     public static final String MODID = "bugtorch";
     public static final String NAME = "BugTorch";
-    public static final String VERSION = "GRADLETOKEN_VERSION";
+    public static final String VERSION = Tags.VERSION;
     public static final Logger logger = LogManager.getLogger(NAME);
     // cached to boost looping, should be used pretty often due to how recipe lookup works
     public static final int[] dyeOreIds = new int[16];
+    
+    public BugTorch() {
+        String configFolder = Loader.instance().getConfigDir().getAbsolutePath() + File.separator + MODID + File.separator;
+        BugTorchConfig.loadBaseConfig(new File(configFolder + "base.cfg"));
+        BugTorchConfig.loadModdedConfig(new File(configFolder + "modSupport.cfg"));
+        if (BugTorchEarlyMixins.txLoaderPresent) {
+            new Runnable() {
+                @Override
+                public void run() {
+                    TXLoaderCore.getAssetBuilder("minecraft/sounds/mob/ghast/fireball4.ogg")
+                    .setOverride("bugtorch/sounds/mob/ghast/fireball4.ogg")
+                    .setSource(Source.ASSET)
+                    .setVersion("1.19.2")
+                    .add();
+                }
+            }.run();
+        }
+    }
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        String configFolder =  event.getModConfigurationDirectory().getAbsolutePath() + File.separator + MODID + File.separator;
-        BugTorchConfig.loadBaseConfig(new File(configFolder + "base.cfg"));
-        BugTorchConfig.loadModdedConfig(new File(configFolder + "modSupport.cfg"));
-
         VanillaSupport.enableSupport();
 
         if(event.getSide() == Side.CLIENT) {

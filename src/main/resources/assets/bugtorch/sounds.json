@@ -1,8 +1,8 @@
 {
-  "item.fireCharge.use": {
-    "category": "block",
-    "sounds": [
-      "mob/ghast/fireball4"
-    ]
-  }
+    "item.fireCharge.use": {
+        "category": "block",
+        "sounds": [
+            "mob/ghast/fireball4"
+        ]
+    }
 }

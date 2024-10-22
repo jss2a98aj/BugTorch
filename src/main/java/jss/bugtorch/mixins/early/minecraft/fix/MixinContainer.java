@@ -27,7 +27,7 @@ public abstract class MixinContainer {
 
         if(input.isStackable()) {
             while(input.stackSize > 0 && (!reverse && index < length || reverse && index >= start)) {
-                slot = (Slot)inventorySlots.get(index);
+                slot = inventorySlots.get(index);
                 slotStack = slot.getStack();
 
                 if(slotStack != null) {
@@ -60,7 +60,7 @@ public abstract class MixinContainer {
         index = reverse ? length - 1 : start;
 
         while(input.stackSize > 0 && (!reverse && index < length || reverse && index >= start)) {
-            slot = (Slot)inventorySlots.get(index);
+            slot = inventorySlots.get(index);
             slotStack = slot.getStack();
 
             if(slotStack == null) {
@@ -82,6 +82,6 @@ public abstract class MixinContainer {
     }
 
     @Shadow
-    public List inventorySlots;
+    public List<Slot> inventorySlots;
 
 }

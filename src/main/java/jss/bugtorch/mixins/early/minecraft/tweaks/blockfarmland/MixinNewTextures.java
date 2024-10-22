@@ -1,7 +1,5 @@
 package jss.bugtorch.mixins.early.minecraft.tweaks.blockfarmland;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.material.Material;
