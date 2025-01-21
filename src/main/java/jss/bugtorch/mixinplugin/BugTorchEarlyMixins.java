@@ -38,7 +38,7 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
             BugTorch.logger.info("NotFine detected, skipping redundant early mixins.");
             useNotFineOverlap = false;
         }
-        
+
         txLoaderPresent = client && loadedCoreMods.contains("glowredman.txloader.TXLoaderCore");
 
         //Backports
@@ -133,6 +133,10 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
         }
         if(BugTorchConfig.fixVillageWellDesertMaterial) {
             mixins.add("minecraft.worldgen.MixinStructureVillagePieces_Well");
+        }
+
+        if (client && BugTorchConfig.fixLWJGL2OpenALCrash && !(loadedCoreMods.contains("me.eigenraven.lwjgl3ify.core.Lwjgl3ifyCoremod"))) {
+            mixins.add("minecraft.fix.MixinSoundManager");
         }
 
         //Performance
