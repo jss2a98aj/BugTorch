@@ -16,7 +16,7 @@ public class BugTorchConfig {
 	public static boolean fixPumpkinBlocksRandomlyTicking;
 	public static boolean fixSnowBlocksRandomlyTicking;
 	public static boolean fixTorchBlocksRandomlyTicking;
-    public static boolean fixLWJGL2OpenALCrash;
+	public static boolean fixLWJGL2OpenALCrash;
 
 	//Base tweaks
 	public static int showBroadcastSettingsButton;
@@ -215,8 +215,8 @@ public class BugTorchConfig {
 		//Bugfixes
 		fixAnvilSoundTypeStepSound = config.getBoolean("fixAnvilSoundTypeStepSound", categoryBugfixes, true, "Makes the anvil sound type step a valid sound\nAlso prevents log errors when walking on anvils.");
 		fixDarkOakRemovingBlocks = config.getBoolean("fixDarkOakRemovingBlocks", categoryBugfixes, true, "Makes Dark Oak trees check if replacement is allowed before putting down logs.");
-		fixEnchantmentBlendFunc = config.getBoolean("fixEnchantmentBlendFunc", categoryBugfixes, true, "Fixes rendering issues caused by enchantments changing glBlendFunc and never reverting it.\nDisabled if NotFine is loaded, it implements this fix.");
-		fixFireChargeUseSound = config.getBoolean("fixFireChargeUseSound", categoryBugfixes, true, "Fire Charges have the correct use sound.\nFrom MC 1.8, fixes MC-1831");
+		fixEnchantmentBlendFunc = config.getBoolean("fixEnchantmentBlendFunc", categoryBugfixes, true, "Fixes rendering issues caused by enchantments changing glBlendFunc and never reverting it.\nDisabled if NotFine is installed, it implements this fix.");
+		fixFireChargeUseSound = config.getBoolean("fixFireChargeUseSound", categoryBugfixes, true, "Fire Charges have the correct use sound.\nFrom MC 1.8, fixes MC-1831\nDisabled if TX Loader is not installed.");
 		fixLavaHissOnAirReplace = config.getBoolean("fixLavaHissOnAirReplace", categoryBugfixes, true, "Lava will only hiss when mixing with water.\nFrom MC 1.8, fixes MC-32301");
 		fixLeadsBreakingOnSomeFenceInstances = config.getBoolean("fixLeadsBreakingOnSomeFenceInstances", categoryBugfixes, true, "Fixes Leads breaking when placed on some modded fences.");
 		fixLeafDecayCheckRange = config.getBoolean("fixLeafDecayCheckRange", categoryBugfixes, true, "Stops vanilla and some modded leaves from decaying when part of some larger naturally occurring trees.");
@@ -224,7 +224,7 @@ public class BugTorchConfig {
 		fixLilyPadPlacementSide = config.getBoolean("fixLilyPadPlacementSide", categoryBugfixes, true, "Stops Lily Pads from trying to place client side.");
 		fixMineshaftAirPockets = config.getBoolean("fixMineshaftAirPockets", categoryBugfixes, true, "Fixes the air bubbles mineshafts create above their dirt rooms, affects all terrain but very noticeable in oceans.\\nThese air pockets were supposed to be in the dirt rooms so this also fixes the dirt rooms having blocked off entrances to some branches.\\nFrom MC 1.8, fixes MC-954");
 		fixNettyConnectionFailureResourceLeak = config.getBoolean("fixNettyConnectionFailureResourceLeak", categoryBugfixes, true, "Fixes improperly terminated client connections sometimes causing a severe resource leak.");
-		fixParticleDepthSorting = config.getBoolean("fixParticleDepthSorting", categoryBugfixes, true, "Fixes particle depth being incorrectly calculated.\nDisabled if NotFine is loaded, it implements this fix.");
+		fixParticleDepthSorting = config.getBoolean("fixParticleDepthSorting", categoryBugfixes, true, "Fixes particle depth being incorrectly calculated.\nDisabled if NotFine is installed, it implements this fix.");
 		fixPumpkinPlacementCheck = config.getBoolean("fixPumpkinPlacementCheck", categoryBackport, true, "Pumpkins and Jack O' Lanterns can be placed without a solid block below them.\nFrom MC 1.13, fixes MC-1947");
 		fixRedstoneTorchMemoryLeak = config.getBoolean("fixRedstoneTorchMemoryLeak", categoryBackport, true, "Stops Redstone Torches from causing a memory leak by making them use a weak hash map to store burnt out torches.\nFixes MC-101233");
 		fixShearedGrassDropDupe = config.getBoolean("fixShearedGrassDropDupe", categoryBugfixes, true, "Shearing tall grass will not give drops in addition to itself.");
@@ -237,19 +237,19 @@ public class BugTorchConfig {
 		fixVillagerTradeMetadataDetection = false; config.getBoolean("fixVillagerTradeMetadataDetection", categoryBugfixes, true, "Villager trades will respect metadata.\nCurrently unfinished and disabled internally.\nFrom MC 1.8");
 		fixVillageSieges = config.getBoolean("fixVillageSieges", categoryBugfixes, true, "Zombies will siege villages that are large enough at night.\nFrom MC 1.8, fixes MC-7432 and MC-7488");
 		fixVillageWellDesertMaterial = config.getBoolean("fixVillageWellDesertMaterial", categoryBugfixes, true, "Wells in desert villages will use the correct material.\nFrom MC 1.8, fixes MC-32514");
-        fixLWJGL2OpenALCrash = config.getBoolean("fixLWJGL2OpenALCrash", categoryBugfixes, true, "Fixes the ridiculous bug where the SoundSystem will consistently fail to re/initialize, commonly observed with LWJGL2 nightlies on Linux. Disabled when LWJGL3ify is present.");
+		fixLWJGL2OpenALCrash = config.getBoolean("fixLWJGL2OpenALCrash", categoryBugfixes, true, "Fixes the ridiculous bug where the SoundSystem will consistently fail to re/initialize, commonly observed with LWJGL2 nightlies on Linux. Disabled when LWJGL3ify is present.");
 
-        //Performance
+		//Performance
 		brokenChestsDontSplitStacks = config.getBoolean("brokenChestsDontSplitStacks", categoryPerformance, false, "Broken chests don't split apart dropped item stacks.");
 		brokenHoppersDontSplitStacks = config.getBoolean("brokenHoppersDontSplitStacks", categoryPerformance, false, "Broken hoppers don't split apart dropped item stacks.");
 		fasterDroppedItemStackingChecks = config.getBoolean("fasterDroppedItemStackingChecks", categoryPerformance, true, "Dropped item nearby stack checks are faster for full stacks.");
 		fasterEntityLivingBaseIsPotionActiveAndSetAir = config.getBoolean("fasterEntityLivingBaseIsPotionActiveAndSetAir", categoryPerformance, true, "isPotionActive returns immediately if there are no active potions.\nsetAir only updates its datawatcher when needed.");
 		fasterGetBlockByIdForAirBlocks = config.getBoolean("fasterGetBlockByIdForAirBlocks", categoryPerformance, true, "When something gets air blocks from ID it will return faster.");
 
-		fasterOptionInteractions = config.getBoolean("fasterOptionInteractions", categoryPerformance, false, "Makes several functions used by option buttons faster.\nDisabled if Optifine is loaded to prevent conflicts.");
-		fasterOptionLoading = config.getBoolean("fasterOptionLoading", categoryPerformance, false, "Makes the function that reads options.txt much faster.\nDisabled if Optifine is loaded to prevent conflicts.");
+		fasterOptionInteractions = config.getBoolean("fasterOptionInteractions", categoryPerformance, false, "Makes several functions used by option buttons faster.\nDisabled if Optifine is installed to prevent conflicts.");
+		fasterOptionLoading = config.getBoolean("fasterOptionLoading", categoryPerformance, false, "Makes the function that reads options.txt much faster.\nDisabled if Optifine is installed to prevent conflicts.");
 
-		moreAccurateLayeredSnowFaceCulling = config.getBoolean("moreAccurateLayeredSnowFaceCulling", categoryPerformance, true, "The faces of layered snow get culled more accurately when chunk meshes are created.\nDisabled if NotFine is loaded, it has a superior implementation.");
+		moreAccurateLayeredSnowFaceCulling = config.getBoolean("moreAccurateLayeredSnowFaceCulling", categoryPerformance, true, "The faces of layered snow get culled more accurately when chunk meshes are created.\nDisabled if NotFine is installed, it has a superior implementation.");
 		fasterSnowBlockTicks = config.getBoolean("fasterSnowBlockTicks", categoryPerformance, true, "Non-layered snow block ticking is faster.");
 		replaceRandomInEffectRenderer = config.getBoolean("replaceRandomInEffectRenderer", categoryPerformance, true, "Makes EffectRenderer.class use a faster implementation of random.");
 		replaceRandomInEntity = config.getBoolean("replaceRandomInEntity", categoryPerformance, true, "Makes Entity.class use a faster implementation of random.");
@@ -257,7 +257,7 @@ public class BugTorchConfig {
 		replaceRandomInMinecraftServer = config.getBoolean("replaceRandomInMinecraftServer", categoryPerformance, true, "Makes MinecraftServer.class use a faster implementation of random.");
 		replaceRandomInRenderItem = config.getBoolean("replaceRandomInRenderItem", categoryPerformance, true, "Makes RenderItem.class use a faster implementation of random.");
 		replaceRandomInWorld = config.getBoolean("replaceRandomInWorld", categoryPerformance, false, "Makes World.class use a faster implementation of random.\n!This impacts world generation slightly!");
-		replaceRandomInWorldClient = config.getBoolean("replaceRandomInWorldClient", categoryPerformance, true, "Makes WorldClient.class use a faster implementation of random.\nDisabled if NotFine is loaded, it implements this optimization.");
+		replaceRandomInWorldClient = config.getBoolean("replaceRandomInWorldClient", categoryPerformance, true, "Makes WorldClient.class use a faster implementation of random.\nDisabled if NotFine is installed, it implements this optimization.");
 		skipInitialWorldChunkLoad = config.getBoolean("skipInitialWorldChunkLoad", categoryPerformance, true, "Speeds up initial world loading by not waiting for chunks to preload.");
 
 		//Tweaks
@@ -266,7 +266,7 @@ public class BugTorchConfig {
 		farmlandHydroponics = config.getBoolean("farmlandHydroponics", categoryTweaks, false, "Farmland can use hydroponics.");
 		farmlandNewTextures = config.getBoolean("farmlandNewTextures", categoryTweaks, false, "New side textures for both wet and dry farmland.");
 		farmlandNoTrample = config.getBoolean("farmlandNoTrample", categoryTweaks, false, "Farmland will no longer get trampled.");
-		lanPortOverride = config.getBoolean("lanPortOverride", categoryTweaks, false, "Override the port used when opening singleplayer to LAN.\nDisabled if Hodgepodge is loaded, use its defaultLanPort setting instead.");
+		lanPortOverride = config.getBoolean("lanPortOverride", categoryTweaks, false, "Override the port used when opening singleplayer to LAN.\nDisabled if Hodgepodge is installed, use its defaultLanPort setting instead.");
 		placeEndPortalsAnywhere = config.getBoolean("placeEndPortalsAnywhere", categoryTweaks, false, "Place End Portals outside of the overworld without them getting removed.");
 		placePressurePlatesOnAnyWallOrFence = config.getBoolean("placePressurePlatesOnAnyWallOrFence", categoryTweaks, true, "Place pressure plates on almost any wall or fence.");
 		placeTorchesOnAnyFence = config.getBoolean("placeTorchesOnAnyFence", categoryTweaks, true, "Place torches on almost any fence.");
@@ -313,7 +313,7 @@ public class BugTorchConfig {
 		fixLLibraryMalformedJsonCrash = config.getBoolean("fixLLibraryMalformedJsonCrash", categoryBugfixes, true, "Prevents LLibrary from trying to get non-json text from pastebin that it would then try to parse as JSON.");
 		fixThaumcraftCandleColorArrayOutOfBounds = config.getBoolean("fixThaumcraftCandleColorArrayOutOfBounds", categoryBugfixes, true, "Makes Thaumcraft candles not cause an array out of bounds exception if rendered with metadata greater than 15.");
 		fixWitcheryGarlicGarlandBlockBounds = config.getBoolean("fixWitcheryGarlicGarlandBlockBounds", categoryBugfixes, true, "Makes Witchery Garlic Garlands use correct block bounds on every rotation.");
-		fixWitcheryLeavesOptifineRendering = config.getBoolean("fixWitcheryLeavesOptifineRendering", categoryBugfixes, true, "Makes Witchery Leaves respect Optifine-like render settings.\nDisabled if NotFine is loaded, it implements this fix.");
+		fixWitcheryLeavesOptifineRendering = config.getBoolean("fixWitcheryLeavesOptifineRendering", categoryBugfixes, true, "Makes Witchery Leaves respect Optifine-like render settings.\nDisabled if NotFine is installed, it implements this fix.");
 		fixWitcheryLeavesShearDupe = config.getBoolean("fixWitcheryLeavesShearDupe", categoryBugfixes, true, "Partially fixes a Forge shearing bug that impacts Witchery Leaves.");
 		reuseAetherIIRenderPlayer = config.getBoolean("reuseAetherIIRenderPlayer", categoryPerformance, true, "Makes Aether II reuse the same player renderer object across frames.");
 
