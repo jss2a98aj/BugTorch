@@ -261,6 +261,9 @@ public class BugTorchEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader
 		if(BugTorchConfig.useAnyDyeOnLeatherArmor) {
 			mixins.add("minecraft.tweaks.MixinRecipeArmorDyes");
 		}
+        if(BugTorchConfig.disableSmartRenderHandler) {
+            mixins.add("smartrender.MixinRenderingRegistry");
+        }
 
 		return mixins;
 	}
