@@ -137,6 +137,7 @@ public class BugTorchConfig {
 	public static boolean fixWitcheryLeavesOptifineRendering;
 	public static boolean fixWitcheryLeavesShearDupe;
 	public static boolean reuseAetherIIRenderPlayer;
+    public static boolean disableSmartRenderHandler;
 
 	//Mixin mod tweaks
 	public static boolean disableCrayfishFurnitureAchievements;
@@ -331,6 +332,7 @@ public class BugTorchConfig {
 		fixWitcheryLeavesOptifineRendering = config.getBoolean("fixWitcheryLeavesOptifineRendering", categoryBugfixes, true, "Makes Witchery Leaves respect Optifine-like render settings.\nDisabled if NotFine is installed, it implements this fix.");
 		fixWitcheryLeavesShearDupe = config.getBoolean("fixWitcheryLeavesShearDupe", categoryBugfixes, true, "Partially fixes a Forge shearing bug that impacts Witchery Leaves.");
 		reuseAetherIIRenderPlayer = config.getBoolean("reuseAetherIIRenderPlayer", categoryPerformance, true, "Makes Aether II reuse the same player renderer object across frames.");
+        disableSmartRenderHandler = config.getBoolean("disableSmartRenderHandler", categoryTweaks, false, "Prevents Smart Render render classes from being registered. This option is useful if Smart Render has incompatibilities in your pack, but you want to use mods like Smart Moving without the buggy animations they implement.");
 
 		//Tweaks
 		disableCrayfishFurnitureAchievements = config.getBoolean("disableCrayfishFurnitureAchievements", categoryTweaks, false, "Disables MrCrayfish's Furniture Mod achievements.");
