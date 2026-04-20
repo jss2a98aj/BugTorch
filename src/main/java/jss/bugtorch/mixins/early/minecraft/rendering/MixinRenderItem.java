@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
 
-@Mixin(value = RenderItem.class)
+@Mixin(value = RenderItem.class, priority = 900)
 public abstract class MixinRenderItem {
 
 	@Shadow
