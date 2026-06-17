@@ -19,13 +19,17 @@ public abstract class MixinTileEntityTradingPost {
      * @reason Filter out invalid Nitwit trades from Village Names
      */
     @Overwrite(remap = false)
-    public boolean isValidVillager(IMerchant villager, boolean locationAlreadyChecked) {
-        if(!(villager instanceof EntityLiving)) {
+    public boolean isValidVillager(IMerchant merchant, boolean locationAlreadyChecked) {
+        if(!(merchant instanceof EntityLiving living)) {
             return false;
         }
-        EntityVillager entity = (EntityVillager)villager;
-        boolean mature = !entity.isChild() && entity.getProfession() != VillageNamesSupport.nitwit;
-        return mature && (locationAlreadyChecked || getAABB().isVecInside(Vec3.createVectorHelper(entity.posX, entity.posY, entity.posZ)));
+        if(living instanceof EntityVillager villager && villager.getProfession() == VillageNamesSupport.nitwit) {
+            return false;
+        }
+        if(living.isChild()) {
+            return false;
+        }
+        return locationAlreadyChecked || this.getAABB().isVecInside(Vec3.createVectorHelper(living.posX, living.posY, living.posZ));
     }
 
     @Shadow(remap = false)
