@@ -2,6 +2,7 @@ package jss.bugtorch.modsupport;
 
 import com.emoniph.witchery.Witchery;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import jss.bugtorch.config.BugTorchConfig;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
@@ -29,7 +30,19 @@ public class WitcherySupport {
 			Witchery.Blocks.LEECH_CHEST.setStepSound(Block.soundTypeWood);
 			Witchery.Blocks.COFFIN.setStepSound(Block.soundTypeWood);
 			Witchery.Blocks.CURSED_BUTTON_WOOD.setStepSound(Block.soundTypeWood);
-		}
+        }
+
+        if(BugTorchConfig.fixWitcheryBlockLighting) {
+			Witchery.Blocks.WOOD_SLAB_SINGLE.useNeighborBrightness = true;
+			Witchery.Blocks.WOOD_SLAB_DOUBLE.useNeighborBrightness = true;
+			Witchery.Blocks.SNOW_SLAB_SINGLE.useNeighborBrightness = true;
+			Witchery.Blocks.SNOW_SLAB_DOUBLE.useNeighborBrightness = true;
+			Witchery.Blocks.PERPETUAL_ICE_SLAB_SINGLE.useNeighborBrightness = true;
+			Witchery.Blocks.PERPETUAL_ICE_SLAB_DOUBLE.useNeighborBrightness = true;
+			Witchery.Blocks.STAIRS_ALDER.useNeighborBrightness = true;
+			Witchery.Blocks.STAIRS_ROWAN.useNeighborBrightness = true;
+			Witchery.Blocks.STAIRS_HAWTHORN.useNeighborBrightness = true;
+        }
 
 		//Ore dictionary
 		if(BugTorchConfig.registerWitcheryWoodSlabsToTheOreDictionary) {
