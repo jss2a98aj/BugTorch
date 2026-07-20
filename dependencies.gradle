@@ -9,10 +9,10 @@ def deobfCurse(String mavenDep) {
 }
 
 dependencies {
-    runtimeOnly("com.github.GTNewHorizons:Baubles-Expanded:2.2.11-GTNH:dev")
+    runtimeOnly("com.github.GTNewHorizons:Baubles-Expanded:2.2.21-GTNH:dev")
 
     implementation("thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev")
-    implementation("com.github.GTNewHorizons:TX-Loader:1.7.1:dev")
+    implementation("com.github.GTNewHorizons:TX-Loader:1.8.11:dev")
     implementation deobfCurse("witchery-69673:2234410")
     implementation deobfCurse("village-names-259230:5591137")
 
