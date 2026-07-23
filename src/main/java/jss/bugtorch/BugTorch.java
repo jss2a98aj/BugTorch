@@ -4,11 +4,16 @@ import java.io.File;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
 import glowredman.txloader.TXLoaderCore;
 import glowredman.txloader.Asset.Source;
 import jss.bugtorch.listeners.ButtonManager;
+import jss.bugtorch.listeners.DropHandler;
+import jss.bugtorch.listeners.PacketSwingArm;
 import jss.bugtorch.mixinplugin.BugTorchEarlyMixins;
 import jss.bugtorch.modsupport.ExtraUtilitiesSupport;
 import jss.bugtorch.modsupport.PamsTemperatePlantsSupport;
@@ -41,7 +46,7 @@ public class BugTorch {
     public static final Logger logger = LogManager.getLogger(NAME);
     // cached to boost looping, should be used pretty often due to how recipe lookup works
     public static final int[] dyeOreIds = new int[16];
-    
+
     public BugTorch() {
         String configFolder = Loader.instance().getConfigDir().getAbsolutePath() + File.separator + MODID + File.separator;
         BugTorchConfig.loadBaseConfig(new File(configFolder + "base.cfg"));
@@ -68,6 +73,17 @@ public class BugTorch {
             FMLCommonHandler.instance().bus().register(ButtonManager.INSTANCE);
             MinecraftForge.EVENT_BUS.register(ButtonManager.INSTANCE);
         }
+    }
+
+    public static SimpleNetworkWrapper networkWrapper;
+
+    @Mod.EventHandler
+    public void init(FMLInitializationEvent event) {
+        FMLCommonHandler.instance().bus().register(DropHandler.INSTANCE);
+        MinecraftForge.EVENT_BUS.register(DropHandler.INSTANCE);
+
+        networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(BugTorch.MODID);
+        networkWrapper.registerMessage(PacketSwingArm.class, PacketSwingArm.class, 0, Side.CLIENT);
     }
 
     @Mod.EventHandler

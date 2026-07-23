@@ -22,11 +22,13 @@ public class BugTorchConfig {
 	public static int showBroadcastSettingsButton;
 	public static int showOpenToLanButton;
 	public static int showSuperSecretSettingsButton;
+    public static boolean replaceItemTossDropAnimation;
 
 	//Mod bugfixes
 	public static boolean fixExtraUtilitiesBlockSounds;
 	public static boolean fixPamsTemperatePlantsBlockSounds;
 	public static boolean fixWitcheryBlockSounds;
+    public static boolean fixWitcheryBlockLighting;
 
 	//Mod ore dictionary
 	public static boolean registerThaumcraftLeavesToTheOreDictionary;
@@ -70,6 +72,11 @@ public class BugTorchConfig {
 	public static boolean fixVillagerTradeMetadataDetection;
 	public static boolean fixVillageSieges;
 	public static boolean fixVillageWellDesertMaterial;
+    public static boolean fixItemBouncingBlock;
+    public static boolean fixBlockFenceAnim;
+    public static boolean fixRedstoneWireBlockBounds;
+    public static boolean fixItemRedstoneAnim;
+    public static boolean fixItemSlabAnim;
 
 	//Mixin performance improvements
 	public static boolean brokenChestsDontSplitStacks;
@@ -166,6 +173,7 @@ public class BugTorchConfig {
 		showBroadcastSettingsButton = config.getInt("showBroadcastSettingsButton", categoryTweaks, 1, -1, 1, "Show (1), disable(0), or remove(-1) the Broadcast Settings button in the options menu.");
 		showOpenToLanButton = config.getInt("showOpenToLanButton", categoryTweaks, 1, -1, 1, "Show (1), disable(0), or remove(-1) the Open to LAN button in the escape menu.");
 		showSuperSecretSettingsButton = config.getInt("showSuperSecretSettingsButton", categoryTweaks, 1, -1, 1, "Show (1), disable(0), or remove(-1) the Super Secret Settings button in the options menu.");
+        replaceItemTossDropAnimation = config.getBoolean("replaceItemTossDropAnimation", categoryTweaks, true, "Backport hand swinging when dropping items.");
 
 		//Update old config options
 		if(config.hasKey(categoryTweaks, "removeBroadcastSettingsButton")) {
@@ -187,6 +195,7 @@ public class BugTorchConfig {
 		fixExtraUtilitiesBlockSounds = config.getBoolean("fixExtraUtilitiesBlockSounds", categoryBugfixes, true, "Assigns the correct sound types to some blocks from Extra Utilities.");
 		fixPamsTemperatePlantsBlockSounds = config.getBoolean("fixPamsTemperatePlantsBlockSounds", categoryBugfixes, true, "Assigns the correct sound types to some blocks from Pam's Temperate Plants.");
 		fixWitcheryBlockSounds = config.getBoolean("fixWitcheryBlockSounds", categoryBugfixes, true, "Assigns the correct sound types to some blocks from Witchery.");
+		fixWitcheryBlockLighting = config.getBoolean("fixWitcheryBlockLighting", categoryBugfixes, true, "Fixes stairs and slabs having dark lighting.");
 
 		//Ore dictionary
 		registerThaumcraftLeavesToTheOreDictionary = config.getBoolean("registerThaumcraftLeavesToTheOreDictionary", categoryOreDictionary, true, "Register Thaumcraft Greatwood and Silverwood leaves as treeLeaves.");
@@ -238,7 +247,13 @@ public class BugTorchConfig {
 		fixVillagerTradeMetadataDetection = false; config.getBoolean("fixVillagerTradeMetadataDetection", categoryBugfixes, true, "Villager trades will respect metadata.\nCurrently unfinished and disabled internally.\nFrom MC 1.8");
 		fixVillageSieges = config.getBoolean("fixVillageSieges", categoryBugfixes, true, "Zombies will siege villages that are large enough at night.\nFrom MC 1.8, fixes MC-7432 and MC-7488");
 		fixVillageWellDesertMaterial = config.getBoolean("fixVillageWellDesertMaterial", categoryBugfixes, true, "Wells in desert villages will use the correct material.\nFrom MC 1.8, fixes MC-32514");
-		fixLWJGL2OpenALCrash = config.getBoolean("fixLWJGL2OpenALCrash", categoryBugfixes, true, "Fixes the ridiculous bug where the SoundSystem will consistently fail to re/initialize, commonly observed with LWJGL2 nightlies on Linux. Disabled when LWJGL3ify is present.");
+        fixItemBouncingBlock = config.getBoolean("fixItemBouncingBlock", categoryBugfixes, true, "Fixes items bouncing on blocks with complicated block bounds like stairs, cauldron and hoppers.");
+        fixBlockFenceAnim = config.getBoolean("fixBlockFenceAnim", categoryBugfixes, true, "Fixes right click animation triggering when right clicking a fence even if nothing happens.");
+        fixRedstoneWireBlockBounds = config.getBoolean("fixRedstoneWireBlockBounds", categoryBugfixes, true, "Fix redstone wires having inaccurate block bounds.");
+        fixItemRedstoneAnim = config.getBoolean("fixItemRedstoneAnim", categoryBugfixes, true, "Fixes right click animation triggering when right clicking a redstone dust even if nothing happens.");
+        fixItemSlabAnim = config.getBoolean("fixItemSlabAnim", categoryBugfixes, true, "Fixes right click animation triggering when right clicking a slab even if nothing happens.");
+
+        fixLWJGL2OpenALCrash = config.getBoolean("fixLWJGL2OpenALCrash", categoryBugfixes, true, "Fixes the ridiculous bug where the SoundSystem will consistently fail to re/initialize, commonly observed with LWJGL2 nightlies on Linux. Disabled when LWJGL3ify is present.");
 
 		//Performance
 		brokenChestsDontSplitStacks = config.getBoolean("brokenChestsDontSplitStacks", categoryPerformance, false, "Broken chests don't split apart dropped item stacks.");
