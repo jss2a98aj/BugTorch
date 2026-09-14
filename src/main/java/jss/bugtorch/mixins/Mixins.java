@@ -145,6 +145,7 @@ public enum Mixins implements IMixins {
         .setApplyIf(() -> BugTorchConfig.fixPumpkinPlacementCheck)
         .setPhase(Phase.EARLY)),
     MC_REDSTONE_TORCH_MEMORY_LEAK(new MixinBuilder()
+        .addExcludedMod(TargetedMod.HODGEPODGE)
         .addCommonMixins("minecraft.optimization.MixinBlockRedstoneTorch")
         .setApplyIf(() -> BugTorchConfig.fixRedstoneTorchMemoryLeak)
         .setPhase(Phase.EARLY)),
