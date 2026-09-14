@@ -318,6 +318,7 @@ public enum Mixins implements IMixins {
         .setApplyIf(() -> BugTorchConfig.placeTorchesOnAnyWall)
         .setPhase(Phase.EARLY)),
     MC_POTION_PARTICLES_CLEAR_ON_SELF(new MixinBuilder()
+        .addExcludedMod(TargetedMod.HODGEPODGE)
         .addClientMixins("minecraft.tweaks.entitylivingbase.MixinTranslucentClientPotionEffects")
         .setApplyIf(() -> BugTorchConfig.potionParticlesAreClearForClientPlayer)
         .setPhase(Phase.EARLY)),

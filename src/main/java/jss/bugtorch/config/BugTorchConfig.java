@@ -272,7 +272,7 @@ public class BugTorchConfig {
 		placePressurePlatesOnAnyWallOrFence = config.getBoolean("placePressurePlatesOnAnyWallOrFence", categoryTweaks, true, "Place pressure plates on almost any wall or fence.");
 		placeTorchesOnAnyFence = config.getBoolean("placeTorchesOnAnyFence", categoryTweaks, true, "Place torches on almost any fence.");
 		placeTorchesOnAnyWall = config.getBoolean("placeTorchesOnAnyWall", categoryTweaks, true, "Place torches on almost any wall.");
-		potionParticlesAreClearForClientPlayer = config.getBoolean("potionParticlesAreClearForClientPlayer", categoryTweaks, false, "Potion particles coming off of the player entity you control are always clear.");
+		potionParticlesAreClearForClientPlayer = config.getBoolean("potionParticlesAreClearForClientPlayer", categoryTweaks, false, "Potion particles coming off of the player entity you control are always clear.\nDisabled if Hodgepodge is installed.");
 		reduceLightningVolume = config.getFloat("reduceLightningVolume", categoryTweaks, 10000f, 2f, 10000f, "Reduces lightning volume and effective range.\nSet to 10,000 to disable.");
 		removeEntityDuplicateExtendedPropertiesIdentifierSpam = config.getBoolean("removeEntityDuplicateExtendedPropertiesIdentifierSpam", categoryTweaks, true, "Removes \"An attempt was made to register extended properties using an existing key\" log spam caused by some mods.");
 		scaledDrowningDamageMaxHealthFlat = config.getFloat("scaledDrowningDamageMaxHealthFlat", categoryTweaks, 0f, 0f, 20000f, "Amount of flat player health to remove each drowning tick.\nSet to 0 to disable.");
