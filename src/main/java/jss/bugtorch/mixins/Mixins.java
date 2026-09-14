@@ -271,6 +271,7 @@ public enum Mixins implements IMixins {
         .setApplyIf(() -> BugTorchConfig.replaceRandomInWorldClient)
         .setPhase(Phase.EARLY)),
     MC_SKIP_INITIAL_WORLD_CHUNK_LOAD(new MixinBuilder()
+        .addExcludedMod(TargetedMod.HODGEPODGE)
         .addClientMixins("minecraft.optimization.MixinMinecraftServer")
         .setApplyIf(() -> BugTorchConfig.skipInitialWorldChunkLoad)
         .setPhase(Phase.EARLY)),

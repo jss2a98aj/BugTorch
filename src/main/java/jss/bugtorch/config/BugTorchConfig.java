@@ -259,7 +259,7 @@ public class BugTorchConfig {
 		replaceRandomInRenderItem = config.getBoolean("replaceRandomInRenderItem", categoryPerformance, true, "Makes RenderItem.class use a faster implementation of random.");
 		replaceRandomInWorld = config.getBoolean("replaceRandomInWorld", categoryPerformance, false, "Makes World.class use a faster implementation of random.\n!This impacts world generation slightly!");
 		replaceRandomInWorldClient = config.getBoolean("replaceRandomInWorldClient", categoryPerformance, true, "Makes WorldClient.class use a faster implementation of random.\nDisabled if NotFine is installed, it implements this optimization.");
-		skipInitialWorldChunkLoad = config.getBoolean("skipInitialWorldChunkLoad", categoryPerformance, true, "Speeds up initial world loading by not waiting for chunks to preload.");
+		skipInitialWorldChunkLoad = config.getBoolean("skipInitialWorldChunkLoad", categoryPerformance, true, "Speeds up initial world loading by not waiting for chunks to preload.\nDisabled if Hodgepodge is installed.");
 
 		//Tweaks
 		enchantmentParticlesForPowerAboveZero = config.getBoolean("enchantmentParticlesForPowerAboveZero", categoryTweaks, true, "Makes Enchantment Tables emit particles for any block with enchantment power.\nDisabled if NotFine is loaded, it implements this fix.");
