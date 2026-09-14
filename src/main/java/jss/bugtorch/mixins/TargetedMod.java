@@ -17,7 +17,7 @@ public enum TargetedMod implements ITargetMod {
     HODGEPODGE("com.mitchej123.hodgepodge.core.HodgepodgeCore", "hodgepodge"),
     L_LIBRARY("llibrary"),
     LWJGL3IFY("me.eigenraven.lwjgl3ify.core.Lwjgl3ifyCoremod", "lwjgl3ify"),
-    NOTFINE("jss.notfine.mixinplugin.NotFineEarlyMixins", null),
+    NOTFINE("jss.notfine.mixinplugin.NotFineEarlyMixins", "notfine"),
     OPTIFINE("optifine.OptiFineForgeTweaker", "Optifine"),
     THAUMCRAFT("Thaumcraft"),
     TX_LOADER("txloader", "glowredman.txloader.TXLoaderCore"),
