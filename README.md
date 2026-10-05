@@ -10,7 +10,7 @@ BugTorch is a mod for Minecraft 1.7.10. It mostly fixes bugs. The name was picke
 
 Fixes bugs, backports some stuff that doesn't add new content, and optionally does some other stuff.
 
-For a more detailed features list see the [Modrinth page](https://modrinth.com/mod/bugtorch)
+For a more detailed features list see the [Modrinth](https://modrinth.com/mod/bugtorch) or [CurseForge](https://www.curseforge.com/minecraft/mc-mods/bugtorch) pages.
 
 ## Modpacks
 
